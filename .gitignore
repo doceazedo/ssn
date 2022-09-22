@@ -9,8 +9,8 @@ node_modules
 coverage
 
 # next.js
-.next/
-out/
+.svelte-kit
+package
 build
 
 # misc
@@ -24,6 +24,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
+.env
 .env.local
 .env.development.local
 .env.test.local
@@ -31,3 +32,6 @@ yarn-error.log*
 
 # turbo
 .turbo
+
+# THIS IS TEMPORARY!
+kratos.yml

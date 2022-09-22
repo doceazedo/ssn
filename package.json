@@ -4,11 +4,14 @@
   "private": true,
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "libraries/*",
+    "plugins/*",
+    "servers/*"
   ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
+    "start": "docker-compose up --build",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },

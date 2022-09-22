@@ -1,0 +1,85 @@
+version: '3.7'
+
+services:
+  gateway:
+    image: traefik:v2.7
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.yml:/etc/traefik/traefik.yml
+    networks:
+      - ssn-network
+
+  kratos-migrate:
+    image: oryd/kratos:v0.10.1
+    environment:
+      DSN: sqlite:///var/lib/sqlite/db.sqlite?_fk=true&mode=rwc
+    volumes:
+      - type: volume
+        source: kratos-sqlite
+        target: /var/lib/sqlite
+        read_only: false
+      - type: bind
+        source: ./apps/identity/kratos
+        target: /etc/config/kratos
+    command: -c /etc/config/kratos/kratos.yml migrate sql -e --yes
+    restart: on-failure
+    networks:
+      - ssn-network
+
+  kratos:
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.kratos.entrypoints=web'
+      - 'traefik.http.routers.kratos.rule=Host(`kratos.servidorsemnome.com`)'
+    depends_on:
+      - kratos-migrate
+    image: oryd/kratos:v0.10.1
+    ports:
+      - '4433:4433'
+    restart: unless-stopped
+    environment:
+      DSN: sqlite:///var/lib/sqlite/db.sqlite?_fk=true
+      LOG_LEVEL: trace
+      COOKIE_SECRET: ${COOKIE_SECRET}
+      CIPHER_SECRET: ${CIPHER_SECRET}
+    command: serve -c /etc/config/kratos/kratos.yml --dev --watch-courier
+    volumes:
+      - type: volume
+        source: kratos-sqlite
+        target: /var/lib/sqlite
+        read_only: false
+      - type: bind
+        source: ./apps/identity/kratos
+        target: /etc/config/kratos
+    networks:
+      - ssn-network
+
+  mailslurper:
+    image: oryd/mailslurper:latest-smtps
+    ports:
+      - '4436:4436'
+      - '4437:4437'
+    networks:
+      - ssn-network
+
+  identity-web:
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.kratosweb.entrypoints=web'
+      - 'traefik.http.routers.kratosweb.rule=Host(`id.servidorsemnome.com`)'
+    ports:
+      - '3000:3000'
+    build:
+      context: ./apps/identity
+    networks:
+      - ssn-network
+
+networks:
+  ssn-network:
+    external: true
+
+volumes:
+  kratos-sqlite:
