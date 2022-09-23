@@ -1,0 +1,18 @@
+{
+  "name": "ssnkit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bulma": "^0.9.4",
+    "sass": "^1.55.0",
+    "typescript": "^4.8.3"
+  }
+}

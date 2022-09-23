@@ -13,7 +13,7 @@
 This monorepo uses [npm](https://www.npmjs.com/) as a package manager. It includes the following applications:
 
 - [`apps`](./apps): all the services related to the server
-- [`libraries`](./libraries): packages shared between services
+- [`packages`](./packages): libraries shared between services
 - [`plugins`](./plugins): all first-party Spigot plugins
 - [`servers`](./servers): the Paper servers configuration files and plugins
 
