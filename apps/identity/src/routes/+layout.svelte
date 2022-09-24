@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import 'ssnkit/styles';
 </script>
 
@@ -40,6 +40,7 @@
       max-width: 36rem
       height: 100%
       padding: 2rem
+      overflow-y: auto
 
       .logo
         display: flex

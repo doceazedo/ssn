@@ -7,6 +7,10 @@
   font-family: 'Space Grotesk', sans-serif
   letter-spacing: -.5px
 
+.button,
+.notification
+  border-radius: .75rem
+
 .button
   display: flex
   justify-content: center
@@ -14,7 +18,6 @@
   gap: .5rem
   height: 3.25rem
   padding: 0 1.5rem
-  border-radius: .75rem
 
   &.is-primary
     font-weight: 600
@@ -23,6 +26,9 @@
 
   &.is-light.is-link
     border-color: $link !important
+
+    &.is-loading::after
+      border-color: transparent transparent $link $link !important
 
   svg
     height: 1.25rem

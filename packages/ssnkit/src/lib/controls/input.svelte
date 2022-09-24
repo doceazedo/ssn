@@ -2,7 +2,8 @@
   export let value = '',
     type = 'text',
     name: string,
-    label: string;
+    label: string,
+    disabled = false;
 
   const inputType = (node: any) => {
     node.type = type;
@@ -11,7 +12,7 @@
 
 <div class="control" class:is-filled={!!value.length}>
   <label for={name}>{label}</label>
-  <input class="input" bind:value use:inputType {name} />
+  <input class="input" bind:value use:inputType {name} {disabled} />
 </div>
 
 <style lang="sass">
