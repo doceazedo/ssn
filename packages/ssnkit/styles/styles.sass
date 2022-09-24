@@ -1,2 +1,32 @@
 @charset "utf-8"
-@import "bulma/bulma.sass"
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&family=Space+Grotesk:wght@400;700&display=swap')
+@import "./vars"
+@import "bulma/bulma"
+
+.title
+  font-family: 'Space Grotesk', sans-serif
+  letter-spacing: -.5px
+
+.button
+  display: flex
+  justify-content: center
+  align-items: center
+  gap: .5rem
+  height: 3.25rem
+  padding: 0 1.5rem
+  border-radius: .75rem
+
+  &.is-primary
+    font-weight: 600
+    text-transform: uppercase
+    letter-spacing: .75px
+
+  &.is-light.is-link
+    border-color: $link !important
+
+  svg
+    height: 1.25rem
+    width: 1.25rem
+
+.field:not(:last-child)
+  margin-bottom: 1rem

@@ -1,3 +1,3 @@
-import styles from '../styles/styles.sass';
+import styles from './styles.sass';
 
 export default styles;

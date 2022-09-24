@@ -1,13 +1,9 @@
 FROM node:16-alpine
 
 WORKDIR /app
-
-COPY package.json .
-
+COPY . .
 RUN npm install
 
-COPY . .
-
+WORKDIR ./apps/identity
 RUN npm run build
-
 CMD ["node", "build"]

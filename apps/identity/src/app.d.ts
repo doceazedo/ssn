@@ -1,9 +1,16 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 // and what to do when importing types
-declare namespace App {
-	// interface Locals {}
-	// interface PageData {}
-	// interface PageError {}
-	// interface Platform {}
+
+import type { SafeIdentity } from '$lib/controllers/identity';
+
+declare global {
+  declare namespace App {
+    interface Locals {
+      identity?: SafeIdentity;
+    }
+    // interface PageData {}
+    // interface PageError {}
+    // interface Platform {}
+  }
 }

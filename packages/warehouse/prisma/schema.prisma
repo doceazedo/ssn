@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Identity {
+  uuid            String     @id @unique @default(uuid())
+  email           String     @unique
+  password        String
+  verified        Boolean    @default(false)
+  token           String     @unique @default(uuid())
+  usernames       Username[] @relation(name: "IdentityUsernames")
+  primaryUsername String     @unique
+  invites         Invite[]   @relation(name: "IdentityInvites")
+  usedInvite      Invite?    @relation(name: "IdentityUsedInvite")
+}
+
+model Username {
+  name    String   @id @unique
+  owner   Identity @relation(name: "IdentityUsernames", fields: [ownerId], references: [uuid])
+  ownerId String
+}
+
+model Invite {
+  code     String    @id @unique @default(cuid())
+  owner    Identity  @relation(name: "IdentityInvites", fields: [ownerId], references: [uuid])
+  ownerId  String
+  usedBy   Identity? @relation(name: "IdentityUsedInvite", fields: [usedById], references: [uuid])
+  usedById String    @unique
+}
