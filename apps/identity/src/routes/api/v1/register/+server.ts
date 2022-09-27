@@ -1,22 +1,18 @@
 import { error, json } from "@sveltejs/kit";
 import * as yup from 'yup';
-import * as bcrypt from 'bcrypt';
-import { env } from '$env/dynamic/private';
+import { hashPassword } from '$lib/auth/crypto';
 import { createUser, getUserByEmail, getUserByName, purifyIdentity } from "$lib/controllers/identity";
 import { validateRequest } from '$lib/middlewares';
 import { setAuthCookies, validateUsername } from '$lib/utils';
+import { registerEnabled, inviteOnly } from '$lib/env/public';
 import type { RequestHandler } from '@sveltejs/kit';
 
-type RegisterParams = {
+export type RegisterParams = {
   email: string;
   password: string;
   username: string;
   invite?: string;
 }
-
-const registerEnabled = env.REGISTER_ENABLED === 'true';
-const inviteOnly = env.REGISTER_INVITE_ONLY === 'true';
-const invitesPerUser = parseInt(env.REGISTER_INVITES_PER_USER) || 0;
 
 export const POST: RequestHandler = async ({ request, cookies, locals }) =>
   validateRequest<RegisterParams>(request, yup.object().shape({
@@ -47,8 +43,7 @@ export const POST: RequestHandler = async ({ request, cookies, locals }) =>
     const existingEmail = await getUserByEmail(body.email);
     if (existingEmail) throw error(409, 'Endereço de e-mail já registrado');
 
-    const salt = await bcrypt.genSalt(10);
-    const password = await bcrypt.hash(body.password, salt);
+    const password = hashPassword(body.password);
 
     // TODO: create x invites, if enabled
 

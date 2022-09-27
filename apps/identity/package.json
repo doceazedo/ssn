@@ -3,9 +3,9 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"dev": "export $(cat ../../.env | xargs) && vite dev",
+		"dev": "export $(cat ../../.env.local | xargs) && vite dev",
 		"build": "vite build",
-		"preview": "vite preview",
+		"preview": "export $(cat ../../.env | xargs) && vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
@@ -15,7 +15,7 @@
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/adapter-node": "^1.0.0-next.95",
 		"@sveltejs/kit": "next",
-		"@types/bcrypt": "^5.0.0",
+		"@types/crypto-js": "^4.1.1",
 		"@types/uuid": "^8.3.4",
 		"@typescript-eslint/eslint-plugin": "^5.27.0",
 		"@typescript-eslint/parser": "^5.27.0",
@@ -35,8 +35,9 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"bcrypt": "^5.0.1",
+		"@prisma/client": "^4.3.1",
 		"cookie": "^0.5.0",
+		"crypto-js": "^4.1.1",
 		"uuid": "^9.0.0",
 		"yup": "^0.32.11"
 	}

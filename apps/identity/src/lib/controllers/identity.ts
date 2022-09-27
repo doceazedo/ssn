@@ -62,7 +62,6 @@ export const createUser = async (data: any): Promise<IdentityWithUsernames | nul
       }
     });
   } catch (e) {
-    console.log(e);
     return null;
   }
   return user || null;

@@ -24,7 +24,7 @@
 </script>
 
 <form class="form" class:is-loading={isLoading} on:submit|preventDefault>
-  <a href="/oauth/discord" class="button is-link is-light is-fullwidth">
+  <a href="/auth/discord" class="button is-link is-light is-fullwidth">
     <DiscordIcon />
     {discordLabel}
   </a>

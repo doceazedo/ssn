@@ -1,1 +1,2 @@
-export { login } from './login';
+export { IDENTITY } from './auth.store';
+export { login, logout, register } from './auth';

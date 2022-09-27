@@ -4,5 +4,6 @@ RUN apt-get install -y openssl
 WORKDIR /app
 COPY . .
 RUN yarn global add prisma
+RUN npx prisma generate
 ENV DATABASE_URL ${DATABASE_URL}
 CMD ["prisma", "migrate", "deploy"]

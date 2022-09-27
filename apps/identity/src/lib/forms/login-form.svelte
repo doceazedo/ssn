@@ -1,6 +1,9 @@
 <script lang="ts">
-  import { Form } from '.';
+  import { page } from '$app/stores';
   import { login } from '$lib/auth';
+  import { Form } from '.';
+
+  const redirect = $page.url.searchParams.get('redirect');
 
   let fields = [
     {
@@ -19,11 +22,11 @@
   const links = [
     {
       label: 'Criar uma conta',
-      href: '/register'
+      href: '/auth/register'
     },
     {
       label: 'Esqueceu sua senha?',
-      href: '/recover-password'
+      href: '/auth/recover-password'
     }
   ]
 
@@ -38,7 +41,7 @@
     const password = fields.find(field => field.name == 'password').value;
 
     try {
-      await login(username, password);
+      await login(username, password, redirect);
     } catch (e) {
       isLoading = false;
       error = e.message;
