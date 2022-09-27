@@ -15,8 +15,8 @@ services:
   identity-web:
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.kratosweb.entrypoints=web'
-      - 'traefik.http.routers.kratosweb.rule=Host(`id.servidorsemnome.com`)'
+      - 'traefik.http.routers.identity.entrypoints=web'
+      - 'traefik.http.routers.identity.rule=Host(`id.servidorsemnome.com`)'
     ports:
       - '3000:3000'
     build:
@@ -56,10 +56,32 @@ services:
     networks:
       - ssn-network
 
+  gatekeeper-web:
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.gatekeeper.entrypoints=web'
+      - 'traefik.http.routers.gatekeeper.rule=Host(`gk.servidorsemnome.com`)'
+    ports:
+      - '3001:3000'
+    build:
+      context: .
+      dockerfile: ./apps/gatekeeper/Dockerfile
+    networks:
+      - ssn-network
+
+  gatekeeper-redis:
+    image: redis:7.0.5-alpine
+    command: redis-server --requirepass ${GK_REDIS_PASSWORD} --appendonly yes
+    hostname: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - gatekeeper:/data/redis
+
 networks:
   ssn-network:
     external: true
 
 volumes:
-  kratos-sqlite:
   warehouse:
+  gatekeeper:
