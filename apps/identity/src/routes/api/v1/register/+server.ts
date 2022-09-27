@@ -19,7 +19,7 @@ export const POST: RequestHandler = async ({ request, cookies, locals }) =>
     email: yup.string().email('Insira um e-mail válido').required('Insira um endereço de e-mail'),
     password: yup.string().min(6, 'A senha deve ter pelo menos 6 dígitos').required('Insira uma senha'),
     username: yup.string().min(3, 'O nome de usuário deve ter pelo menos 3 dígitos').max(16, 'O nome de usuário deve ter no máximo 16 dígitos').required('Insira um nome de usuário'),
-    invite: yup.string(),
+    invite: yup.string().nullable(),
   }), async (body) => {
     if (!registerEnabled) throw error(409, 'Registro temporariamente desativado');
 

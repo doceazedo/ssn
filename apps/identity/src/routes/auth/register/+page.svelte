@@ -4,7 +4,7 @@
   import { registerEnabled, inviteOnly } from '../../../lib/env/public';
 </script>
 
-<PageTitle pretitle="Registrar" title="Boas-vindas ao ssn.gg!" />
+<PageTitle pretitle="Registrar" title="Boas-vindas ao SSN.gg!" />
 {#if registerEnabled}
   {#if inviteOnly}
     <div class="is-flex is-flex-direction-column is-flex-grow-1">

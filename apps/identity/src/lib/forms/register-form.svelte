@@ -1,9 +1,13 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { register } from "$lib/auth";
+  import { TermsModal } from '$lib/modals';
   import { Form } from '.';
 
   const redirect = $page.url.searchParams.get('redirect');
+
+  let isTermsModalOpen = false;
+  let acceptedTerms = false;
 
   let fields = [
     {
@@ -41,9 +45,6 @@
   let error = '';
 
   const handleSubmit = async () => {
-    isLoading = true;
-    error = '';
-
     const email = fields.find(field => field.name == 'email').value;
     const username = fields.find(field => field.name == 'username').value;
     const password = fields.find(field => field.name == 'password').value;
@@ -51,6 +52,14 @@
 
     try {
       if (password != confirmPassword) throw Error('As senhas informadas não combinam');
+      if (![email, username, password, confirmPassword].every(x => x))
+        throw Error('Preencha todos os campos');
+
+      error = '';
+
+      if (!acceptedTerms) return isTermsModalOpen = true;
+
+      isLoading = true;
 
       await register({
         email,
@@ -61,6 +70,13 @@
       isLoading = false;
       error = e.message;
     }
+  }
+
+  const handleAccept = () => {
+    acceptedTerms = true;
+    handleSubmit();
+    isTermsModalOpen = false;
+    acceptedTerms = false;
   }
 </script>
 
@@ -73,3 +89,5 @@
   discordLabel="Registrar com Discord"
   submitLabel="Registrar"
 />
+
+<TermsModal bind:isOpen={isTermsModalOpen} {handleAccept} />
