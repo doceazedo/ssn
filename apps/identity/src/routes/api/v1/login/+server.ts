@@ -1,7 +1,7 @@
 import { error, json } from "@sveltejs/kit";
 import * as yup from 'yup';
 import { matchPassword } from '$lib/auth/crypto';
-import { getUserByEmailOrName, purifyIdentity } from "$lib/controllers/identity";
+import { getUserByEmailOrName, purifyIdentity } from "warehouse";
 import { validateRequest } from '$lib/middlewares';
 import { setAuthCookies } from '$lib/utils';
 import type { RequestHandler } from '@sveltejs/kit';

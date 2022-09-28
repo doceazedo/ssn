@@ -1,17 +1,7 @@
 import { prisma } from '.';
 import type { Identity, Prisma, Username } from '@prisma/client';
 
-type IdentityWithUsernames = Identity & { usernames: Username[] };
-
-export type SafeIdentity = Omit<Identity, 'password' | 'token'> & { usernames: string[] };
-
-export const purifyIdentity = (identity: IdentityWithUsernames): SafeIdentity => {
-  const {password, token, ...safeIdentity} = identity;
-  return {
-    ...safeIdentity,
-    usernames: safeIdentity.usernames.map(username => username.name)
-  };
-};
+export type IdentityWithUsernames = Identity & { usernames: Username[] };
 
 export const getUserByEmail = async (email: string): Promise<IdentityWithUsernames | null> =>
   await prisma.identity.findUnique({

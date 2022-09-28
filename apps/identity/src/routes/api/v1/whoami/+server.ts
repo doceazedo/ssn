@@ -1,5 +1,5 @@
 import { error, json } from "@sveltejs/kit";
-import { getUserByName, purifyIdentity } from "$lib/controllers/identity";
+import { getUserByName, purifyIdentity } from "warehouse";
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async ({ locals }) => {

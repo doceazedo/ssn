@@ -1,7 +1,7 @@
 import { error, json } from "@sveltejs/kit";
 import * as yup from 'yup';
 import { hashPassword } from '$lib/auth/crypto';
-import { createUser, getUserByEmail, getUserByName, purifyIdentity } from "$lib/controllers/identity";
+import { createUser, getUserByEmail, getUserByName, purifyIdentity } from "warehouse";
 import { validateRequest } from '$lib/middlewares';
 import { setAuthCookies, validateUsername } from '$lib/utils';
 import { registerEnabled, inviteOnly } from '$lib/env/public';

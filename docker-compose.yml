@@ -66,6 +66,8 @@ services:
     build:
       context: .
       dockerfile: ./apps/gatekeeper/Dockerfile
+    environment:
+      PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
     networks:
       - ssn-network
 

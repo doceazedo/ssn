@@ -2,7 +2,7 @@
 // for information about these interfaces
 // and what to do when importing types
 
-import type { SafeIdentity } from '$lib/controllers/identity';
+import type { SafeIdentity } from 'warehouse';
 
 declare global {
   declare namespace App {
