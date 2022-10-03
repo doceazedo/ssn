@@ -1,6 +1,6 @@
 import { error } from "@sveltejs/kit";
-import { getFlowByCode } from "$lib/controllers/flow";
-import { validGrantTTL } from '$lib/controllers/grant';
+import { getFlowByCode, setFlow } from "$lib/controllers/flow";
+import { isGranted, setGrant, validGrantTTL } from "$lib/controllers/grant";
 import { isValidCode } from '$lib/utils';
 import { errorMessage } from '$lib/enums';
 import type { PageServerLoad } from './$types';
@@ -25,16 +25,27 @@ export const load: PageServerLoad = async ({ locals, url }) => {
   if (!flow)
     throw error(410, errorMessage.EXPIRED_CODE);
 
-  if (flow.grantUuid)
+  if (flow.grantKey)
     throw error(409, errorMessage.GRANTED_FLOW);
 
-  // TODO: check if there is a grant for this user/owner/ip already
+  const existingGrant = await isGranted(identity.uuid, flow.ip, flow.username);
+  if (existingGrant)
+    throw error(409, errorMessage.GRANTED_USERNAME);
 
-  // TODO: createGrant, updateFlow with grantUuid
+  const grant = await setGrant({
+    ownerUuid: identity.uuid,
+    ip: flow.ip,
+    username: allUsernames ? '*' : flow.username,
+    authorized: true
+  }, ttl);
+  if (!grant)
+    throw error(500, errorMessage.GRANT_FAIL);
 
-  return {
-    code,
-    ttl,
-    allUsernames
-  };
+  const updatedFlow = await setFlow(flow.code, {
+    username: flow.username,
+    ip: flow.ip,
+    grantKey: grant.key
+  });
+  if (!updatedFlow)
+    throw error(500, errorMessage.FLOW_FAIL);
 }

@@ -4,7 +4,7 @@ import { generateCode } from "$lib/utils";
 type FlowData = {
   username: string;
   ip: string;
-  grantUuid?: string;
+  grantKey?: string;
 };
 
 type Flow = {
@@ -15,7 +15,7 @@ const flowDurationSec = 45;
 
 export const getFlowByCode = async (code: string): Promise<Flow | null> => {
   await connectDatabase();
-  const flow = await redis.get(`flow:${code}`);
+  const flow = await redis.get(`flows:${code}`);
   if (!flow) return null;
 
   const flowData = JSON.parse(flow);
@@ -24,7 +24,7 @@ export const getFlowByCode = async (code: string): Promise<Flow | null> => {
 
 export const setFlow = async (code: string, data: FlowData): Promise<Flow | null> => {
   await connectDatabase();
-  const result = await redis.setEx(`flow:${code}`, flowDurationSec, JSON.stringify(data));
+  const result = await redis.setEx(`flows:${code}`, flowDurationSec, JSON.stringify(data));
   if (result !== 'OK') return null;
   return { code, ...data };
 }

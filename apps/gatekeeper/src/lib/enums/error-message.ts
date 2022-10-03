@@ -5,4 +5,7 @@ export const errorMessage = {
   INVALID_TTL: 'Duração da permissão inválida',
   EXPIRED_CODE: 'O código informado não existe ou expirou',
   GRANTED_FLOW: 'A permissão de acesso já foi concedida à esse fluxo',
+  GRANTED_USERNAME: 'Esse IP já está autorizado a jogar com esse nome de usuário',
+  GRANT_FAIL: 'Não foi possível realizar a autorização, tente novamente mais tarde',
+  FLOW_FAIL: 'Não foi possível atualizar o fluxo de autorização, tente novamente mais tarde',
 };
