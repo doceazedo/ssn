@@ -36,6 +36,7 @@
 	"dependencies": {
 		"@prisma/client": "^4.4.0",
 		"geoip-lite": "^1.4.6",
+		"redis": "^4.3.1",
 		"uuid": "^9.0.0"
 	}
 }

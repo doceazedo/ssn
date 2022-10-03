@@ -1,16 +1,16 @@
 <script lang="ts">
-  import { RadioGroup } from 'ssnkit';
-  import ssnIcon from 'ssnkit/assets/img/ssn-icon.png';
+  import { Checkbox, RadioGroup } from 'ssnkit';
   import type { PageServerData } from './$types';
 
   export let data: PageServerData;
 
   const options = [
-    { value: 'once',    label: 'Permitir dessa vez' },
-    { value: '24h',     label: 'Permitir esse IP por 24 horas' },
-    { value: 'forever', label: 'Sempre permitir esse IP' },
+    { value: 5,     label: 'Permitir dessa vez' },
+    { value: 86400, label: 'Permitir esse IP por 24 horas' },
+    { value: -1,    label: 'Sempre permitir esse IP' },
   ];
-  let grantType = 'once';
+  let ttl = 5;
+  let grantAlts = true;
 
   const getRegion = () =>
     `${data.location.city}, ${data.location.region}${
@@ -18,39 +18,27 @@
     }`;
 </script>
 
-<header class="header">
-  <img src={ssnIcon} />
-</header>
+<h1 class="title">Liberar acesso</h1>
+<p>Você está tentando se conectar com o usuário <b>{data.username}</b>
+  na região de <b>{getRegion()}</b>.</p>
 
-<div class="card">
-  <div class="card-content">
-    <div class="content">
-      <h1 class="title">Liberar acesso</h1>
-      <p>Você está tentando se conectar com o usuário <b>{data.nickname}</b>
-        na região de <b>{getRegion()}</b>.</p>
+<div class="controls">
+  <RadioGroup {options} bind:value={ttl} />
+  <Checkbox bind:checked={grantAlts}>
+    Também autorizar minhas contas alternativas
+  </Checkbox>
+</div>
 
-      <div class="radio-group">
-        <RadioGroup {options} bind:value={grantType} />
-      </div>
-
-      <div class="buttons">
-        <button class="button">Cancelar</button>
-        <button class="button is-primary">Permitir</button>
-      </div>
-    </div>
-  </div>
+<div class="buttons">
+  <button class="button">Cancelar</button>
+  <a class="button is-primary" href="/grant?code={data.code}&ttl={ttl}&grantAlts={grantAlts}">Permitir</a>
 </div>
 
 <style lang="sass">
-  .header
+  .controls
     display: flex
-    justify-content: center
-    margin-bottom: 2rem
-
-    img
-      height: 6rem
-
-  .radio-group
+    flex-direction: column
+    gap: 1rem
     margin-bottom: 1rem
 
   .buttons

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
   import { quintOut } from 'svelte/easing';
+  import { page } from "$app/stores";
   import { DiscordIcon, Input, Separator } from 'ssnkit';
 
   type Field = {
@@ -21,6 +22,9 @@
   export let error: string;
   export let discordLabel;
   export let submitLabel;
+
+  const redirect = $page.url.searchParams.get('redirect');
+  const redirectParams = redirect ? `?redirect=${redirect}` : '';
 </script>
 
 <form class="form" class:is-loading={isLoading} on:submit|preventDefault>
@@ -61,7 +65,7 @@
 
 <div class="mt-auto">
   {#each links as link}
-    <p><a class="has-text-grey" href={link.href}>{link.label}</a></p>
+    <p><a class="has-text-grey" href={link.href + redirectParams}>{link.label}</a></p>
   {/each}
 </div>
 

@@ -2,7 +2,7 @@
   import Radio from './radio.svelte';
 
   type Option = {
-    value: string;
+    value: any;
     label: string;
   }
 

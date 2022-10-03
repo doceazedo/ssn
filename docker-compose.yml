@@ -68,17 +68,19 @@ services:
       dockerfile: ./apps/gatekeeper/Dockerfile
     environment:
       PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
+      GK_REDIS_URL: ${GK_REDIS_URL}
     networks:
       - ssn-network
 
   gatekeeper-redis:
     image: redis:7.0.5-alpine
     command: redis-server --requirepass ${GK_REDIS_PASSWORD} --appendonly yes
-    hostname: redis
     ports:
       - "6379:6379"
     volumes:
       - gatekeeper:/data/redis
+    networks:
+      - ssn-network
 
 networks:
   ssn-network:
