@@ -1,0 +1,55 @@
+enforce_secure_profile: false
+listeners:
+- query_port: 25577
+  motd: '&1Another Bungee server'
+  tab_list: GLOBAL_PING
+  query_enabled: false
+  proxy_protocol: false
+  forced_hosts:
+    pvp.md-5.net: pvp
+  ping_passthrough: false
+  priorities:
+  - queue
+  bind_local_address: true
+  host: 0.0.0.0:25565
+  max_players: 1
+  tab_size: 60
+  force_default_server: true
+remote_ping_cache: -1
+network_compression_threshold: 256
+permissions:
+  default:
+  - bungeecord.command.server
+  - bungeecord.command.list
+  admin:
+  - bungeecord.command.alert
+  - bungeecord.command.end
+  - bungeecord.command.ip
+  - bungeecord.command.reload
+log_pings: true
+connection_throttle_limit: 3
+server_connect_timeout: 5000
+timeout: 30000
+player_limit: -1
+prevent_proxy_connections: false
+ip_forward: true
+groups:
+  md_5:
+  - admin
+remote_ping_timeout: 5000
+connection_throttle: 4000
+log_commands: false
+stats: 95f1bdcc-b14a-4cf3-b9b9-ab1bd3d7e3fa
+online_mode: false
+forge_support: false
+disabled_commands:
+- disabledcommandhere
+servers:
+  queue:
+    motd: SSN - Queue
+    address: minecraft-queue:25561
+    restricted: false
+  main:
+    motd: SSN - Main
+    address: minecraft-main:25562
+    restricted: false

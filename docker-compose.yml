@@ -82,6 +82,39 @@ services:
     networks:
       - ssn-network
 
+  minecraft-proxy:
+    image: arm64v8/amazoncorretto:17
+    command: java -Xms512M -Xmx1024M -jar BungeeCord.jar
+    ports:
+      - "25565:25565"
+    working_dir: /data
+    volumes:
+      - ./servers/0-proxy:/data
+    networks:
+      - ssn-network
+
+  minecraft-queue:
+    image: arm64v8/amazoncorretto:17
+    command: java -Xms512M -Xmx2048M -jar paper-1.12.2-1620.jar
+    ports:
+      - "25561:25561"
+    working_dir: /data
+    volumes:
+      - ./servers/1-queue:/data
+    networks:
+      - ssn-network
+
+  minecraft-main:
+    image: arm64v8/amazoncorretto:17
+    command: java -Xms2048M -Xmx4096M -jar paper-1.12.2-1620.jar
+    ports:
+      - "25562:25562"
+    working_dir: /data
+    volumes:
+      - ./servers/2-main:/data
+    networks:
+      - ssn-network
+
 networks:
   ssn-network:
     external: true

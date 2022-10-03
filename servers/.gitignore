@@ -1,0 +1,27 @@
+# Logs
+logs
+*.log*
+
+# Plugin configs
+bStats
+Atreus
+
+# *.jar
+# *.bat
+
+# Spigot generated files
+cache
+world*
+banned-*.json
+eula.txt
+help.yml
+ops.json
+permissions.yml
+usercache.json
+version_history.json
+whitelist.json
+
+# Bungeecord generated files
+locations.yml
+modules
+modules.yml
