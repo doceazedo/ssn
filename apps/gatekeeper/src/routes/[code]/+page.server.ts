@@ -22,7 +22,7 @@ export const load: PageServerLoad = async ({ params, locals, url }) => {
   if (!flow)
     throw error(410, errorMessage.EXPIRED_CODE);
 
-  if (flow.grantUuid)
+  if (flow.grantKey)
     throw error(409, errorMessage.GRANTED_FLOW);
 
   if (!identity.usernames.includes(flow.username))

@@ -28,14 +28,14 @@ export const getGrant = async (ownerUuid: string, ip: string, username: string):
 }
 
 export const isGranted = async (ownerUuid: string, ip: string, username: string): Promise<Grant | null> => {
-  const usernameGrant = getGrant(ownerUuid, ip, username);
+  const usernameGrant = getGrant(ownerUuid, ip, username.toLowerCase());
   if (usernameGrant) return usernameGrant;
   return getGrant(ownerUuid, ip, '*');
 }
 
 export const setGrant = async (data: GrantData, ttl: number): Promise<Grant | null> => {
   await connectDatabase();
-  const key = `grants:${data.ownerUuid}:${data.ip}:${data.username}`;
+  const key = `grants:${data.ownerUuid}:${data.ip}:${data.username.toLowerCase()}`;
   const result = await redis.setEx(key, ttl, data.authorized.toString());
   if (result !== 'OK') return null;
   return { key, ...data };
