@@ -12,6 +12,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "start": "docker-compose up --build",
+    "start:minecraft": "docker-compose up --build minecraft-proxy minecraft-queue minecraft-main gatekeeper-redis",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },

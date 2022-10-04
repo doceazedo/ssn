@@ -1,0 +1,7 @@
+targetServer: "main"
+gatekeeper:
+  loginURL: "http://gk.servidorsemnome.com"
+  redis:
+    host: "gatekeeper-redis"
+    port: 6379
+    password: "VERY-SECURE-DATABASE-PASSWORD"

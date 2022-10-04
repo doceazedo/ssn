@@ -15,6 +15,10 @@
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>1.7.20</kotlin.version>
+        <mccoroutine.version>2.5.0</mccoroutine.version>
+        <kotlinx-coroutines.version>1.6.4</kotlinx-coroutines.version>
+        <jedis.version>4.2.3</jedis.version>
+        <gson.version>2.9.1</gson.version>
     </properties>
 
     <build>
@@ -121,6 +125,42 @@
             <artifactId>kotlin-test</artifactId>
             <version>${kotlin.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-core</artifactId>
+            <version>${kotlinx-coroutines.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-reactive</artifactId>
+            <version>${kotlinx-coroutines.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.shynixn.mccoroutine</groupId>
+            <artifactId>mccoroutine-bukkit-api</artifactId>
+            <version>${mccoroutine.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.shynixn.mccoroutine</groupId>
+            <artifactId>mccoroutine-bukkit-core</artifactId>
+            <version>${mccoroutine.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
