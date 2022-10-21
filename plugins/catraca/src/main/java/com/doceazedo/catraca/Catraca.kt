@@ -1,6 +1,6 @@
 package com.doceazedo.catraca
 
-import com.doceazedo.catraca.events.PlayerJoin
+import com.doceazedo.catraca.events.*
 import com.github.shynixn.mccoroutine.bukkit.registerSuspendingEvents
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
@@ -15,6 +15,7 @@ class Catraca : JavaPlugin() {
     override fun onEnable() {
         instance = this
         instance.saveDefaultConfig()
+        server.messenger.registerOutgoingPluginChannel(this, "BungeeCord")
 
         val redisHost: String = config.getString("gatekeeper.redis.host")
         val redisPort: Int = config.getInt("gatekeeper.redis.port")
@@ -22,11 +23,12 @@ class Catraca : JavaPlugin() {
 
         jedis = Jedis(redisHost, redisPort)
         jedis.auth(redisPassword)
-        jedis["foo"] = "bar"
-        val value = jedis["foo"]
-        Bukkit.getLogger().info("foo:$value")
 
         Bukkit.getPluginManager().registerSuspendingEvents(PlayerJoin, this)
+        Bukkit.getPluginManager().registerEvents(EntityDamage, this)
+        Bukkit.getPluginManager().registerEvents(FoodLevelChange, this)
+        Bukkit.getPluginManager().registerEvents(PlayerInteract, this)
+        Bukkit.getPluginManager().registerEvents(PlayerMove, this)
     }
 
     override fun onDisable() {

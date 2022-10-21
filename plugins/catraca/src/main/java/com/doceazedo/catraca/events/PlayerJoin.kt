@@ -5,14 +5,18 @@ import com.doceazedo.catraca.gatekeeper.Flows.checkFlow
 import com.doceazedo.catraca.gatekeeper.Flows.createFlow
 import com.doceazedo.catraca.utils.sendPlayer
 import com.github.shynixn.mccoroutine.bukkit.launch
+import org.bukkit.Location
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 
 object PlayerJoin : Listener {
+    private val spawn = Catraca.instance.config.get("spawn") as Location
+
     @EventHandler
     suspend fun onPlayerJoin(e: PlayerJoinEvent) {
         Catraca.instance.launch {
+            e.player.teleport(spawn)
             // TODO: check if username is registered
 
             // TODO: check if player is already granted
@@ -27,6 +31,7 @@ object PlayerJoin : Listener {
             // TODO: get grant, check if it is authorized, kick player if it isn't
 
             // TODO: send player to targetServer
+
             sendPlayer(e.player)
         }
     }
