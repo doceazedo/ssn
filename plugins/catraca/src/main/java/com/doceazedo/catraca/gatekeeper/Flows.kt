@@ -1,11 +1,10 @@
 package com.doceazedo.catraca.gatekeeper
 
 import com.doceazedo.catraca.Catraca
+import com.doceazedo.catraca.utils.generateCode
 import com.google.gson.Gson
 import kotlinx.coroutines.delay
-import org.bukkit.Bukkit
 import org.bukkit.entity.Player
-import java.util.*
 
 data class FlowData(
     val username: String,
@@ -20,12 +19,22 @@ data class Flow(
     val grantKey: String?,
 )
 
-const val flowDurationSec: Long = 45
-const val hr = "§2======================================="
+object Flows {
+    private const val flowDurationSec: Long = 45
+    private const val hr = "§2======================================="
+    private val loginURL: String = Catraca.instance.config.getString("gatekeeper.loginURL")
 
-val loginURL: String = Catraca.instance.config.getString("gatekeeper.loginURL")
+    private fun getFlow(code: String): Flow? {
+        val value = Catraca.jedis["flows:$code"] ?: return null
+        val flow = Gson().fromJson(value, FlowData::class.java)
+        return Flow(
+                code,
+                flow.username,
+                flow.ip,
+                flow.grantKey
+        )
+    }
 
-object Gatekeeper {
     fun createFlow(player: Player): Flow {
         val code = generateCode()
         val key = "flows:$code"
@@ -59,27 +68,11 @@ object Gatekeeper {
         )
     }
 
-    private fun getFlow(code: String): Flow? {
-        val value = Catraca.jedis["flows:$code"] ?: return null
-        val flow = Gson().fromJson(value, FlowData::class.java)
-        return Flow(
-            code,
-            flow.username,
-            flow.ip,
-            flow.grantKey
-        )
-    }
-
     suspend fun checkFlow(code: String, player: Player): Flow? {
-        Bukkit.getLogger().info("Checking flow $code for ${player.displayName}")
         if (!player.isOnline) return null
         val flow = getFlow(code) ?: return null
         if (flow.grantKey != null) return Flow(code, flow.username, flow.ip, flow.grantKey)
         delay(500)
         return checkFlow(code, player)
-    }
-
-    private fun generateCode(): String {
-        return UUID.randomUUID().toString().slice(0..4)
     }
 }

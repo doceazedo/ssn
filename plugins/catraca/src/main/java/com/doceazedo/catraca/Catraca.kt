@@ -1,12 +1,10 @@
 package com.doceazedo.catraca
 
 import com.doceazedo.catraca.events.PlayerJoin
-import com.github.shynixn.mccoroutine.bukkit.launch
 import com.github.shynixn.mccoroutine.bukkit.registerSuspendingEvents
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import redis.clients.jedis.Jedis
-import redis.clients.jedis.JedisPubSub
 
 class Catraca : JavaPlugin() {
     companion object {
