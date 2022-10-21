@@ -134,11 +134,11 @@ world-settings:
     parrots-are-unaffected-by-player-movement: false
     disable-explosion-knockback: false
     elytra-hit-wall-damage: true
+    bed-search-radius: 1
     grass-spread-tick-rate: 1
     use-alternate-fallingblock-onGround-detection: false
-    bed-search-radius: 1
-    non-player-arrow-despawn-rate: -1
     prevent-tnt-from-moving-in-water: false
+    non-player-arrow-despawn-rate: -1
     armor-stands-tick: true
     keep-spawn-loaded: true
     anti-xray:
