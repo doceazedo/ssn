@@ -28,10 +28,10 @@ object Flows {
         val value = Catraca.jedis["flows:$code"] ?: return null
         val flow = Gson().fromJson(value, FlowData::class.java)
         return Flow(
-                code,
-                flow.username,
-                flow.ip,
-                flow.grantKey
+            code,
+            flow.username,
+            flow.ip,
+            flow.grantKey
         )
     }
 
@@ -68,11 +68,11 @@ object Flows {
         )
     }
 
-    suspend fun checkFlow(code: String, player: Player): Flow? {
+    suspend fun awaitFlowChange(code: String, player: Player): Flow? {
         if (!player.isOnline) return null
         val flow = getFlow(code) ?: return null
         if (flow.grantKey != null) return Flow(code, flow.username, flow.ip, flow.grantKey)
         delay(500)
-        return checkFlow(code, player)
+        return awaitFlowChange(code, player)
     }
 }
