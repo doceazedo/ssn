@@ -40,8 +40,8 @@ object PlayerJoin : Listener {
 
             // create flow and await for a response
             // if nothing is returned, the flow expired
-            val flow = createFlow(e.player)
-            val updatedFlow = awaitFlowChange(flow.code, e.player) ?: return@launch kickPlayer(e.player, Reason.EXPIRED_FLOW)
+            val (flow, bar) = createFlow(e.player)
+            val updatedFlow = awaitFlowChange(flow.code, e.player, bar) ?: return@launch kickPlayer(e.player, Reason.EXPIRED_FLOW)
 
             // check if a grant was created for this flow
             if (updatedFlow.grantKey == null) return@launch kickPlayer(e.player, Reason.UNAUTHORIZED)

@@ -2,9 +2,12 @@ package com.doceazedo.catraca.gatekeeper
 
 import com.doceazedo.catraca.Catraca
 import com.doceazedo.catraca.enums.Env
+import com.doceazedo.catraca.utils.createBossBar
 import com.doceazedo.catraca.utils.generateCode
 import com.google.gson.Gson
 import kotlinx.coroutines.delay
+import org.bukkit.boss.BarColor
+import org.bukkit.boss.BossBar
 import org.bukkit.entity.Player
 
 object Flows {
@@ -21,7 +24,13 @@ object Flows {
         val grantKey: String?,
     )
 
+    data class FlowResponse(
+        val flow: Flow,
+        val bar: BossBar
+    )
+
     private const val flowDurationSec: Long = 45
+    private const val flowProgressDecrement: Double = 1.0 / (flowDurationSec.toDouble() * 2.0)
     private const val hr = "§2======================================="
 
     private fun getFlow(code: String): Flow? {
@@ -35,7 +44,7 @@ object Flows {
         )
     }
 
-    fun createFlow(player: Player): Flow {
+    fun createFlow(player: Player): FlowResponse {
         val code = generateCode()
         val key = "flows:$code"
         val username = player.displayName
@@ -60,22 +69,28 @@ object Flows {
         player.sendMessage(" ")
         player.sendMessage(hr)
 
-        return Flow(
-            code,
-            username,
-            ip,
-            grantKey
+        val bar = createBossBar(
+            "§e${Env.GATEKEEPER_URL.value}/${code}",
+            BarColor.GREEN,
+            player
+        )
+
+        return FlowResponse(
+            Flow(code, username, ip, grantKey),
+            bar
         )
     }
 
-    suspend fun awaitFlowChange(code: String, player: Player): Flow? {
+    suspend fun awaitFlowChange(code: String, player: Player, bar: BossBar): Flow? {
         if (!player.isOnline) return null // TODO: delete flow
         val flow = getFlow(code) ?: return null // TODO: delete flow
         if (flow.grantKey != null) {
             // TODO: delete flow
             return Flow(code, flow.username, flow.ip, flow.grantKey)
         }
+        val progress = bar.progress - flowProgressDecrement
+        bar.progress = if (progress >= 0.0) progress else 0.0
         delay(500)
-        return awaitFlowChange(code, player)
+        return awaitFlowChange(code, player, bar)
     }
 }
