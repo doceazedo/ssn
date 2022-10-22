@@ -29,6 +29,7 @@ class Catraca : JavaPlugin() {
         Bukkit.getPluginManager().registerEvents(FoodLevelChange, this)
         Bukkit.getPluginManager().registerEvents(PlayerInteract, this)
         Bukkit.getPluginManager().registerEvents(PlayerMove, this)
+        Bukkit.getPluginManager().registerEvents(PlayerQuit, this)
     }
 
     override fun onDisable() {

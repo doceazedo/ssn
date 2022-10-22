@@ -63,6 +63,18 @@ stats:
 world-settings:
   default:
     verbose: true
+    mob-spawn-range: 4
+    growth:
+      cactus-modifier: 100
+      cane-modifier: 100
+      melon-modifier: 100
+      mushroom-modifier: 100
+      pumpkin-modifier: 100
+      sapling-modifier: 100
+      wheat-modifier: 100
+      netherwart-modifier: 100
+      vine-modifier: 100
+      cocoa-modifier: 100
     entity-activation-range:
       animals: 32
       monsters: 32
@@ -100,18 +112,6 @@ world-settings:
       entity: 50
     squid-spawn-range:
       min: 45.0
-    growth:
-      cactus-modifier: 100
-      cane-modifier: 100
-      melon-modifier: 100
-      mushroom-modifier: 100
-      pumpkin-modifier: 100
-      sapling-modifier: 100
-      wheat-modifier: 100
-      netherwart-modifier: 100
-      vine-modifier: 100
-      cocoa-modifier: 100
-    mob-spawn-range: 4
     item-despawn-rate: 6000
     merge-radius:
       item: 2.5

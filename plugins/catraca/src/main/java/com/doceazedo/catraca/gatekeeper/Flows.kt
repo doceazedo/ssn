@@ -69,8 +69,8 @@ object Flows {
     }
 
     suspend fun awaitFlowChange(code: String, player: Player): Flow? {
-        if (!player.isOnline) return null
-        val flow = getFlow(code) ?: return null
+        if (!player.isOnline) return null // TODO: delete flow
+        val flow = getFlow(code) ?: return null // TODO: delete flow
         if (flow.grantKey != null) {
             // TODO: delete flow
             return Flow(code, flow.username, flow.ip, flow.grantKey)

@@ -10,6 +10,7 @@ import com.doceazedo.catraca.utils.Reason
 import com.doceazedo.catraca.utils.kickPlayer
 import com.doceazedo.catraca.utils.sendPlayer
 import com.github.shynixn.mccoroutine.bukkit.launch
+import kotlinx.coroutines.delay
 import org.bukkit.Location
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -18,17 +19,23 @@ import org.bukkit.event.player.PlayerJoinEvent
 object PlayerJoin : Listener {
     private val spawn = Catraca.instance.config.get("spawn") as Location
 
-    @EventHandler
+    @EventHandler()
     suspend fun onPlayerJoin(e: PlayerJoinEvent) {
         Catraca.instance.launch {
+            e.joinMessage = ""
             e.player.teleport(spawn)
 
             // kick user if not registered
-            whois(e.player.displayName) ?: return@launch kickPlayer(e.player, Reason.NOT_REGISTERED)
+            val identity = whois(e.player.displayName) ?: return@launch kickPlayer(e.player, Reason.NOT_REGISTERED)
 
             // check if user is granted already
-            val previousGrant = isUserGranted("", e.player)
-            if (previousGrant == true) sendPlayer(e.player)
+            val previousGrant = isUserGranted(identity.uuid, e.player)
+            if (previousGrant == true) {
+                e.player.sendMessage("§5Logado, por favor aguarde...")
+                delay(1000) // not working without a delay for some reason
+                sendPlayer(e.player)
+                return@launch
+            }
             if (previousGrant == false) return@launch kickPlayer(e.player, Reason.PROHIBITED)
 
             // create flow and await for a response
