@@ -6,15 +6,15 @@ import khttp.responses.Response
 import org.bukkit.Bukkit
 import org.json.JSONObject
 
-data class Identity(
-    val uuid: String,
-    val email: String,
-    val verified: Boolean,
-    val primaryUsername: String,
-    val usernames: Array<String>
-)
-
 object Whois {
+    data class Identity(
+        val uuid: String,
+        val email: String,
+        val verified: Boolean,
+        val primaryUsername: String,
+        val usernames: Array<String>
+    )
+
     private val identityURL: String = Catraca.instance.config.getString("identityURL")
 
     fun whois (username: String): Identity? {

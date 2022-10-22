@@ -6,20 +6,20 @@ import com.google.gson.Gson
 import kotlinx.coroutines.delay
 import org.bukkit.entity.Player
 
-data class FlowData(
-    val username: String,
-    val ip: String,
-    val grantKey: String?,
-)
-
-data class Flow(
-    val code: String,
-    val username: String,
-    val ip: String,
-    val grantKey: String?,
-)
-
 object Flows {
+    data class FlowData(
+        val username: String,
+        val ip: String,
+        val grantKey: String?,
+    )
+
+    data class Flow(
+        val code: String,
+        val username: String,
+        val ip: String,
+        val grantKey: String?,
+    )
+
     private const val flowDurationSec: Long = 45
     private const val hr = "§2======================================="
     private val loginURL: String = Catraca.instance.config.getString("gatekeeper.loginURL")
