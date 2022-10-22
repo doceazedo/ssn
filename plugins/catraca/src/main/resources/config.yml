@@ -7,11 +7,3 @@ spawn:
   z: -522.5
   pitch: -5.0
   yaw: 165.0
-gatekeeper:
-  loginURL: "http://gk.servidorsemnome.com"
-  redis:
-    host: "gatekeeper-redis"
-    port: 6379
-    password: "VERY-SECURE-DATABASE-PASSWORD"
-identityURL: "http://identity-web:3000"
-websiteURL: "ssn.gg"

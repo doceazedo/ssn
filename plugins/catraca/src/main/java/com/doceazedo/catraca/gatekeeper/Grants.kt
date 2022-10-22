@@ -5,7 +5,7 @@ import org.bukkit.entity.Player
 
 object Grants {
     private fun getGrant(ownerUUID: String, ip: String, username: String): Boolean? {
-        return getGrantByKey("grants:$ownerUUID:$ip:$username")
+        return getGrantByKey("grants:$ownerUUID:$ip:${username.lowercase()}")
     }
 
     fun getGrantByKey(key: String): Boolean? {

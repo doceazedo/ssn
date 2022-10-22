@@ -101,6 +101,13 @@ services:
     working_dir: /data
     volumes:
       - ./servers/1-queue:/data
+    environment:
+      PUBLIC_BASE_DOMAIN: ${PUBLIC_BASE_DOMAIN}
+      PUBLIC_GATEKEEPER_URL: ${PUBLIC_GATEKEEPER_URL}
+      LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
+      GK_REDIS_HOST: ${GK_REDIS_HOST}
+      GK_REDIS_PORT: ${GK_REDIS_PORT}
+      GK_REDIS_PASSWORD: ${GK_REDIS_PASSWORD}
     networks:
       - ssn-network
 

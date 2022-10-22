@@ -1,6 +1,7 @@
 package com.doceazedo.catraca.gatekeeper
 
 import com.doceazedo.catraca.Catraca
+import com.doceazedo.catraca.enums.Env
 import com.doceazedo.catraca.utils.generateCode
 import com.google.gson.Gson
 import kotlinx.coroutines.delay
@@ -22,7 +23,6 @@ object Flows {
 
     private const val flowDurationSec: Long = 45
     private const val hr = "§2======================================="
-    private val loginURL: String = Catraca.instance.config.getString("gatekeeper.loginURL")
 
     private fun getFlow(code: String): Flow? {
         val value = Catraca.jedis["flows:$code"] ?: return null
@@ -56,7 +56,7 @@ object Flows {
         player.sendMessage(" ")
         player.sendMessage("§aOi, §e${player.displayName}§a!")
         player.sendMessage("§aClique no link abaixo para fazer login:")
-        player.sendMessage("§e§l§n${loginURL}/${code}")
+        player.sendMessage("§e§l§n${Env.GATEKEEPER_URL.value}/${code}")
         player.sendMessage(" ")
         player.sendMessage(hr)
 

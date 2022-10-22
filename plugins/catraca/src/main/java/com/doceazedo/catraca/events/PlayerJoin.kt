@@ -1,12 +1,12 @@
 package com.doceazedo.catraca.events
 
 import com.doceazedo.catraca.Catraca
+import com.doceazedo.catraca.enums.Reason
 import com.doceazedo.catraca.gatekeeper.Flows.awaitFlowChange
 import com.doceazedo.catraca.gatekeeper.Flows.createFlow
 import com.doceazedo.catraca.gatekeeper.Grants.getGrantByKey
 import com.doceazedo.catraca.gatekeeper.Grants.isUserGranted
 import com.doceazedo.catraca.identity.Whois.whois
-import com.doceazedo.catraca.utils.Reason
 import com.doceazedo.catraca.utils.kickPlayer
 import com.doceazedo.catraca.utils.sendPlayer
 import com.github.shynixn.mccoroutine.bukkit.launch

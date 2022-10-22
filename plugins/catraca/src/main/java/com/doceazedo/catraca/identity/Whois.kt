@@ -1,6 +1,6 @@
 package com.doceazedo.catraca.identity
 
-import com.doceazedo.catraca.Catraca
+import com.doceazedo.catraca.enums.Env
 import com.google.gson.Gson
 import khttp.responses.Response
 import org.bukkit.Bukkit
@@ -15,15 +15,13 @@ object Whois {
         val usernames: Array<String>
     )
 
-    private val identityURL: String = Catraca.instance.config.getString("identityURL")
-
     fun whois (username: String): Identity? {
         return try {
-            val resp: Response = khttp.get("$identityURL/api/v1/whois/$username")
+            val resp: Response = khttp.get("${Env.IDENTITY_URL.value}/api/v1/whois/$username")
             val data: JSONObject = resp.jsonObject
             Gson().fromJson(data["identity"].toString(), Identity::class.java)
         } catch (cause: Throwable) {
-            Bukkit.getLogger().warning("An error ocurred when trying to fetch $identityURL/api/v1/whois/$username")
+            Bukkit.getLogger().warning("An error ocurred when trying to fetch ${Env.IDENTITY_URL}/api/v1/whois/$username")
             cause.printStackTrace()
             null
         }
