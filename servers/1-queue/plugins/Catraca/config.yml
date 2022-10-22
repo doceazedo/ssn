@@ -13,3 +13,5 @@ gatekeeper:
     host: "gatekeeper-redis"
     port: 6379
     password: "VERY-SECURE-DATABASE-PASSWORD"
+identityURL: "http://identity-web:3000"
+websiteURL: "ssn.gg"
