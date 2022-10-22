@@ -31,16 +31,12 @@ export const load: PageServerLoad = async ({ params, locals, url }) => {
   if (!identity.usernames.includes(flow.username))
     throw error(403, errorMessage.FORBIDDEN);
 
-  const loc = geoip.lookup(flow.ip);
+  const location = geoip.lookup(flow.ip);
 
   return {
     code,
     identity,
     username: "DoceAzedo",
-    location: {
-      city: loc?.city,
-      region: loc?.region,
-      country: loc?.country,
-    },
+    location
   };
 }

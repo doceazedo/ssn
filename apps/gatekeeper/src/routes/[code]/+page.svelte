@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { Checkbox, RadioGroup } from 'ssnkit';
   import type { PageServerData } from './$types';
 
@@ -11,16 +12,23 @@
   ];
   let ttl = 5;
   let grantAlts = true;
+  let region = null;
 
-  const getRegion = () =>
-    `${data.location.city}, ${data.location.region}${
+  onMount(() => {
+    if (!data.location) return;
+    region = `${data.location.city}, ${data.location.region}${
       data.location.country != 'BR' ? ` (${data.location.country})` : ''
-    }`;
+    }`
+  })
 </script>
 
 <h1 class="title">Liberar acesso</h1>
-<p>Você está tentando se conectar com o usuário <b>{data.username}</b>
-  na região de <b>{getRegion()}</b>.</p>
+<p>
+  Você está tentando se conectar com o usuário <b>{data.username}</b>
+  {#if region}
+    na região de <b>{region}</b>
+  {/if}
+</p>
 
 <div class="controls">
   <RadioGroup {options} bind:value={ttl} />
