@@ -5,6 +5,7 @@
   import { Form } from '.';
 
   const redirect = $page.url.searchParams.get('redirect');
+  const invite = $page.url.searchParams.get('invite');
 
   let isTermsModalOpen = false;
   let acceptedTerms = false;
@@ -65,7 +66,7 @@
         email,
         username,
         password
-      }, null, redirect);
+      }, invite, redirect);
     } catch (e) {
       isLoading = false;
       error = e.message;

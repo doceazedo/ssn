@@ -1,5 +1,5 @@
 import { prisma } from '.';
-import type { Identity, Prisma, Username } from '@prisma/client';
+import type { Identity, Username } from '@prisma/client';
 
 export type IdentityWithUsernames = Identity & { usernames: Username[] };
 

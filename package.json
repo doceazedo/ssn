@@ -14,8 +14,10 @@
     "dev": "turbo run dev --parallel",
     "start": "docker-compose up --build",
     "start:minecraft": "docker-compose up --build minecraft-proxy minecraft-queue minecraft-main gatekeeper-redis",
+    "start:iam": "docker-compose up --build gateway warehouse warehouse-migrate identity-web",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "migrate": "(cd ./packages/warehouse && DATABASE_URL=postgresql://doceazedo:VERY-SECURE-DATABASE-PASSWORD@localhost:5432/whdb?schema=public npx prisma migrate dev)"
   },
   "devDependencies": {
     "eslint-config-custom": "*",

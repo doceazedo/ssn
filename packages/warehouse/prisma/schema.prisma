@@ -30,9 +30,9 @@ model Username {
 }
 
 model Invite {
-  code     String    @id @unique @default(cuid())
+  code     String    @id @unique
   owner    Identity  @relation(name: "IdentityInvites", fields: [ownerId], references: [uuid])
   ownerId  String
   usedBy   Identity? @relation(name: "IdentityUsedInvite", fields: [usedById], references: [uuid])
-  usedById String    @unique
+  usedById String?   @unique
 }

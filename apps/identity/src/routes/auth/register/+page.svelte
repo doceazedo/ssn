@@ -1,19 +1,24 @@
 <script lang="ts">
   import { PageTitle } from 'ssnkit';
   import { RegisterForm } from '../../../lib/forms';
-  import { registerEnabled, inviteOnly } from '../../../lib/env/public';
+  import { registerEnabled, inviteOnly } from '$lib/env/public';
+
+  export let data;
 </script>
 
 <PageTitle pretitle="Registrar" title="Boas-vindas ao SSN.gg!" />
 {#if registerEnabled}
-  {#if inviteOnly}
+  {#if inviteOnly && !data.invite}
     <div class="is-flex is-flex-direction-column is-flex-grow-1">
-      <div class="notification is-warning is-light">
-        Você precisa receber o convite de um outro usuário para se registrar.
-      </div>
-      <div class="notification is-danger is-light">
-        O convite informado é inválido ou já foi utilizado.
-      </div>
+      {#if data.inviteCode}
+        <div class="notification is-danger is-light">
+          O convite informado é inválido ou já foi utilizado.
+        </div>
+      {:else}
+        <div class="notification is-warning is-light">
+          Você precisa receber o convite de um outro usuário para se registrar.
+        </div>
+      {/if}
       <p class="mt-auto"><a class="has-text-grey" href="/login">Já possui uma conta?</a></p>
     </div>
   {:else}

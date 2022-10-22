@@ -1,10 +1,18 @@
 import { error, json } from "@sveltejs/kit";
 import * as yup from 'yup';
 import { hashPassword } from '$lib/auth/crypto';
-import { createUser, getUserByEmail, getUserByName, purifyIdentity } from "warehouse";
+import {
+  createUser,
+  generateUserInvites,
+  getInvite,
+  getUserByEmail,
+  getUserByName,
+  purifyIdentity,
+  updateInvite
+} from "warehouse";
 import { validateRequest } from '$lib/middlewares';
 import { setAuthCookies, validateUsername } from '$lib/utils';
-import { registerEnabled, inviteOnly } from '$lib/env/public';
+import { registerEnabled, inviteOnly, invitesPerUser } from "$lib/env/public";
 import type { RequestHandler } from '@sveltejs/kit';
 
 export type RegisterParams = {
@@ -21,14 +29,15 @@ export const POST: RequestHandler = async ({ request, cookies, locals }) =>
     username: yup.string().min(3, 'O nome de usuário deve ter pelo menos 3 dígitos').max(16, 'O nome de usuário deve ter no máximo 16 dígitos').required('Insira um nome de usuário'),
     invite: yup.string().nullable(),
   }), async (body) => {
-    if (!registerEnabled) throw error(409, 'Registro temporariamente desativado');
+    if (!registerEnabled) throw error(400, 'Registro temporariamente desativado');
 
     if (!!locals.identity) throw error(401, 'Você já está logado');
 
     if (inviteOnly) {
       if (!body.invite) throw error(400, 'Insira um código de convite');
-      // TODO: check if invite exists and is not used
-      // and if the owner has validated their email
+      const invite = await getInvite(body.invite);
+      if (!invite || invite.usedById) throw error(410, 'Código de convite inválido ou já utilizado');
+      // TODO: check if invite owner has validated their email
     }
 
     const isValidUsername = validateUsername(body.username);
@@ -45,8 +54,6 @@ export const POST: RequestHandler = async ({ request, cookies, locals }) =>
 
     const password = hashPassword(body.password);
 
-    // TODO: create x invites, if enabled
-
     const identity = await createUser({
       email: body.email,
       primaryUsername: body.username,
@@ -60,7 +67,12 @@ export const POST: RequestHandler = async ({ request, cookies, locals }) =>
     if (!identity) throw error(500, 'Ocorreu um erro, por favor tente novamente.');
     const safeIdentity = purifyIdentity(identity);
 
-    // TODO: set invite as used
+    if (inviteOnly && body.invite) {
+      await updateInvite(body.invite, {
+        usedById: identity.uuid
+      });
+      await generateUserInvites(identity.uuid, invitesPerUser);
+    }
 
     setAuthCookies(cookies, identity.token);
     return json({
