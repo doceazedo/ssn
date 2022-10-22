@@ -1,12 +1,8 @@
 import { error, json } from "@sveltejs/kit";
-import { getUserByName, purifyIdentity } from "warehouse";
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async ({ locals }) => {
-  const identity = await getUserByName('DoceAzedo');
-  if (!identity) throw error(404);
-  const safeIdentity = purifyIdentity(identity);
-
+  if (!locals?.identity) throw error(404);
   return json({
     identity: locals?.identity || null
   });
