@@ -5,6 +5,7 @@ import com.doceazedo.catraca.gatekeeper.Flows.awaitFlowChange
 import com.doceazedo.catraca.gatekeeper.Flows.createFlow
 import com.doceazedo.catraca.gatekeeper.Grants.getGrantByKey
 import com.doceazedo.catraca.gatekeeper.Grants.isUserGranted
+import com.doceazedo.catraca.identity.Whois.whois
 import com.doceazedo.catraca.utils.Reason
 import com.doceazedo.catraca.utils.kickPlayer
 import com.doceazedo.catraca.utils.sendPlayer
@@ -22,7 +23,8 @@ object PlayerJoin : Listener {
         Catraca.instance.launch {
             e.player.teleport(spawn)
 
-            // TODO: check if username is registered
+            // kick user if not registered
+            whois(e.player.displayName) ?: return@launch kickPlayer(e.player, Reason.NOT_REGISTERED)
 
             // check if user is granted already
             val previousGrant = isUserGranted("", e.player)
