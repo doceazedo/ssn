@@ -6,7 +6,7 @@ import com.doceazedo.catraca.gatekeeper.Flows.awaitFlowChange
 import com.doceazedo.catraca.gatekeeper.Flows.createFlow
 import com.doceazedo.catraca.gatekeeper.Grants.getGrantByKey
 import com.doceazedo.catraca.gatekeeper.Grants.isUserGranted
-import com.doceazedo.catraca.identity.Whois.whois
+import com.doceazedo.catraca.identity.Username.getUsernameIdentity
 import com.doceazedo.catraca.utils.kickPlayer
 import com.doceazedo.catraca.utils.sendPlayer
 import com.github.shynixn.mccoroutine.bukkit.launch
@@ -26,7 +26,7 @@ object PlayerJoin : Listener {
             e.player.teleport(spawn)
 
             // kick user if not registered
-            val identity = whois(e.player.displayName) ?: return@launch kickPlayer(e.player, Reason.NOT_REGISTERED)
+            val identity = getUsernameIdentity(e.player.displayName) ?: return@launch kickPlayer(e.player, Reason.NOT_REGISTERED)
 
             // check if user is granted already
             val previousGrant = isUserGranted(identity.uuid, e.player)

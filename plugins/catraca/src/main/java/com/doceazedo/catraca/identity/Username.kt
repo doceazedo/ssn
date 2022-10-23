@@ -6,18 +6,24 @@ import khttp.responses.Response
 import org.bukkit.Bukkit
 import org.json.JSONObject
 
-object Whois {
+object Username {
     data class Identity(
         val uuid: String,
         val email: String,
         val verified: Boolean,
         val primaryUsername: String,
+        val role: String,
+        val isBanned: Boolean,
+        val createdAt: String,
         val usernames: Array<String>
     )
 
-    fun whois (username: String): Identity? {
+    fun getUsernameIdentity (username: String): Identity? {
         return try {
-            val resp: Response = khttp.get("${Env.IDENTITY_URL.value}/api/v1/whois/$username", mapOf("Authorization" to "Bearer ${Env.IDENTITY_TOKEN.value}"))
+            val resp: Response = khttp.get(
+                "${Env.IDENTITY_URL.value}/api/v1/username/$username/identity",
+                mapOf("Authorization" to "Bearer ${Env.IDENTITY_TOKEN.value}")
+            )
             val data: JSONObject = resp.jsonObject
             Gson().fromJson(data["identity"].toString(), Identity::class.java)
         } catch (cause: Throwable) {
