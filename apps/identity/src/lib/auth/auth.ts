@@ -8,6 +8,11 @@ export type RegisterParams = {
   username: string;
 }
 
+export type RegisterWithDiscordParams = {
+  refreshToken: string;
+  username: string;
+}
+
 const baseUrl = '/api/v1';
 
 export const login = async (login: string, password: string, redirectTo?: string) => {
@@ -34,6 +39,22 @@ export const register = async (params: RegisterParams, invite?: string, redirect
 
   try {
     const resp = await fetch(`${baseUrl}/register`, {
+      method: 'POST',
+      body: JSON.stringify({ ...params, invite })
+    });
+    const data = await resp.json();
+    if (!resp.ok) throw Error(data.message || 'Erro desconhecido');
+    IDENTITY.set(data.identity);
+    await goto(redirectTo || dashboardUrl);
+  } catch (e: any) {
+    console.error(e);
+    throw Error(e.message || 'Erro desconhecido');
+  }
+}
+
+export const registerWithDiscord = async (params: RegisterWithDiscordParams, invite?: string, redirectTo?: string) => {
+  try {
+    const resp = await fetch(`${baseUrl}/register/discord`, {
       method: 'POST',
       body: JSON.stringify({ ...params, invite })
     });

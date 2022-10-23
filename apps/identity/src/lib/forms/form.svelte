@@ -3,7 +3,7 @@
   import { quintOut } from 'svelte/easing';
   import { page } from "$app/stores";
   import { DiscordIcon, Input, Separator } from 'ssnkit';
-  import { discordClientId, identityUrl } from "$lib/env/public";
+  import { discordOauthUrl } from '$lib/helpers';
 
   type Field = {
     label: string;
@@ -26,17 +26,16 @@
 
   const redirect = $page.url.searchParams.get('redirect');
   const redirectParams = redirect ? `?redirect=${redirect}` : '';
-
-  const discordRedirectUrl = encodeURI(`${identityUrl}/auth/discord`);
-  const discordUrl = `https://discord.com/oauth2/authorize?client_id=${discordClientId}&redirect_uri=${discordRedirectUrl}&response_type=code&scope=identify`;
 </script>
 
 <form class="form" class:is-loading={isLoading} on:submit|preventDefault>
-  <a href={discordUrl} class="button is-link is-light is-fullwidth">
-    <DiscordIcon />
-    {discordLabel}
-  </a>
-  <Separator />
+  {#if discordLabel}
+    <a href={discordOauthUrl} class="button is-link is-light is-fullwidth">
+      <DiscordIcon />
+      {discordLabel}
+    </a>
+    <Separator />
+  {/if}
   {#each fields as field}
     <div class="field">
       <Input
