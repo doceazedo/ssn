@@ -31,6 +31,12 @@
     &.is-loading::after
       border-color: transparent transparent $link $link !important
 
+  &.is-small
+    height: unset
+    padding: .5rem 1rem
+    font-size: .9rem
+    border-radius: .5rem !important
+
   svg
     height: 1.25rem
     width: 1.25rem
@@ -40,3 +46,18 @@
 
 .card
   border-radius: 1rem
+
+.menu
+  min-width: 16rem
+
+  .menu-list a
+    display: flex
+    align-items: center
+    gap: .25rem
+    border-radius: .5rem
+
+    &.is-active
+      background-color: $primary
+
+    &:not(.is-active):hover
+      background-color: rgba(#000, .05)

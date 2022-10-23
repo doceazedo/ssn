@@ -4,8 +4,8 @@
 </script>
 
 <PageTitle pretitle="Perfil" title={$IDENTITY?.primaryUsername} />
-<pre>{JSON.stringify($IDENTITY, null, 2)}</pre>
+<pre class="card my-4">{JSON.stringify($IDENTITY, null, 2)}</pre>
 
-<button class="button is-danger" on:click={logout}>
+<button class="button is-danger is-small" on:click={logout}>
   Desconectar
 </button>
