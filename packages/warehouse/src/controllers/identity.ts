@@ -4,9 +4,12 @@ import type { Identity, Username } from '@prisma/client';
 export type IdentityWithUsernames = Identity & { usernames: Username[] };
 
 export const getUserByEmail = async (email: string): Promise<IdentityWithUsernames | null> =>
-  await prisma.identity.findUnique({
+  await prisma.identity.findFirst({
     where: {
-      email
+      email: {
+        equals: email,
+        mode: 'insensitive'
+      }
     },
     include: {
       usernames: true
@@ -14,9 +17,12 @@ export const getUserByEmail = async (email: string): Promise<IdentityWithUsernam
   });
 
 export const getUserByName = async (name: string): Promise<IdentityWithUsernames | null> => {
-  const username = await prisma.username.findUnique({
+  const username = await prisma.username.findFirst({
     where: {
-      name
+      name: {
+        equals: name,
+        mode: 'insensitive'
+      }
     },
     include: {
       owner: {
