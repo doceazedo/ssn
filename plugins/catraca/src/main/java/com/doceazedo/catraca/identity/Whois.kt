@@ -17,7 +17,7 @@ object Whois {
 
     fun whois (username: String): Identity? {
         return try {
-            val resp: Response = khttp.get("${Env.IDENTITY_URL.value}/api/v1/whois/$username")
+            val resp: Response = khttp.get("${Env.IDENTITY_URL.value}/api/v1/whois/$username", mapOf("Authorization" to "Bearer ${Env.IDENTITY_TOKEN.value}"))
             val data: JSONObject = resp.jsonObject
             Gson().fromJson(data["identity"].toString(), Identity::class.java)
         } catch (cause: Throwable) {
