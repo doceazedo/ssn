@@ -13,8 +13,8 @@ datasource db {
 
 model Identity {
   uuid            String           @id @unique @default(uuid())
-  email           String           @unique
-  password        String
+  email           String?          @unique
+  password        String?
   verified        Boolean          @default(false)
   token           String           @unique @default(uuid())
   usernames       Username[]       @relation(name: "IdentityUsernames")
@@ -24,6 +24,7 @@ model Identity {
   role            Role             @default(USER)
   isBanned        Boolean          @default(false)
   badges          IdentityBadges[]
+  connections     Connection[]
   createdAt       DateTime         @default(now())
 }
 
@@ -59,7 +60,23 @@ model IdentityBadges {
   @@id([ownerId, badgeSlug])
 }
 
+model Connection {
+  id           String   @id @unique
+  service      Service
+  accessToken  String
+  expiresAt    DateTime
+  refreshToken String
+  scope        String
+  tokenType    String
+  owner        Identity @relation(fields: [ownerId], references: [uuid])
+  ownerId      String
+}
+
 enum Role {
   USER
   ADMIN
+}
+
+enum Service {
+  DISCORD
 }

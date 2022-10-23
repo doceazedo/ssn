@@ -21,7 +21,7 @@ export const POST: RequestHandler = async ({ request, cookies, locals }) =>
     const identity = await getUserByEmailOrName(body.login);
     if (!identity) throw error(401, 'Login ou senha inválidos');
 
-    const isValidPassword = matchPassword(body.password, identity.password);
+    const isValidPassword = identity.password && matchPassword(body.password, identity.password);
     if (!isValidPassword) throw error(401, 'Login ou senha inválidos');
 
     const safeIdentity = purifyIdentity(identity);

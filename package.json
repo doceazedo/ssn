@@ -17,7 +17,7 @@
     "start:iam": "docker-compose up --build gateway warehouse warehouse-migrate identity-web",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "migrate": "(cd ./packages/warehouse && DATABASE_URL=postgresql://doceazedo:VERY-SECURE-DATABASE-PASSWORD@localhost:5432/whdb?schema=public npx prisma migrate dev && npx prisma migrate)"
+    "migrate": "(cd ./packages/warehouse && DATABASE_URL=postgresql://doceazedo:VERY-SECURE-DATABASE-PASSWORD@localhost:5432/whdb?schema=public npx prisma migrate dev && npx prisma generate)"
   },
   "devDependencies": {
     "eslint-config-custom": "*",

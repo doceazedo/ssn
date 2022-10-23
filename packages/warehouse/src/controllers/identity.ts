@@ -3,6 +3,16 @@ import type { Identity, Username } from '@prisma/client';
 
 export type IdentityWithUsernames = Identity & { usernames: Username[] };
 
+export const getUser = async (uuid: string): Promise<IdentityWithUsernames | null> =>
+  await prisma.identity.findUnique({
+    where: {
+      uuid
+    },
+    include: {
+      usernames: true
+    }
+  });
+
 export const getUserByEmail = async (email: string): Promise<IdentityWithUsernames | null> =>
   await prisma.identity.findFirst({
     where: {

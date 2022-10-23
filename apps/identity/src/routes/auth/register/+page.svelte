@@ -1,9 +1,16 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+  import { browser } from '$app/environment';
   import { PageTitle } from 'ssnkit';
   import { RegisterForm } from '../../../lib/forms';
   import { registerEnabled, inviteOnly } from '$lib/env/public';
 
   export let data;
+
+  onMount(() => {
+    if (!browser || !data.inviteCode) return;
+    localStorage.setItem("invite", data.inviteCode);
+  });
 </script>
 
 <PageTitle pretitle="Registrar" title="Boas-vindas ao SSN.gg!" />
