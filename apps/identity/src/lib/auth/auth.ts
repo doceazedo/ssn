@@ -33,7 +33,7 @@ export const login = async (login: string, password: string, redirectTo?: string
   }
 }
 
-export const register = async (params: RegisterParams, invite?: string, redirectTo?: string) => {
+export const register = async (params: RegisterParams, invite?: string) => {
   const isFilled = Object.values(params).every(x => x);
   if (!isFilled) throw Error('Preencha todos os campos');
 
@@ -45,14 +45,13 @@ export const register = async (params: RegisterParams, invite?: string, redirect
     const data = await resp.json();
     if (!resp.ok) throw Error(data.message || 'Erro desconhecido');
     IDENTITY.set(data.identity);
-    await goto(redirectTo || dashboardUrl);
   } catch (e: any) {
     console.error(e);
     throw Error(e.message || 'Erro desconhecido');
   }
 }
 
-export const registerWithDiscord = async (params: RegisterWithDiscordParams, invite?: string, redirectTo?: string) => {
+export const registerWithDiscord = async (params: RegisterWithDiscordParams, invite?: string) => {
   try {
     const resp = await fetch(`${baseUrl}/register/discord`, {
       method: 'POST',
@@ -61,7 +60,7 @@ export const registerWithDiscord = async (params: RegisterWithDiscordParams, inv
     const data = await resp.json();
     if (!resp.ok) throw Error(data.message || 'Erro desconhecido');
     IDENTITY.set(data.identity);
-    await goto(redirectTo || dashboardUrl);
+    await goto('/auth/register');
   } catch (e: any) {
     console.error(e);
     throw Error(e.message || 'Erro desconhecido');

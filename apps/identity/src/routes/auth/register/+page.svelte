@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { browser } from '$app/environment';
-  import { page } from "$app/stores";
   import { CopyIpTag, PageTitle } from 'ssnkit';
   import { Heart, Mail, Users } from 'ssnkit/icons';
   import { RegisterForm } from '$lib/forms';
@@ -11,13 +10,11 @@
 
   export let data;
 
-  let debugSuccess = false;
-
   const nextSteps = [
     {
       icon: Users,
       // TODO: make this text better?
-      label: `Você pode adicionar <b>outros nomes de usuário</b> a sua conta para usar a mesma senha e só precisar logar uma vez através do seu painel em <a href="https://${baseDomain}/alt">${baseDomain}/alt</a>`,
+      label: `Você pode adicionar <b>outros nomes de usuário</b> à sua conta para usar a mesma senha e só precisar logar uma vez através do seu painel em <a href="https://${baseDomain}/alt">${baseDomain}/alt</a>`,
     },
     {
       icon: Mail,
@@ -30,13 +27,12 @@
   ]
 
   onMount(() => {
-    if (browser) debugSuccess = !!$page.url.searchParams.get('success'); // FIXME: debug code, remove later
     if (!browser || !data.inviteCode) return;
     localStorage.setItem("invite", data.inviteCode);
   });
 </script>
 
-{#if debugSuccess || $IDENTITY}
+{#if $IDENTITY}
   <PageTitle pretitle="Registrar" title="Tudo pronto! 🎉" />
   <p>Voce já pode jogar no SSN.gg através do IP <CopyIpTag /> :)</p>
   <h2 class="title is-4 mb-0">Informações importantes:</h2>
@@ -50,6 +46,7 @@
       </li>
     {/each}
   </ul>
+  <a class="button is-primary" href="/me">Meu perfil</a>
 {:else}
   <PageTitle pretitle="Registrar" title="Boas-vindas ao SSN.gg!" />
   {#if registerEnabled}

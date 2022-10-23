@@ -3,8 +3,6 @@
   import { register } from "$lib/auth";
   import { TermsModal } from '$lib/modals';
   import { Form } from '.';
-
-  const redirect = $page.url.searchParams.get('redirect');
   const invite = $page.url.searchParams.get('invite');
 
   let isTermsModalOpen = false;
@@ -66,7 +64,7 @@
         email,
         username,
         password
-      }, invite, redirect);
+      }, invite);
     } catch (e) {
       isLoading = false;
       error = e.message;
