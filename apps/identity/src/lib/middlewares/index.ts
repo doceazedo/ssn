@@ -1,2 +1,3 @@
-export { loggedInOnly } from './logged-in-only';
-export { validateRequest } from './validate-request';
+export * from './logged-in-only';
+export * from './token-only';
+export * from './validate-request';
