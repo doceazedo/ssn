@@ -23,5 +23,8 @@
     "typescript": "^4.6.4",
     "vite": "^3.1.0",
     "warehouse": "*"
+  },
+  "dependencies": {
+    "lucide-svelte": "^0.93.0"
   }
 }
