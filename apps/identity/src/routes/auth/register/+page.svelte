@@ -46,7 +46,7 @@
       </li>
     {/each}
   </ul>
-  <a class="button is-primary" href="/me">Meu perfil</a>
+  <a class="button is-primary" href="/dashboard">Meu perfil</a>
 {:else}
   <PageTitle pretitle="Registrar" title="Boas-vindas ao SSN.gg!" />
   {#if registerEnabled}
