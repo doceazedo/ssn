@@ -12,21 +12,28 @@ datasource db {
 }
 
 model Identity {
-  uuid            String     @id @unique @default(uuid())
-  email           String     @unique
+  uuid            String           @id @unique @default(uuid())
+  email           String           @unique
   password        String
-  verified        Boolean    @default(false)
-  token           String     @unique @default(uuid())
-  usernames       Username[] @relation(name: "IdentityUsernames")
-  primaryUsername String     @unique
-  invites         Invite[]   @relation(name: "IdentityInvites")
-  usedInvite      Invite?    @relation(name: "IdentityUsedInvite")
+  verified        Boolean          @default(false)
+  token           String           @unique @default(uuid())
+  usernames       Username[]       @relation(name: "IdentityUsernames")
+  primaryUsername String           @unique
+  invites         Invite[]         @relation(name: "IdentityInvites")
+  usedInvite      Invite?          @relation(name: "IdentityUsedInvite")
+  role            Role             @default(USER)
+  isBanned        Boolean          @default(false)
+  badges          IdentityBadges[]
+  createdAt       DateTime         @default(now())
 }
 
 model Username {
-  name    String   @id @unique
-  owner   Identity @relation(name: "IdentityUsernames", fields: [ownerId], references: [uuid])
-  ownerId String
+  name      String    @id @unique
+  owner     Identity  @relation(name: "IdentityUsernames", fields: [ownerId], references: [uuid])
+  ownerId   String
+  createdAt DateTime  @default(now())
+  firstJoin DateTime?
+  lastSeen  DateTime?
 }
 
 model Invite {
@@ -35,4 +42,24 @@ model Invite {
   ownerId  String
   usedBy   Identity? @relation(name: "IdentityUsedInvite", fields: [usedById], references: [uuid])
   usedById String?   @unique
+}
+
+model Badge {
+  slug   String           @id @unique
+  label  String
+  owners IdentityBadges[]
+}
+
+model IdentityBadges {
+  owner     Identity @relation(fields: [ownerId], references: [uuid])
+  ownerId   String
+  badge     Badge    @relation(fields: [badgeSlug], references: [slug])
+  badgeSlug String
+
+  @@id([ownerId, badgeSlug])
+}
+
+enum Role {
+  USER
+  ADMIN
 }
