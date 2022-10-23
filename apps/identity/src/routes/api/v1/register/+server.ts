@@ -1,5 +1,6 @@
 import { error, json } from "@sveltejs/kit";
 import * as yup from 'yup';
+import { validate } from 'deep-email-validator';
 import { hashPassword } from '$lib/auth/crypto';
 import {
   createUser,
@@ -46,8 +47,11 @@ export const POST: RequestHandler = async ({ request, cookies, locals }) =>
     const existingUsername = await getUserByName(body.username);
     if (existingUsername) throw error(409, 'Nome de usuário já registrado');
 
-    // const isValidEmail;
-    // TODO: https://github.com/mfbx9da4/deep-email-validator
+    const emailValidation = await validate({
+      email: body.email,
+      validateTypo: false
+    });
+    if (!emailValidation.valid) throw error(400, 'Insira um e-mail válido');
 
     const existingEmail = await getUserByEmail(body.email);
     if (existingEmail) throw error(409, 'Endereço de e-mail já registrado');
