@@ -1,4 +1,5 @@
 import { goto } from '$app/navigation';
+import { browser } from '$app/environment';
 import { dashboardUrl } from '$lib/env/public';
 import { IDENTITY } from "./auth.store";
 
@@ -76,6 +77,20 @@ export const logout = async () => {
     if (!resp.ok) throw Error(data.message || 'Erro desconhecido');
     IDENTITY.set(null);
     await goto('/auth/login');
+  } catch (e: any) {
+    console.error(e);
+    throw Error(e.message || 'Erro desconhecido');
+  }
+}
+
+export const createNewUsername = async (username: string) => {
+  try {
+    const resp = await fetch(`${baseUrl}/username/${username}`, {
+      method: 'POST'
+    });
+    const data = await resp.json();
+    if (!resp.ok) throw Error(data.message || 'Erro desconhecido');
+    if (browser) window.location.assign('/dashboard/usernames');
   } catch (e: any) {
     console.error(e);
     throw Error(e.message || 'Erro desconhecido');

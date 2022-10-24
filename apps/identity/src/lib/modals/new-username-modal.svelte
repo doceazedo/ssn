@@ -2,6 +2,7 @@
   import { Input } from 'ssnkit';
   import { fade, scale, slide } from 'svelte/transition';
   import { quintOut } from 'svelte/easing';
+  import { createNewUsername } from "$lib/auth";
 
   export let isOpen = false;
 
@@ -9,18 +10,20 @@
   let isLoading = false;
   let error = '';
 
+  $: isOpen, error = '';
+
   const close = () => {
     if (!isLoading) isOpen = false;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (isLoading) return;
     try {
       isLoading = true;
       error = '';
 
       if (!username.length) throw Error('Digite um nome de usuário');
-      throw Error('Not implemented');
+      await createNewUsername(username);
     } catch (e) {
       isLoading = false;
       error = e.message;

@@ -1,7 +1,5 @@
 <script lang="ts">
   import dayjs from 'dayjs';
-  import relativeTime from 'dayjs/plugin/relativeTime';
-  import 'dayjs/locale/pt-br';
   import { PageTitle } from 'ssnkit';
   import { Plus } from 'ssnkit/icons';
   import { IDENTITY } from "$lib/auth";
@@ -11,11 +9,8 @@
 
   let isNewUserModalOpen = false;
 
-  const timeAgo = (date: Date) => {
-    dayjs.extend(relativeTime);
-    dayjs().locale('pt-br');
-    return dayjs(date).fromNow();
-  };
+  const getFullDate = (date: Date) =>
+    dayjs(date).format('DD/MM/YYYY [às] HH:mm:ss');
 </script>
 
 <PageTitle pretitle="Geral" title="Minhas contas" class="mb-6">
@@ -43,7 +38,7 @@
           </h1>
           <p>
             {#if username.lastSeen}
-              Visto por último {timeAgo(username.lastSeen)}
+              Visto por último em {getFullDate(username.lastSeen)}
             {:else}
               <i>Ainda não se conectou</i>
             {/if}

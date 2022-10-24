@@ -24,4 +24,8 @@
 
   .logo
     height: 8rem
+
+  @media screen and (min-width: 769px)
+    .hero-body
+      padding: 4rem 4.5rem !important
 </style>

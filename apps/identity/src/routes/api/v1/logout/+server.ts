@@ -4,7 +4,7 @@ import { deleteAuthCookies } from '$lib/utils';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async ({ cookies, locals }) =>
-  loggedInOnly(locals, () => {
+  loggedInOnly(locals, null, () => {
     deleteAuthCookies(cookies);
     return json({
       identity: null
