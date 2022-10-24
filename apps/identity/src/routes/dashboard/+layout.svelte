@@ -7,9 +7,9 @@
 <Layout identity={$IDENTITY}>
   <div class="dashboard">
     <Menu />
-    <div>
+    <main class="main">
       <slot />
-    </div>
+    </main>
   </div>
 </Layout>
 
@@ -17,4 +17,7 @@
   .dashboard
     display: flex
     gap: 3rem
+
+    .main
+      width: 100%
 </style>
