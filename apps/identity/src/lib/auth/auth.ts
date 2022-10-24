@@ -76,7 +76,7 @@ export const logout = async () => {
     const data = await resp.json();
     if (!resp.ok) throw Error(data.message || 'Erro desconhecido');
     IDENTITY.set(null);
-    await goto('/auth/login');
+    window.location.assign('/auth/login');
   } catch (e: any) {
     console.error(e);
     throw Error(e.message || 'Erro desconhecido');
