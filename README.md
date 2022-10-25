@@ -1,48 +1,85 @@
-<h1 align="center">
-  SSN.gg 🍉
-</h1>
-
 <p align="center">
-    This is the official repository for every part that composes the open-source Minecraft anarchy server ✨
+  <img src="./packages/ssnkit/assets/img/ssn-icon.png" width="100" />
 </p>
 
-> **Warning**: this project is under heavy development, do not expect anything to work at all at this point.
+<p align="center">
+    Over-engineered open-source Minecraft anarchy server — made in Brasil 🇧🇷✨
+</p>
 
 ## 🗂 What's inside?
 
 This monorepo uses [npm](https://www.npmjs.com/) as a package manager. It includes the following applications:
 
 - [`apps`](./apps): all the services related to the server
-- [`packages`](./packages): libraries shared between services
-- [`plugins`](./plugins): all first-party Spigot plugins
-- [`servers`](./servers): the Paper servers configuration files and plugins
+- [`packages`](./packages): libraries shared between apps
+- [`plugins`](./plugins): first-party Minecraft plugins source code
+- [`servers`](./servers): the Minecraft servers configuration files and plugins
 
-## 🧰 Build
+## 📦 Dependencies
+
+Make sure you have **Node.js v18** installed. You can easily change your Node version using [nvm](https://github.com/nvm-sh/nvm):
+```bash
+nvm install 18
+node --version
+```
+
+For plugin development, you will need **JDK 17** and **Maven**. To install them on macOS using [Homebrew](https://brew.sh), run:
+```bash
+brew install openjdk@17 maven
+```
+
+Finally, you will also need to have **Docker** and **Docker Compose** installed. You can easily get both by installing the much recommended [Docker Desktop](https://www.docker.com/products/docker-desktop).
+
+## ⚡️ Get started
 
 First off, install the dependencies by running the following command:
-
-```
+```bash
 npm install
 ```
 
-Then to build all apps and packages, run:
-
+Then, you will need to setup your environment variables. You can do this by copying the example file:
+```bash
+cp .env.example .env
 ```
-npm run build
+
+Now, open your `/etc/hosts` file and add these lines to the end:
+```
+127.0.0.1 servidorsemnome.com id.servidorsemnome.com gk.servidorsemnome.com
+::1       servidorsemnome.com id.servidorsemnome.com gk.servidorsemnome.com
 ```
 
-## 🚧 Develop
-
-To start the development environment, run the following command:
-
+Then start the containers by running this command:
+```bash
+npm run start
 ```
-npm run dev
+
+You should now be able to join the Minecraft server on **localhost:25565** and open [id.servidorsemnome.com/auth/login](http://id.servidorsemnome.com/auth/login) in your browser.
+
+## 🧰 Build
+
+To build a plugin and copy the artifact to the server, you can run this command:
+```bash
+# npm run build:plugin-name
+npm run build:catraca
 ```
+
+All services are rebuilt on start by default.
 
 ## 🚀 Deploy
 
-To start the production environment, run the following command:
+_The deployment stage is not yet defined._
 
-```
-npm run start
-```
+## 🤒 Known issues
+
+These are known issues with the current setup of this project:
+
+- A few scripts might only work with Unix-like systems, as Windows has a different way of setting environment variables on the fly.
+- Unfortunately, `npm run start` is also being used as the development environment at this moment. This means no hot reloading, you will have to restart it everytime you change something. **Help on setting one up is much appreciated.**
+
+## 🤝 Contributing
+
+First of all, thank you for your interest in making SSN.gg better! Contributions are always welcomed. Please, feel free to [open an issue](https://github.com/doceazedo/ssn/issues) with your suggestion or bug report. Discussions must be in Brazilian Portuguese.
+
+## 📝 License
+
+The SSN.gg project is licensed under the [GPLv3 License](LICENSE).
