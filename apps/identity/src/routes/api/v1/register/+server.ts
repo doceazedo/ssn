@@ -34,11 +34,13 @@ export const POST: RequestHandler = async ({ request, cookies, locals }) =>
 
     if (!!locals.identity) throw error(401, 'Você já está logado');
 
+    let invites = undefined;
     if (inviteOnly) {
       if (!body.invite) throw error(400, 'Insira um código de convite');
       const invite = await getInvite(body.invite);
       if (!invite || invite.usedById) throw error(410, 'Código de convite inválido ou já utilizado');
       // TODO: check if invite owner has validated their email
+      invites = await generateUserInvites(invitesPerUser)
     }
 
     const isValidUsername = validateUsername(body.username);
@@ -66,6 +68,7 @@ export const POST: RequestHandler = async ({ request, cookies, locals }) =>
           { name: body.username },
         ],
       },
+      invites,
       password,
     });
     if (!identity) throw error(500, 'Ocorreu um erro, por favor tente novamente.');
@@ -75,7 +78,6 @@ export const POST: RequestHandler = async ({ request, cookies, locals }) =>
       await updateInvite(body.invite, {
         usedById: identity.uuid
       });
-      await generateUserInvites(identity.uuid, invitesPerUser);
     }
 
     setAuthCookies(cookies, identity.token);

@@ -16,13 +16,11 @@ export const getUserInvites = async (ownerId: string): Promise<Invite[]> =>
     }
   });
 
-export const generateUserInvites = async (ownerId: string, quantity: number) =>
-  await prisma.invite.createMany({
-    data: Array(quantity).fill(null).map(_ => ({
-      code: generateSlug(),
-      ownerId,
-    }))
-  });
+export const generateUserInvites = async (quantity: number) => ({
+  create: Array(quantity).fill(null).map(_ => ({
+    code: generateSlug(),
+  })),
+})
 
 export const updateInvite = async (code: string, data: Partial<Invite>) =>
   await prisma.invite.update({
