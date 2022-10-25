@@ -123,7 +123,7 @@ world-settings:
     duplicate-uuid-saferegen-delete-range: 32
     keep-spawn-loaded-range: 8
     auto-save-interval: -1
-    parrots-are-unaffected-by-player-movement: false
+    disable-teleportation-suffocation-check: false
     nether-ceiling-void-damage: false
     allow-non-player-entities-on-scoreboards: false
     frosted-ice:
@@ -132,6 +132,7 @@ world-settings:
         min: 20
         max: 40
     container-update-tick-rate: 1
+    parrots-are-unaffected-by-player-movement: false
     disable-explosion-knockback: false
     elytra-hit-wall-damage: true
     grass-spread-tick-rate: 1
@@ -171,13 +172,12 @@ world-settings:
     skeleton-horse-thunder-spawn-chance: 0.01
     disable-ice-and-snow: false
     fire-physics-event-for-redstone: false
-    baby-zombie-movement-speed: 0.5
     spawner-nerfed-mobs-should-jump: false
+    baby-zombie-movement-speed: 0.5
     allow-leashing-undead-horse: false
-    mob-spawner-tick-rate: 1
     all-chunks-are-slime-chunks: false
+    mob-spawner-tick-rate: 1
     squid-spawn-height:
       maximum: 0.0
-    disable-teleportation-suffocation-check: false
     enable-treasure-maps: true
     treasure-maps-return-already-discovered: false

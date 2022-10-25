@@ -65,12 +65,12 @@ world-settings:
       disable-extreme-hills-emeralds: false
       disable-extreme-hills-monster-eggs: false
       disable-mesa-additional-gold: false
-    delay-chunk-unloads-by: 10s
     portal-search-radius: 128
-    use-vanilla-world-scoreboard-name-coloring: false
     queue-light-updates: false
     optimize-explosions: false
     use-chunk-inhabited-timer: true
+    use-vanilla-world-scoreboard-name-coloring: false
+    delay-chunk-unloads-by: 10s
     max-auto-save-chunks-per-tick: 24
     save-queue-limit-for-auto-save: 50
     remove-corrupt-tile-entities: false
@@ -130,6 +130,8 @@ world-settings:
       delay:
         min: 20
         max: 40
+    enable-treasure-maps: true
+    treasure-maps-return-already-discovered: false
     container-update-tick-rate: 1
     parrots-are-unaffected-by-player-movement: false
     disable-explosion-knockback: false
@@ -139,6 +141,7 @@ world-settings:
     bed-search-radius: 1
     non-player-arrow-despawn-rate: -1
     prevent-tnt-from-moving-in-water: false
+    disable-teleportation-suffocation-check: false
     armor-stands-tick: true
     keep-spawn-loaded: true
     anti-xray:
@@ -174,10 +177,7 @@ world-settings:
     baby-zombie-movement-speed: 0.5
     spawner-nerfed-mobs-should-jump: false
     allow-leashing-undead-horse: false
-    mob-spawner-tick-rate: 1
     all-chunks-are-slime-chunks: false
+    mob-spawner-tick-rate: 1
     squid-spawn-height:
       maximum: 0.0
-    disable-teleportation-suffocation-check: false
-    enable-treasure-maps: true
-    treasure-maps-return-already-discovered: false
