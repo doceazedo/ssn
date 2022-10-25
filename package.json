@@ -9,17 +9,13 @@
     "servers/*"
   ],
   "scripts": {
-    "build": "turbo run build",
     "build:catraca": "(cd ./plugins/catraca && mvn install && cp ./target/Catraca-0.0.1.jar ../../servers/1-queue/plugins)",
     "build:lagosta": "(cd ./plugins/lagosta && mvn install && cp ./target/Lagosta-1.0.0.jar ../../servers/2-main/plugins)",
     "build:tttalk": "(cd ./plugins/tttalk && mvn install && cp ./target/Tttalk-0.0.1.jar ../../servers/2-main/plugins)",
-    "dev": "turbo run dev --parallel",
     "start": "docker-compose up --build",
-    "start:minecraft": "docker-compose up --build minecraft-proxy minecraft-queue minecraft-main gatekeeper-redis",
     "start:iam": "docker-compose up --build gateway warehouse warehouse-migrate identity-web",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "migrate": "(cd ./packages/warehouse && DATABASE_URL=postgresql://doceazedo:VERY-SECURE-DATABASE-PASSWORD@localhost:5432/whdb?schema=public npx prisma migrate dev && npx prisma generate)"
+    "warehouse:generate": "(cd ./packages/warehouse && npx prisma generate)",
+    "postinstall": "npm run warehouse:generate"
   },
   "devDependencies": {
     "eslint-config-custom": "*",
