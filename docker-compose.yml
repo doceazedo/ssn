@@ -87,7 +87,7 @@ services:
       - ssn-network
 
   minecraft-proxy:
-    image: arm64v8/amazoncorretto:17
+    image: amazoncorretto:17
     command: java -Xms512M -Xmx1024M -jar BungeeCord.jar
     ports:
       - "25565:25565"
@@ -98,7 +98,7 @@ services:
       - ssn-network
 
   minecraft-queue:
-    image: arm64v8/amazoncorretto:17
+    image: amazoncorretto:17
     command: java --add-opens java.base/java.net=ALL-UNNAMED -Xms512M -Xmx2048M -jar paper-1.12.2-1620.jar
     ports:
       - "25561:25561"
@@ -117,7 +117,7 @@ services:
       - ssn-network
 
   minecraft-main:
-    image: arm64v8/amazoncorretto:17
+    image: amazoncorretto:17
     command: java -Xms2048M -Xmx4096M -jar paper-1.12.2-1620.jar
     ports:
       - "25562:25562"
