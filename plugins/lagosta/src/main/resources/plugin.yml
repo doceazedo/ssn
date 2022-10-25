@@ -1,0 +1,6 @@
+name: Lagosta
+version: '${project.version}'
+main: com.doceazedo.lagosta.Lagosta
+commands:
+  kill:
+    aliases: [suicide]

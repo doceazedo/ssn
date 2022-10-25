@@ -123,6 +123,7 @@ world-settings:
     duplicate-uuid-saferegen-delete-range: 32
     keep-spawn-loaded-range: 8
     auto-save-interval: -1
+    use-alternate-fallingblock-onGround-detection: false
     parrots-are-unaffected-by-player-movement: false
     nether-ceiling-void-damage: false
     allow-non-player-entities-on-scoreboards: false
@@ -135,7 +136,6 @@ world-settings:
     disable-explosion-knockback: false
     elytra-hit-wall-damage: true
     grass-spread-tick-rate: 1
-    use-alternate-fallingblock-onGround-detection: false
     bed-search-radius: 1
     non-player-arrow-despawn-rate: -1
     prevent-tnt-from-moving-in-water: false

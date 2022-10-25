@@ -11,6 +11,7 @@
   "scripts": {
     "build": "turbo run build",
     "build:catraca": "(cd ./plugins/catraca && mvn install && cp ./target/Catraca-0.0.1.jar ../../servers/1-queue/plugins)",
+    "build:lagosta": "(cd ./plugins/lagosta && mvn install && cp ./target/Lagosta-1.0.0.jar ../../servers/2-main/plugins)",
     "dev": "turbo run dev --parallel",
     "start": "docker-compose up --build",
     "start:minecraft": "docker-compose up --build minecraft-proxy minecraft-queue minecraft-main gatekeeper-redis",
