@@ -7,6 +7,7 @@ import { errorMessage } from '$lib/enums';
 import type { PageServerLoad } from './$types';
 
 const identityBaseUrl = env.PUBLIC_IDENTITY_URL;
+const gatekeeperBaseUrl = env.PUBLIC_GATEKEEPER_URL;
 
 export const load: PageServerLoad = async ({ params, locals, url }) => {
   const { code } = params;
@@ -15,11 +16,10 @@ export const load: PageServerLoad = async ({ params, locals, url }) => {
   if (!isValidCode(code))
     throw error(406, errorMessage.INVALID_CODE);
 
-  // FIXME: remove this later
-  const DEBUG = url.href.replace('https://', 'http://');
+  const redirectTo = `${gatekeeperBaseUrl}/${code}`;
 
   if (!identity)
-    throw redirect(302, `${identityBaseUrl}/auth/login?redirect=${DEBUG}`);
+    throw redirect(302, `${identityBaseUrl}/auth/login?redirect=${redirectTo}`);
 
   const flow = await getFlowByCode(code);
   if (!flow)

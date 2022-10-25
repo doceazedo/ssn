@@ -12,7 +12,7 @@
 
 <div class="control" class:is-filled={!!value.length}>
   <label for={name}>{label}</label>
-  <input class="input" bind:value use:inputType name="debug-{name}" {disabled} autocomplete="debug-{name}" />
+  <input class="input" bind:value use:inputType {name} {disabled} />
 </div>
 
 <style lang="sass">
