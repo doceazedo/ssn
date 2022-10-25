@@ -26,7 +26,7 @@
             <li><b>✅ O conteúdo dos jogadores não é moderado.</b> Muito do que pode ser encontrado no servidor pode ser considerado ofensivo e sem filtro.</li>
             <li><b>✅ Serei respeitoso nas comunidades do SSN.gg.</b> Apesar do servidor não ter regras, eu entendo que as comunidades fora do jogo são moderadas e devem ser espaços receptivos a <u>todas as pessoas</u>.</li>
           </ul>
-          <p>Ir contra qualquer uma dessas diretrizes pode ocasionar no bloqueio temporário ou permanente, parcial ou integral, do seu acesso às plataformas do SSN.gg.</p>
+          <p>Ir contra qualquer uma dessas diretrizes pode ocasionar no bloqueio temporário ou permanente, parcial ou integral, do seu acesso aos serviços do SSN.gg.</p>
         </div>
       </section>
       <footer class="modal-card-foot">
