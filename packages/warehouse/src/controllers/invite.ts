@@ -2,6 +2,12 @@ import { prisma } from '.';
 import { generateSlug } from 'random-word-slugs';
 import type { Invite } from '@prisma/client';
 
+export type InviteWithUsedBy = Invite & {
+  usedBy: {
+    primaryUsername: string
+  } | null
+}
+
 export const getInvite = async (code: string): Promise<Invite | null> =>
   await prisma.invite.findUnique({
     where: {
@@ -9,10 +15,17 @@ export const getInvite = async (code: string): Promise<Invite | null> =>
     }
   });
 
-export const getUserInvites = async (ownerId: string): Promise<Invite[]> =>
+export const getUserInvites = async (ownerId: string): Promise<InviteWithUsedBy[]> =>
   await prisma.invite.findMany({
     where: {
       ownerId
+    },
+    include: {
+      usedBy: {
+        select: {
+          primaryUsername: true
+        }
+      }
     }
   });
 
