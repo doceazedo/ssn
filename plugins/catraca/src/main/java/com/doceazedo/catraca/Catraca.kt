@@ -24,6 +24,8 @@ class Catraca : JavaPlugin() {
         Bukkit.getPluginManager().registerSuspendingEvents(PlayerJoin, this)
         Bukkit.getPluginManager().registerEvents(EntityDamage, this)
         Bukkit.getPluginManager().registerEvents(FoodLevelChange, this)
+        Bukkit.getPluginManager().registerEvents(PlayerChat, this)
+        Bukkit.getPluginManager().registerEvents(PlayerCommand, this)
         Bukkit.getPluginManager().registerEvents(PlayerInteract, this)
         Bukkit.getPluginManager().registerEvents(PlayerMove, this)
         Bukkit.getPluginManager().registerEvents(PlayerQuit, this)

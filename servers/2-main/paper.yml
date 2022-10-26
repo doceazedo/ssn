@@ -80,12 +80,12 @@ world-settings:
       allow-permanent-chunk-loaders: false
       scan-for-legacy-ender-dragon: true
       shield-blocking-delay: 5
+      disable-unloaded-chunk-enderpearl-exploit: true
       disable-end-credits: false
+      village-sieges-enabled: true
       disable-player-crits: false
       disable-sprint-interruption-on-attack: false
       disable-chest-cat-detection: false
-      disable-unloaded-chunk-enderpearl-exploit: true
-      village-sieges-enabled: true
     prevent-moving-into-unloaded-chunks: true
     max-growth-height:
       cactus: 3
@@ -123,6 +123,8 @@ world-settings:
     duplicate-uuid-saferegen-delete-range: 32
     keep-spawn-loaded-range: 8
     auto-save-interval: -1
+    parrots-are-unaffected-by-player-movement: false
+    armor-stands-tick: false
     nether-ceiling-void-damage: false
     allow-non-player-entities-on-scoreboards: false
     frosted-ice:
@@ -131,15 +133,13 @@ world-settings:
         min: 20
         max: 40
     container-update-tick-rate: 2
-    parrots-are-unaffected-by-player-movement: false
     disable-explosion-knockback: false
     elytra-hit-wall-damage: true
     grass-spread-tick-rate: 4
     use-alternate-fallingblock-onGround-detection: false
     bed-search-radius: 1
-    prevent-tnt-from-moving-in-water: false
     non-player-arrow-despawn-rate: 60
-    armor-stands-tick: false
+    prevent-tnt-from-moving-in-water: false
     keep-spawn-loaded: true
     anti-xray:
       enabled: false
@@ -171,8 +171,8 @@ world-settings:
     skeleton-horse-thunder-spawn-chance: 0.01
     disable-ice-and-snow: false
     fire-physics-event-for-redstone: false
-    spawner-nerfed-mobs-should-jump: false
     baby-zombie-movement-speed: 0.5
+    spawner-nerfed-mobs-should-jump: false
     allow-leashing-undead-horse: false
     mob-spawner-tick-rate: 2
     all-chunks-are-slime-chunks: false
