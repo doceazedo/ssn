@@ -3,4 +3,4 @@ version: '${project.version}'
 main: com.doceazedo.lagosta.Lagosta
 commands:
   kill:
-    aliases: [suicide]
+    aliases: [suicide, lagosta, lagostar]
