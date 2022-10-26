@@ -3,5 +3,5 @@ version: '${project.version}'
 main: com.doceazedo.tttalk.Tttalk
 commands:
   msg:
-    aliases: [tell, w]
+    aliases: [tell, whisper, w]
     usage: "Uso: /<command> <player> <mensagem>"
