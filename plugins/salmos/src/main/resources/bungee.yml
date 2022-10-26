@@ -1,0 +1,4 @@
+name: Salmos
+version: '${project.version}'
+main: com.doceazedo.salmos.Salmos
+author: DoceAzedo
