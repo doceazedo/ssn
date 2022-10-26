@@ -19,8 +19,16 @@ permissions.yml
 usercache.json
 version_history.json
 whitelist.json
+crash-reports
 
 # Bungeecord generated files
 locations.yml
 modules
 modules.yml
+
+# Plugin generated files
+LuckPerms
+Players
+Skins
+locales
+lastupdate

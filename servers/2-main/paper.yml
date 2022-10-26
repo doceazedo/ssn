@@ -65,15 +65,15 @@ world-settings:
       disable-extreme-hills-emeralds: false
       disable-extreme-hills-monster-eggs: false
       disable-mesa-additional-gold: false
-    portal-search-radius: 128
-    queue-light-updates: false
-    optimize-explosions: false
+    remove-corrupt-tile-entities: false
     use-chunk-inhabited-timer: true
+    queue-light-updates: false
+    optimize-explosions: true
+    portal-search-radius: 128
     use-vanilla-world-scoreboard-name-coloring: false
     delay-chunk-unloads-by: 10s
-    max-auto-save-chunks-per-tick: 24
+    max-auto-save-chunks-per-tick: 8
     save-queue-limit-for-auto-save: 50
-    remove-corrupt-tile-entities: false
     max-chunk-sends-per-tick: 81
     max-chunk-gens-per-tick: 10
     game-mechanics:
@@ -86,7 +86,7 @@ world-settings:
       disable-chest-cat-detection: false
       disable-unloaded-chunk-enderpearl-exploit: true
       village-sieges-enabled: true
-    prevent-moving-into-unloaded-chunks: false
+    prevent-moving-into-unloaded-chunks: true
     max-growth-height:
       cactus: 3
       reeds: 3
@@ -94,8 +94,8 @@ world-settings:
       MinimumTicks: 100
       MaximumTicks: 600
     despawn-ranges:
-      soft: 32
-      hard: 128
+      soft: 24
+      hard: 96
     falling-block-height-nerf: 0
     tnt-entity-height-nerf: 0
     water-over-lava-flow-speed: 5
@@ -113,11 +113,11 @@ world-settings:
       refresh-min: 12h
       refresh-max: 2d
     filter-nbt-data-from-spawn-eggs-and-related: true
-    max-entity-collisions: 8
+    max-entity-collisions: 2
     disable-creeper-lingering-effect: false
     hopper:
       cooldown-when-full: true
-      disable-move-event: false
+      disable-move-event: true
       push-based: false
     duplicate-uuid-resolver: saferegen
     duplicate-uuid-saferegen-delete-range: 32
@@ -130,19 +130,16 @@ world-settings:
       delay:
         min: 20
         max: 40
-    enable-treasure-maps: true
-    treasure-maps-return-already-discovered: false
-    container-update-tick-rate: 1
+    container-update-tick-rate: 2
     parrots-are-unaffected-by-player-movement: false
     disable-explosion-knockback: false
     elytra-hit-wall-damage: true
-    grass-spread-tick-rate: 1
+    grass-spread-tick-rate: 4
     use-alternate-fallingblock-onGround-detection: false
     bed-search-radius: 1
-    non-player-arrow-despawn-rate: -1
     prevent-tnt-from-moving-in-water: false
-    disable-teleportation-suffocation-check: false
-    armor-stands-tick: true
+    non-player-arrow-despawn-rate: 60
+    armor-stands-tick: false
     keep-spawn-loaded: true
     anti-xray:
       enabled: false
@@ -177,7 +174,10 @@ world-settings:
     baby-zombie-movement-speed: 0.5
     spawner-nerfed-mobs-should-jump: false
     allow-leashing-undead-horse: false
+    mob-spawner-tick-rate: 2
     all-chunks-are-slime-chunks: false
-    mob-spawner-tick-rate: 1
     squid-spawn-height:
       maximum: 0.0
+    disable-teleportation-suffocation-check: false
+    enable-treasure-maps: true
+    treasure-maps-return-already-discovered: false
