@@ -86,6 +86,22 @@ services:
     networks:
       - ssn-network
 
+  website:
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.website.entrypoints=web'
+      - 'traefik.http.routers.website.rule=Host(`servidorsemnome.com`)'
+    ports:
+      - '3002:3000'
+    build:
+      context: .
+      dockerfile: ./apps/website/Dockerfile
+    environment:
+      PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
+      GK_REDIS_URL: ${GK_REDIS_URL}
+    networks:
+      - ssn-network
+
   minecraft-proxy:
     image: amazoncorretto:17
     command: java -Xms512M -Xmx1024M -jar BungeeCord.jar
