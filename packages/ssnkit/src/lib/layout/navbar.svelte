@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { BookOpenCheck, Home, MessageCircle, Users, Wallet } from 'lucide-svelte';
+  import { BookOpenCheck, Home, Users, Wallet } from 'lucide-svelte';
+  import { DiscordAltIcon } from '../icons';
   import type { SafeIdentity } from "warehouse";
 
   export let identity: SafeIdentity;
@@ -32,7 +33,7 @@
       label: 'Discord',
       href: `https://discord.gg/DChTnVTuKp`, // TODO: add this ssnkit/helpers or smth
       target: '_blank',
-      icon: MessageCircle
+      icon: DiscordAltIcon
     },
   ]
 </script>
@@ -98,6 +99,10 @@
       &.is-active
         color: $primary
         border-bottom-color: $primary
+
+      :global(svg)
+        width: 1.5rem
+        height: 1.5rem
 
   .user
     display: flex
