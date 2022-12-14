@@ -1,2 +1,12 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<div class="placeholder">
+  Silence is golden. ✨
+</div>
+
+<style lang="sass">
+  .placeholder
+    display: flex
+    justify-content: center
+    font-style: italic
+    height: 50vh
+    opacity: .75
+</style>
