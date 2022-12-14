@@ -1,14 +1,23 @@
 <script lang="ts">
   import 'ssnkit/styles';
   import { Layout } from 'ssnkit';
+  import { page } from '$app/stores';
+  import { env } from '$env/dynamic/public';
   import { IDENTITY } from "$lib/auth";
   import type { LayoutServerData } from './$types';
 
   export let data: LayoutServerData;
 
-  $IDENTITY = data.identity;
+  $: currentUrl = $page.url.href.endsWith('/') ? $page.url.href.slice(0, -1) : $page.url.href;
+
+  $IDENTITY = data.identity || null;
 </script>
 
-<Layout identity={$IDENTITY}>
+<Layout
+  {currentUrl}
+  websiteBaseUrl={env.PUBLIC_WEBSITE_URL || ''}
+  identityBaseUrl={env.PUBLIC_IDENTITY_URL || ''}
+  identity={$IDENTITY}
+>
   <slot />
 </Layout>

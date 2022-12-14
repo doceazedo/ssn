@@ -2,10 +2,13 @@
   import { Footer, Header } from '.';
   import type { SafeIdentity } from "warehouse";
 
-  export let identity: SafeIdentity;
+  export let identity: SafeIdentity | null;
+  export let websiteBaseUrl: string;
+  export let identityBaseUrl: string;
+  export let currentUrl = '';
 </script>
 
-<Header {identity} />
+<Header {websiteBaseUrl} {identityBaseUrl} {currentUrl} {identity} />
 <main class="section">
   <div class="container">
     <slot />

@@ -24,6 +24,7 @@ services:
       dockerfile: ./apps/identity/Dockerfile
     environment:
       PUBLIC_BASE_DOMAIN: ${PUBLIC_BASE_DOMAIN}
+      PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
       PUBLIC_DASHBOARD_URL: ${PUBLIC_DASHBOARD_URL}
       PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
       PUBLIC_REGISTER_ENABLED: ${PUBLIC_REGISTER_ENABLED}
@@ -97,8 +98,8 @@ services:
       context: .
       dockerfile: ./apps/website/Dockerfile
     environment:
+      PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
       PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
-      GK_REDIS_URL: ${GK_REDIS_URL}
     networks:
       - ssn-network
 

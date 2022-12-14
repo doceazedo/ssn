@@ -1,10 +1,19 @@
 <script lang="ts">
   import { Layout } from 'ssnkit';
   import { Menu } from '$lib/components';
-  import { IDENTITY} from "$lib/auth";
+  import { page } from '$app/stores';
+  import { env } from '$env/dynamic/public';
+  import { IDENTITY } from "$lib/auth";
+
+  $: currentUrl = $page.url.href.endsWith('/') ? $page.url.href.slice(0, -1) : $page.url.href;
 </script>
 
-<Layout identity={$IDENTITY}>
+<Layout
+  {currentUrl}
+  websiteBaseUrl={env.PUBLIC_WEBSITE_URL || ''}
+  identityBaseUrl={env.PUBLIC_IDENTITY_URL || ''}
+  identity={$IDENTITY}
+>
   <div class="dashboard">
     <Menu />
     <main class="main">
