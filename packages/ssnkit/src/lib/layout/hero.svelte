@@ -1,12 +1,16 @@
 <script lang="ts">
   import witherImg from '../../../assets/img/wither.jpeg';
   import ssnIconImg from '../../../assets/img/ssn-icon.png';
+
+  export let websiteBaseUrl: string;
 </script>
 
 <section class="hero is-medium is-primary" style="background-image:url({witherImg})">
   <div class="hero-body">
     <div class="left">
-      <img class="logo" src={ssnIconImg} />
+      <a href={websiteBaseUrl}>
+        <img class="logo" src={ssnIconImg} alt="Logotipo SSN" />
+      </a>
     </div>
     <div class="right"></div>
   </div>

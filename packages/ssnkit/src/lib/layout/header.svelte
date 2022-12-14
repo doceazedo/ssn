@@ -8,5 +8,5 @@
   export let currentUrl = '';
 </script>
 
-<Hero />
+<Hero {websiteBaseUrl} />
 <Navbar {websiteBaseUrl} {identityBaseUrl} {currentUrl} {identity} />

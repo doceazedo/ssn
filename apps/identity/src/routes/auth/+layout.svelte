@@ -1,7 +1,11 @@
+<script lang="ts">
+  import { env } from "$env/dynamic/public";
+</script>
+
 <div class="split">
   <main class="main">
     <header class="header">
-      <a href="/" class="logo">
+      <a href={env.PUBLIC_WEBSITE_URL} class="logo">
         <img src="/img/ssn-icon.png" alt="" />
       </a>
     </header>
