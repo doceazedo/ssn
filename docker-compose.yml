@@ -73,6 +73,7 @@ services:
       dockerfile: ./apps/gatekeeper/Dockerfile
     environment:
       PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
+      PUBLIC_GATEKEEPER_URL: ${PUBLIC_GATEKEEPER_URL}
       GK_REDIS_URL: ${GK_REDIS_URL}
     networks:
       - ssn-network
