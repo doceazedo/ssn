@@ -44,21 +44,16 @@ cp .env.example .env
 
 Now, open your `/etc/hosts` file and add these lines to the end:
 ```
-127.0.0.1 servidorsemnome.com id.servidorsemnome.com gk.servidorsemnome.com
-::1       servidorsemnome.com id.servidorsemnome.com gk.servidorsemnome.com
+127.0.0.1 ssn.local id.ssn.local gk.ssn.local
+::1       ssn.local id.ssn.local gk.ssn.local
 ```
 
-Create a Docker network for the SSN.gg services to use:
-```bash
-docker network create ssn-network
-```
-
-Then start the containers by running this command:
+Start the containers by running this command:
 ```bash
 npm run start
 ```
 
-You should now be able to join the Minecraft server on **localhost:25565** and open [id.servidorsemnome.com/auth/login](http://id.servidorsemnome.com/auth/login) in your browser.
+You should now be able to join the Minecraft server on **localhost:25565** and open [ssn.local](http://ssn.local) in your browser.
 
 ## 🧰 Build
 
@@ -80,7 +75,7 @@ These are known issues with the current setup of this project:
 
 - A few scripts might only work with Unix-like systems, as Windows has a different way of setting environment variables on the fly.
 - Unfortunately, `npm run start` is also being used as the development environment at this moment. This means no hot reloading, you will have to restart it everytime you change something. **Help on setting one up is much appreciated.**
-- As you restart your instance multiple times, a gigantic build cache will form until your containers are out of space. When that happens, run `docker system prune --volumes` and recreate your network.
+- As you restart your instance multiple times, a gigantic build cache will form until your containers are out of space. When that happens, run `docker system prune --volumes`.
 
 ## 🤝 Contributing
 

@@ -123,9 +123,7 @@ world-settings:
     duplicate-uuid-saferegen-delete-range: 32
     keep-spawn-loaded-range: 8
     auto-save-interval: -1
-    disable-teleportation-suffocation-check: false
     nether-ceiling-void-damage: false
-    allow-non-player-entities-on-scoreboards: false
     frosted-ice:
       enabled: true
       delay:
@@ -133,15 +131,14 @@ world-settings:
         max: 40
     container-update-tick-rate: 2
     parrots-are-unaffected-by-player-movement: false
+    allow-non-player-entities-on-scoreboards: false
     disable-explosion-knockback: false
     elytra-hit-wall-damage: true
     grass-spread-tick-rate: 4
     use-alternate-fallingblock-onGround-detection: false
     bed-search-radius: 1
-    prevent-tnt-from-moving-in-water: false
     non-player-arrow-despawn-rate: 60
-    enable-treasure-maps: true
-    treasure-maps-return-already-discovered: false
+    prevent-tnt-from-moving-in-water: false
     armor-stands-tick: false
     keep-spawn-loaded: true
     anti-xray:
@@ -181,3 +178,6 @@ world-settings:
     all-chunks-are-slime-chunks: false
     squid-spawn-height:
       maximum: 0.0
+    disable-teleportation-suffocation-check: false
+    enable-treasure-maps: true
+    treasure-maps-return-already-discovered: false

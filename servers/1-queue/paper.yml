@@ -137,8 +137,8 @@ world-settings:
     grass-spread-tick-rate: 1
     use-alternate-fallingblock-onGround-detection: false
     bed-search-radius: 1
-    non-player-arrow-despawn-rate: -1
     prevent-tnt-from-moving-in-water: false
+    non-player-arrow-despawn-rate: -1
     armor-stands-tick: true
     keep-spawn-loaded: true
     anti-xray:
