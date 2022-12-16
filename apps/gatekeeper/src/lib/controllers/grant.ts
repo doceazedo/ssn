@@ -36,7 +36,13 @@ export const isGranted = async (ownerUuid: string, ip: string, username: string)
 export const setGrant = async (data: GrantData, ttl: number): Promise<Grant | null> => {
   await connectDatabase();
   const key = `grants:${data.ownerUuid}:${data.ip}:${data.username.toLowerCase()}`;
-  const result = await redis.setEx(key, ttl, data.authorized.toString());
-  if (result !== 'OK') return null;
+  const value = data.authorized.toString();
+  try {
+    const result = ttl >= 0 ? await redis.setEx(key, ttl, value) : await redis.set(key, value);
+    if (result !== 'OK') return null;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
   return { key, ...data };
 }
