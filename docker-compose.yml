@@ -44,7 +44,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
-      - warehouse:/data/postgres
+      - /mnt:/data/postgres
     ports:
       - '5432:5432'
     networks:
@@ -156,5 +156,4 @@ networks:
     external: true
 
 volumes:
-  warehouse:
   gatekeeper:
