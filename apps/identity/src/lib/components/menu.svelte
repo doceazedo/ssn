@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LayoutDashboard, Link, Users } from 'ssnkit/icons';
+  import { LayoutDashboard, Link, Mails, Users } from 'ssnkit/icons';
   import { page } from '$app/stores';
   import { IDENTITY } from '$lib/auth';
 
@@ -35,7 +35,7 @@
           label: 'Convites',
           href: '/dashboard/admin/invites',
           active: $page.url.pathname === '/dashboard/admin/invites',
-          icon: LayoutDashboard,
+          icon: Mails,
         }
       ]
     }
