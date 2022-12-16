@@ -41,6 +41,7 @@
 		"crypto-js": "^4.1.1",
 		"dayjs": "^1.11.6",
 		"deep-email-validator": "^0.1.21",
+		"email-validator": "^2.0.4",
 		"random-word-slugs": "^0.1.6",
 		"uuid": "^9.0.0",
 		"yup": "^0.32.11"
