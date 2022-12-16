@@ -36,7 +36,7 @@ settings:
     attackDamage:
       max: 2048.0
 commands:
-  tab-complete: 0
+  tab-complete: -1
   log: true
   spam-exclusions:
   - /skill
