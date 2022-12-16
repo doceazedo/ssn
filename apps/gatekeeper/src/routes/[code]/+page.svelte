@@ -12,10 +12,10 @@
   ];
   let ttl = 5;
   let grantAlts = true;
-  let region = null;
+  let region: string;
 
   onMount(() => {
-    if (!data.location) return;
+    if (!data.location || !data.location.city || !data.location.region) return;
     region = `${data.location.city}, ${data.location.region}${
       data.location.country != 'BR' ? ` (${data.location.country})` : ''
     }`
