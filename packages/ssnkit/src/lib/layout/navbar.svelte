@@ -1,5 +1,7 @@
 <script lang="ts">
   import { BookOpenCheck, Home, Users, Wallet } from 'lucide-svelte';
+  import { slide } from 'svelte/transition';
+	import { quintOut } from 'svelte/easing';
   import { DiscordAltIcon } from '../icons';
   import type { SafeIdentity } from "warehouse";
 
@@ -35,54 +37,63 @@
       target: '_blank',
       icon: DiscordAltIcon
     },
-  ]
+  ];
+
+  let isOpen = false;
+  let innerWidth: number;
+
+  $: isMobile = innerWidth <= 1023;
 </script>
+
+<svelte:window bind:innerWidth />
 
 <nav class="navbar" aria-label="main navigation">
   <div class="container">
     <div class="navbar-brand">
-      <button class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <button class="navbar-burger" aria-label="menu" aria-expanded="false" on:click={() => isOpen = !isOpen}>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
       </button>
     </div>
 
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        {#each navbarItems as item}
-          <a
-            href={item.href}
-            target={item.target}
-            class="navbar-item"
-            class:is-active={item.href == currentUrl}
-          >
-            <svelte:component this={item.icon} size={24} />
-            {item.label}
-          </a>
-        {/each}
-      </div>
-
-      <div class="navbar-end">
-        <div class="navbar-item">
-          {#if identity}
-            <a href="{identityBaseUrl}/dashboard" class="user has-text-grey-dark">
-              <img src="https://mc-heads.net/avatar/{identity.primaryUsername}/64" alt="Avatar de {identity.primaryUsername}" />
-              <span>{identity.primaryUsername}</span>
+    {#if !isMobile || isOpen}
+      <div class="navbar-menu is-active" transition:slide={{ duration: 300, easing: quintOut }}>
+        <div class="navbar-start">
+          {#each navbarItems as item}
+            <a
+              href={item.href}
+              target={item.target}
+              class="navbar-item"
+              class:is-active={item.href == currentUrl}
+            >
+              <svelte:component this={item.icon} size={24} />
+              {item.label}
             </a>
-          {:else}
-            <div class="buttons">
-              <a href="{identityBaseUrl}/auth/register" class="button is-primary is-small">
-                Registrar
+          {/each}
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            {#if identity}
+              <a href="{identityBaseUrl}/dashboard" class="user has-text-grey-dark">
+                <img src="https://mc-heads.net/avatar/{identity.primaryUsername}/64" alt="Avatar de {identity.primaryUsername}" />
+                <span>{identity.primaryUsername}</span>
               </a>
-              <a href="{identityBaseUrl}/auth/login" class="button is-light is-small">
-                Fazer login
-              </a>
-            </div>
-          {/if}
+            {:else}
+              <div class="buttons">
+                <a href="{identityBaseUrl}/auth/register" class="button is-primary is-small">
+                  Registrar
+                </a>
+                <a href="{identityBaseUrl}/auth/login" class="button is-light is-small">
+                  Fazer login
+                </a>
+              </div>
+            {/if}
+          </div>
         </div>
       </div>
-    </div>
+    {/if}
   </div>
 </nav>
 
@@ -113,4 +124,27 @@
       height: 28px
       width: 28px
       border-radius: .25rem
+
+  @media screen and (max-width: 1023px)
+    .navbar
+      &-menu
+        padding: 0
+
+      &-item
+        display: flex
+        align-items: center
+        gap: .5rem
+        border-bottom: none
+        border-left: 2px solid transparent
+
+        &.is-active
+          border-left-color: $primary
+
+        :global(svg)
+          width: 1.25rem
+          height: 1.25rem
+
+    .user img
+      width: 1.25rem
+      height: 1.25rem
 </style>

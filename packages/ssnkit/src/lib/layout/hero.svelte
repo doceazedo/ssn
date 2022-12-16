@@ -24,10 +24,19 @@
     background-size: cover
 
     &-body
+      display: flex
       background-color: rgba($primary, .75)
 
   .logo
     height: 8rem
+
+  @media screen and (max-width: 768px)
+    .hero-body
+      justify-content: center
+      padding: 1.5rem !important
+
+      .logo
+        height: 6rem
 
   @media screen and (min-width: 769px)
     .hero-body

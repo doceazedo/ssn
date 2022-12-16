@@ -29,4 +29,8 @@
 
     .main
       width: 100%
+
+  @media screen and (max-width: 768px)
+    .dashboard
+      flex-direction: column
 </style>

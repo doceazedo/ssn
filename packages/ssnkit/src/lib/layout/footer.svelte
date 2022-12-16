@@ -85,4 +85,30 @@
       font-family: 'Space Grotesk', sans-serif
       font-weight: 700
       line-height: 1.25
+
+  @media screen and (max-width: 768px)
+    .footer
+      flex-direction: column
+      padding: 2rem 1rem
+      gap: .5rem
+
+      > *
+        width: 100%
+
+      &-left
+        text-align: center
+
+      &-center
+        display: none
+
+      &-right
+        justify-content: center
+
+        .button
+          width: 2rem
+          height: 2rem
+
+          :global(svg)
+            width: 1rem
+            height: 1rem
 </style>
