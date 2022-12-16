@@ -65,13 +65,13 @@ world-settings:
       disable-extreme-hills-emeralds: false
       disable-extreme-hills-monster-eggs: false
       disable-mesa-additional-gold: false
+    use-vanilla-world-scoreboard-name-coloring: false
+    delay-chunk-unloads-by: 10s
     remove-corrupt-tile-entities: false
     use-chunk-inhabited-timer: true
     queue-light-updates: false
     optimize-explosions: true
     portal-search-radius: 128
-    use-vanilla-world-scoreboard-name-coloring: false
-    delay-chunk-unloads-by: 10s
     max-auto-save-chunks-per-tick: 8
     save-queue-limit-for-auto-save: 50
     max-chunk-sends-per-tick: 81
@@ -124,6 +124,7 @@ world-settings:
     keep-spawn-loaded-range: 8
     auto-save-interval: -1
     nether-ceiling-void-damage: false
+    allow-non-player-entities-on-scoreboards: false
     frosted-ice:
       enabled: true
       delay:
@@ -131,7 +132,6 @@ world-settings:
         max: 40
     container-update-tick-rate: 2
     parrots-are-unaffected-by-player-movement: false
-    allow-non-player-entities-on-scoreboards: false
     disable-explosion-knockback: false
     elytra-hit-wall-damage: true
     grass-spread-tick-rate: 4
