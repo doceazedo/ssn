@@ -36,7 +36,8 @@ export const load: PageServerLoad = async ({ params, locals, url }) => {
   return {
     code,
     identity,
-    username: "DoceAzedo",
-    location
+    username: flow.username,
+    location,
+    flow
   };
 }

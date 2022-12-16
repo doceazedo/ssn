@@ -15,6 +15,7 @@
   let region = null;
 
   onMount(() => {
+    console.log(data);
     if (!data.location) return;
     region = `${data.location.city}, ${data.location.region}${
       data.location.country != 'BR' ? ` (${data.location.country})` : ''
