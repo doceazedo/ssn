@@ -23,8 +23,8 @@ settings:
   deprecated-verbose: default
   shutdown-message: Server closed
 spawn-limits:
-  monsters: 50
-  animals: 8
+  monsters: 70
+  animals: 10
   water-animals: 3
   ambient: 1
 chunk-gc:
@@ -32,6 +32,6 @@ chunk-gc:
   load-threshold: 0
 ticks-per:
   animal-spawns: 400
-  monster-spawns: 2
+  monster-spawns: 1
   autosave: 6000
 aliases: now-in-commands.yml
