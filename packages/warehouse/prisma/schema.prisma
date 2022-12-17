@@ -35,6 +35,7 @@ model Username {
   createdAt DateTime  @default(now())
   firstJoin DateTime?
   lastSeen  DateTime?
+  isOnline  Boolean
 }
 
 model Invite {

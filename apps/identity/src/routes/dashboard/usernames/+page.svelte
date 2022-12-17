@@ -35,6 +35,11 @@
             {#if $IDENTITY.primaryUsername === username.name}
               <span class="tag is-primary">Principal</span>
             {/if}
+            {#if username.isOnline}
+              <span class="tag is-primary">Online</span>
+            {:else}
+              <span class="tag">Offline</span>
+            {/if}
           </h1>
           <p>
             {#if username.lastSeen}
