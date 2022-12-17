@@ -1,0 +1,4 @@
+configVersion: 1
+
+settings:
+  witherSpawnSoundRange: 96 # How many blocks away should players be to hear the wither spawn sound.

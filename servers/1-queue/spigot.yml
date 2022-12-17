@@ -15,8 +15,6 @@ settings:
   debug: false
   save-user-cache-on-stop-only: false
   sample-count: 12
-  bungeecord: true
-  late-bind: false
   player-shuffle: 0
   filter-creative-items: true
   user-cache-size: 1000
@@ -24,6 +22,8 @@ settings:
   moved-wrongly-threshold: 0.0625
   moved-too-quickly-multiplier: 10.0
   item-dirty-ticks: 20
+  bungeecord: true
+  late-bind: false
   timeout-time: 60
   restart-on-crash: true
   restart-script: ./start.sh
@@ -63,18 +63,6 @@ stats:
 world-settings:
   default:
     verbose: true
-    mob-spawn-range: 4
-    growth:
-      cactus-modifier: 100
-      cane-modifier: 100
-      melon-modifier: 100
-      mushroom-modifier: 100
-      pumpkin-modifier: 100
-      sapling-modifier: 100
-      wheat-modifier: 100
-      netherwart-modifier: 100
-      vine-modifier: 100
-      cocoa-modifier: 100
     entity-activation-range:
       animals: 32
       monsters: 32
@@ -92,6 +80,18 @@ world-settings:
       hopper-check: 1
     hopper-amount: 1
     random-light-updates: false
+    growth:
+      cactus-modifier: 100
+      cane-modifier: 100
+      melon-modifier: 100
+      mushroom-modifier: 100
+      pumpkin-modifier: 100
+      sapling-modifier: 100
+      wheat-modifier: 100
+      netherwart-modifier: 100
+      vine-modifier: 100
+      cocoa-modifier: 100
+    mob-spawn-range: 4
     save-structure-info: true
     dragon-death-sound-radius: 0
     seed-village: 10387312
