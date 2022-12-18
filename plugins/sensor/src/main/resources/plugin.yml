@@ -1,5 +1,3 @@
 name: sensor
 version: '${project.version}'
 main: com.github.maizenalegal.sensor.Main
-libraries:
-  - org.jetbrains.kotlin:kotlin-stdlib:1.6.10
