@@ -1,0 +1,3 @@
+#The probability of the item getting duped once the item frame is hit.
+#100 and above means that every item will get duped. 0 will effectively disable this plugin.
+probability-percentage: 5
