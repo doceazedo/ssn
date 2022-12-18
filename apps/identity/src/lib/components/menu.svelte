@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { LayoutDashboard, Link, Users } from 'ssnkit/icons';
+  import { LayoutDashboard, Link, Mails, Users } from 'ssnkit/icons';
   import { page } from '$app/stores';
+  import { IDENTITY } from '$lib/auth';
 
   $: items = [
     {
@@ -25,24 +26,38 @@
           icon: Link,
         },
       ]
+    },
+    {
+      label: 'Administração',
+      role: 'ADMIN',
+      list: [
+        {
+          label: 'Convites',
+          href: '/dashboard/admin/invites',
+          active: $page.url.pathname === '/dashboard/admin/invites',
+          icon: Mails,
+        }
+      ]
     }
   ]
 </script>
 
 <aside class="menu">
   {#each items as category}
-    <p class="menu-label">
-      {category.label}
-    </p>
-    <ul class="menu-list">
-      {#each category.list as item}
-        <li>
-          <a class:is-active={item.active} href={item.href}>
-            <svelte:component this={item.icon} size={16} />
-            {item.label}
-          </a>
-        </li>
-      {/each}
-    </ul>
+    {#if !category.role || category.role === $IDENTITY?.role}
+      <p class="menu-label">
+        {category.label}
+      </p>
+      <ul class="menu-list">
+        {#each category.list as item}
+          <li>
+            <a class:is-active={item.active} href={item.href}>
+              <svelte:component this={item.icon} size={16} />
+              {item.label}
+            </a>
+          </li>
+        {/each}
+      </ul>
+    {/if}
   {/each}
 </aside>

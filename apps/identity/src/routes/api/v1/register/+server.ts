@@ -1,6 +1,6 @@
 import { error, json } from "@sveltejs/kit";
 import * as yup from 'yup';
-import { validate } from 'deep-email-validator';
+import * as emailValidator from 'email-validator';
 import { hashPassword } from '$lib/auth/crypto';
 import {
   createUser,
@@ -32,7 +32,7 @@ export const POST: RequestHandler = async ({ request, cookies, locals }) =>
   }), async (body) => {
     if (!registerEnabled) throw error(400, 'Registro temporariamente desativado');
 
-    if (!!locals.identity) throw error(401, 'Você já está logado');
+    if (locals.identity) throw error(401, 'Você já está logado');
 
     let invites = undefined;
     if (inviteOnly) {
@@ -49,11 +49,8 @@ export const POST: RequestHandler = async ({ request, cookies, locals }) =>
     const existingUsername = await getUserByName(body.username);
     if (existingUsername) throw error(409, 'Nome de usuário já registrado');
 
-    const emailValidation = await validate({
-      email: body.email,
-      validateTypo: false
-    });
-    if (!emailValidation.valid) throw error(400, 'Insira um e-mail válido');
+    const emailValidation = emailValidator.validate(body.email);
+    if (!emailValidation) throw error(400, 'Insira um e-mail válido');
 
     const existingEmail = await getUserByEmail(body.email);
     if (existingEmail) throw error(409, 'Endereço de e-mail já registrado');

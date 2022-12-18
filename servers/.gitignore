@@ -20,6 +20,7 @@ usercache.json
 version_history.json
 whitelist.json
 crash-reports
+tmp
 
 # Bungeecord generated files
 locations.yml

@@ -15,7 +15,9 @@
     "build:salmos": "(cd ./plugins/salmos && mvn clean && mvn package && cp ./target/Salmos-0.0.1.jar ../../servers/0-proxy/plugins)",
     "start": "docker-compose up --build",
     "start:iam": "docker-compose up --build gateway warehouse warehouse-migrate identity-web",
+    "start:website": "docker-compose up --build gateway warehouse warehouse-migrate identity-web website",
     "warehouse:generate": "(cd ./packages/warehouse && npx prisma generate)",
+    "docker:prune": "docker system prune --volumes",
     "postinstall": "npm run warehouse:generate"
   },
   "devDependencies": {

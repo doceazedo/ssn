@@ -1,78 +1,119 @@
 <script lang="ts">
+  import { BookOpenCheck, Home, Users, Wallet } from 'lucide-svelte';
+  import { slide } from 'svelte/transition';
+	import { quintOut } from 'svelte/easing';
+  import { DiscordAltIcon } from '../icons';
   import type { SafeIdentity } from "warehouse";
 
   export let identity: SafeIdentity;
+  export let websiteBaseUrl: string;
+  export let identityBaseUrl: string;
+  export let currentUrl = '';
+
+  const navbarItems = [
+    {
+      label: 'Início',
+      href: websiteBaseUrl,
+      icon: Home
+    },
+    {
+      label: 'Doar',
+      href: `${websiteBaseUrl}/donate`,
+      icon: Wallet
+    },
+    {
+      label: 'Etiqueta',
+      href: `${websiteBaseUrl}/rules`,
+      icon: BookOpenCheck
+    },
+    {
+      label: 'Comunidade',
+      href: `${websiteBaseUrl}/community`,
+      icon: Users
+    },
+    {
+      label: 'Discord',
+      href: `https://discord.gg/DChTnVTuKp`, // TODO: add this ssnkit/helpers or smth
+      target: '_blank',
+      icon: DiscordAltIcon
+    },
+  ];
+
+  let isOpen = false;
+  let innerWidth: number;
+
+  $: isMobile = innerWidth <= 1023;
 </script>
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<svelte:window bind:innerWidth />
+
+<nav class="navbar" aria-label="main navigation">
   <div class="container">
     <div class="navbar-brand">
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <button class="navbar-burger" aria-label="menu" aria-expanded="false" on:click={() => isOpen = !isOpen}>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
-      </a>
+      </button>
     </div>
 
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item">
-          Home
-        </a>
+    {#if !isMobile || isOpen}
+      <div class="navbar-menu is-active" transition:slide={{ duration: 300, easing: quintOut }}>
+        <div class="navbar-start">
+          {#each navbarItems as item}
+            <a
+              href={item.href}
+              target={item.target}
+              class="navbar-item"
+              class:is-active={item.href == currentUrl}
+            >
+              <svelte:component this={item.icon} size={24} />
+              {item.label}
+            </a>
+          {/each}
+        </div>
 
-        <a class="navbar-item">
-          Documentation
-        </a>
-
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            More
-          </a>
-
-          <div class="navbar-dropdown">
-            <a class="navbar-item">
-              About
-            </a>
-            <a class="navbar-item">
-              Jobs
-            </a>
-            <a class="navbar-item">
-              Contact
-            </a>
-            <hr class="navbar-divider">
-            <a class="navbar-item">
-              Report an issue
-            </a>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            {#if identity}
+              <a href="{identityBaseUrl}/dashboard" class="user has-text-grey-dark">
+                <img src="https://mc-heads.net/avatar/{identity.primaryUsername}/64" alt="Avatar de {identity.primaryUsername}" />
+                <span>{identity.primaryUsername}</span>
+              </a>
+            {:else}
+              <div class="buttons">
+                <a href="{identityBaseUrl}/auth/register" class="button is-primary is-small">
+                  Registrar
+                </a>
+                <a href="{identityBaseUrl}/auth/login" class="button is-light is-small">
+                  Fazer login
+                </a>
+              </div>
+            {/if}
           </div>
         </div>
       </div>
-
-      <div class="navbar-end">
-        <div class="navbar-item">
-          {#if identity}
-            <a href="/dashboard" class="user has-text-grey-dark">
-              <img src="https://mc-heads.net/avatar/{identity.primaryUsername}/64" />
-              <span>{identity.primaryUsername}</span>
-            </a>
-          {:else}
-            <div class="buttons">
-              <a href="/auth/register" class="button is-primary is-small">
-                Registrar
-              </a>
-              <a href="/auth/login" class="button is-light is-small">
-                Fazer login
-              </a>
-            </div>
-          {/if}
-        </div>
-      </div>
-    </div>
+    {/if}
   </div>
 </nav>
 
 <style lang="sass">
+  @import '../../../styles/vars'
+  
   .navbar
     border-bottom: 1px solid #e6e7ea
+
+    &-item
+      gap: .25rem
+      border-bottom: 2px solid transparent
+
+      &.is-active
+        color: $primary
+        border-bottom-color: $primary
+
+      :global(svg)
+        width: 1.5rem
+        height: 1.5rem
 
   .user
     display: flex
@@ -83,4 +124,27 @@
       height: 28px
       width: 28px
       border-radius: .25rem
+
+  @media screen and (max-width: 1023px)
+    .navbar
+      &-menu
+        padding: 0
+
+      &-item
+        display: flex
+        align-items: center
+        gap: .5rem
+        border-bottom: none
+        border-left: 2px solid transparent
+
+        &.is-active
+          border-left-color: $primary
+
+        :global(svg)
+          width: 1.25rem
+          height: 1.25rem
+
+    .user img
+      width: 1.25rem
+      height: 1.25rem
 </style>

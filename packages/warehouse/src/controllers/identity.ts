@@ -1,5 +1,5 @@
 import { prisma } from '.';
-import type { Identity, Username } from '@prisma/client';
+import type { Identity, Role, Username } from '@prisma/client';
 
 export type IdentityWithUsernames = Identity & { usernames: Username[] };
 
@@ -71,4 +71,23 @@ export const createUser = async (data: any): Promise<IdentityWithUsernames | nul
     return null;
   }
   return user || null;
+}
+
+export const updateUserRole = async (uuid: string, role: Role): Promise<IdentityWithUsernames | null> => {
+  try {
+    const user = await prisma.identity.update({
+      where: {
+        uuid
+      },
+      data: {
+        role
+      },
+      include: {
+        usernames: true
+      }
+    });
+    return user;
+  } catch (e) {
+    return null;
+  }
 }

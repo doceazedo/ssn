@@ -5,6 +5,9 @@ import { exchangeTokens, getCurrentAuthorization } from "$lib/services/discord";
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ url, cookies }) => {
+  const errorCode = url.searchParams.get('error');
+  if (errorCode) throw redirect(302, '/auth/login');
+
   const code = url.searchParams.get('code');
   if (!code) throw error(400);
 

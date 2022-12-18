@@ -9,14 +9,12 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.yml:/etc/traefik/traefik.yml
-    networks:
-      - ssn-network
 
   identity-web:
     labels:
       - 'traefik.enable=true'
       - 'traefik.http.routers.identity.entrypoints=web'
-      - 'traefik.http.routers.identity.rule=Host(`id.servidorsemnome.com`)'
+      - 'traefik.http.routers.identity.rule=Host(`id.${PUBLIC_BASE_DOMAIN}`)'
     ports:
       - '3000:3000'
     build:
@@ -24,6 +22,7 @@ services:
       dockerfile: ./apps/identity/Dockerfile
     environment:
       PUBLIC_BASE_DOMAIN: ${PUBLIC_BASE_DOMAIN}
+      PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
       PUBLIC_DASHBOARD_URL: ${PUBLIC_DASHBOARD_URL}
       PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
       PUBLIC_REGISTER_ENABLED: ${PUBLIC_REGISTER_ENABLED}
@@ -33,8 +32,7 @@ services:
       DISCORD_CLIENT_SECRET: ${DISCORD_CLIENT_SECRET}
       CATRACA_IDENTITY_TOKEN: ${CATRACA_IDENTITY_TOKEN}
       DATABASE_URL: ${DATABASE_URL}
-    networks:
-      - ssn-network
+      WH_DEFAULT_ADMIN_USERNAME: ${WH_DEFAULT_ADMIN_USERNAME}
 
   warehouse:
     image: postgres:13.1-alpine
@@ -43,11 +41,9 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
-      - warehouse:/data/postgres
+      - ${MNT_WAREHOUSE}:/var/lib/postgresql/data
     ports:
       - '5432:5432'
-    networks:
-      - ssn-network
 
   warehouse-migrate:
     build:
@@ -57,14 +53,12 @@ services:
     restart: on-failure
     environment:
       DATABASE_URL: ${DATABASE_URL}
-    networks:
-      - ssn-network
 
   gatekeeper-web:
     labels:
       - 'traefik.enable=true'
       - 'traefik.http.routers.gatekeeper.entrypoints=web'
-      - 'traefik.http.routers.gatekeeper.rule=Host(`gk.servidorsemnome.com`)'
+      - 'traefik.http.routers.gatekeeper.rule=Host(`gk.${PUBLIC_BASE_DOMAIN}`)'
     ports:
       - '3001:3000'
     build:
@@ -72,9 +66,8 @@ services:
       dockerfile: ./apps/gatekeeper/Dockerfile
     environment:
       PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
+      PUBLIC_GATEKEEPER_URL: ${PUBLIC_GATEKEEPER_URL}
       GK_REDIS_URL: ${GK_REDIS_URL}
-    networks:
-      - ssn-network
 
   gatekeeper-redis:
     image: redis:7.0.5-alpine
@@ -82,9 +75,21 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - gatekeeper:/data/redis
-    networks:
-      - ssn-network
+      - ${MNT_GATEKEEPER}:/data/redis
+
+  website:
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.website.entrypoints=web'
+      - 'traefik.http.routers.website.rule=Host(`${PUBLIC_BASE_DOMAIN}`)'
+    ports:
+      - '3002:3000'
+    build:
+      context: .
+      dockerfile: ./apps/website/Dockerfile
+    environment:
+      PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
+      PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
 
   minecraft-proxy:
     image: amazoncorretto:17
@@ -96,8 +101,6 @@ services:
     working_dir: /data
     volumes:
       - ./servers/0-proxy:/data
-    networks:
-      - ssn-network
 
   minecraft-queue:
     image: amazoncorretto:17
@@ -117,8 +120,6 @@ services:
       GK_REDIS_HOST: ${GK_REDIS_HOST}
       GK_REDIS_PORT: ${GK_REDIS_PORT}
       GK_REDIS_PASSWORD: ${GK_REDIS_PASSWORD}
-    networks:
-      - ssn-network
 
   minecraft-main:
     image: amazoncorretto:17
@@ -130,12 +131,6 @@ services:
     working_dir: /data
     volumes:
       - ./servers/2-main:/data
-    networks:
-      - ssn-network
-
-networks:
-  ssn-network:
-    external: true
 
 volumes:
   warehouse:

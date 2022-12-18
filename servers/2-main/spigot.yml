@@ -36,8 +36,7 @@ settings:
     attackDamage:
       max: 2048.0
 commands:
-  tab-complete: 0
-  log: true
+  tab-complete: -1
   spam-exclusions:
   - /skill
   silent-commandblock-console: false
@@ -46,6 +45,7 @@ commands:
   - summon
   - testforblock
   - tellraw
+  log: true
 messages:
   whitelist: You are not whitelisted on this server!
   unknown-command: Unknown command. Type "/help" for help.
@@ -54,9 +54,9 @@ messages:
   outdated-server: Outdated server! I'm still on {0}
   restart: Server is restarting
 advancements:
-  disable-saving: false
+  disable-saving: true
   disabled:
-  - minecraft:story/disabled
+  - '*'
 stats:
   disable-saving: false
   forced-stats: {}
@@ -117,8 +117,8 @@ world-settings:
       item: 4.0
       exp: 6.0
     view-distance: 6
-    arrow-despawn-rate: 300
     enable-zombie-pigmen-portal-spawns: true
+    arrow-despawn-rate: 300
     wither-spawn-sound-radius: 0
     hanging-tick-frequency: 100
     zombie-aggressive-towards-villager: true
