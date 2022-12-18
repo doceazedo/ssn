@@ -77,7 +77,7 @@ checks:
   blockbreak:
     active: default
     direction:
-      active: default
+      active: false
       actions: cancel
     fastbreak:
       active: default
@@ -85,9 +85,9 @@ checks:
       delay: 95
       intervalsurvival: 100
       grace: 2000
-      actions: cancel vl>5 cancel log:fastbreak:4:2:i vl>50 cancel log:fastbreak:0:2:if cmdc:kickfastbreak:2:5
+      actions: cancel
     frequency:
-      active: default
+      active: false
       intervalcreative: 95
       intervalsurvival: 45
       shortterm:
@@ -95,7 +95,7 @@ checks:
         limit: 7
       actions: cancel vl>5 log:bbfrequency:3:5:i cancel vl>40 log:bbfrequency:0:5:if cancel cmdc:kickfrequency:0:5
     noswing:
-      active: default
+      active: false
       actions: cancel vl>10 log:noswing:0:5:i cancel
     reach:
       active: default
@@ -106,11 +106,11 @@ checks:
       improbable:
         feedonly: false
         weight: 2.0
-      actions: cancel vl>10 log:bwrong:2:5:i cancel vl>30 cancel log:bwrong:0:5:if cmdc:kickwb:0:5
+      actions: cancel
   blockinteract:
     active: default
     direction:
-      active: default
+      active: false
       actions: cancel vl>15 cancel log:bdirection:4:8:i vl>200 cancel log:bdirection:1:5:if cmdc:kickillegalblockinteract:1:5
     reach:
       active: default
@@ -119,24 +119,24 @@ checks:
       active: default
       interval: 2000
       limit: 55
-      actions: cancel vl>10 cancel log:bspeed:5:4:i cancel vl>500 cancel log:bspeed:0:5:icf cmdc:kickbspeed:2:5
+      actions: cancel
     visible:
-      active: default
+      active: false
       actions: cancel vl>30 log:bvisible:8:5:if cancel
   blockplace:
     active: default
     against:
-      active: default
+      active: false
       actions: cancel log:against:1:5:i vl>10 cancel log:against:0:2:if cmdc:kickagainst:0:10
     autosign:
       active: default
       skipempty: false
       actions: cancel vl>10 log:bautosign:0:3:if cancel
     direction:
-      active: default
+      active: false
       actions: cancel
     fastplace:
-      active: default
+      active: false
       limit: 15
       shortterm:
         ticks: 10
@@ -155,7 +155,7 @@ checks:
       - FLINT_AND_STEEL
       actions: cancel vl>10 log:noswing:2:5:i cancel
     scaffold:
-      active: default
+      active: false
       angle: true
       sprint: true
       time:
@@ -179,7 +179,7 @@ checks:
     preventmisc:
       boatsanywhere: true
   chat:
-    active: default
+    active: false
     captcha:
       active: 'false'
       skip:
@@ -296,7 +296,7 @@ checks:
       active: true
       preventclickblock: true
     improbable:
-      active: default
+      active: false
       level: 250
       actions: cancel vl>20 log:improbable:8:9:if cancel vl>1500 cancel log:improbable:0:10:if cmdc:kickimprobable:0:5
     invulnerable:
@@ -311,10 +311,10 @@ checks:
       modifiers:
         all: 0
     munchhausen:
-      active: default
+      active: false
       actions: cancel vl>100 cancel log:munchhausen:0:60:if
     yawrate:
-      rate: 290
+      rate: 360
       penalty:
         factor: 2.0
         minimum: 450
@@ -330,9 +330,9 @@ checks:
     pvp:
       knockbackvelocity: default
     yawrate:
-      active: true
+      active: false
     angle:
-      active: default
+      active: false
       threshold:
         average_move: 100
         average_time: 150
@@ -340,18 +340,18 @@ checks:
         average_switch: 50
       actions: cancel vl>100 log:angle:6:5:i cancel vl>800 log:angle:0:20:if cancel
     critical:
-      active: default
+      active: false
       falldistance: 0.075
       falldistleniency: 9.0E-4
       actions: cancel vl>5 cancel log:critical:6:10:i vl>60 cancel log:critical:0:5:icf cmd:clearcritical:0:5 cmdc:kickcritical:0:2
     direction:
-      active: default
+      active: false
       strict: true
       failall: true
       penalty: 75
       actions: vl>2 log:fdirectionlowvl:5:6:i vl>10 cancel log:fdirection:2:4:if vl>50 cancel log:fdirection:0:7:icf cmdc:kicksuspiciouscombat:1:5
     fastheal:
-      active: default
+      active: false
       interval: 4000
       buffer: 1000
       actions: cancel vl>10 cancel log:fastheal:2:6:i vl>30 cancel log:fastheal:1:1:i vl>90 cancel log:fastheal:0:10:if cmdc:kickfastheal:0:10
@@ -370,12 +370,12 @@ checks:
       actions: vl>2 cancel vl>10 log:noswing:2:5:i cancel
     reach:
       active: default
-      survivaldistance: 4.02
-      penalty: 250
+      survivaldistance: 4.4
+      penalty: 500
       reduce: true
       precision: true
-      reducedistance: 0.8
-      reducestep: 0.14
+      reducedistance: 0.9
+      reducestep: 0.15
       improbable:
         feedonly: false
         weight: 2.0
@@ -385,8 +385,8 @@ checks:
       actions: cancel log:fselfhit:0:5:icf cmdc:kickselfhit:0:5
     speed:
       active: default
-      limit: 15
-      actions: cancel vl>10 cancel log:fspeed:2:5:i vl>60 cancel log:fspeed:0:5:if cmdc:kickattackfrequency:0:10
+      limit: 60
+      actions: cancel vl>50 cancel
       shortterm:
         ticks: 7
         limit: 5
@@ -396,7 +396,7 @@ checks:
   inventory:
     active: default
     fastclick:
-      active: default
+      active: false
       exclude:
       - Inventory Name Here
       sparecreative: true
@@ -409,7 +409,7 @@ checks:
         weight: 0.7
       actions: cancel vl>150 cancel log:fastclick:7:5:i vl>400 cancel log:fastclick:1:5:if vl>3000 cancel log:fastclick:1:2:if cmdc:kickfastclick:2:5
     instantbow:
-      active: default
+      active: false
       strict: true
       delay: 75
       improbable:
@@ -420,13 +420,13 @@ checks:
       active: false
       actions: log:instanteat:2:5:i cancel
     fastconsume:
-      active: default
+      active: false
       duration: 1.4
       whitelist: false
       items: []
       actions: cancel vl>2 log:fastconsume:2:5:if cancel vl>35 cancel log:fastconsume:0:5:if cmdc:kickfastconsume:0:5
     inventorymove:
-      active: default
+      active: false
       disable_creative: true
       hdistdivisor: 4
       improbable:
@@ -484,12 +484,12 @@ checks:
             modsprint: 1.0
           vertical:
             ascend:
-              speed: 0
+              speed: 999999
             maxheight: 128
           modifiers: false
           resetFwOnground: false
-          strict: true
-      actions: cancel log:flyfile:3:5:f vl>100 cancel log:creativefly:8:9:i log:flyfile:0:10:f vl>900 cancel log:creativefly:2:4:i log:flyfile:0:5:cf vl>2000 cancel log:creativefly:0:5:icf cmdc:kickfly:0:15
+          strict: false
+      actions: cancel
     morepackets:
       active: default
       seconds: 6
@@ -502,8 +502,8 @@ checks:
       setbackage: 110
       actions: cancel vl>2 cancel log:morepackets:10:9:i vl>100 cancel log:morepackets:0:2:ifc cmdc:kickpackets:0:10
     nofall:
-      active: default
-      dealdamage: true
+      active: false
+      dealdamage: false
       skipallowflight: true
       resetonviolation: false
       resetonteleport: false
@@ -511,7 +511,7 @@ checks:
       anticriticals: true
       actions: cancel vl>2 cancel log:nofall:0:5:if
     passable:
-      active: default
+      active: false
       actions: cancel vl>15 cancel log:passable:7:9:i vl>100 cancel log:passable:1:4:if
       untracked:
         teleport:
@@ -541,12 +541,12 @@ checks:
         vertical-accounting: true
         horizontal-accounting: true
         step-accounting: true
-        noslow: true
+        noslow: false
         reset-activeitem: true
       leniency:
-        hbufmax: 1.0
+        hbufmax: 5.0
         violationfrequency:
-          active: true
+          active: false
           debug: false
           maxleniencyvl: 35
           mintoadd: 5
@@ -556,10 +556,10 @@ checks:
         freezeinair: true
       setbackpolicy:
         falldamage: true
-        voidtovoid: false
+        voidtovoid: true
       actions: cancel log:flyfile:6:15:f vl>100 cancel log:survivalfly:10:11:i log:flyfile:6:15:f vl>700 cancel log:survivalfly:8:5:i log:flyfile:1:3:f vl>2100 cancel log:survivalflyhighvl:0:4:icf cmdc:kickfly:0:15
       hover:
-        active: true
+        active: false
         step: 5
         ticks: 85
         loginticks: 60
@@ -569,7 +569,7 @@ checks:
       maxage: 30
       maxsize: 30
     velocity:
-      activationcounter: 20
+      activationcounter: 80
       activationticks: 140
       strictinvalidation: true
     splitmoves: default
@@ -587,12 +587,12 @@ checks:
     setback:
       method: default
     vehicle:
-      preventdestroyown: true
+      preventdestroyown: false
       enforcelocation: default
       schedulesetbacks: default
       schedulesetpassenger: default
       morepackets:
-        active: default
+        active: false
         actions: cancel vl>2 log:morepackets:2:5:if cancel vl>100 cancel log:morepackets:1:2:if cmdc:kickpackets:2:10
       envelope:
         active: default
