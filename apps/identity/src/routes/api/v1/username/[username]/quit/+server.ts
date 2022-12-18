@@ -11,8 +11,6 @@ export const POST: RequestHandler = async ({ params, request }) =>
     if (!username) throw error(404);
 
     const updatedUsername = await updateUsername(username.name, {
-      firstJoin: username.firstJoin,
-      lastSeen: username.lastSeen,
       isOnline: false
     })
 
