@@ -15,7 +15,7 @@ Exploits:
     GroupStack: []
   Other:
     PreventItemSwapLagExploit: true
-    DisableChestsOnMobs: false
+    DisableChestsOnMobs: true
     PreventCommandsInBed: true
     PreventEndPortalDestruction: true
     PreventHoppersToUnloadedChunks: true
