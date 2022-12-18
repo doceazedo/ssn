@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerQuitEvent
 object PlayerQuit : Listener {
 
     @EventHandler()
-    fun onPlayerQuit(e: PlayerQuitEvent) {
+    suspend fun onPlayerQuit(e: PlayerQuitEvent) {
 
         var username = e.player.displayName
 

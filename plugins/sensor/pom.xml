@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.maizenalegal</groupId>
-    <artifactId>sensor</artifactId>
+    <artifactId>Sensor</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
 
@@ -15,6 +15,8 @@
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>1.8.0-RC</kotlin.version>
+        <mccoroutine.version>2.6.0</mccoroutine.version>
+        <kotlinx-coroutines.version>1.6.4</kotlinx-coroutines.version>
     </properties>
 
     <build>
@@ -130,6 +132,24 @@
             <groupId>khttp</groupId>
             <artifactId>khttp</artifactId>
             <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.shynixn.mccoroutine</groupId>
+            <artifactId>mccoroutine-bukkit-api</artifactId>
+            <version>${mccoroutine.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.shynixn.mccoroutine</groupId>
+            <artifactId>mccoroutine-bukkit-core</artifactId>
+            <version>${mccoroutine.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-core</artifactId>
+            <version>${kotlinx-coroutines.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
