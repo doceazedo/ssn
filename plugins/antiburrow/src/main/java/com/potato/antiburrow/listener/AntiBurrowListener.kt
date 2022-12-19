@@ -7,9 +7,9 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 
-class AntiBurrowListener(pl: Main?) : Listener {
+class AntiBurrowListener(pl: Main) : Listener {
     init {
-        Companion.pl = pl!!
+        Companion.pl = pl
     }
 
     @EventHandler
