@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerMoveEvent
 
 class AntiBurrowListener(pl: Main?) : Listener {
     init {
-        Companion.pl = pl
+        Companion.pl = pl!!
     }
 
     @EventHandler
@@ -21,26 +21,26 @@ class AntiBurrowListener(pl: Main?) : Listener {
         val z = l.blockZ
         val m = l.world.getBlockAt(x, y, z).type
         if (m != Material.AIR && m.isOccluding) {
-            if (pl!!.config.getBoolean("Teleport")) {
+            if (pl.config.getBoolean("Teleport")) {
                 p.teleport(l.add(0.0, 1.0, 0.0))
             }
-            if (pl!!.config.getBoolean("Damage")) {
-                p.damage(pl!!.config.getDouble("DamageV"))
+            if (pl.config.getBoolean("Damage")) {
+                p.damage(pl.config.getDouble("DamageV"))
             }
-            if (pl!!.config.getBoolean("Kick")) {
+            if (pl.config.getBoolean("Kick")) {
                 p.kickPlayer("\u00A74" + "[AntiBurrow]" + " the burrow is disabled")
             }
-            if (pl!!.config.getBoolean("Alert")) {
+            if (pl.config.getBoolean("Alert")) {
                 p.sendMessage("\u00A74" + "[AntiBurrow]" + " the burrow is disabled")
                 p.playSound(l, Sound.BLOCK_GLASS_BREAK, 20f, 5f)
             }
-            if (pl!!.config.getBoolean("Log")) {
-                pl!!.server.consoleSender.sendMessage("\u00A74" + "[AntiBurrow]" + " a burrow was prevented, name player:" + p.name)
+            if (pl.config.getBoolean("Log")) {
+                pl.server.consoleSender.sendMessage("\u00A74" + "[AntiBurrow]" + " a burrow was prevented, name player:" + p.name)
             }
         }
     }
 
     companion object {
-        private var pl: Main? = null
+        lateinit var pl: Main
     }
 }
