@@ -1,0 +1,13 @@
+AntiBurrow:
+
+Teleport: true #Teleport player out of the burrow
+
+Kick: false
+
+Damage: false #Damage if player is in burrow
+DamageV: 5.0 #Damage value if Damage is true
+
+Alert: false #Alert Player if he is in burrow
+Log: true #Log to console if player is in burrow
+
+

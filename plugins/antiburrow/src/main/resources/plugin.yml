@@ -1,0 +1,4 @@
+name: PreventBurrow
+version: '${project.version}'
+main: com.potato.antiburrow.Main
+authors: [ Potato ]
