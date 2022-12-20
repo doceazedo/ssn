@@ -131,6 +131,9 @@ services:
     working_dir: /data
     volumes:
       - ./servers/2-main:/data
+    environment:
+      LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
+      CATRACA_IDENTITY_TOKEN: ${CATRACA_IDENTITY_TOKEN}
 
 volumes:
   warehouse:
