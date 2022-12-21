@@ -6,11 +6,19 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 
 object PlayerMove : Listener {
+    private val allowedBlocks = arrayOf(
+        Material.AIR,
+        Material.FENCE,
+        Material.FENCE_GATE,
+        Material.THIN_GLASS,
+        Material.STAINED_GLASS_PANE,
+    )
+
     @EventHandler
     fun onPlayerMove(e: PlayerMoveEvent) {
         val location = e.player.location
         val block = location.block
-        if (block.type == Material.AIR) return
+        if (block.type in allowedBlocks) return
 
         val heightThreshold = location.block.y + 0.1
         if (block.type.isOccluding || (block.type.isSolid && location.y < heightThreshold)) {
