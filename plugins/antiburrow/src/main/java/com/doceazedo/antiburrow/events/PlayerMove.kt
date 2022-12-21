@@ -9,8 +9,12 @@ object PlayerMove : Listener {
     @EventHandler
     fun onPlayerMove(e: PlayerMoveEvent) {
         val location = e.player.location
-        val blockType = location.world.getBlockAt(location.blockX, location.blockY, location.blockZ).type
-        if (blockType == Material.AIR || !blockType.isOccluding) return
-        e.player.teleport(location.add(0.0, 1.0, 0.0))
+        val block = location.block
+        if (block.type == Material.AIR) return
+
+        val heightThreshold = location.block.y + 0.1
+        if (block.type.isOccluding || (block.type.isSolid && location.y < heightThreshold)) {
+            e.player.teleport(location.add(0.0, 1.0, 0.0))
+        }
     }
 }
