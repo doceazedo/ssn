@@ -511,7 +511,7 @@ checks:
       anticriticals: true
       actions: cancel vl>2 cancel log:nofall:0:5:if
     passable:
-      active: false
+      active: true
       actions: cancel vl>15 cancel log:passable:7:9:i vl>100 cancel log:passable:1:4:if
       untracked:
         teleport:
