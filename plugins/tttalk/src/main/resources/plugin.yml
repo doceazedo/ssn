@@ -5,3 +5,6 @@ commands:
   msg:
     aliases: [tell, whisper, w]
     usage: "Uso: /<command> <player> <mensagem>"
+  r:
+    aliases: [reply]
+    usage: "Uso: /<command> <mensagem>"
