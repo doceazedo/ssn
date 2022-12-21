@@ -124,7 +124,6 @@ world-settings:
     keep-spawn-loaded-range: 8
     auto-save-interval: -1
     nether-ceiling-void-damage: false
-    allow-non-player-entities-on-scoreboards: false
     frosted-ice:
       enabled: true
       delay:
@@ -132,6 +131,7 @@ world-settings:
         max: 40
     container-update-tick-rate: 2
     parrots-are-unaffected-by-player-movement: false
+    allow-non-player-entities-on-scoreboards: false
     disable-explosion-knockback: false
     elytra-hit-wall-damage: true
     grass-spread-tick-rate: 4

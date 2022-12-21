@@ -74,7 +74,6 @@ world-settings:
       netherwart-modifier: 100
       vine-modifier: 100
       cocoa-modifier: 100
-    mob-spawn-range: 4
     entity-activation-range:
       animals: 32
       monsters: 32
@@ -93,6 +92,7 @@ world-settings:
     hopper-amount: 1
     random-light-updates: false
     save-structure-info: true
+    mob-spawn-range: 4
     dragon-death-sound-radius: 0
     seed-village: 10387312
     seed-feature: 14357617
