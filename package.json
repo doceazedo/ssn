@@ -13,6 +13,7 @@
     "build:lagosta": "(cd ./plugins/lagosta && mvn install && cp ./target/Lagosta-1.0.0.jar ../../servers/2-main/plugins)",
     "build:tttalk": "(cd ./plugins/tttalk && mvn install && cp ./target/Tttalk-0.0.1.jar ../../servers/2-main/plugins)",
     "build:salmos": "(cd ./plugins/salmos && mvn clean && mvn package && cp ./target/Salmos-0.0.1.jar ../../servers/0-proxy/plugins)",
+    "build:sensor": "(cd ./plugins/sensor && mvn install && cp ./target/Sensor-0.0.1.jar ../../servers/2-main/plugins)",
     "build:antiburrow": "(cd ./plugins/antiburrow && mvn clean && mvn package && cp ./target/AntiBurrow-0.0.1.jar ../../servers/2-main/plugins)",
     "start": "docker-compose up --build",
     "start:iam": "docker-compose up --build gateway warehouse warehouse-migrate identity-web",

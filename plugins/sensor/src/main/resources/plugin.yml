@@ -1,0 +1,3 @@
+name: sensor
+version: '${project.version}'
+main: com.github.maizenalegal.sensor.Sensor
