@@ -20,17 +20,24 @@ object IgnoreCmd : CommandExecutor {
         if (args == null || args.isEmpty()) {
             val ignoredPlayers = IgnoredManager.getIgnoredPlayers(sender.uniqueId)
             if (ignoredPlayers.size > 0) {
-                sender.sendMessage("§eVocê está ignorando §c${ignoredPlayers.size} jogador(es)§e: §c${ignoredPlayers.joinToString("§e, §c")}")
+                val ignoredPlayersList = ignoredPlayers.joinToString("§e, §c") { Bukkit.getOfflinePlayer(it).name }
+                sender.sendMessage("§eVocê está ignorando §c${ignoredPlayers.size} §ejogador(es): §c${ignoredPlayersList}")
             } else {
-                sender.sendMessage("§cVocê não está ignorando ninguém. Para ignorar alguém, use §4/${command.toString()} <player>§c.")
+                sender.sendMessage("§cVocê não está ignorando ninguém. Para ignorar alguém, use §4/${label} <player>§c.")
             }
             return true
         }
 
-        val targetName = args[0];
-        val targetPlayer = Bukkit.getServer().getOfflinePlayer(targetName);
+        val targetName = args[0]
+        val targetPlayer = Bukkit.getServer().getOfflinePlayer(targetName)
+
         if (targetPlayer == null) {
             sender.sendMessage("§4${targetName} §cnão existe.")
+            return true
+        }
+
+        if (targetPlayer.uniqueId == sender.uniqueId) {
+            sender.sendMessage("§c§o~~ Você não consegue calar as vozes da sua cabeça.")
             return true
         }
 
