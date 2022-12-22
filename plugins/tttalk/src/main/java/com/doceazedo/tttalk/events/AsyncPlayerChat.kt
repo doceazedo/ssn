@@ -1,5 +1,6 @@
 package com.doceazedo.tttalk.events
 
+import com.doceazedo.tttalk.utils.IgnoredManager
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.event.EventHandler
@@ -24,7 +25,7 @@ object AsyncPlayerChat : Listener {
         val message = "$colorPrefix${e.player.displayName} §9» §7${e.message}"
 
         for (player in Bukkit.getServer().onlinePlayers) {
-            // TODO: check if player doesn't ignore sender
+            if (IgnoredManager.isIgnoringPlayer(player.uniqueId, e.player.uniqueId)) continue
             player.sendMessage(message)
         }
     }

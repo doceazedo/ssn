@@ -1,0 +1,3 @@
+name: AntiBurrow
+version: '${project.version}'
+main: com.doceazedo.antiburrow.AntiBurrow

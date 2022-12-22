@@ -1,5 +1,6 @@
 package com.doceazedo.tttalk.commands
 
+import com.doceazedo.tttalk.utils.sendPM
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -14,9 +15,9 @@ object MsgCmd : CommandExecutor {
         args: Array<out String>?
     ): Boolean {
         if (args == null || args.size < 2) return false
+        if (sender !is Player) return false
 
         val recipientName = args[0]
-        val senderName = if (sender is Player) sender.displayName else "[CONSOLE]"
         val message = args.drop(1).joinToString(" ")
 
         // TODO: if recipientName == senderName, return error
@@ -27,8 +28,7 @@ object MsgCmd : CommandExecutor {
             return true
         }
 
-        recipient.sendMessage("§5$senderName diz: §d$message")
-        sender.sendMessage("§5Para ${recipient.displayName}: §d$message")
+        sendPM(sender, recipient, message)
         return true
     }
 }

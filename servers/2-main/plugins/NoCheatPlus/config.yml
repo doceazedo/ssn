@@ -77,7 +77,7 @@ checks:
   blockbreak:
     active: default
     direction:
-      active: false
+      active: true
       actions: cancel
     fastbreak:
       active: default
@@ -87,7 +87,7 @@ checks:
       grace: 2000
       actions: cancel
     frequency:
-      active: false
+      active: true
       intervalcreative: 95
       intervalsurvival: 45
       shortterm:
@@ -98,33 +98,33 @@ checks:
       active: false
       actions: cancel vl>10 log:noswing:0:5:i cancel
     reach:
-      active: default
+      active: false
       actions: cancel
     wrongblock:
-      active: default
+      active: true
       level: 20
       improbable:
         feedonly: false
         weight: 2.0
       actions: cancel
   blockinteract:
-    active: default
+    active: true
     direction:
-      active: false
+      active: true
       actions: cancel vl>15 cancel log:bdirection:4:8:i vl>200 cancel log:bdirection:1:5:if cmdc:kickillegalblockinteract:1:5
     reach:
-      active: default
+      active: true
       actions: cancel log:breach:5:6:i
     speed:
-      active: default
-      interval: 2000
-      limit: 55
+      active: true
+      interval: 200
+      limit: 50
       actions: cancel
     visible:
       active: false
       actions: cancel vl>30 log:bvisible:8:5:if cancel
   blockplace:
-    active: default
+    active: true
     against:
       active: false
       actions: cancel log:against:1:5:i vl>10 cancel log:against:0:2:if cmdc:kickagainst:0:10
@@ -133,7 +133,7 @@ checks:
       skipempty: false
       actions: cancel vl>10 log:bautosign:0:3:if cancel
     direction:
-      active: false
+      active: true
       actions: cancel
     fastplace:
       active: false
@@ -179,7 +179,7 @@ checks:
     preventmisc:
       boatsanywhere: true
   chat:
-    active: false
+    active: true
     captcha:
       active: 'false'
       skip:
@@ -232,7 +232,7 @@ checks:
           factor: 0.9
           weight: 6
           level: 160
-          actions: cancel cmdc:tellchatnormal vl>7 log:chatnormal:0:5:cif cancel cmdc:tellchatnormal vl>20 log:chatnormal:0:5:cif cancel cmdc:kickchatnormal vl>40 log:chatnormal:0:5:cif cancel cmdc:kickchat5
+          actions: cancel
         shortterm:
           minimum: 2.0
           factor: 0.7
@@ -326,7 +326,7 @@ checks:
     active: default
     canceldead: true
     maxloopletencyticks: 8
-    toolchangepenalty: 0
+    toolchangepenalty: 10
     pvp:
       knockbackvelocity: default
     yawrate:
@@ -345,7 +345,7 @@ checks:
       falldistleniency: 9.0E-4
       actions: cancel vl>5 cancel log:critical:6:10:i vl>60 cancel log:critical:0:5:icf cmd:clearcritical:0:5 cmdc:kickcritical:0:2
     direction:
-      active: false
+      active: true
       strict: true
       failall: true
       penalty: 75
@@ -366,7 +366,7 @@ checks:
         weight: 0.05
       actions: cancel vl>3 cancel log:impossiblehit:0:5:if
     noswing:
-      active: default
+      active: false
       actions: vl>2 cancel vl>10 log:noswing:2:5:i cancel
     reach:
       active: default
@@ -394,7 +394,7 @@ checks:
         feedonly: false
         weight: 1.0
   inventory:
-    active: default
+    active: false
     fastclick:
       active: false
       exclude:
@@ -511,7 +511,7 @@ checks:
       anticriticals: true
       actions: cancel vl>2 cancel log:nofall:0:5:if
     passable:
-      active: false
+      active: true
       actions: cancel vl>15 cancel log:passable:7:9:i vl>100 cancel log:passable:1:4:if
       untracked:
         teleport:
@@ -633,7 +633,7 @@ checks:
       active: default
       actions: cancel vl>17 cancel log:moving:10:15:i
     packetfrequency:
-      active: default
+      active: true
       limitpersecond: 300
       seconds: 4
       actions: cancel vl>2 cancel cmdc:kickpacketfrequency:0:5

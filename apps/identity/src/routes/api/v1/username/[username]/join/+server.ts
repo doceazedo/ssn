@@ -12,7 +12,8 @@ export const POST: RequestHandler = async ({ params, request }) =>
 
     const updatedUsername = await updateUsername(username.name, {
       firstJoin: !username.lastSeen ? new Date() : undefined,
-      lastSeen: new Date()
+      lastSeen: new Date(),
+      isOnline: true
     })
 
     return json({
