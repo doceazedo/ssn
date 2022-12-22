@@ -3,7 +3,7 @@ name: Deploy to SSH server
 on:
   push:
     branches:
-      - main
+      - github-actions
 
 jobs:
   deploy:
