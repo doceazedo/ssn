@@ -1,18 +1,18 @@
 package com.doceazedo.tttalk
 
+import com.doceazedo.tttalk.commands.IgnoreCmd
 import com.doceazedo.tttalk.commands.MsgCmd
 import com.doceazedo.tttalk.commands.ReplyCmd
 import com.doceazedo.tttalk.events.*
+import com.doceazedo.tttalk.utils.IgnoredManager
 import org.bukkit.Bukkit
-import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
-import kotlin.collections.HashMap
 
 class Tttalk : JavaPlugin() {
     companion object {
         lateinit var instance: Tttalk
-        var lastChatters: HashMap<UUID, UUID> = HashMap<UUID, UUID>()
+        var lastChatters = hashMapOf<UUID, UUID>()
     }
 
     override fun onEnable() {
@@ -21,13 +21,15 @@ class Tttalk : JavaPlugin() {
 
         getCommand("msg").executor = MsgCmd
         getCommand("r").executor = ReplyCmd
+        getCommand("ignore").executor = IgnoreCmd
 
         Bukkit.getPluginManager().registerEvents(AsyncPlayerChat, this)
         Bukkit.getPluginManager().registerEvents(PlayerDeath, this)
         Bukkit.getPluginManager().registerEvents(PlayerJoin, this)
+        Bukkit.getPluginManager().registerEvents(PlayerQuit, this)
     }
 
     override fun onDisable() {
-        // Plugin shutdown logic
+        IgnoredManager.saveAll()
     }
 }

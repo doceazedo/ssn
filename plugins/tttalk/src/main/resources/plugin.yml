@@ -8,3 +8,6 @@ commands:
   r:
     aliases: [reply]
     usage: "Uso: /<command> <mensagem>"
+  ignore:
+    aliases: [i]
+    usage: "Uso: /<command> <player>"
