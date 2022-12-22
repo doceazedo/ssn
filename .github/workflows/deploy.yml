@@ -1,0 +1,47 @@
+name: Deploy to SSH server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.4.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Check for changes in servers
+        run: |
+          if [[ -n $(git diff --name-only HEAD~1 HEAD servers) ]]; then
+            export SHUTDOWN_COMMAND="docker-compose down"
+          else
+            export SHUTDOWN_COMMAND="SHUTDOWN_COMMAND_GOES_HERE"
+          fi
+      - name: Check for changes in apps or packages folders
+        run: |
+          if [[ -n $(git diff --name-only HEAD~1 HEAD apps packages) ]]; then
+            export STARTUP_COMMAND="docker-compose up --build -d"
+          else
+            export STARTUP_COMMAND="docker-compose up -d"
+          fi
+      - name: Deploy to server
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SHUTDOWN_COMMAND: ${{ env.SHUTDOWN_COMMAND }}
+          STARTUP_COMMAND: ${{ env.STARTUP_COMMAND }}
+          WORKDIR: /mnt/ssn-githubactions
+        run: |
+          # Shut down the existing application
+          ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "(cd $WORKDIR && $SHUTDOWN_COMMAND)"
+
+          # Copy the new code to the server, excluding the plugins folder
+          rsync -av --exclude 'plugins' . $SSH_USER@$SSH_HOST:$WORKDIR
+
+          # Start the new application
+          ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "(cd $WORKDIR && $STARTUP_COMMAND)"
