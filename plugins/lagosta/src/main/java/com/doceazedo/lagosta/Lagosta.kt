@@ -19,7 +19,6 @@ class Lagosta : JavaPlugin() {
 
         Bukkit.getPluginManager().registerEvents(PlayerInteract, this)
         Bukkit.getPluginManager().registerSuspendingEvents(PlayerJoin, this)
-        Bukkit.getPluginManager().registerEvents(PlayerQuit, this)
         Bukkit.getPluginManager().registerSuspendingEvents(PlayerRespawn, this)
     }
 
