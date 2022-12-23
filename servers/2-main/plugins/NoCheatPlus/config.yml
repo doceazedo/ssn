@@ -276,7 +276,7 @@ checks:
       timeout: 10
     relog:
       active: default
-      timeout: 5000
+      timeout: 2500
       warning:
         message: '&c&l(!)&7 You relogged really fast! If you keep doing that, you''re going to be banned.'
         number: 1
