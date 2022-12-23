@@ -14,8 +14,13 @@ object PlayerJoin : Listener {
 
     @EventHandler
     fun onPlayerJoin(e: PlayerJoinEvent) {
+        // Load who this player ignores into memory
         IgnoredManager.loadIgnoredPlayers(e.player.uniqueId)
 
+        // Show custom join message
+        e.joinMessage = "§8[§a+§8] ${e.player.displayName} entrou"
+
+        // Show MOTD
         if (motd.isEmpty()) return
         e.player.playSound(e.player.location, Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f)
         for (message in motd) {
