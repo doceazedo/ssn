@@ -14,7 +14,7 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: ""
+          known_hosts: "just-a-placeholder-so-we-dont-get-errors"
       - name: Check for changes in servers
         run: |
           if [[ -n $(git diff --name-only HEAD~1 HEAD servers) ]]; then
