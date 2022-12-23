@@ -11,9 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set up SSH key
-        uses: webfactory/ssh-agent@v0.4.1
+        uses: shimataro/ssh-key-action@v2
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ""
       - name: Check for changes in servers
         run: |
           if [[ -n $(git diff --name-only HEAD~1 HEAD servers) ]]; then
