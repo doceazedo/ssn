@@ -6,9 +6,11 @@ import com.doceazedo.tttalk.utils.IgnoredManager
 import org.bukkit.Bukkit
 import org.bukkit.Sound
 import org.bukkit.event.EventHandler
-import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
+import java.io.File
+import java.nio.file.Files
+import java.nio.file.attribute.FileTime
 import java.text.CharacterIterator
 import java.text.StringCharacterIterator
 import java.time.Duration
@@ -19,6 +21,7 @@ object PlayerJoin : Listener {
     private val serverCreatedAt = Tttalk.instance.config.getString("server.created")
     private val serverVersion = Tttalk.instance.config.getInt("server.version")
     private val world = Bukkit.getWorld("world")
+    private val worldFilePath = world.worldFolder.toPath()
 
     @EventHandler
     fun onPlayerJoin(e: PlayerJoinEvent) {
@@ -30,9 +33,10 @@ object PlayerJoin : Listener {
         e.joinMessage = "§8[§a+§8] ${e.player.displayName} entrou"
 
         // Show MOTD
-        val worldSize = humanReadableByteCountSI(world.worldFolder.length())
-        val worldAgeDays = worldAgeInDays(world.worldFolder.lastModified())
-        val playerCount = world.worldFolder.listFiles { file -> file.name.endsWith(".dat") }?.size ?: 0
+        val worldSize = humanReadableByteCountSI(Files.size(worldFilePath))
+        val worldCreationTime = Files.getAttribute(worldFilePath, "creationTime") as FileTime
+        val worldAgeDays = worldAgeInDays(worldCreationTime)
+        val playerCount = File(worldFilePath.toFile(), "playerdata").listFiles()?.size
 
         e.player.sendMessage(" ")
         e.player.sendMessage("§aOlá, §e${e.player.displayName}§a!")
@@ -55,7 +59,8 @@ object PlayerJoin : Listener {
         return String.format("%.1f %cB", bytes / 1000.0, ci.current())
     }
 
-    private fun worldAgeInDays(timestamp: Long): Int {
+    private fun worldAgeInDays(time: FileTime): Int {
+        val timestamp = time.toMillis()
         val then = Instant.ofEpochMilli(timestamp)
         val duration = Duration.between(then, Instant.now())
         return duration.toDaysPart().toInt()
