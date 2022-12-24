@@ -16,3 +16,5 @@ commands:
     usage: "Uso: /<command> <codigo>"
   help:
     aliases: [ajuda, commands, comandos]
+  rules:
+    aliases: [regras]

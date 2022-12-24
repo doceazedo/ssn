@@ -22,6 +22,7 @@ class Tttalk : JavaPlugin() {
         getCommand("msg").executor = MsgCmd
         getCommand("r").executor = ReplyCmd
         getCommand("ignore").executor = IgnoreCmd
+        getCommand("rules").executor = RulesCmd
 
         Bukkit.getPluginManager().registerEvents(AsyncPlayerChat, this)
         Bukkit.getPluginManager().registerEvents(PlayerDeath, this)

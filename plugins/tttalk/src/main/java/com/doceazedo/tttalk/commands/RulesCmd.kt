@@ -6,9 +6,8 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
-
-object HelpCmd : CommandExecutor {
-    private val commands = Tttalk.instance.config.getMapList("commands")
+object RulesCmd : CommandExecutor {
+    private val rules = Tttalk.instance.config.getStringList("rules")
 
     override fun onCommand(
         sender: CommandSender?,
@@ -19,13 +18,10 @@ object HelpCmd : CommandExecutor {
         if (sender !is Player) return false
 
         sender.sendMessage(" ")
-        sender.sendMessage("§6§lCOMANDOS DISPONÍVEIS")
+        sender.sendMessage("§4§lREGRAS DO SERVIDOR")
         sender.sendMessage(" ")
-        for (command in commands) {
-            val label = command["label"]
-            val help = command["help"]
-
-            sender.sendMessage("§c/$label §e- $help")
+        rules.forEachIndexed { i, rule ->
+            sender.sendMessage("§4${i + 1}. §c$rule")
         }
         sender.sendMessage(" ")
 
