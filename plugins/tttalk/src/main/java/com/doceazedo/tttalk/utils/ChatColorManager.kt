@@ -36,7 +36,8 @@ object ChatColorManager {
 
     fun loadNameColor(player: Player) {
         if (!hasPermission(player)) return
-        coloredNames[player.uniqueId] = config.getString("players.${player.uniqueId}")
+        val nameColor = config.getString("players.${player.uniqueId}")
+        if (nameColor != null) coloredNames[player.uniqueId] = nameColor
     }
 
     fun updateNameColor(player: Player, color: Char): Boolean {
