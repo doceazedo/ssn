@@ -11,3 +11,6 @@ commands:
   ignore:
     aliases: [i]
     usage: "Uso: /<command> <player>"
+  color:
+    aliases: [cor]
+    usage: "Uso: /<command> <codigo>"

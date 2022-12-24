@@ -1,5 +1,6 @@
 package com.doceazedo.tttalk
 
+import com.doceazedo.tttalk.commands.ColorCmd
 import com.doceazedo.tttalk.commands.IgnoreCmd
 import com.doceazedo.tttalk.commands.MsgCmd
 import com.doceazedo.tttalk.commands.ReplyCmd
@@ -19,6 +20,7 @@ class Tttalk : JavaPlugin() {
         instance = this
         saveDefaultConfig()
 
+        getCommand("color").executor = ColorCmd
         getCommand("msg").executor = MsgCmd
         getCommand("r").executor = ReplyCmd
         getCommand("ignore").executor = IgnoreCmd
