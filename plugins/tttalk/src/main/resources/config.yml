@@ -1,5 +1,6 @@
-motd:
-  - ""
+server:
+  created: "21/03/2020"
+  version: 5
 rules:
   - "Não prejudique a estabilidade do servidor"
   - "Qualquer forma de doxxing é proibida"
