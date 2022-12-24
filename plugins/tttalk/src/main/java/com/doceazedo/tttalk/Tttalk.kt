@@ -1,9 +1,6 @@
 package com.doceazedo.tttalk
 
-import com.doceazedo.tttalk.commands.ColorCmd
-import com.doceazedo.tttalk.commands.IgnoreCmd
-import com.doceazedo.tttalk.commands.MsgCmd
-import com.doceazedo.tttalk.commands.ReplyCmd
+import com.doceazedo.tttalk.commands.*
 import com.doceazedo.tttalk.events.*
 import com.doceazedo.tttalk.utils.IgnoredManager
 import org.bukkit.Bukkit
@@ -21,6 +18,7 @@ class Tttalk : JavaPlugin() {
         saveDefaultConfig()
 
         getCommand("color").executor = ColorCmd
+        getCommand("help").executor = HelpCmd
         getCommand("msg").executor = MsgCmd
         getCommand("r").executor = ReplyCmd
         getCommand("ignore").executor = IgnoreCmd

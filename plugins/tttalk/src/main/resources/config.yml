@@ -1,2 +1,13 @@
 motd:
   - ""
+commands:
+  - label: help
+    help: Mostra essa lista de comandos
+  - label: kill
+    help: Comete suicídio
+  - label: msg <player> <mensagem>
+    help: Envia mensagem privada para alguém
+  - label: ignore [player]
+    help: Ignora todas as mensagens de alguém
+  - label: color <codigo>
+    help: Muda a cor do seu nome no chat

@@ -14,3 +14,5 @@ commands:
   color:
     aliases: [cor]
     usage: "Uso: /<command> <codigo>"
+  help:
+    aliases: [ajuda, commands, comandos]
