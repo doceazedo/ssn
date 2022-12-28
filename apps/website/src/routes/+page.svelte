@@ -1,10 +1,11 @@
 <script lang="ts">
   import { ContentWithSidebar, Card } from "ssnkit";
   import { Hand, LifeBuoy, Rocket, Swords } from "ssnkit/icons";
+  import { GallerySlider } from '$lib/components/gallery';
 </script>
 
 <ContentWithSidebar>
-  <div class="gallery-placeholder"></div>
+  <GallerySlider />
 
   <Card title="Conheça o SSN.gg!" icon={Hand}>
     <div class="content">
@@ -30,14 +31,3 @@
     </div>
   </Card>
 </ContentWithSidebar>
-
-<style lang="sass">
-  .gallery-placeholder
-    aspect-ratio: 21 / 9
-    background-color: #e5e7ea
-    border-radius: 1rem
-
-  @media screen and (max-width: 768px)
-    .gallery-placeholder
-      aspect-ratio: 16 / 9
-</style>
