@@ -83,7 +83,7 @@ world-settings:
       disable-end-credits: false
       disable-player-crits: false
       disable-sprint-interruption-on-attack: false
-      disable-chest-cat-detection: false
+      disable-chest-cat-detection: true
       disable-unloaded-chunk-enderpearl-exploit: true
       village-sieges-enabled: true
     prevent-moving-into-unloaded-chunks: true
@@ -165,7 +165,7 @@ world-settings:
       - stone
       - planks
     experience-merge-max-value: -1
-    armor-stands-do-collision-entity-lookups: true
+    armor-stands-do-collision-entity-lookups: false
     skip-entity-ticking-in-chunks-scheduled-for-unload: true
     disable-thunder: false
     skeleton-horse-thunder-spawn-chance: 0.01
