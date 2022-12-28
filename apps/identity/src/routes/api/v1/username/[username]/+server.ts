@@ -1,21 +1,20 @@
 import { error, json } from "@sveltejs/kit";
 import { createUsername, getUsername, getUsernames } from "warehouse";
-import { loggedInOnly } from "$lib/middlewares";
+import { loggedInOnly, tokenOnly } from "$lib/middlewares";
 import type { RequestHandler } from '@sveltejs/kit';
 import { validateUsername } from "../../../../../lib/utils";
 
-export const GET: RequestHandler = async ({ locals, params }) => {
-  if (!params.username) throw error(400);
-  if (!locals?.identity) throw error(401);
-  if (!locals.identity.usernames.includes(params.username)) throw error(403);
-
-  const username = await getUsername(params.username);
-  if (!username) throw error(404);
-
-  return json({
-    username
+export const GET: RequestHandler = async ({ request, params }) =>
+  tokenOnly(request, async () => {
+    if (!params.username) throw error(400);
+  
+    const username = await getUsername(params.username);
+    if (!username) throw error(404);
+  
+    return json({
+      username
+    });
   });
-};
 
 export const POST: RequestHandler = async ({ locals, params, cookies }) =>
   loggedInOnly(locals, cookies, async (identity) => {
