@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { Github } from 'lucide-svelte';
   import { DiscordIcon, GitHubIcon, TwitterIcon } from '../icons';
   import { CopyIpTag } from '../elements';
 
@@ -40,12 +39,14 @@
 </footer>
 
 <style lang="sass">
+  @import '../../../styles/vars'
+
   .footer
     display: flex
     justify-content: space-between
     padding: 5rem 2.5rem
     background-color: #fff
-    border-top: 1px solid #e6e7ea
+    border-top: $divider
 
     > *
       width: 33.33333%

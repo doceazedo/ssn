@@ -101,7 +101,7 @@
   @import '../../../styles/vars'
   
   .navbar
-    border-bottom: 1px solid #e6e7ea
+    border-bottom: $divider
 
     &-item
       gap: .25rem
