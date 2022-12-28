@@ -93,7 +93,6 @@ world-settings:
     hopper-amount: 1
     random-light-updates: false
     save-structure-info: true
-    mob-spawn-range: 4
     dragon-death-sound-radius: 0
     seed-village: 10387312
     seed-feature: 14357617
