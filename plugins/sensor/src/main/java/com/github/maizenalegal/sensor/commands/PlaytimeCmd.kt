@@ -22,7 +22,7 @@ object PlaytimeCmd : SuspendingCommandExecutor {
             return true
         }
 
-        sender.sendMessage("§a${user.name} §eentrou no servidor em §a${user.firstJoin} §ee jogou por §a${user.playedSeconds} segundos§e.")
+        sender.sendMessage("§e${user.name} §aentrou no servidor em §e${user.firstJoin} §ae jogou por §e${user.playedSeconds} segundos§a.")
         return true
     }
 }
