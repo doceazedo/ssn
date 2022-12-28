@@ -1,6 +1,7 @@
 package com.github.maizenalegal.sensor.commands
 
 import com.github.maizenalegal.sensor.identity.Username.getUsername
+import com.github.maizenalegal.sensor.utils.TimeFormatter
 import com.github.shynixn.mccoroutine.bukkit.SuspendingCommandExecutor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
@@ -22,7 +23,11 @@ object PlaytimeCmd : SuspendingCommandExecutor {
             return true
         }
 
-        sender.sendMessage("§e${user.name} §aentrou no servidor em §e${user.firstJoin} §ae jogou por §e${user.playedSeconds} segundos§a.")
+        val joinDate = TimeFormatter.dateFormatter.parse(user.firstJoin)
+        val formattedJoinDate = TimeFormatter.formatDate(joinDate)
+        val playTime = TimeFormatter.formatDuration(user.playedSeconds)
+
+        sender.sendMessage("§e${user.name} §aentrou no servidor em §e${formattedJoinDate} §ae jogou por §e${playTime}§a.")
         return true
     }
 }

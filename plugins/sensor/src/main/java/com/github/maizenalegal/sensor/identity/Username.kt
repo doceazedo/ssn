@@ -13,7 +13,7 @@ object Username {
         val createdAt: String,
         val firstJoin: String?,
         val lastSeen: String?,
-        val playedSeconds: Int,
+        val playedSeconds: Long,
         val joinCount: Int,
         val isOnline: Boolean
     )
