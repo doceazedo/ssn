@@ -36,4 +36,8 @@
     aspect-ratio: 21 / 9
     background-color: #e5e7ea
     border-radius: 1rem
+
+  @media screen and (max-width: 768px)
+    .gallery-placeholder
+      aspect-ratio: 16 / 9
 </style>

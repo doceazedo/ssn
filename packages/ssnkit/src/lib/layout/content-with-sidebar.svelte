@@ -28,4 +28,9 @@
   @media screen and (max-width: 768px)
     .content-with-sidebar
       flex-direction: column
+
+      .main,
+      .sidebar
+        width: 100%
+        flex-grow: 0
 </style>
