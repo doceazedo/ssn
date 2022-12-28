@@ -25,7 +25,6 @@ class Tttalk : JavaPlugin() {
         getCommand("rules").executor = RulesCmd
 
         Bukkit.getPluginManager().registerEvents(AsyncPlayerChat, this)
-        Bukkit.getPluginManager().registerEvents(PlayerDeath, this)
         Bukkit.getPluginManager().registerEvents(PlayerJoin, this)
         Bukkit.getPluginManager().registerEvents(PlayerQuit, this)
     }
