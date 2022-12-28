@@ -75,7 +75,7 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - ${MNT_GATEKEEPER}:/data/redis
+      - ${MNT_GATEKEEPER}:/data
 
   website:
     labels:
