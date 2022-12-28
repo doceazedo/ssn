@@ -12,6 +12,7 @@ export const POST: RequestHandler = async ({ params, request }) =>
 
     const updatedUsername = await updateUsername(username.name, {
       firstJoin: !username.lastSeen ? new Date() : undefined,
+      joinCount: ++username.joinCount,
       lastSeen: new Date(),
       isOnline: true
     })

@@ -29,13 +29,15 @@ model Identity {
 }
 
 model Username {
-  name      String    @id @unique
-  owner     Identity  @relation(name: "IdentityUsernames", fields: [ownerId], references: [uuid])
-  ownerId   String
-  createdAt DateTime  @default(now())
-  firstJoin DateTime?
-  lastSeen  DateTime?
-  isOnline  Boolean   @default(false)
+  name          String    @id @unique
+  owner         Identity  @relation(name: "IdentityUsernames", fields: [ownerId], references: [uuid])
+  ownerId       String
+  createdAt     DateTime  @default(now())
+  firstJoin     DateTime?
+  lastSeen      DateTime?
+  playedSeconds Int @default(0)
+  joinCount     Int @default(0)
+  isOnline      Boolean   @default(false)
 }
 
 model Invite {

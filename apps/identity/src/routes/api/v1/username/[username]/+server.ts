@@ -1,5 +1,5 @@
 import { error, json } from "@sveltejs/kit";
-import { createUsername, getUser, getUsername, getUsernames } from "warehouse";
+import { createUsername, getUsername, getUsernames } from "warehouse";
 import { loggedInOnly } from "$lib/middlewares";
 import type { RequestHandler } from '@sveltejs/kit';
 import { validateUsername } from "../../../../../lib/utils";

@@ -10,7 +10,13 @@ export const POST: RequestHandler = async ({ params, request }) =>
     const username = await getUsername(params.username);
     if (!username) throw error(404);
 
+    const now = new Date();
+    const lastSeen = username.lastSeen || now;
+    const sessionDuration = parseInt((now.getTime() - lastSeen.getTime()) / 1000);
+
     const updatedUsername = await updateUsername(username.name, {
+      lastSeen: now,
+      playedSeconds: username.playedSeconds + sessionDuration,
       isOnline: false
     })
 
