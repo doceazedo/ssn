@@ -9,8 +9,6 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import java.io.File
-import java.nio.file.Files
-import java.nio.file.attribute.FileTime
 import java.text.CharacterIterator
 import java.text.StringCharacterIterator
 import java.time.Duration
@@ -20,8 +18,10 @@ import java.time.Instant
 object PlayerJoin : Listener {
     private val serverCreatedAt = Tttalk.instance.config.getString("server.created")
     private val serverVersion = Tttalk.instance.config.getInt("server.version")
-    private val world = Bukkit.getWorld("world")
-    private val worldFilePath = world.worldFolder.toPath()
+
+    private val worldFile = Bukkit.getWorld("world").worldFolder
+    private val worldSize = humanReadableByteCountSI(directorySize(worldFile))
+    private val worldAgeDays = worldAgeInDays(File(worldFile, "uid.dat").lastModified())
 
     @EventHandler
     fun onPlayerJoin(e: PlayerJoinEvent) {
@@ -33,11 +33,7 @@ object PlayerJoin : Listener {
         e.joinMessage = "§8[§a+§8] ${e.player.displayName} entrou"
 
         // Show MOTD
-        val worldSize = humanReadableByteCountSI(Files.size(worldFilePath))
-        val worldCreationTime = Files.getAttribute(worldFilePath, "creationTime") as FileTime
-        val worldAgeDays = worldAgeInDays(worldCreationTime)
-        val playerCount = File(worldFilePath.toFile(), "playerdata").listFiles()?.size
-
+        val playerCount = File(worldFile, "playerdata").listFiles()?.size
         e.player.sendMessage(" ")
         e.player.sendMessage("§aOlá, §e${e.player.displayName}§a!")
         e.player.sendMessage("§e$playerCount §ajogadores já entraram nesse servidor")
@@ -46,6 +42,15 @@ object PlayerJoin : Listener {
         e.player.sendMessage(" ")
 
         e.player.playSound(e.player.location, Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f)
+    }
+
+    private fun directorySize(dir: File): Long {
+        var size: Long = 0
+        val files = dir.listFiles() ?: return 0
+        for (file in files) {
+            size += if (file.isFile) file.length() else directorySize(file)
+        }
+        return size
     }
 
     private fun humanReadableByteCountSI(bytes: Long): String {
@@ -59,8 +64,7 @@ object PlayerJoin : Listener {
         return String.format("%.1f %cB", bytes / 1000.0, ci.current())
     }
 
-    private fun worldAgeInDays(time: FileTime): Int {
-        val timestamp = time.toMillis()
+    private fun worldAgeInDays(timestamp: Long): Int {
         val then = Instant.ofEpochMilli(timestamp)
         val duration = Duration.between(then, Instant.now())
         return duration.toDaysPart().toInt()
