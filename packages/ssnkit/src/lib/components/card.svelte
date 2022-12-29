@@ -11,7 +11,7 @@
     <header class="card-header">
       <p class="card-header-title">
         {#if icon}
-          <svelte:component this={icon} size={24} />
+          <svelte:component this={icon} size={24} width={24} height={24} />
         {/if}
         {title}
       </p>

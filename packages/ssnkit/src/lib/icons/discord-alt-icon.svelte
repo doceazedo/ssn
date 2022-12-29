@@ -1,8 +1,11 @@
 <script lang="ts">
   export let color = 'currentColor';
+
+  export let width: number = null;
+  export let height: number = null;
 </script>
 
-<svg viewBox="0 0 15 15">
+<svg viewBox="0 0 15 15" {width} {height}>
   <path
     fill={color}
     fill-rule="evenodd"

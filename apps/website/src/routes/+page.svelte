@@ -2,9 +2,10 @@
   import { ContentWithSidebar, Card, CopyIpTag } from "ssnkit";
   import { Hand, LifeBuoy, Rocket, Swords } from "ssnkit/icons";
   import { GallerySlider } from '$lib/components/gallery';
+  import { SERVER_STATUS } from '$lib/status';
 </script>
 
-<ContentWithSidebar>
+<ContentWithSidebar status={$SERVER_STATUS}>
   <GallerySlider />
 
   <Card title="Conheça o SSN.gg!" icon={Hand}>

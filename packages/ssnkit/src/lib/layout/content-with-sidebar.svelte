@@ -1,9 +1,16 @@
+<script lang="ts">
+  import { Sidebar } from '.';
+  import type { JavaStatusResponse } from 'minecraft-server-util';
+
+  export let status: JavaStatusResponse | null = null;
+</script>
+
 <div class="content-with-sidebar">
   <main class="main">
     <slot />
   </main>
   <aside class="sidebar">
-    ...
+    <Sidebar {status} />
   </aside>
 </div>
 
