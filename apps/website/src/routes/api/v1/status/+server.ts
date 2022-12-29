@@ -1,11 +1,16 @@
-import { status as getServerStatus } from 'minecraft-server-util';
+import { status as getServerStatus, type JavaStatusResponse } from 'minecraft-server-util';
 import { json } from "@sveltejs/kit";
 import type { RequestHandler } from '@sveltejs/kit';
 
 const ip = 'ssn.gg';
 
 export const GET: RequestHandler = async () => {
-  const status = await getServerStatus(ip);
+  let status: JavaStatusResponse | null = null;
+  try {
+    status = await getServerStatus(ip);
+  } catch (e) { 
+    // you'll never see me ;)
+  }
 
   return json({
     status
