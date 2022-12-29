@@ -36,6 +36,7 @@
 	"type": "module",
 	"dependencies": {
 		"@glidejs/glide": "^3.6.0",
-		"@prisma/client": "^4.4.0"
+		"@prisma/client": "^4.4.0",
+		"minecraft-server-util": "^5.3.1"
 	}
 }
