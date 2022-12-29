@@ -3,6 +3,40 @@
   import { Hand, LifeBuoy, Rocket, Swords } from "ssnkit/icons";
   import { GallerySlider } from '$lib/components/gallery';
   import { SERVER_STATUS } from '$lib/status';
+
+  type Client = {
+    name: string;
+    description: string;
+    href: string;
+  }
+
+  const clients: Client[] = [
+    {
+      name: 'Lambda Client',
+      description: 'recomendação obrigatória, código aberto, promissor e é expansível com extensões.',
+      href: 'https://github.com/lambda-client/lambda',
+    },
+    {
+      name: 'Ares',
+      description: 'minha escolha pessoal, código aberto com seleção minimalista de módulos.',
+      href: 'https://aresclient.org',
+    },
+    {
+      name: 'Impact',
+      description: 'opção razoável e popular entre iniciantes, porém tem o código fechado.',
+      href: 'https://impactclient.net',
+    },
+    {
+      name: 'Inertia',
+      description: 'opção tão boa (ou melhor) quanto o Impact, porém não é tão atualizado e também tem o código fechado.',
+      href: 'https://inertiaclient.com',
+    },
+    {
+      name: '3arthh4ck',
+      description: 'menção honrosa por ser robusto e de código aberto, porém não é mais mantido e tem um histórico duvidoso.',
+      href: 'https://github.com/3arthqu4ke/3arthh4ck',
+    },
+  ];
 </script>
 
 <ContentWithSidebar status={$SERVER_STATUS}>
@@ -39,11 +73,11 @@
       <p>A maioria das pessoas no servidor usam clients modificados, e tem várias opções por aí. Eu vou deixar uma lista com algumas <b>sugestões pessoais</b>, mas que fique claro que eu não me responsabilizo por problemas que você possa ter com eles e não ofereço suporte. Você terá que descobrir como configurar cada módulo para funcionar no SSN por conta própria.</p>
       <p>Existem clients com módulos focados em utilidade e PVP. Se você é novo no jogo, mods utilitários provavelmente farão mais sentido para você. Algumas opções incluem:</p>
       <ul>
-        <li><a href="/" target="_blank">Lambda Client</a>: recomendação obrigatória, código aberto, promissor e é expansível com extensões.</li>
-        <li><a href="/" target="_blank">Ares</a>: minha escolha pessoal, código aberto com seleção minimalista de módulos.</li>
-        <li><a href="/" target="_blank">Impact</a>: opção razoável e popular entre iniciantes, porém tem o código fechado.</li>
-        <li><a href="/" target="_blank">Inertia</a>: opção tão boa (ou melhor) quanto o Impact, tem o código aberto, porém não é tão atualizado.</li>
-        <li><a href="/" target="_blank">3arthh4ck</a>: menção honrosa por ser robusto e de código aberto, porém não é mais mantido e tem um histórico duvidoso.</li>
+        {#each clients as client}
+          <li>
+            <a href={client.href} target="_blank" rel="noreferrer">{client.name}</a>: {client.description}
+          </li>
+        {/each}
       </ul>
       <p>Eu recomendo experimentar alguns desses clients e ver qual você gosta mais. Alguns até funcionam bem quando usados em conjunto se você quiser usar mais de um ao mesmo tempo.</p>
       <p>Agora, uma coisa importante: <b>qualquer client pode ser perigoso</b>. Por isso, é melhor minimizar o risco de infectar seu computador baixando os arquivos apenas da fonte oficial, usando mods populares e, se possível, auditar o código e fazer sua própria build. Eu também recomendo evitar usar clients crackeados ou vazados, porque pode ser difícil para um jogador inexperiente distinguir um mod seguro de um infectado.</p>
