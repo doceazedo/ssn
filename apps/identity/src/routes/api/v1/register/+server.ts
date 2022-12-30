@@ -13,7 +13,7 @@ import {
 } from "warehouse";
 import { validateRequest } from '$lib/middlewares';
 import { setAuthCookies, validateUsername } from '$lib/utils';
-import { validateCaptcha } from "$lib/captcha";
+import { validateCaptcha } from "$lib/captcha/validate-captcha";
 import { registerEnabled, inviteOnly, invitesPerUser } from "$lib/env/public";
 import type { RequestHandler } from '@sveltejs/kit';
 

@@ -1,1 +1,1 @@
-export * from './validate-captcha'
+export { default as Captcha } from './captcha.svelte'
