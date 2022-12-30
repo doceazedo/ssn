@@ -15,6 +15,9 @@ export const getUsernames = async (ownerId: string): Promise<Username[]> =>
   await prisma.username.findMany({
     where: {
       ownerId
+    },
+    orderBy: {
+      createdAt: 'asc'
     }
   });
 

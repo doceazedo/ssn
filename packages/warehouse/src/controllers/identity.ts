@@ -91,3 +91,23 @@ export const updateUserRole = async (uuid: string, role: Role): Promise<Identity
     return null;
   }
 }
+
+export const updateUser = async (
+  uuid: string, 
+  data: Partial<Identity>
+): Promise<IdentityWithUsernames | null> =>{
+  try {
+    const user = await prisma.identity.update({
+      where: {
+        uuid
+      },
+      data,
+      include: {
+        usernames: true
+      }
+    });
+    return user;
+  } catch (e) {
+    return null;
+  }
+}
