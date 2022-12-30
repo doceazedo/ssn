@@ -35,7 +35,7 @@ jobs:
 
           export STARTUP_COMMAND="docker compose up -d"
 
-          rsync -av --exclude 'plugins' . $SSH_USER@$SSH_HOST:$WORKDIR
+          rsync -av --exclude './plugins' . $SSH_USER@$SSH_HOST:$WORKDIR
 
           ssh $SSH_USER@$SSH_HOST "(cd $WORKDIR && $PULL_COMMAND && $BUILD_COMMAND)"
 
