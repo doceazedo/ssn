@@ -1,9 +1,12 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
   import { quintOut } from 'svelte/easing';
+  import { env } from '$env/dynamic/public';
   import { page } from "$app/stores";
   import { DiscordIcon, Input, Separator } from 'ssnkit';
   import { discordOauthUrl } from '$lib/helpers';
+	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
 
   type Field = {
     label: string;
@@ -23,9 +26,27 @@
   export let error: string;
   export let discordLabel;
   export let submitLabel;
+  export let hasCaptcha = false;
+  export let captchaToken = '';
 
   const redirect = $page.url.searchParams.get('redirect');
   const redirectParams = redirect ? `?redirect=${redirect}` : '';
+
+  const turnstileSiteKey = env.PUBLIC_CF_TURNSTILE_SITE_KEY;
+
+  const renderTurnstile = () => {
+    if (!document.querySelector('#cf-turnstile')) return;
+    window.turnstile.render('#cf-turnstile', {
+      sitekey: turnstileSiteKey,
+      theme: 'light',
+      callback: (token: string) => captchaToken = token,
+    })
+  }
+
+  onMount(() => {
+    if (!browser || !window.turnstile || !turnstileSiteKey) return;
+    renderTurnstile();
+  });
 </script>
 
 <form class="form" class:is-loading={isLoading} on:submit|preventDefault>
@@ -47,6 +68,12 @@
       />
     </div>
   {/each}
+
+  {#if hasCaptcha && turnstileSiteKey}
+    <div class="field">
+      <div id="cf-turnstile" />
+    </div>
+  {/if}
 
   {#if error}
     <div

@@ -32,6 +32,7 @@
       value: ''
     },
   ];
+  let captchaToken = '';
 
   const links = [
     {
@@ -63,7 +64,8 @@
       await register({
         email,
         username,
-        password
+        password,
+        captchaToken
       }, invite);
     } catch (e) {
       isLoading = false;
@@ -85,8 +87,10 @@
   {isLoading}
   {error}
   {links}
+  hasCaptcha
   discordLabel="Registrar com Discord"
   submitLabel="Registrar"
+  bind:captchaToken
 />
 
 <TermsModal bind:isOpen={isTermsModalOpen} {handleAccept} />

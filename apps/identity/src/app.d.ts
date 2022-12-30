@@ -13,4 +13,9 @@ declare global {
     // interface PageError {}
     // interface Platform {}
   }
+
+  interface Window {
+    turnstile: any;
+    onloadTurnstile: any;
+  }
 }

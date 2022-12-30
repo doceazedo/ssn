@@ -7,6 +7,7 @@ export type RegisterParams = {
   email: string;
   password: string;
   username: string;
+  captchaToken: string;
 }
 
 export type RegisterWithDiscordParams = {
