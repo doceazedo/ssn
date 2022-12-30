@@ -84,9 +84,10 @@ export const logout = async () => {
   }
 }
 
-export const createNewUsername = async (username: string) => {
+export const createNewUsername = async (username: string, captchaToken: string) => {
   try {
     const resp = await fetch(`${baseUrl}/username/${username}`, {
+      body: JSON.stringify({ captchaToken }),
       method: 'POST'
     });
     const data = await resp.json();
