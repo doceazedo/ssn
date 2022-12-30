@@ -28,11 +28,11 @@ jobs:
           touch ~/.ssh/known_hosts
           echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts
 
-          export PULL_COMMAND="docker-compose pull"
+          export PULL_COMMAND="docker compose pull"
 
-          export BUILD_COMMAND="docker-compose build"
+          export BUILD_COMMAND="docker compose build"
 
-          export STARTUP_COMMAND="docker-compose up -d"
+          export STARTUP_COMMAND="docker compose up -d"
 
           rsync -av --exclude 'plugins' . $SSH_USER@$SSH_HOST:$WORKDIR
 
