@@ -18,6 +18,7 @@
       value: '',
     },
   ];
+  let captchaToken = '';
 
   const links = [
     {
@@ -41,7 +42,7 @@
     const password = fields.find(field => field.name == 'password').value;
 
     try {
-      await login(username, password, redirect);
+      await login(username, password, captchaToken, redirect);
     } catch (e) {
       isLoading = false;
       error = e.message;
@@ -55,6 +56,8 @@
   {isLoading}
   {error}
   {links}
+  hasCaptcha
   discordLabel="Fazer login com Discord"
   submitLabel="Login"
+  bind:captchaToken
 />
