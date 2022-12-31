@@ -43,6 +43,7 @@
 		"deep-email-validator": "^0.1.21",
 		"email-validator": "^2.0.4",
 		"random-word-slugs": "^0.1.6",
+		"socket.io-client": "^4.5.4",
 		"uuid": "^9.0.0",
 		"yup": "^0.32.11"
 	}

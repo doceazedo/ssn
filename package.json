@@ -18,6 +18,7 @@
     "start": "docker-compose up --build",
     "start:iam": "docker-compose up --build gateway warehouse warehouse-migrate identity-web",
     "start:website": "docker-compose up --build gateway warehouse warehouse-migrate identity-web website",
+    "start:rcon-test": "docker-compose up --build gateway warehouse warehouse-migrate identity-web rcon minecraft-main",
     "warehouse:generate": "(cd ./packages/warehouse && npx prisma generate)",
     "docker:prune": "docker system prune --volumes",
     "postinstall": "npm run warehouse:generate"
@@ -30,5 +31,8 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "packageManager": "npm@8.18.0"
+  "packageManager": "npm@8.18.0",
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  }
 }

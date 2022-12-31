@@ -93,6 +93,21 @@ services:
       PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
       PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
 
+  rcon:
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.website.entrypoints=web'
+      - 'traefik.http.routers.website.rule=Host(`rcon.${PUBLIC_BASE_DOMAIN}`)'
+    ports:
+      - '443:443'
+    build:
+      context: .
+      dockerfile: ./apps/rcon/Dockerfile
+    restart: on-failure
+    environment:
+      PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
+      LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
+
   minecraft-proxy:
     image: amazoncorretto:17
     command: java -Xms512M -Xmx1024M -jar BungeeCord.jar
@@ -111,6 +126,7 @@ services:
     tty: true
     ports:
       - "25561:25561"
+      - "25572:25572"
     working_dir: /data
     volumes:
       - ./servers/1-queue:/data
@@ -130,6 +146,7 @@ services:
     tty: true
     ports:
       - "25562:25562"
+      - "25573:25573"
     working_dir: /data
     volumes:
       - ./servers/2-main:/data
