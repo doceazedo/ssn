@@ -1,25 +1,15 @@
 import { Server, Socket } from "socket.io";
-import { RCON } from 'minecraft-server-util';
-
-const MinecraftServers = {
-  QUEUE: {
-    host: 'minecraft-queue',
-    port: 25572
-  },
-  MAIN: {
-    host: 'minecraft-main',
-    port: 25573
-  }
-}
-
-const client = new RCON();
+import { connect, MinecraftServers } from 'rcon-helper';
+import type { RCON } from 'minecraft-server-util';
 
 export const registerConsoleHandlers = async (io: Server, socket: Socket) => {
+  let client: RCON;
+
   try {
-    await client.connect(MinecraftServers.MAIN.host, MinecraftServers.MAIN.port);
-    await client.login('rcon');
+    client = await connect(MinecraftServers.MAIN);
   } catch (error) {
     socket.emit("message", "Error connecting to RCON");
+    return;
   }
 
   client.on('message', async (data) => {
