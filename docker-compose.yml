@@ -118,6 +118,7 @@ services:
     working_dir: /data
     volumes:
       - ./servers/0-proxy:/data
+    restart: on-failure
 
   minecraft-queue:
     image: amazoncorretto:17
@@ -138,6 +139,7 @@ services:
       GK_REDIS_HOST: ${GK_REDIS_HOST}
       GK_REDIS_PORT: ${GK_REDIS_PORT}
       GK_REDIS_PASSWORD: ${GK_REDIS_PASSWORD}
+    restart: on-failure
 
   minecraft-main:
     image: amazoncorretto:17
@@ -153,6 +155,7 @@ services:
     environment:
       LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
       CATRACA_IDENTITY_TOKEN: ${CATRACA_IDENTITY_TOKEN}
+    restart: on-failure
 
 volumes:
   warehouse:
