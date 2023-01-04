@@ -2,8 +2,9 @@
   import { io } from 'socket.io-client';
   import { Checkbox } from 'ssnkit';
 	import { tick } from 'svelte';
+  import { env } from '$env/dynamic/public';
 
-  const socket = io('ws://rcon.ssn.local', {
+  const socket = io(env.PUBLIC_RCON_URL || '', {
     withCredentials: true
   });
 
