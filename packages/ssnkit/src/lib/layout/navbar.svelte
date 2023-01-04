@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { BookOpenCheck, Home, Users, Wallet } from 'lucide-svelte';
+  import { Home, ShieldCheck, Wallet } from 'lucide-svelte';
   import { slide } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
   import { DiscordAltIcon } from '../icons';
@@ -22,14 +22,9 @@
       icon: Wallet
     },
     {
-      label: 'Etiqueta',
-      href: `${websiteBaseUrl}/rules`,
-      icon: BookOpenCheck
-    },
-    {
-      label: 'Comunidade',
-      href: `${websiteBaseUrl}/community`,
-      icon: Users
+      label: 'Segurança',
+      href: `${websiteBaseUrl}/safety`,
+      icon: ShieldCheck
     },
     {
       label: 'Discord',
