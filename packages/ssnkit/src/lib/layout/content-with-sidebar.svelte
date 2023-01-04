@@ -26,11 +26,12 @@
       gap: 1.5rem
 
     .main
-      width: 75%
-      flex-shrink: 0
+      width: 0
+      flex-grow: 1
 
     .sidebar
-      flex-grow: 1
+      width: 20rem
+      flex-shrink: 0
 
   @media screen and (max-width: 768px)
     .content-with-sidebar
