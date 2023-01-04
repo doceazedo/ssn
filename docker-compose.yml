@@ -96,8 +96,8 @@ services:
   rcon:
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.website.entrypoints=web'
-      - 'traefik.http.routers.website.rule=Host(`rcon.${PUBLIC_BASE_DOMAIN}`)'
+      - 'traefik.http.routers.rcon.entrypoints=web'
+      - 'traefik.http.routers.rcon.rule=Host(`rcon.${PUBLIC_BASE_DOMAIN}`)'
     ports:
       - '443:443'
     build:
