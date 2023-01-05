@@ -27,7 +27,7 @@
     },
     {
       label: 'Esqueceu sua senha?',
-      href: '/auth/recover-password'
+      href: '/auth/reset-password'
     }
   ]
 

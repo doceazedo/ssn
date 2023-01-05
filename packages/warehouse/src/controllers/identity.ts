@@ -55,6 +55,16 @@ export const getUserByToken = async (token: string): Promise<IdentityWithUsernam
     }
   });
 
+export const getUserByPasswordResetToken = async (passwordResetToken: string): Promise<IdentityWithUsernames | null> =>
+  await prisma.identity.findFirst({
+    where: {
+      passwordResetToken
+    },
+    include: {
+      usernames: true
+    }
+  });
+
 export const getUserByEmailOrName = async (usernameOrEmail: string) =>
   await getUserByEmail(usernameOrEmail) || await getUserByName(usernameOrEmail);
 
