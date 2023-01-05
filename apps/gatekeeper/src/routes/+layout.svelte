@@ -1,7 +1,11 @@
 <script lang="ts">
   import 'ssnkit/styles';
   import ssnIcon from 'ssnkit/assets/img/ssn-icon.png';
+  import { page } from '$app/stores';
+  import { Metadata } from 'ssnkit';
 </script>
+
+<Metadata appTitle="SSN Gatekeeper" currentUrl={$page.url.href} />
 
 <div class="container">
   <section class="section">

@@ -1,6 +1,6 @@
 <script lang="ts">
   import 'ssnkit/styles';
-  import { Layout } from 'ssnkit';
+  import { Layout, Metadata } from 'ssnkit';
   import { page } from '$app/stores';
   import { env } from '$env/dynamic/public';
   import { IDENTITY } from "$lib/auth";
@@ -13,6 +13,8 @@
 
   $IDENTITY = data.identity || null;
 </script>
+
+<Metadata {currentUrl} />
 
 <Layout
   {currentUrl}
