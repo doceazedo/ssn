@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Home, ShieldCheck, Wallet } from 'lucide-svelte';
+  import { HeartHandshake, Home, ShieldCheck } from 'lucide-svelte';
   import { slide } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
   import { DiscordAltIcon } from '../icons';
@@ -17,9 +17,9 @@
       icon: Home
     },
     {
-      label: 'Doar',
+      label: 'Apoiar',
       href: `${websiteBaseUrl}/donate`,
-      icon: Wallet
+      icon: HeartHandshake
     },
     {
       label: 'Segurança',
