@@ -7,6 +7,8 @@ import { validateCaptcha } from "$lib/captcha/validate-captcha";
 import type { RequestHandler } from '@sveltejs/kit';
 import { hashPassword } from "$lib/auth/crypto";
 import { setAuthCookies } from "$lib/utils";
+import { sendEmail } from "$lib/utils/send-email";
+import { PASSWORD_CHANGED_TEMPLATE } from "$lib/utils/send-email/templates";
 
 type ResetPasswordParams = {
   password: string;
@@ -48,7 +50,15 @@ export const POST: RequestHandler = async ({ request, locals, params, cookies })
 
     const safeIdentity = purifyIdentity(identity);
     
-    // TODO: send email notifying about password change!
+    const userEmail = updatedUser.email || '';
+    try {
+      await sendEmail(
+        userEmail,
+        PASSWORD_CHANGED_TEMPLATE(updatedUser.primaryUsername)
+      );
+    } catch (e) {
+      // it's ok if the email is not sent here :)
+    }
 
     setAuthCookies(cookies, updatedUser.token);
     return json({

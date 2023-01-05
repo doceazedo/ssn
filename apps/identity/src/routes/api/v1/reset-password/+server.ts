@@ -5,6 +5,9 @@ import { getUserByEmail, updateUser } from "warehouse";
 import { validateRequest } from "$lib/middlewares";
 import { validateCaptcha } from "$lib/captcha/validate-captcha";
 import type { RequestHandler } from '@sveltejs/kit';
+import { sendEmail } from "$lib/utils/send-email";
+import { RESET_PASSWORD_TEMPLATE } from "$lib/utils/send-email/templates";
+import { env } from "$env/dynamic/public";
 
 type ResetPasswordParams = {
   email: string;
@@ -38,7 +41,16 @@ export const POST: RequestHandler = async ({ request, locals }) =>
     });
     if (!updatedUser) throw error(500);
 
-    // TODO: send email
+    const userEmail = identity.email || '';
+    const resetUrl = `${env.PUBLIC_IDENTITY_URL}/auth/reset-password/${updatedUser.passwordResetToken}`;
+    try {
+      await sendEmail(
+        userEmail,
+        RESET_PASSWORD_TEMPLATE(updatedUser.primaryUsername, resetUrl)
+      );
+    } catch (e: any) {
+      throw error(500, e.message || 'Não foi possível enviar o e-mail, tente novamente mais tarde');
+    }
 
     return json(null);
   });
