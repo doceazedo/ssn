@@ -36,3 +36,10 @@ export const createUsername = async (name: string, ownerId: string): Promise<Use
       ownerId
     }
   });
+
+export const deleteUsername = async (name: string): Promise<Username | null> =>
+  await prisma.username.delete({
+    where: {
+      name
+    }
+  });

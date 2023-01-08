@@ -1,6 +1,6 @@
 import { error, json } from "@sveltejs/kit";
 import * as yup from 'yup';
-import { createUsername, getUsername, getUsernames } from "warehouse";
+import { createUsername, deleteUsername, getUserByName, getUsername, getUsernames } from "warehouse";
 import { loggedInOnly, tokenOnly, validateRequest } from "$lib/middlewares";
 import { validateUsername } from "$lib/utils";
 import { validateCaptcha } from "$lib/captcha/validate-captcha";
@@ -51,3 +51,22 @@ export const POST: RequestHandler = async ({ request, locals, params, cookies })
       });
     })
   );
+
+export const DELETE: RequestHandler = async ({ request, params }) =>
+  tokenOnly(request, async () => {
+    if (!params.username) throw error(400);
+  
+    const username = await getUsername(params.username);
+    if (!username) throw error(404);
+
+    const owner = await getUserByName(username.name);
+    if (!owner) throw error(404);
+    if (owner.primaryUsername === username.name) throw error(400, 'Cannot delete primary username');
+
+    const deletedUsername = await deleteUsername(username.name);
+    if (!deletedUsername) throw error(500);
+  
+    return json({
+      username: deletedUsername
+    });
+  });
