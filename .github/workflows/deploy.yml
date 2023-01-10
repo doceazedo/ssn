@@ -3,7 +3,7 @@ name: Deploy to SSH server
 on:
   push:
     branches:
-      - github-actions
+      - main
 
 jobs:
   deploy:
@@ -16,7 +16,7 @@ jobs:
           KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
-          WORKDIR: /mnt/ssn-githubactions
+          WORKDIR: /mnt/ssn
 
         run: |
           sudo apt-get update && sudo apt-get install -y openssh-client
