@@ -10,14 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      - name: Setup SSH key
+      - name: vai tudo de uma vez
         env:
           SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          WORKDIR: /mnt/ssn
+
         run: |
           sudo apt-get update && sudo apt-get install -y openssh-client
-          
+
           mkdir -p ~/.ssh
           touch ~/.ssh/id_rsa
           echo "$SSH_KEY" > ~/.ssh/id_rsa
@@ -26,17 +29,13 @@ jobs:
           touch ~/.ssh/known_hosts
           echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts
 
-      - name: Deploy to server
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          WORKDIR: /mnt/ssn
-        run: |
-          export PRUNE_COMMAND="docker system prune --force --volumes"
           export PULL_COMMAND="docker compose pull"
           export BUILD_COMMAND="docker compose build"
           export STARTUP_COMMAND="docker compose up -d"
+          export PRUNE_COMMAND="docker system prune --volumes --force"
 
           rsync -av --exclude './plugins' . $SSH_USER@$SSH_HOST:$WORKDIR
+
           ssh $SSH_USER@$SSH_HOST "(cd $WORKDIR && $PRUNE_COMMAND && $PULL_COMMAND && $BUILD_COMMAND)"
+
           ssh $SSH_USER@$SSH_HOST "(cd $WORKDIR && $STARTUP_COMMAND)"
