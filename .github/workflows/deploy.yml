@@ -30,7 +30,7 @@ jobs:
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
-          WORKDIR: /mnt/ssn
+          WORKDIR: /mnt/ssn-githubactions
         run: |
           export PRUNE_COMMAND="docker system prune --force --volumes"
           export PULL_COMMAND="docker compose pull"
