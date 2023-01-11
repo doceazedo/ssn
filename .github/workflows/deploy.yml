@@ -32,7 +32,7 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           WORKDIR: /mnt/ssn
         run: |
-          export PRUNE_COMMAND="docker system prune -af --volumes"
+          export PRUNE_COMMAND="docker system prune --force --volumes"
           export PULL_COMMAND="docker compose pull"
           export BUILD_COMMAND="docker compose build"
           export STARTUP_COMMAND="docker compose up -d"
