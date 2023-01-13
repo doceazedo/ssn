@@ -166,6 +166,8 @@ services:
       - 'traefik.enable=true'
       - 'traefik.http.routers.identity.entrypoints=web'
       - 'traefik.http.routers.identity.rule=Host(`static.${PUBLIC_BASE_DOMAIN}`)'
+    ports:
+      - '8081:80'
     volumes:
       - ./static:/static
 
