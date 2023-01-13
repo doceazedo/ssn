@@ -15,10 +15,12 @@
     "build:salmos": "(cd ./plugins/salmos && mvn clean && mvn package && cp ./target/Salmos-0.0.1.jar ../../servers/0-proxy/plugins)",
     "build:sensor": "(cd ./plugins/sensor && mvn install && cp ./target/Sensor-0.0.1.jar ../../servers/2-main/plugins)",
     "build:antiburrow": "(cd ./plugins/antiburrow && mvn clean && mvn package && cp ./target/AntiBurrow-0.0.1.jar ../../servers/2-main/plugins)",
+    "build:nowitherplease": "(cd ./plugins/nowitherplease && mvn clean && mvn package && cp ./target/NoWitherPlease-0.0.1.jar ../../servers/2-main/plugins)",
     "start": "docker-compose up --build",
     "start:iam": "docker-compose up --build gateway warehouse warehouse-migrate identity-web",
     "start:website": "docker-compose up --build gateway warehouse warehouse-migrate identity-web website",
-    "start:rcon-test": "docker-compose up --build gateway warehouse warehouse-migrate identity-web rcon minecraft-main",
+    "start:rcon": "docker-compose up --build gateway warehouse warehouse-migrate identity-web rcon minecraft-main",
+    "start:minecraft": "docker-compose up gateway warehouse warehouse-migrate identity-web gatekeeper-redis gatekeeper-web minecraft-proxy minecraft-queue minecraft-main",
     "warehouse:generate": "(cd ./packages/warehouse && npx prisma generate)",
     "docker:prune": "docker system prune --volumes",
     "postinstall": "npm run warehouse:generate"

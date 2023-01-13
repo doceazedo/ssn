@@ -1,0 +1,3 @@
+name: NoWitherPlease
+version: '${project.version}'
+main: com.doceazedo.nowitherplease.NoWitherPlease
