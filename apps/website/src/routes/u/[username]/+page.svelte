@@ -19,7 +19,7 @@
 <div class="cards">
   <Card title="Sobre mim">
     <div class="content">
-      <img src="https://api.mineatar.io/body/full/{data.user.name}" alt="" />
+      <img class="avatar-body" src="https://mc-heads.net/body/{data.user.name}" alt="" />
       {#if data.user.firstJoin}
         <ul>
           <li>Eu entrei pela primeira vez em <b>{getFullDate(data.user.firstJoin)}</b></li>
@@ -83,4 +83,7 @@
         width: 30px
         height: 30px
         image-rendering: pixelated
+
+  .avatar-body
+    height: 8rem
 </style>
