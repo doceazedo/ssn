@@ -160,6 +160,15 @@ services:
       CATRACA_IDENTITY_TOKEN: ${CATRACA_IDENTITY_TOKEN}
     restart: on-failure
 
+  static:
+    image: flashspys/nginx-static
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.identity.entrypoints=web'
+      - 'traefik.http.routers.identity.rule=Host(`static.${PUBLIC_BASE_DOMAIN}`)'
+    volumes:
+      - ./static:/static
+
 volumes:
   warehouse:
   gatekeeper:
