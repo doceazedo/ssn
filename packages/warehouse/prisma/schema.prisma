@@ -61,6 +61,7 @@ model UsernameBadges {
   ownerName String
   badge     Badge    @relation(fields: [badgeSlug], references: [slug])
   badgeSlug String
+  createdAt DateTime @default(now())
 
   @@id([ownerName, badgeSlug])
 }
