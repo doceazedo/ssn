@@ -164,10 +164,8 @@ services:
     image: flashspys/nginx-static
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.identity.entrypoints=web'
-      - 'traefik.http.routers.identity.rule=Host(`static.${PUBLIC_BASE_DOMAIN}`)'
-    ports:
-      - '8081:80'
+      - 'traefik.http.routers.static.entrypoints=web'
+      - 'traefik.http.routers.static.rule=Host(`static.${PUBLIC_BASE_DOMAIN}`)'
     volumes:
       - ./static:/static
 
