@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { ContentWithSidebar, Card, CopyIpTag } from "ssnkit";
+  import { ContentWithSidebar, Card, CopyIpTag, Metadata } from "ssnkit";
   import { Hand, LifeBuoy, Rocket, Swords } from "ssnkit/icons";
   import { GallerySlider } from '$lib/components/gallery';
   import { SERVER_STATUS } from '$lib/status';
+	import { CURRENT_URL } from "$lib/stores";
 
   type Client = {
     name: string;
@@ -38,6 +39,8 @@
     },
   ];
 </script>
+
+<Metadata currentUrl={$CURRENT_URL} />
 
 <ContentWithSidebar status={$SERVER_STATUS}>
   <GallerySlider />

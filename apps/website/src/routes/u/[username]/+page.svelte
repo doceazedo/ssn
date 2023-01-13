@@ -2,13 +2,37 @@
   import dayjs from 'dayjs';
   import { Card, PageTitle } from 'ssnkit';
   import { formatDuration } from 'ssnkit/utils';
+  import watermelonIconImg from 'ssnkit/assets/img/watermelon-icon.png';
   import type { PageServerData } from './$types';
 
   export let data: PageServerData;
 
+  const siteName = 'SSN.gg';
+  const pageTitle = `${data.user.name} | Perfil no ${siteName}`;
+  const pageDescription = `Veja o perfil de ${data.user.name} no ${siteName} com data de registro, horas jogadas e mais!`;
+  const avatarImage = `https://mc-heads.net/avatar/${data.user.name}/256`;
+
   const getFullDate = (date: Date) =>
     dayjs(date).format('DD/MM/YYYY [às] HH:mm:ss');
 </script>
+
+<svelte:head>
+  <title>{pageTitle}</title>
+  <meta name="title" content={pageTitle} />
+  <meta name="description" content={pageDescription} />
+  <meta name="theme-color" content="#2c9902" />
+  <link rel="icon" href={watermelonIconImg} />
+
+  <meta name="og:title" content={pageTitle}>
+  <meta name="og:site_name" content={siteName}>
+  <meta name="og:description" content={pageDescription}>
+  <meta name="og:image" content={avatarImage}>
+
+  <meta name="twitter:title" content={pageTitle}>
+  <meta name="twitter:description" content={pageDescription}>
+  <meta name="twitter:image" content={avatarImage}>
+  <meta name="twitter:card" content="summary">
+</svelte:head>
 
 <PageTitle title={data.user.name} class="mb-6" />
 

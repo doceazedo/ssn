@@ -8,7 +8,7 @@
   export let currentUrl = '';
   export let thumbnail = '';
 
-  $: title = !!title ? `${appTitle} • ${pageTitle}` : appTitle;
+  $: title = !!pageTitle ? `${appTitle} • ${pageTitle}` : appTitle;
   $: openGraphImage = thumbnail || defaultOpenGraphImg;
 </script>
 

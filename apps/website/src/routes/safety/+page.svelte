@@ -1,8 +1,11 @@
 <script lang="ts">
-  import { Card, ContentWithSidebar, PageTitle } from "ssnkit";
+  import { Card, ContentWithSidebar, Metadata, PageTitle } from "ssnkit";
   import { FileCog, FormInput, Key, Lock, ShieldCheck } from "ssnkit/icons";
   import { SERVER_STATUS } from '$lib/status';
+	import { CURRENT_URL } from "$lib/stores";
 </script>
+
+<Metadata currentUrl={$CURRENT_URL} pageTitle="Segurança" />
 
 <PageTitle title="Segurança" class="mb-6" />
 
