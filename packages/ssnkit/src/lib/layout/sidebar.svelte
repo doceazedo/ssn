@@ -15,7 +15,7 @@
     <li><Users /> {status?.players?.online || 0}/{status?.players?.max || 0} online</li>
     <li><Joystick /> Java Edition 1.12.2</li>
     <li><Skull /> Pirata e original</li>
-    <li><Sprout /> Seed: 0000000000000000000</li>
+    <li><Sprout /> Seed: 372733000726032955</li>
   </ul>
 </Card>
 

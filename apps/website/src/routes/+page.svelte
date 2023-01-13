@@ -47,7 +47,7 @@
 
   <Card title="Conheça o SSN.gg!" icon={Hand}>
     <div class="content">
-      <p>O <b>SSN</b>, também conhecido como "servidor sem nome", é um dos poucos servidores de anarquia no Minecraft que ainda estão ativos no Brasil. A ideia é criar um ambiente sem regras e sem censura, onde a única preocupação da administração é manter o servidor no ar. Ele foi fundado em <b>21/03/2020</b>, mas o mapa atual só foi criado em <b>??/??/????</b>.</p>
+      <p>O <b>SSN</b>, também conhecido como "servidor sem nome", é um dos poucos servidores de anarquia no Minecraft que ainda estão ativos no Brasil. A ideia é criar um ambiente sem regras e sem censura, onde a única preocupação da administração é manter o servidor no ar. Ele foi fundado em <b>21/03/2020</b>, mas o mapa atual só foi criado em <b>13/01/2023</b>.</p>
       <p>O servidor já foi fechado, reaberto e reiniciado várias vezes, e agora estamos na <b>quinta edição</b>, que a gente espera que seja a definitiva. Tudo o que tem aqui, desde as configurações até os plugins e sistemas, é de <a href="https://github.com/doceazedo/ssn" target="_blank">código-aberto</a>, o que significa que qualquer um pode verificar o código e contribuir para o SSN, ou até criar sua própria instância do servidor.</p>
     </div>
   </Card>
