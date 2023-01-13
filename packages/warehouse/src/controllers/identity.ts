@@ -1,5 +1,5 @@
 import { prisma } from '.';
-import type { Identity, IdentityBadges, Role, Username } from '@prisma/client';
+import type { Identity, Role, Username } from '@prisma/client';
 
 export type IdentityWithUsernames = Identity & { usernames: Username[] };
 
@@ -121,10 +121,3 @@ export const updateUser = async (
     return null;
   }
 }
-
-export const getUserBadges = async (uuid: string): Promise<IdentityBadges[] | null> =>
-  await prisma.identityBadges.findMany({
-    where: {
-      ownerId: uuid
-    }
-  });

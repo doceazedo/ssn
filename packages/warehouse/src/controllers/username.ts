@@ -1,5 +1,7 @@
-import { Username } from "@prisma/client";
+import { Badge, Username, UsernameBadges } from "@prisma/client";
 import { prisma } from ".";
+
+export type BadgeWithDetails = UsernameBadges & { badge: Badge };
 
 export const getUsername = async (name: string): Promise<Username | null> =>
   await prisma.username.findFirst({
@@ -41,5 +43,15 @@ export const deleteUsername = async (name: string): Promise<Username | null> =>
   await prisma.username.delete({
     where: {
       name
+    }
+  });
+
+export const getUserBadges = async (username: string): Promise<BadgeWithDetails[]> =>
+  await prisma.usernameBadges.findMany({
+    where: {
+      ownerName: username
+    },
+    include: {
+      badge: true
     }
   });

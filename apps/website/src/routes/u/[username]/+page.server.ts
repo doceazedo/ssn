@@ -9,10 +9,11 @@ export const load: PageServerLoad = async ({ params }) => {
   const user = await getUsername(username);
   if (!user) throw error(404);
 
-  const badges = await getUserBadges(user.ownerId);
+  const badges = await getUserBadges(user.name);
+  const badgeDetails = badges.map(badge => badge.badge);
 
   return {
     user,
-    badges
+    badges: badgeDetails
   };
 }
