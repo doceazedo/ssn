@@ -37,6 +37,7 @@
 	"dependencies": {
 		"@glidejs/glide": "^3.6.0",
 		"@prisma/client": "^4.4.0",
+		"dayjs": "^1.11.7",
 		"minecraft-server-util": "^5.3.1"
 	}
 }
