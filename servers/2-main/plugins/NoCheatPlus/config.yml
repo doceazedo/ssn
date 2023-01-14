@@ -98,7 +98,7 @@ checks:
       active: false
       actions: cancel vl>10 log:noswing:0:5:i cancel
     reach:
-      active: false
+      active: true
       actions: cancel
     wrongblock:
       active: true
@@ -117,11 +117,11 @@ checks:
       actions: cancel log:breach:5:6:i
     speed:
       active: true
-      interval: 200
-      limit: 50
+      interval: 150
+      limit: 30
       actions: cancel
     visible:
-      active: false
+      active: true
       actions: cancel vl>30 log:bvisible:8:5:if cancel
   blockplace:
     active: true
