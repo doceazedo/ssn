@@ -74,6 +74,7 @@ Currently, there is no specific deployment process but you can generally follow 
   - Generate random and strong passwords for the keys
   - Configure the memory allocation according to your server
   - Fill in external sevice keys (like Discord, Turnstile and SendGrid)
+  - Update the volume mount points to local paths
 
 Please keep in mind that these are general guidelines and your specific deployment process may differ.
 
