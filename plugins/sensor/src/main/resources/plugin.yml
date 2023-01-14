@@ -1,3 +1,6 @@
 name: sensor
 version: '${project.version}'
 main: com.github.maizenalegal.sensor.Sensor
+commands:
+  playtime:
+    aliases: ['join', 'joindate']

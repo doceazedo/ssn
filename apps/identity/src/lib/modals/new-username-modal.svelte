@@ -3,10 +3,12 @@
   import { fade, scale, slide } from 'svelte/transition';
   import { quintOut } from 'svelte/easing';
   import { createNewUsername } from "$lib/auth";
+  import { Captcha } from '$lib/captcha';
 
   export let isOpen = false;
 
   let username = '';
+  let captchaToken = '';
   let isLoading = false;
   let error = '';
 
@@ -23,7 +25,7 @@
       error = '';
 
       if (!username.length) throw Error('Digite um nome de usuário');
-      await createNewUsername(username);
+      await createNewUsername(username, captchaToken);
     } catch (e) {
       isLoading = false;
       error = e.message;
@@ -42,7 +44,10 @@
       <section class="modal-card-body">
         <div class="content">
           <p class="mb-5">Você está criando um novo usuário, você poderá acessá-lo com a mesma senha ou método de login que você já definiu anteriormente.</p>
-          <Input bind:value={username} disabled={isLoading} name="username" label="Nome de usuário" />
+          <div class="mb-5">
+            <Input bind:value={username} disabled={isLoading} name="username" label="Nome de usuário" />
+          </div>
+          <Captcha bind:token={captchaToken} />
           {#if error}
             <div
               class="notification is-danger is-light mt-4"

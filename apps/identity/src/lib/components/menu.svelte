@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LayoutDashboard, Link, Mails, Users } from 'ssnkit/icons';
+  import { LayoutDashboard, Link, Mails, Server, Users } from 'ssnkit/icons';
   import { page } from '$app/stores';
   import { IDENTITY } from '$lib/auth';
 
@@ -31,6 +31,12 @@
       label: 'Administração',
       role: 'ADMIN',
       list: [
+        {
+          label: 'Servidor',
+          href: '/dashboard/admin/server',
+          active: $page.url.pathname === '/dashboard/admin/server',
+          icon: Server,
+        },
         {
           label: 'Convites',
           href: '/dashboard/admin/invites',

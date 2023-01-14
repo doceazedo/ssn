@@ -12,30 +12,34 @@ datasource db {
 }
 
 model Identity {
-  uuid            String           @id @unique @default(uuid())
-  email           String?          @unique
-  password        String?
-  verified        Boolean          @default(false)
-  token           String           @unique @default(uuid())
-  usernames       Username[]       @relation(name: "IdentityUsernames")
-  primaryUsername String           @unique
-  invites         Invite[]         @relation(name: "IdentityInvites")
-  usedInvite      Invite?          @relation(name: "IdentityUsedInvite")
-  role            Role             @default(USER)
-  isBanned        Boolean          @default(false)
-  badges          IdentityBadges[]
-  connections     Connection[]
-  createdAt       DateTime         @default(now())
+  uuid                        String           @id @unique @default(uuid())
+  email                       String?          @unique
+  password                    String?
+  verified                    Boolean          @default(false)
+  token                       String           @unique @default(uuid())
+  usernames                   Username[]       @relation(name: "IdentityUsernames")
+  primaryUsername             String           @unique
+  invites                     Invite[]         @relation(name: "IdentityInvites")
+  usedInvite                  Invite?          @relation(name: "IdentityUsedInvite")
+  role                        Role             @default(USER)
+  isBanned                    Boolean          @default(false)
+  connections                 Connection[]
+  passwordResetToken          String?
+  passwordResetTokenCreatedAt DateTime?
+  createdAt                   DateTime         @default(now())
 }
 
 model Username {
-  name      String    @id @unique
-  owner     Identity  @relation(name: "IdentityUsernames", fields: [ownerId], references: [uuid])
-  ownerId   String
-  createdAt DateTime  @default(now())
-  firstJoin DateTime?
-  lastSeen  DateTime?
-  isOnline  Boolean   @default(false)
+  name          String    @id @unique
+  owner         Identity  @relation(name: "IdentityUsernames", fields: [ownerId], references: [uuid])
+  ownerId       String
+  createdAt     DateTime  @default(now())
+  firstJoin     DateTime?
+  lastSeen      DateTime?
+  playedSeconds Int @default(0)
+  joinCount     Int @default(0)
+  isOnline      Boolean   @default(false)
+  badges        UsernameBadges[]
 }
 
 model Invite {
@@ -49,16 +53,17 @@ model Invite {
 model Badge {
   slug   String           @id @unique
   label  String
-  owners IdentityBadges[]
+  owners UsernameBadges[]
 }
 
-model IdentityBadges {
-  owner     Identity @relation(fields: [ownerId], references: [uuid])
-  ownerId   String
+model UsernameBadges {
+  owner     Username @relation(fields: [ownerName], references: [name])
+  ownerName String
   badge     Badge    @relation(fields: [badgeSlug], references: [slug])
   badgeSlug String
+  createdAt DateTime @default(now())
 
-  @@id([ownerId, badgeSlug])
+  @@id([ownerName, badgeSlug])
 }
 
 model Connection {

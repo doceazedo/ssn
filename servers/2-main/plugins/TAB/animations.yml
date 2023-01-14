@@ -1,5 +1,5 @@
 MyAnimation1:
-  change-interval: 100
+  change-interval: 101 # debug
   texts:
   - '&d-&3--------------'
   - '&3-&d-&3-------------'

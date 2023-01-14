@@ -1,2 +1,21 @@
-motd:
-  - ""
+server:
+  created: "21/03/2020"
+  version: 5
+rules:
+  - "Não prejudique a estabilidade do servidor"
+  - "Qualquer forma de doxxing é proibida"
+commands:
+  - label: help
+    help: Mostra essa lista de comandos
+  - label: rules
+    help: Mostra a lista de regras do servidor
+  - label: kill
+    help: Comete suicídio
+  - label: msg <player> <mensagem>
+    help: Envia mensagem privada para alguém
+  - label: ignore [player]
+    help: Ignora todas as mensagens de alguém
+  - label: playtime [player]
+    help: Mostra a data que entrou no servidor e tempo de jogo
+  - label: color <codigo>
+    help: Muda a cor do seu nome no chat

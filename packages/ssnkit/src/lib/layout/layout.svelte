@@ -6,9 +6,10 @@
   export let websiteBaseUrl: string;
   export let identityBaseUrl: string;
   export let currentUrl = '';
+  export let playerCount = 0;
 </script>
 
-<Header {websiteBaseUrl} {identityBaseUrl} {currentUrl} {identity} />
+<Header {websiteBaseUrl} {identityBaseUrl} {currentUrl} {identity} {playerCount} />
 <main class="section">
   <div class="container">
     <slot />

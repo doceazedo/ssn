@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { BookOpenCheck, Home, Users, Wallet } from 'lucide-svelte';
+  import { HeartHandshake, Home, ShieldCheck } from 'lucide-svelte';
   import { slide } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
   import { DiscordAltIcon } from '../icons';
@@ -17,19 +17,14 @@
       icon: Home
     },
     {
-      label: 'Doar',
+      label: 'Apoiar',
       href: `${websiteBaseUrl}/donate`,
-      icon: Wallet
+      icon: HeartHandshake
     },
     {
-      label: 'Etiqueta',
-      href: `${websiteBaseUrl}/rules`,
-      icon: BookOpenCheck
-    },
-    {
-      label: 'Comunidade',
-      href: `${websiteBaseUrl}/community`,
-      icon: Users
+      label: 'Segurança',
+      href: `${websiteBaseUrl}/safety`,
+      icon: ShieldCheck
     },
     {
       label: 'Discord',
@@ -101,7 +96,7 @@
   @import '../../../styles/vars'
   
   .navbar
-    border-bottom: 1px solid #e6e7ea
+    border-bottom: $divider
 
     &-item
       gap: .25rem

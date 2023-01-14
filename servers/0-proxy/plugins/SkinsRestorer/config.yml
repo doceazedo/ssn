@@ -213,6 +213,23 @@ Updater:
 # Enable to start receiving debug messages about api requests & more.
 Debug: false
 
+##########
+# Locale #
+##########
+
+# Translation & message options here
+
+# A language code for the language you want to use by default for messages and commands.
+# Has to a string separated by an underscore.
+Language: en_US
+
+# <!! Warning Experimental !!>
+# This enables the experimental PaperMC join event integration that allows instant skins on join.
+# It is not as tested as the default implementation, but it is smoother and should not lag the server.
+# It also fixes all resource pack skin apply issues.
+# If your players are experiencing extremely long loading screens, try disabling this.
+EnablePaperJoinListener: true
+
 # End #
 
 # Useful tools:

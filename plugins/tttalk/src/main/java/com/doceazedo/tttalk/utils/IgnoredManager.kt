@@ -18,6 +18,7 @@ object IgnoredManager {
         if (ignoredPlayers[uuid] == null) return
         config.set("players.$uuid", ignoredPlayers[uuid]!!.map { it.toString() }.toList())
         config.save(file)
+        ignoredPlayers.remove(uuid)
     }
 
     fun saveAll() {

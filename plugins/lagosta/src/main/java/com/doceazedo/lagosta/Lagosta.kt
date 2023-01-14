@@ -17,9 +17,10 @@ class Lagosta : JavaPlugin() {
 
         getCommand("kill").executor = KillCmd
 
+        Bukkit.getPluginManager().registerEvents(EntityDamageByEntity, this)
+        Bukkit.getPluginManager().registerEvents(PlayerDeath, this)
         Bukkit.getPluginManager().registerEvents(PlayerInteract, this)
         Bukkit.getPluginManager().registerSuspendingEvents(PlayerJoin, this)
-        Bukkit.getPluginManager().registerEvents(PlayerQuit, this)
         Bukkit.getPluginManager().registerSuspendingEvents(PlayerRespawn, this)
     }
 

@@ -11,7 +11,9 @@ Atreus
 
 # Spigot generated files
 cache
-world*
+world
+world_nether
+world_the_end
 banned-*.json
 help.yml
 ops.json
@@ -31,6 +33,10 @@ modules.yml
 LuckPerms
 Players
 Skins
+Archive
+languages
 locales
 lastupdate
 ignored.yml
+Citizens
+WorldEdit

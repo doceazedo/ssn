@@ -3,7 +3,7 @@ import type { Cookies } from "@sveltejs/kit";
 import { getUserByToken } from "warehouse";
 import type { IdentityWithUsernames } from "warehouse";
 
-export const loggedInOnly = async (locals: App.Locals, cookies: Cookies | null, callback: (identity?: IdentityWithUsernames) => any) => {
+export const loggedInOnly = async (locals: App.Locals, cookies: Cookies | null, callback: (identity: IdentityWithUsernames) => any) => {
   if (!locals.identity) throw error(401, 'Você não está logado');
   if (!cookies) return callback();
 

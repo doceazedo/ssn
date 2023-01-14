@@ -4,6 +4,7 @@
   import { page } from "$app/stores";
   import { DiscordIcon, Input, Separator } from 'ssnkit';
   import { discordOauthUrl } from '$lib/helpers';
+  import { Captcha } from '$lib/captcha';
 
   type Field = {
     label: string;
@@ -20,9 +21,12 @@
   export let fields: Field[] = [];
   export let links: Link[] = [];
   export let isLoading = false;
-  export let error: string;
-  export let discordLabel;
-  export let submitLabel;
+  export let error = '';
+  export let success = '';
+  export let discordLabel = '';
+  export let submitLabel: string;
+  export let hasCaptcha = false;
+  export let captchaToken = '';
 
   const redirect = $page.url.searchParams.get('redirect');
   const redirectParams = redirect ? `?redirect=${redirect}` : '';
@@ -48,12 +52,27 @@
     </div>
   {/each}
 
+  {#if hasCaptcha}
+    <div class="field">
+      <Captcha bind:token={captchaToken} />
+    </div>
+  {/if}
+
   {#if error}
     <div
       class="notification is-danger is-light"
       transition:slide={{ duration: 200, easing: quintOut }}
     >
       {error}
+    </div>
+  {/if}
+
+  {#if success}
+    <div
+      class="notification is-success is-light"
+      transition:slide={{ duration: 200, easing: quintOut }}
+    >
+      {success}
     </div>
   {/if}
 

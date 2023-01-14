@@ -55,6 +55,16 @@ export const getUserByToken = async (token: string): Promise<IdentityWithUsernam
     }
   });
 
+export const getUserByPasswordResetToken = async (passwordResetToken: string): Promise<IdentityWithUsernames | null> =>
+  await prisma.identity.findFirst({
+    where: {
+      passwordResetToken
+    },
+    include: {
+      usernames: true
+    }
+  });
+
 export const getUserByEmailOrName = async (usernameOrEmail: string) =>
   await getUserByEmail(usernameOrEmail) || await getUserByName(usernameOrEmail);
 
@@ -82,6 +92,26 @@ export const updateUserRole = async (uuid: string, role: Role): Promise<Identity
       data: {
         role
       },
+      include: {
+        usernames: true
+      }
+    });
+    return user;
+  } catch (e) {
+    return null;
+  }
+}
+
+export const updateUser = async (
+  uuid: string, 
+  data: Partial<Identity>
+): Promise<IdentityWithUsernames | null> =>{
+  try {
+    const user = await prisma.identity.update({
+      where: {
+        uuid
+      },
+      data,
       include: {
         usernames: true
       }

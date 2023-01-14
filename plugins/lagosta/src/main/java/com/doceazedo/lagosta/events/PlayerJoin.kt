@@ -8,8 +8,6 @@ import com.doceazedo.lagosta.utils.Teleport.teleportToRandomLocation
 object PlayerJoin: Listener {
     @EventHandler
     suspend fun onPlayerJoin(e: PlayerJoinEvent) {
-        e.joinMessage = ""
-
         if (e.player.hasPlayedBefore()) return
         teleportToRandomLocation(e.player)
     }
