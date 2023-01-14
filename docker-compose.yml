@@ -111,6 +111,14 @@ services:
       PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
       LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
 
+  melonbot:
+    build:
+      context: ./apps/melonbot
+    environment:
+      PUBLIC_DISCORD_CLIENT_ID: ${PUBLIC_DISCORD_CLIENT_ID}
+      DISCORD_CLIENT_SECRET: ${DISCORD_CLIENT_SECRET}
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
+
   minecraft-proxy:
     image: amazoncorretto:17
     command: java -Xms512M -Xmx1024M -jar BungeeCord.jar

@@ -1,0 +1,6 @@
+import { BaseInteraction, SlashCommandBuilder } from 'discord.js';
+
+export type Command = {
+  data: SlashCommandBuilder;
+  execute: (interaction: BaseInteraction) => void;
+}
