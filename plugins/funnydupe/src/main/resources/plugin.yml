@@ -1,0 +1,3 @@
+name: FunnyDupe
+version: '${project.version}'
+main: com.doceazedo.funnydupe.FunnyDupe
