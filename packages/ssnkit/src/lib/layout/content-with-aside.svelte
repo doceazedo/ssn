@@ -1,21 +1,13 @@
 <script lang="ts">
-  import { ContentWithAside, Sidebar } from '.';
-  import type { JavaStatusResponse } from 'minecraft-server-util';
-
-  export let status: JavaStatusResponse | null = null;
+  export let reverse = false;
 </script>
 
-<ContentWithAside>
-  <slot slot="main" />
-  <svelte:fragment slot="aside">
-    <Sidebar {status} />
-  </svelte:fragment>
-</ContentWithAside>
-
-<div class="content-with-sidebar">
+<div class="content-with-sidebar" class:is-reverse={reverse}>
   <main class="main">
+    <slot name="main" />
   </main>
   <aside class="sidebar">
+    <slot name="aside" />
   </aside>
 </div>
 
@@ -23,6 +15,9 @@
   .content-with-sidebar
     display: flex
     gap: 1.5rem
+
+    &.is-reverse
+      flex-direction: row-reverse
 
     .main,
     .sidebar

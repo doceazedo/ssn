@@ -17,6 +17,7 @@
     "build:antiburrow": "(cd ./plugins/antiburrow && mvn clean && mvn package && cp ./target/AntiBurrow-0.0.1.jar ../../servers/2-main/plugins)",
     "build:nowitherplease": "(cd ./plugins/nowitherplease && mvn clean && mvn package && cp ./target/NoWitherPlease-0.0.1.jar ../../servers/2-main/plugins)",
     "build:funnydupe": "(cd ./plugins/funnydupe && mvn clean && mvn package && cp ./target/FunnyDupe-0.0.1.jar ../../servers/2-main/plugins)",
+    "build:commander": "(cd ./plugins/commander && mvn clean && mvn package && cp ./target/Commander-0.0.1.jar ../../servers/2-main/plugins)",
     "start": "docker-compose up --build",
     "start:iam": "docker-compose up --build gateway warehouse warehouse-migrate identity-web",
     "start:website": "docker-compose up --build gateway warehouse warehouse-migrate identity-web website",

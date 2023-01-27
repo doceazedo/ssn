@@ -1,3 +1,4 @@
+export { default as ContentWithAside } from './content-with-aside.svelte'
 export { default as ContentWithSidebar } from './content-with-sidebar.svelte'
 export { default as Footer } from './footer.svelte'
 export { default as Header } from './header.svelte'
