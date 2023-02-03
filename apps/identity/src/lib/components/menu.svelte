@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LayoutDashboard, Link, Mails, Server, Users } from 'ssnkit/icons';
+  import { LayoutDashboard, Link, Mails, Paintbrush, Server, Users } from 'ssnkit/icons';
   import { page } from '$app/stores';
   import { IDENTITY } from '$lib/auth';
 
@@ -18,6 +18,12 @@
           href: '/dashboard/usernames',
           active: $page.url.pathname === '/dashboard/usernames',
           icon: Users,
+        },
+        {
+          label: 'Meu perfil',
+          href: '/dashboard/profile',
+          active: $page.url.pathname === '/dashboard/profile',
+          icon: Paintbrush,
         },
         {
           label: 'Conexões',

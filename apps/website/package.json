@@ -15,6 +15,7 @@
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/adapter-node": "^1.0.0-next.96",
 		"@sveltejs/kit": "next",
+		"@types/dompurify": "^2.4.0",
 		"@types/geoip-lite": "^1.4.1",
 		"@types/glidejs__glide": "^3.6.1",
 		"@typescript-eslint/eslint-plugin": "^5.27.0",
@@ -38,7 +39,9 @@
 		"@glidejs/glide": "^3.6.0",
 		"@prisma/client": "^4.4.0",
 		"dayjs": "^1.11.7",
+		"dompurify": "^2.4.3",
 		"minecraft-server-util": "^5.3.1",
-		"skinview3d": "^3.0.0-alpha.1"
+		"skinview3d": "^3.0.0-alpha.1",
+		"svelte-markdown": "^0.2.3"
 	}
 }

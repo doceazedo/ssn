@@ -9,7 +9,7 @@ export const toggleProfileLike = async (profileId: string): Promise<ProfileLike 
     });
     const data = await resp.json();
     if (!resp.ok) throw Error(data.message || 'Erro desconhecido');
-    return data;
+    return data?.like || null;
   } catch (e: any) {
     console.error(e);
     throw Error(e.message || 'Erro desconhecido');

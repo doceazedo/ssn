@@ -1,5 +1,7 @@
 <script lang="ts">
   import dayjs from 'dayjs';
+  import SvelteMarkdown from 'svelte-markdown';
+  import DOMPurify from 'dompurify';
   import { Card, ContentWithAside, PageTitle } from 'ssnkit';
   import watermelonIconImg from 'ssnkit/assets/img/watermelon-icon.png';
 	import { Heart } from 'ssnkit/icons';
@@ -97,6 +99,12 @@
 
     isLoadingLike = false;
   }
+
+  let cleanAboutMe: string;
+  onMount(() => {
+    if (!browser) return;
+    cleanAboutMe = DOMPurify.sanitize(data.aboutMe);
+  })
 </script>
 
 <svelte:head>
@@ -160,7 +168,13 @@
       {/each}
     </div>
     <Card title="Sobre mim">
-      {data.aboutMe || `Ainda não conhecemos ${data.user.name} muito bem...`}
+      <div class="content">
+        {#if data.aboutMe}
+          <SvelteMarkdown source={cleanAboutMe} />
+        {:else}
+          Ainda não conhecemos {data.user.name} muito bem...
+        {/if}
+      </div>
     </Card>
     {#if data.socials.length}
       <Card title="Redes sociais">

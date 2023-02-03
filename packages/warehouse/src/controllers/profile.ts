@@ -1,6 +1,13 @@
+import { Profile } from "@prisma/client";
 import { getUser, prisma } from ".";
 
-export const getProfile = async (uuid: string) =>
+export type ProfileWithLikeCount = Profile & {
+  _count: {
+      likes: number;
+  };
+}
+
+export const getProfile = async (uuid: string): Promise<ProfileWithLikeCount | null> =>
   await prisma.profile.findUnique({
     where: {
       uuid
@@ -14,7 +21,7 @@ export const getProfile = async (uuid: string) =>
     }
   });
 
-export const getProfileByUsername = async (name: string) => {
+export const getProfileByUsername = async (name: string): Promise<ProfileWithLikeCount | null> => {
   const username = await prisma.username.findUnique({
     where: {
       name
@@ -38,6 +45,18 @@ export const getProfileByUsername = async (name: string) => {
           likes: true
         }
       }
+    }
+  });
+}
+
+// not used because it doesnt upsert
+export const getUserProfiles = async (ownerId: string) => {
+  const owner = await getUser(ownerId);
+  if (!owner) return [];
+
+  return await prisma.profile.findMany({
+    where: {
+      OR: owner.usernames.map(user => ({ ownerName: user.name }))
     }
   });
 }
@@ -70,3 +89,11 @@ export const toggleProfileLike = async (likerId: string, profileId: string) => {
     }
   })
 }
+
+export const updateProfile = async (uuid: string, data: Partial<Profile>) =>
+  await prisma.profile.update({
+    where: {
+      uuid
+    },
+    data
+  });
