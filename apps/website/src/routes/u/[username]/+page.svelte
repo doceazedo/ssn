@@ -2,12 +2,12 @@
   import dayjs from 'dayjs';
   import { Card, ContentWithAside, PageTitle } from 'ssnkit';
   import watermelonIconImg from 'ssnkit/assets/img/watermelon-icon.png';
-  import type { PageServerData } from './$types';
 	import { Heart } from 'ssnkit/icons';
   import * as skinview3d from 'skinview3d';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
-  
+  import { toggleProfileLike } from '$lib/profile';
+  import type { PageServerData } from './$types';
 
   export let data: PageServerData;
 
@@ -17,7 +17,8 @@
   const avatarImage = `https://mc-heads.net/avatar/${data.user.name}/256`;
 
   let playermodel: HTMLCanvasElement;
-  let liked = false;
+  let likes: number = data.likes;
+  let hasLiked: boolean = data.hasLiked;
 
   onMount(() => {
     if (!browser) return;
@@ -38,7 +39,10 @@
   const getFullDate = (date: Date) =>
     dayjs(date).format('DD/MM/YYYY');
 
-  const formatDuration = (seconds: number) => {
+  const formatJoinCount = (count = 0) =>
+    `${count} vez${count == 1 ? '' : 'es'}`
+
+  const formatDuration = (seconds = 0) => {
     if (seconds < 60) return `${seconds} segundos`;
 
     const hours = seconds / 3600;
@@ -66,9 +70,33 @@
     },
     {
       label: 'Entrou no servidor',
-      value: `${data.user.joinCount} vezes`
+      value: formatJoinCount(data.user.joinCount)
     },
-  ]
+  ];
+
+  const toggleLikeClientSidePrediction = () => {
+    likes = hasLiked ? --likes : ++likes;
+    hasLiked = !hasLiked;
+  }
+
+  let isLoadingLike = false;
+  const toggleLike = async () => {
+    if (isLoadingLike) return;
+    isLoadingLike = true;
+    toggleLikeClientSidePrediction();
+
+    try {
+      await toggleProfileLike(data.profileId);
+    } catch (error) {
+      // fix client side prediction
+      toggleLikeClientSidePrediction();
+
+      console.error('Could not like the profile', data.profileId);
+      console.error(error);
+    }
+
+    isLoadingLike = false;
+  }
 </script>
 
 <svelte:head>
@@ -91,8 +119,8 @@
 
 <PageTitle title={data.user.name} class="mb-6">
   <div class="like">
-    {liked ? 1 : 0}
-    <button class="like-button" class:is-liked={liked} on:click={() => liked = !liked}>
+    {likes}
+    <button class="like-button" class:is-liked={hasLiked} disabled={data.isOwner || isLoadingLike} on:click={toggleLike}>
       <Heart size={16} />
     </button>
   </div>
@@ -132,9 +160,9 @@
       {/each}
     </div>
     <Card title="Sobre mim">
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Soluta facere dolorem enim sit alias, sint consectetur eius culpa maiores, cum saepe, deleniti at consequatur porro architecto sunt ipsum ducimus. Dicta!
+      {data.aboutMe || `Ainda não conhecemos ${data.user.name} muito bem...`}
     </Card>
-    {#if data.socials}
+    {#if data.socials.length}
       <Card title="Redes sociais">
         <div class="buttons">
           {#each data.socials as social}
@@ -241,10 +269,13 @@
       color: #4a4a4a
       border: none
       border-radius: 50%
-      cursor: pointer
 
-      &:hover
+      &:not(:disabled):hover
         background-color: #e6e7ea
+        cursor: pointer
+
+      &:disabled:hover
+        cursor: not-allowed
 
       &.is-liked
         color: #f14668
@@ -252,7 +283,7 @@
         :global(svg)
           fill: #f14668
           
-        &:hover
+        &:not(:disabled):hover
           background-color: rgba(#f14668, .2)
 
   .playermodel

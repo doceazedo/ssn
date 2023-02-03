@@ -1,9 +1,11 @@
-import { getUserBadges, getUserByName, getUserConnections, getUsername } from 'warehouse';
+import { getProfileByUsername, getProfileLike, getUserBadges, getUserByName, getUserConnections, getUsername } from 'warehouse';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, locals }) => {
   const { username } = params;
+  const { identity } = locals;
+
   if (!username) throw error(404);
 
   const user = await getUsername(username);
@@ -12,22 +14,39 @@ export const load: PageServerLoad = async ({ params }) => {
   const badges = await getUserBadges(user.name);
   const badgeDetails = badges.map(badge => badge.badge);
 
-  const identity = await getUserByName(username);
-  if (!identity) throw error(404);
+  const owner = await getUserByName(username);
+  if (!owner) throw error(404);
 
-  // TODO: check if profile allows showing alts
-  const alts = identity.usernames
-    .map(username => username.name)
-    .filter(username => username != user.name);
+  const profile = await getProfileByUsername(user.name);
+  if (!profile) throw error(404);
 
-  // TODO: get socials from profile (and get actual relevant data)
-  const connections = await getUserConnections(identity.uuid);
+  let hasLiked = false;
+  let isOwner = false;
+  if (identity) {
+    const profileLike = await getProfileLike(identity.uuid, profile.uuid);
+    hasLiked = !!profileLike;
+    isOwner = identity.usernames.includes(user.name);
+  }
+
+  const alts = profile.showAlts 
+    ? owner.usernames
+        .map(username => username.name)
+        .filter(username => username != user.name)
+    : [];
+
+  // TODO: get get actual relevant data from socials
+  const connections = await getUserConnections(owner.uuid, true);
   const socials = connections.map(connection => connection.service);
 
   return {
+    profileId: profile.uuid,
     user,
     badges: badgeDetails,
     alts,
-    socials
+    socials,
+    aboutMe: profile.aboutMe,
+    likes: profile._count.likes,
+    hasLiked,
+    isOwner
   };
 }

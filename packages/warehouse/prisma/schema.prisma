@@ -26,6 +26,7 @@ model Identity {
   connections                 Connection[]
   passwordResetToken          String?
   passwordResetTokenCreatedAt DateTime?
+  likedProfiles               ProfileLike[]
   createdAt                   DateTime         @default(now())
 }
 
@@ -40,6 +41,7 @@ model Username {
   joinCount     Int @default(0)
   isOnline      Boolean   @default(false)
   badges        UsernameBadges[]
+  profile       Profile?
 }
 
 model Invite {
@@ -66,6 +68,23 @@ model UsernameBadges {
   @@id([ownerName, badgeSlug])
 }
 
+model Profile {
+  uuid      String   @id @unique @default(uuid())
+  owner     Username @relation(fields: [ownerName], references: [name])
+  ownerName String   @unique
+  aboutMe   String?
+  showAlts  Boolean  @default(false)
+  likes     ProfileLike[]
+}
+
+model ProfileLike {
+  id        Int      @id @default(autoincrement())
+  liker     Identity @relation(fields: [likerId], references: [uuid])
+  likerId   String
+  profile   Profile  @relation(fields: [profileId], references: [uuid])
+  profileId String
+}
+
 model Connection {
   id           String   @id @unique
   service      Service
@@ -74,6 +93,7 @@ model Connection {
   refreshToken String
   scope        String
   tokenType    String
+  isPublic     Boolean @default(false)
   owner        Identity @relation(fields: [ownerId], references: [uuid])
   ownerId      String
 }

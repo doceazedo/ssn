@@ -8,10 +8,11 @@ export const getConnection = async (id: string): Promise<Connection | null> =>
     }
   });
 
-export const getUserConnections = async (ownerId: string): Promise<Connection[]> =>
+export const getUserConnections = async (ownerId: string, publicOnly = false): Promise<Connection[]> =>
   await prisma.connection.findMany({
     where: {
-      ownerId
+      ownerId,
+      isPublic: publicOnly || undefined
     }
   });
 
