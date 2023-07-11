@@ -153,6 +153,7 @@ export const getPublicDiscordProfile = async (
 	connection: Connection
 ): Promise<ServiceProfile | null> => {
 	const profile = await getDiscordProfile(connection);
+	console.log({ profile });
 	if (!profile) return null;
 	return {
 		username: profile.global_name,
