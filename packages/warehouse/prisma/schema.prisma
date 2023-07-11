@@ -69,12 +69,14 @@ model UsernameBadges {
 }
 
 model Profile {
-  uuid      String   @id @unique @default(uuid())
-  owner     Username @relation(fields: [ownerName], references: [name])
-  ownerName String   @unique
-  aboutMe   String?
-  showAlts  Boolean  @default(false)
-  likes     ProfileLike[]
+  uuid        String   @id @unique @default(uuid())
+  owner       Username @relation(fields: [ownerName], references: [name])
+  ownerName   String   @unique
+  aboutMe     String?
+  showAlts    Boolean  @default(false)
+  showSocials Boolean  @default(false)
+  showOnline  Boolean  @default(false)
+  likes       ProfileLike[]
 }
 
 model ProfileLike {

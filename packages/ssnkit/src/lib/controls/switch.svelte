@@ -4,7 +4,7 @@
 
 <div class="control">
   <label class="checkbox">
-    <input type="checkbox" bind:checked>
+    <input type="checkbox" bind:checked on:change />
     <slot />
   </label>
 </div>
