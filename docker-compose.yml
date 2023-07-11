@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   gateway:
@@ -12,11 +12,11 @@ services:
 
   identity-web:
     labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.identity.entrypoints=web'
-      - 'traefik.http.routers.identity.rule=Host(`id.${PUBLIC_BASE_DOMAIN}`)'
+      - "traefik.enable=true"
+      - "traefik.http.routers.identity.entrypoints=web"
+      - "traefik.http.routers.identity.rule=Host(`id.${PUBLIC_BASE_DOMAIN}`)"
     ports:
-      - '3000:3000'
+      - "3000:3000"
     build:
       context: .
       dockerfile: ./apps/identity/Dockerfile
@@ -48,7 +48,7 @@ services:
     volumes:
       - ${MNT_WAREHOUSE}:/var/lib/postgresql/data
     ports:
-      - '5432:5432'
+      - "5432:5432"
 
   warehouse-migrate:
     build:
@@ -61,11 +61,11 @@ services:
 
   gatekeeper-web:
     labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.gatekeeper.entrypoints=web'
-      - 'traefik.http.routers.gatekeeper.rule=Host(`gk.${PUBLIC_BASE_DOMAIN}`)'
+      - "traefik.enable=true"
+      - "traefik.http.routers.gatekeeper.entrypoints=web"
+      - "traefik.http.routers.gatekeeper.rule=Host(`gk.${PUBLIC_BASE_DOMAIN}`)"
     ports:
-      - '3001:3000'
+      - "3001:3000"
     build:
       context: .
       dockerfile: ./apps/gatekeeper/Dockerfile
@@ -84,11 +84,11 @@ services:
 
   website:
     labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.website.entrypoints=web'
-      - 'traefik.http.routers.website.rule=Host(`${PUBLIC_BASE_DOMAIN}`)'
+      - "traefik.enable=true"
+      - "traefik.http.routers.website.entrypoints=web"
+      - "traefik.http.routers.website.rule=Host(`${PUBLIC_BASE_DOMAIN}`)"
     ports:
-      - '3002:3000'
+      - "3002:3000"
     build:
       context: .
       dockerfile: ./apps/website/Dockerfile
@@ -98,11 +98,11 @@ services:
 
   rcon:
     labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.rcon.entrypoints=web'
-      - 'traefik.http.routers.rcon.rule=Host(`rcon.${PUBLIC_BASE_DOMAIN}`)'
+      - "traefik.enable=true"
+      - "traefik.http.routers.rcon.entrypoints=web"
+      - "traefik.http.routers.rcon.rule=Host(`rcon.${PUBLIC_BASE_DOMAIN}`)"
     ports:
-      - '443:443'
+      - "443:443"
     build:
       context: .
       dockerfile: ./apps/rcon/Dockerfile
@@ -167,15 +167,6 @@ services:
       LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
       CATRACA_IDENTITY_TOKEN: ${CATRACA_IDENTITY_TOKEN}
     restart: on-failure
-
-  static:
-    image: flashspys/nginx-static
-    labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.static.entrypoints=web'
-      - 'traefik.http.routers.static.rule=Host(`static.${PUBLIC_BASE_DOMAIN}`)'
-    volumes:
-      - ./static:/static
 
 volumes:
   warehouse:
