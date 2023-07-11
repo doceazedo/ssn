@@ -95,6 +95,7 @@ services:
     environment:
       PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
       PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
+      LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
 
   rcon:
     labels:
