@@ -103,6 +103,7 @@ export const refreshAccessToken = async (
 		const data = await resp.json();
 		return !data.error ? data : null;
 	} catch (e) {
+		// FIXME: if it could not refresh, user should be logged out. their token is probably invalid at this point
 		return null;
 	}
 };

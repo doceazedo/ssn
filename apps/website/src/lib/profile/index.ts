@@ -1,4 +1,3 @@
-import { env } from '$env/dynamic/public';
 import type { ProfileLike, Service } from '@prisma/client';
 import type { ServiceProfile } from 'ssnkit/utils/connections';
 
@@ -7,7 +6,6 @@ export type ProfileSocials = ({
 } & ServiceProfile)[];
 
 const baseUrl = '/api/v1';
-const identityBaseUrl = `${env.PUBLIC_IDENTITY_URL}/api/v1`;
 
 export const toggleProfileLike = async (profileId: string): Promise<ProfileLike | null> => {
 	try {
@@ -25,7 +23,7 @@ export const toggleProfileLike = async (profileId: string): Promise<ProfileLike 
 
 export const getProfileSocials = async (username: string): Promise<ProfileSocials> => {
 	try {
-		const resp = await fetch(`${identityBaseUrl}/username/${username}/profile/socials`);
+		const resp = await fetch(`${baseUrl}/profile/${username}/socials`);
 		const data = await resp.json();
 		if (!resp.ok) throw Error(data.message || 'Erro desconhecido');
 		return data?.socials || [];
