@@ -126,11 +126,15 @@ export const getCurrentAuthorization = async (
 export const getDiscordProfile = async (
 	connection: Connection
 ): Promise<ProfileResponse | null> => {
+	console.log({ connection });
 	if (connection.service != 'DISCORD') return null;
 
 	let accessToken = connection.accessToken;
+	console.log({ isConnectionExpired: isConnectionExpired(connection) });
 	if (isConnectionExpired(connection)) {
+		console.log('it is expired');
 		const tokens = await refreshAccessToken(connection.refreshToken);
+		console.log({ tokens });
 		if (!tokens) return null;
 		accessToken = tokens.access_token;
 		await updateConnection(connection.id, tokens);
@@ -143,8 +147,11 @@ export const getDiscordProfile = async (
 			}
 		});
 		const data = await resp.json();
+		console.log({ data });
 		return !data.error ? data : null;
 	} catch (e) {
+		console.log('/v10/users/@me fail');
+		console.log(e);
 		return null;
 	}
 };
