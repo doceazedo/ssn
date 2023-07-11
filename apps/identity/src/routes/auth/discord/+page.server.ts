@@ -21,7 +21,13 @@ export const load: PageServerLoad = async ({ url, cookies }) => {
 	let identity = null;
 	const discordConnection = await getConnection(authorization.user.id);
 	if (discordConnection) {
-		await updateConnection(discordConnection.id, tokens);
+		await updateConnection(discordConnection.id, {
+			accessToken: tokens.access_token,
+			tokenType: tokens.token_type,
+			expiresAt: new Date(tokens.expires_in),
+			refreshToken: tokens.refresh_token,
+			scope: tokens.scope
+		});
 		identity = await getUser(discordConnection.ownerId);
 		if (identity) setAuthCookies(cookies, identity.token);
 	}

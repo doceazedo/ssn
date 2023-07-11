@@ -141,7 +141,13 @@ export const getDiscordProfile = async (
 		console.log({ tokens });
 		if (!tokens) return null;
 		accessToken = tokens.access_token;
-		await updateConnection(connection.id, tokens);
+		await updateConnection(connection.id, {
+			accessToken: tokens.access_token,
+			tokenType: tokens.token_type,
+			expiresAt: new Date(tokens.expires_in),
+			refreshToken: tokens.refresh_token,
+			scope: tokens.scope
+		});
 	}
 
 	try {
