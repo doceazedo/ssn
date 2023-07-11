@@ -92,6 +92,8 @@ export const refreshAccessToken = async (
 	body.append('grant_type', 'refresh_token');
 	body.append('refresh_token', refreshToken);
 
+	console.log({ body });
+
 	try {
 		const resp = await fetch(`${discordBaseUrl}/oauth2/token`, {
 			method: 'POST',
@@ -103,6 +105,8 @@ export const refreshAccessToken = async (
 		const data = await resp.json();
 		return !data.error ? data : null;
 	} catch (e) {
+		console.log('refresh fail');
+		console.log(e);
 		return null;
 	}
 };
