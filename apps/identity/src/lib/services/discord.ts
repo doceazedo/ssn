@@ -92,8 +92,6 @@ export const refreshAccessToken = async (
 	body.append('grant_type', 'refresh_token');
 	body.append('refresh_token', refreshToken);
 
-	console.log({ body });
-
 	try {
 		const resp = await fetch(`${discordBaseUrl}/oauth2/token`, {
 			method: 'POST',
@@ -105,8 +103,6 @@ export const refreshAccessToken = async (
 		const data = await resp.json();
 		return !data.error ? data : null;
 	} catch (e) {
-		console.log('refresh fail');
-		console.log(e);
 		return null;
 	}
 };
@@ -130,15 +126,11 @@ export const getCurrentAuthorization = async (
 export const getDiscordProfile = async (
 	connection: Connection
 ): Promise<ProfileResponse | null> => {
-	console.log({ connection });
 	if (connection.service != 'DISCORD') return null;
 
 	let accessToken = connection.accessToken;
-	console.log({ isConnectionExpired: isConnectionExpired(connection) });
 	if (isConnectionExpired(connection)) {
-		console.log('it is expired');
 		const tokens = await refreshAccessToken(connection.refreshToken);
-		console.log({ tokens });
 		if (!tokens) return null;
 		accessToken = tokens.access_token;
 		await updateConnection(connection.id, {
@@ -157,11 +149,8 @@ export const getDiscordProfile = async (
 			}
 		});
 		const data = await resp.json();
-		console.log({ data });
 		return !data.error ? data : null;
 	} catch (e) {
-		console.log('/v10/users/@me fail');
-		console.log(e);
 		return null;
 	}
 };
@@ -170,7 +159,6 @@ export const getPublicDiscordProfile = async (
 	connection: Connection
 ): Promise<ServiceProfile | null> => {
 	const profile = await getDiscordProfile(connection);
-	console.log({ profile });
 	if (!profile) return null;
 	return {
 		username: profile.global_name,
