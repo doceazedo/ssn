@@ -21,10 +21,6 @@ export const GET: RequestHandler = async ({ params, setHeaders }) => {
 		})
 	);
 
-	setHeaders({
-		'Access-Control-Allow-Origin': '*'
-	});
-
 	return json({
 		socials
 	});
