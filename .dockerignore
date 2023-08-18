@@ -1,3 +1,4 @@
 servers
 plugins
 node_modules
+*.zip
