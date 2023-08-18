@@ -181,5 +181,7 @@ world-settings:
     zombie-aggressive-towards-villager: true
     nerf-spawner-mobs: false
     max-entity-collisions: 2
+  worldeditregentempworld:
+    verbose: false
 players:
   disable-saving: false

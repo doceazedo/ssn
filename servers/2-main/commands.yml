@@ -16,3 +16,5 @@ unrestricted-advancements: false
 aliases:
   icanhasbukkit:
   - version $1-
+  help:
+  - tttalk:help
