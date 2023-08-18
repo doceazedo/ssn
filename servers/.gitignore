@@ -23,6 +23,8 @@ version_history.json
 whitelist.json
 crash-reports
 tmp
+versions
+libraries
 
 # Bungeecord generated files
 locations.yml

@@ -13,14 +13,14 @@ example_group:
   footer:
     - "applied to a group"
 
- # default settings for all groups, all groups will take properties from this section unless player's primary group overrides a specific setting
+  # default settings for all groups, all groups will take properties from this section unless player's primary group overrides a specific setting
 _DEFAULT_:
   tabprefix: "%vault-prefix%"
   tagprefix: "%vault-prefix%"
   customtabname: "%essentials_nickname%"
   customtagname: "%essentials_nickname%" # don't forget to enable unlimited nametag mode to make this one work
-  tabsuffix: "%vault-suffix%%afk%"
-  tagsuffix: "%vault-suffix%%afk%"
+  tabsuffix: "%vault-suffix%"
+  tagsuffix: "%vault-suffix%"
 
 per-world:
   world1:
