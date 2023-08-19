@@ -1,6 +1,7 @@
 package com.doceazedo.funnydupe.events
 
 import org.bukkit.Bukkit
+import org.bukkit.Material
 import org.bukkit.entity.AbstractHorse
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
@@ -21,13 +22,17 @@ object EntityDeath : Listener {
 
         val donkey = e.entity as AbstractHorse
         val donkeyInventory = donkey.inventory.contents
+        val world = donkey.world
 
         if (donkeyInventory.isEmpty()) return
-        if (donkey.world.time < 18000) return
+        if (world.time < 18000) return
 
         val nearbyPlayers = donkey.getNearbyEntities(96.0, 96.0, 96.0).filterIsInstance<Player>()
         if (nearbyPlayers.size > 1) return
 
-        e.drops.addAll(donkeyInventory)
+        donkeyInventory
+            .filterNotNull()
+            .filter{ !(it.type == Material.CHEST && it.amount == 1) }
+            .forEach{ world.dropItemNaturally(donkey.location, it) }
     }
 }
