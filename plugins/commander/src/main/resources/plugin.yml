@@ -1,0 +1,6 @@
+name: Commander
+version: '${project.version}'
+main: com.doceazedo.commander.Commander
+api-version: '1.19'
+libraries:
+  - org.jetbrains.kotlin:kotlin-stdlib:${kotlin.version}
