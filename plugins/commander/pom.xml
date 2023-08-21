@@ -16,6 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>1.9.0</kotlin.version>
         <ktor.version>2.3.3</ktor.version>
+        <mccoroutine.version>2.13.0</mccoroutine.version>
     </properties>
 
     <build>
@@ -140,8 +141,23 @@
         </dependency>
         <dependency>
             <groupId>io.ktor</groupId>
-            <artifactId>ktor-serialization-kotlinx-json-jvm</artifactId>
+            <artifactId>ktor-serialization-gson-jvm</artifactId>
             <version>${ktor.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.shynixn.mccoroutine</groupId>
+            <artifactId>mccoroutine-bukkit-api</artifactId>
+            <version>${mccoroutine.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.shynixn.mccoroutine</groupId>
+            <artifactId>mccoroutine-bukkit-core</artifactId>
+            <version>${mccoroutine.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-core</artifactId>
+            <version>1.7.3</version>
         </dependency>
     </dependencies>
 </project>
