@@ -104,7 +104,7 @@ checks:
       active: false
       actions: cancel vl>10 log:noswing:0:5:i cancel
     reach:
-      active: false
+      active: true
       actions: cancel
     wrongblock:
       active: true
@@ -125,8 +125,8 @@ checks:
       actions: cancel log:breach:5:6:i
     speed:
       active: true
-      interval: 200
-      limit: 50
+      interval: 750
+      limit: 6
       actions: cancel
     visible:
       active: false
@@ -134,7 +134,7 @@ checks:
   blockplace:
     active: true
     against:
-      active: false
+      active: true
       actions: cancel log:against:1:5:i vl>10 cancel log:against:0:2:if cmdc:kickagainst:0:10
     autosign:
       active: default
@@ -144,7 +144,7 @@ checks:
       active: true
       actions: cancel
     fastplace:
-      active: false
+      active: true
       limit: 15
       shortterm:
         ticks: 10
