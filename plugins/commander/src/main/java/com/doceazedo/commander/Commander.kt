@@ -18,10 +18,19 @@ import java.text.DateFormat
 
 
 class Commander : JavaPlugin() {
+    companion object {
+        lateinit var instance: Commander
+    }
+
     override fun onEnable() {
+        instance = this
+
+        server.messenger.registerOutgoingPluginChannel(this, "BungeeCord")
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, TPS, 100L, 1L)
+
         launch {
             withContext(Dispatchers.IO) {
-                embeddedServer(Netty, port = 25573) {
+                embeddedServer(Netty, port = 25574) {
                     install(ContentNegotiation) {
                         gson {
                             setDateFormat(DateFormat.LONG)
@@ -34,17 +43,18 @@ class Commander : JavaPlugin() {
                             call.respondText("Hello, world!")
                         }
 
-                        route("/api") {
-                            route("/public") {
-                                statusRoute()
-                            }
+                        route("/api/public") {
+                            statusRoute()
+                        }
+
+                        route("/api/private") {
+                            skinRoute()
+                            execRoute()
                         }
                     }
                 }.start(wait = true)
             }
         }
-
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, TPS, 100L, 1L)
     }
 
     override fun onDisable() {

@@ -163,10 +163,11 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.minecraft-main.entrypoints=web"
       - "traefik.http.routers.minecraft-main.rule=Host(`cmd.${PUBLIC_BASE_DOMAIN}`)"
-      - "traefik.http.services.minecraft-main.loadbalancer.server.port=25573"
+      - "traefik.http.services.minecraft-main.loadbalancer.server.port=25574"
     ports:
-      - "25562:25562"
-      - "25573:25573"
+      - "25562:25562" # minecraft
+      - "25573:25573" # rcon
+      - "25574:25574" # commander
     working_dir: /data
     volumes:
       - ./servers/2-main:/data
