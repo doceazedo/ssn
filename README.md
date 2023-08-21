@@ -18,12 +18,14 @@ This monorepo uses [npm](https://www.npmjs.com/) as a package manager. It includ
 ## 📦 Dependencies
 
 Make sure you have **Node.js v18** installed with **npm v8** or up. You can easily change your Node version using [nvm](https://github.com/nvm-sh/nvm):
+
 ```bash
 nvm install 18
 node --version
 ```
 
 For plugin development, you will need **JDK 17** and **Maven**. To install them on macOS using [Homebrew](https://brew.sh), run:
+
 ```bash
 brew install openjdk@17 maven
 ```
@@ -33,22 +35,26 @@ Finally, you will also need to have **Docker** and **Docker Compose** installed.
 ## ⚡️ Get started
 
 First off, install the dependencies by running the following command:
+
 ```bash
 npm install
 ```
 
 Then, you will need to setup your environment variables. You can do this by copying the example file:
+
 ```bash
 cp .env.example .env
 ```
 
 Now, open your `/etc/hosts` file and add these lines to the end:
+
 ```
-127.0.0.1 ssn.local id.ssn.local gk.ssn.local rcon.ssn.local
-::1       ssn.local id.ssn.local gk.ssn.local rcon.ssn.local
+127.0.0.1 ssn.local id.ssn.local gk.ssn.local rcon.ssn.local cmd.ssn.local
+::1       ssn.local id.ssn.local gk.ssn.local rcon.ssn.local cmd.ssn.local
 ```
 
 Start the containers by running this command:
+
 ```bash
 npm run start
 ```
@@ -58,6 +64,7 @@ You should now be able to join the Minecraft server on **localhost:25565** and o
 ## 🧰 Build
 
 To build a plugin and copy the artifact to the server, you can run this command:
+
 ```bash
 # npm run build:plugin-name
 npm run build:catraca
