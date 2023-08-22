@@ -3,6 +3,7 @@ package com.doceazedo.tttalk.events
 import com.doceazedo.tttalk.Tttalk
 import com.doceazedo.tttalk.utils.ChatColorManager
 import com.doceazedo.tttalk.utils.IgnoredManager
+import com.viaversion.viaversion.api.Via
 import org.bukkit.Bukkit
 import org.bukkit.Sound
 import org.bukkit.event.EventHandler
@@ -40,6 +41,21 @@ object PlayerJoin : Listener {
         e.player.sendMessage("§aO mundo tem §e$worldAgeDays dias §ade vida e pesa §e$worldSize§a")
         e.player.sendMessage("§aO servidor foi criado em §e$serverCreatedAt §ae está em sua §e${serverVersion}ª §aversão")
         e.player.sendMessage(" ")
+
+
+        // https://wiki.vg/Protocol_version_numbers
+        val api = Via.getAPI()
+        val version = api.getPlayerVersion(e.player)
+        if (version > 762) { // > 1.9.4
+            e.player.sendMessage("§6§l[§e§l!§6§l] §e§lVocê está usando uma versão acima da §6§l1.19.4§e§l. Em caso de problemas, recomendamos usar a §6§l1.19.4§e§l.")
+            e.player.sendMessage(" ")
+        } else if (version < 755) { // < 1.17
+            e.player.sendMessage("§4§l[§c§l!§4§l] §c§lVocê está usando uma versão abaixo da §4§l1.17§c§l. Você não poderá ver abaixo do nível 0. Se possível, use a versão §4§l1.19.4§c§l.")
+            e.player.sendMessage(" ")
+        } else if (version < 759) { // < 1.19
+            e.player.sendMessage("§6§l[§e§l!§6§l] §e§lVocê está usando uma versão abaixo da §6§l1.19.4§e§l. Em caso de problemas, recomendamos usar a §6§l1.19.4§e§l.")
+            e.player.sendMessage(" ")
+        }
 
         e.player.playSound(e.player.location, Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f)
     }

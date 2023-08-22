@@ -1,6 +1,8 @@
 name: Tttalk
 version: '${project.version}'
 main: com.doceazedo.tttalk.Tttalk
+api-version: 1.19
+depend: [ViaVersion]
 commands:
   msg:
     aliases: [tell, whisper, w]
