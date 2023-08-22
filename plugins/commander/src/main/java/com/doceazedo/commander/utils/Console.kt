@@ -10,8 +10,8 @@ import java.io.DataOutputStream
 object Console {
     private val console = Bukkit.getServer().consoleSender;
 
-    fun run (command: String, proxy: Boolean = false) {
-        if (proxy) return runProxy(command);
+    fun exec (command: String, proxy: Boolean = false) {
+        if (proxy) return execProxy(command);
 
         // Minecraft main thread
         Commander.instance.launch {
@@ -19,17 +19,10 @@ object Console {
         }
     }
 
-    private fun runProxy(command: String) {
-        // Minecraft main thread
-        val b = ByteArrayOutputStream()
-        val out = DataOutputStream(b)
-        try {
-            out.writeUTF("Message")
-            out.writeUTF("ALL")
-            out.writeUTF(command)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        Bukkit.getServer().sendPluginMessage(Commander.instance, "BungeeCord", b.toByteArray())
+    private fun execProxy(command: String) {
+        val stream = ByteArrayOutputStream()
+        val out = DataOutputStream(stream)
+        out.writeUTF(command)
+        Commander.instance.server.sendPluginMessage(Commander.instance, "commander:exec", stream.toByteArray())
     }
 }

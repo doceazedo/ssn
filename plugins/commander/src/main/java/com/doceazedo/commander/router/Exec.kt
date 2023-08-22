@@ -1,6 +1,7 @@
 package com.doceazedo.commander.router
 
 import com.doceazedo.commander.utils.Console
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
@@ -14,7 +15,7 @@ data class ExecRequest(
 fun Route.execRoute() {
     post("/exec") {
         val request = call.receive<ExecRequest>()
-        Console.run(request.command, request.proxy)
-        call.respond("Executando comando: ${request.command}")
+        Console.exec(request.command, request.proxy)
+        call.respond(HttpStatusCode.NoContent)
     }
 }

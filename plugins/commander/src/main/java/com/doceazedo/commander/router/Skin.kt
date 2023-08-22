@@ -12,10 +12,20 @@ data class SkinRequest(
     val skin: String,
 )
 
+data class SkinClearRequest(
+    val player: String
+)
+
 fun Route.skinRoute() {
     post("/skin") {
         val request = call.receive<SkinRequest>()
-        Console.run("skin set ${request.player} ${request.skin}", true)
+        Console.exec("skin set ${request.player} ${request.skin}", true)
+        call.respond(HttpStatusCode.NoContent)
+    }
+
+    post("/skin/clear") {
+        val request = call.receive<SkinClearRequest>()
+        Console.exec("skin clear ${request.player}", true)
         call.respond(HttpStatusCode.NoContent)
     }
 }

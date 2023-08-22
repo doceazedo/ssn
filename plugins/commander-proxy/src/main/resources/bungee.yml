@@ -1,0 +1,4 @@
+name: CommanderProxy
+version: '${project.version}'
+main: com.doceazedo.commanderproxy.CommanderProxy
+author: DoceAzedo

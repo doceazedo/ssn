@@ -25,7 +25,7 @@ class Commander : JavaPlugin() {
     override fun onEnable() {
         instance = this
 
-        server.messenger.registerOutgoingPluginChannel(this, "BungeeCord")
+        server.messenger.registerOutgoingPluginChannel(this, "commander:exec")
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, TPS, 100L, 1L)
 
         launch {
@@ -39,8 +39,7 @@ class Commander : JavaPlugin() {
                     }
                     routing {
                         get("/") {
-                            logger.info("Commander: GET /")
-                            call.respondText("Hello, world!")
+                            call.respondText("Hello Commander!")
                         }
 
                         route("/api/public") {
