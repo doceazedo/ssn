@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { ContentWithAside, Sidebar } from '.';
-  import type { JavaStatusResponse } from 'minecraft-server-util';
+  import { ContentWithAside, Sidebar } from ".";
+  import type { JavaStatusResponse } from "minecraft-server-util";
 
-  export let status: JavaStatusResponse | null = null;
+  export let status: JavaStatusResponse | false | null = null;
 </script>
 
 <ContentWithAside>
@@ -13,10 +13,8 @@
 </ContentWithAside>
 
 <div class="content-with-sidebar">
-  <main class="main">
-  </main>
-  <aside class="sidebar">
-  </aside>
+  <main class="main" />
+  <aside class="sidebar" />
 </div>
 
 <style lang="sass">

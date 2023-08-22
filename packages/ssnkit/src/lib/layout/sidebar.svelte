@@ -12,17 +12,28 @@
   import { DiscordAltIcon } from "../icons";
   import type { JavaStatusResponse } from "minecraft-server-util";
 
-  export let status: JavaStatusResponse | null = null;
+  type Status = JavaStatusResponse | false | null;
+
+  export let status: Status = null;
+
+  const getStatusTitle = (status: Status) => {
+    if (status === null) return "Carregando...";
+    return status ? "Server online" : "Server fechado";
+  };
 </script>
 
 <Card
-  title={status ? "Server online" : "Server fechado"}
-  icon={status ? Server : ServerOff}
+  title={getStatusTitle(status)}
+  icon={status === false ? ServerOff : Server}
 >
   <ul class="server-status">
     <li>
       <Users />
-      {status?.players?.online || 0}/{status?.players?.max || 0} online
+      {#if !!status}
+        {status.players.online}/{status.players.max} online
+      {:else}
+        0/0 online
+      {/if}
     </li>
     <li>
       <Joystick />
