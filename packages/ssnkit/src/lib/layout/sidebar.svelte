@@ -26,7 +26,10 @@
     </li>
     <li>
       <Joystick />
-      <span>Java Edition 1.19.4 <small>Com suporte à 1.20.x</small></span>
+      <span>
+        Java Edition 1.19.4
+        <small>Compatível com 1.9.x ou superior</small>
+      </span>
     </li>
     <li><Skull /> Pirata e original</li>
     <li><Sprout /> Seed: 372733000726032955</li>

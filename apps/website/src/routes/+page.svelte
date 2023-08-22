@@ -75,14 +75,14 @@
 		</div>
 		<div class="content">
 			<p>
-				O SSN está disponível exclusivamente para o Minecraft <b>Java Edition</b> à partir da
-				<b>versão 1.19.4</b>. Se você adquiriu o Minecraft, baixe o
+				O SSN está disponível para o Minecraft <b>Java Edition</b> à partir da versão 1.9, sendo
+				recomendado jogar na <b>versão 1.19.4</b>. Se você adquiriu o Minecraft, baixe o
 				<a href="https://minecraft.net/pt-br/download" target="_blank">launcher oficial</a>
 				no site do jogo. Caso você não possua uma cópia do jogo, recomendo o uso do
 				<a href="https://tlaun.ch" target="_blank">TL Legacy</a>.
 			</p>
 			<ol>
-				<li>Abra o Minecraft na versão 1.19.4 ou superior</li>
+				<li>Abra o Minecraft na versão 1.19.4</li>
 				<li>Acesse o servidor pelo IP: <CopyIpTag /></li>
 				<li>Registre-se com e-mail e senha ou via Discord no nosso site</li>
 			</ol>
