@@ -41,13 +41,13 @@ commands:
   send-namespaced: true
   tab-complete: -1
   spam-exclusions:
-  - /skill
+    - /skill
   silent-commandblock-console: false
   replace-commands:
-  - setblock
-  - summon
-  - testforblock
-  - tellraw
+    - setblock
+    - summon
+    - testforblock
+    - tellraw
   log: true
 messages:
   whitelist: You are not whitelisted on this server!
@@ -57,9 +57,9 @@ messages:
   outdated-server: Outdated server! I'm still on {0}
   restart: Server is restarting
 advancements:
-  disable-saving: true
+  disable-saving: false
   disabled:
-  - '*'
+    - minecraft:story/disabled
 stats:
   disable-saving: false
   forced-stats: {}
