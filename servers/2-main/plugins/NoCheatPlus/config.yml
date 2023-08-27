@@ -134,7 +134,7 @@ checks:
   blockplace:
     active: true
     against:
-      active: true
+      active: false
       actions: cancel log:against:1:5:i vl>10 cancel log:against:0:2:if cmdc:kickagainst:0:10
     autosign:
       active: default
