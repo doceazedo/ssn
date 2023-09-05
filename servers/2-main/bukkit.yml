@@ -11,7 +11,6 @@
 # Forums: http://www.spigotmc.org/
 # Bug tracker: http://www.spigotmc.org/go/bugs
 
-
 settings:
   minimum-api: none
   use-map-color-cache: true
@@ -25,10 +24,10 @@ settings:
   deprecated-verbose: default
   shutdown-message: Server closed
 spawn-limits:
-  water-ambient: 20
+  water-ambient: 3
   water-underground-creature: 5
   axolotls: 5
-  monsters: 70
+  monsters: 30
   animals: 10
   water-animals: 3
   ambient: 1
