@@ -1,36 +1,40 @@
 <script lang="ts">
-  import { HeartHandshake, Home, ShieldCheck } from 'lucide-svelte';
-  import { slide } from 'svelte/transition';
-	import { quintOut } from 'svelte/easing';
-  import { DiscordAltIcon } from '../icons';
+  import { slide } from "svelte/transition";
+  import { quintOut } from "svelte/easing";
+  import {
+    DiscordAltIcon,
+    HeartHandshakeIcon,
+    HomeIcon,
+    ShieldCheckIcon,
+  } from "../icons";
   import type { SafeIdentity } from "warehouse";
 
   export let identity: SafeIdentity;
   export let websiteBaseUrl: string;
   export let identityBaseUrl: string;
-  export let currentUrl = '';
+  export let currentUrl = "";
 
   const navbarItems = [
     {
-      label: 'Início',
+      label: "Início",
       href: websiteBaseUrl,
-      icon: Home
+      icon: HomeIcon,
     },
     {
-      label: 'Apoiar',
+      label: "Apoiar",
       href: `${websiteBaseUrl}/donate`,
-      icon: HeartHandshake
+      icon: HeartHandshakeIcon,
     },
     {
-      label: 'Segurança',
+      label: "Segurança",
       href: `${websiteBaseUrl}/safety`,
-      icon: ShieldCheck
+      icon: ShieldCheckIcon,
     },
     {
-      label: 'Discord',
+      label: "Discord",
       href: `https://discord.gg/DChTnVTuKp`, // TODO: add this ssnkit/helpers or smth
-      target: '_blank',
-      icon: DiscordAltIcon
+      target: "_blank",
+      icon: DiscordAltIcon,
     },
   ];
 
@@ -45,15 +49,23 @@
 <nav class="navbar" aria-label="main navigation">
   <div class="container">
     <div class="navbar-brand">
-      <button class="navbar-burger" aria-label="menu" aria-expanded="false" on:click={() => isOpen = !isOpen}>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
+      <button
+        class="navbar-burger"
+        aria-label="menu"
+        aria-expanded="false"
+        on:click={() => (isOpen = !isOpen)}
+      >
+        <span aria-hidden="true" />
+        <span aria-hidden="true" />
+        <span aria-hidden="true" />
       </button>
     </div>
 
     {#if !isMobile || isOpen}
-      <div class="navbar-menu is-active" transition:slide={{ duration: 300, easing: quintOut }}>
+      <div
+        class="navbar-menu is-active"
+        transition:slide={{ duration: 300, easing: quintOut }}
+      >
         <div class="navbar-start">
           {#each navbarItems as item}
             <a
@@ -71,16 +83,28 @@
         <div class="navbar-end">
           <div class="navbar-item">
             {#if identity}
-              <a href="{identityBaseUrl}/dashboard" class="user has-text-grey-dark">
-                <img src="https://mc-heads.net/avatar/{identity.primaryUsername}/64" alt="Avatar de {identity.primaryUsername}" />
+              <a
+                href="{identityBaseUrl}/dashboard"
+                class="user has-text-grey-dark"
+              >
+                <img
+                  src="https://mc-heads.net/avatar/{identity.primaryUsername}/64"
+                  alt="Avatar de {identity.primaryUsername}"
+                />
                 <span>{identity.primaryUsername}</span>
               </a>
             {:else}
               <div class="buttons">
-                <a href="{identityBaseUrl}/auth/register" class="button is-primary is-small">
+                <a
+                  href="{identityBaseUrl}/auth/register"
+                  class="button is-primary is-small"
+                >
                   Registrar
                 </a>
-                <a href="{identityBaseUrl}/auth/login" class="button is-light is-small">
+                <a
+                  href="{identityBaseUrl}/auth/login"
+                  class="button is-light is-small"
+                >
                   Fazer login
                 </a>
               </div>

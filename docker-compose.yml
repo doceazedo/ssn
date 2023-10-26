@@ -20,6 +20,7 @@ services:
     build:
       context: .
       dockerfile: ./apps/identity/Dockerfile
+      target: ${NODE_ENV}
     environment:
       PUBLIC_BASE_DOMAIN: ${PUBLIC_BASE_DOMAIN}
       PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
@@ -38,6 +39,13 @@ services:
       CF_TURNSTILE_SECRET_KEY: ${CF_TURNSTILE_SECRET_KEY}
       SENDGRID_API_KEY: ${SENDGRID_API_KEY}
       SENDGRID_FROM: ${SENDGRID_FROM}
+    volumes:
+      - type: bind
+        source: ./apps/identity
+        target: /app/apps/identity
+      - type: bind
+        source: ./packages
+        target: /app/packages
 
   warehouse:
     image: postgres:13.1-alpine
@@ -69,10 +77,18 @@ services:
     build:
       context: .
       dockerfile: ./apps/gatekeeper/Dockerfile
+      target: ${NODE_ENV}
     environment:
       PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
       PUBLIC_GATEKEEPER_URL: ${PUBLIC_GATEKEEPER_URL}
       GK_REDIS_URL: ${GK_REDIS_URL}
+    volumes:
+      - type: bind
+        source: ./apps/gatekeeper
+        target: /app/apps/gatekeeper
+      - type: bind
+        source: ./packages
+        target: /app/packages
 
   gatekeeper-redis:
     image: redis:7.0.5-alpine
@@ -92,10 +108,18 @@ services:
     build:
       context: .
       dockerfile: ./apps/website/Dockerfile
+      target: ${NODE_ENV}
     environment:
       PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
       PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
       LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
+    volumes:
+      - type: bind
+        source: ./apps/website
+        target: /app/apps/website
+      - type: bind
+        source: ./packages
+        target: /app/packages
 
   rcon:
     labels:

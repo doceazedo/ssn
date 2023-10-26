@@ -1,23 +1,23 @@
 <script>
-  import { Check, Copy } from "lucide-svelte";
+  import { CheckIcon, CopyIcon } from "../icons";
 
   export let playerCount = 0;
 
-  const ip = 'ssn.gg';
+  const ip = "ssn.gg";
   let showCheckmark = false;
 
   const copy = () => {
     navigator.clipboard.writeText(ip);
     showCheckmark = true;
-    setTimeout(() => showCheckmark = false, 1000);
+    setTimeout(() => (showCheckmark = false), 1000);
   };
 </script>
 
 <button class="ip-button" on:click={copy}>
   {#if showCheckmark}
-    <Check size={32} />
+    <CheckIcon size={32} />
   {:else}
-    <Copy size={32} />
+    <CopyIcon size={32} />
   {/if}
   <div>
     <h1>IP: {ip}</h1>

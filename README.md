@@ -89,8 +89,7 @@ Please keep in mind that these are general guidelines and your specific deployme
 
 These are known issues with the current setup of this project:
 
-- Unfortunately, `npm run start` is also being used as the development environment at this moment. This means no hot reloading, you will have to restart it everytime you change something. **Help on setting one up is much appreciated.**
-- As you restart your instance multiple times, a gigantic build cache will form until your containers are out of space. When that happens, run `docker system prune --volumes`.
+- As you restart your instance multiple times, a gigantic build cache will form until your containers are out of space. When that happens, run `docker system prune -af --volumes` to delete all your docker containers and volumes.
 
 ## 🤝 Contributing
 

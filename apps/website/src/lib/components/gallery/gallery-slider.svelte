@@ -1,35 +1,35 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-  import { ChevronLeft, ChevronRight } from 'ssnkit/icons';
-  import images from './assets';
-  import Glide, { Autoplay, Controls, Swipe } from '@glidejs/glide/dist/glide.modular.esm';
-  import '@glidejs/glide/dist/css/glide.core.min.css';
+	import { ChevronLeft, ChevronRight } from 'lucide-svelte';
+	import images from './assets';
+	import Glide, { Autoplay, Controls, Swipe } from '@glidejs/glide/dist/glide.modular.esm';
+	import '@glidejs/glide/dist/css/glide.core.min.css';
 
-  onMount(() => {
-    new Glide('.glide', {
-      gap: 0
-    })
-      .mount({ Autoplay, Controls, Swipe })
-      .play(4000);
-  });
+	onMount(() => {
+		new Glide('.glide', {
+			gap: 0
+		})
+			.mount({ Autoplay, Controls, Swipe })
+			.play(4000);
+	});
 </script>
 
 <div class="glide">
-  <div class="glide__track" data-glide-el="track">
-    <ul class="glide__slides">
-      {#each images as image}
-        <li class="glide__slide" style="background-image: url({image})"></li>
-      {/each}
-    </ul>
-    <div class="glide__arrows" data-glide-el="controls">
-      <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
-        <ChevronLeft size={24} />
-      </button>
-      <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
-        <ChevronRight size={24} />
-      </button>
-    </div>
-  </div>
+	<div class="glide__track" data-glide-el="track">
+		<ul class="glide__slides">
+			{#each images as image}
+				<li class="glide__slide" style="background-image: url({image})"></li>
+			{/each}
+		</ul>
+		<div class="glide__arrows" data-glide-el="controls">
+			<button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+				<ChevronLeft size={24} />
+			</button>
+			<button class="glide__arrow glide__arrow--right" data-glide-dir=">">
+				<ChevronRight size={24} />
+			</button>
+		</div>
+	</div>
 </div>
 
 <style lang="sass">

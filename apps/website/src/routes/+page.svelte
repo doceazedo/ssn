@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ContentWithSidebar, Card, CopyIpTag, Metadata } from 'ssnkit';
-	import { Hand, LifeBuoy, Rocket, Swords } from 'ssnkit/icons';
+	import { Hand, LifeBuoy, Rocket, Swords } from 'lucide-svelte';
 	import { GallerySlider } from '$lib/components/gallery';
 	import { SERVER_STATUS } from '$lib/status';
 	import { CURRENT_URL } from '$lib/stores';

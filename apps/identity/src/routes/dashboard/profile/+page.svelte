@@ -4,7 +4,7 @@
 	import { IDENTITY } from '$lib/auth';
 	import { getProfileByUsername, updateProfile } from '$lib/profile';
 	import { Card, PageTitle, Switch, UsernamePicker } from 'ssnkit';
-	import { ExternalLink, Upload } from 'ssnkit/icons';
+	import { ExternalLink, Upload } from 'lucide-svelte';
 	import type { ProfileWithLikeCount } from 'warehouse';
 
 	export let data;

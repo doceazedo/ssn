@@ -1,15 +1,15 @@
 <script lang="ts">
   import {
-    Joystick,
-    Server,
-    ServerOff,
-    Skull,
-    Sprout,
-    Twitter,
-    Users,
-  } from "lucide-svelte";
+    DiscordAltIcon,
+    JoystickIcon,
+    ServerIcon,
+    ServerOffIcon,
+    SkullIcon,
+    SproutIcon,
+    TwitterAltIcon,
+    UsersIcon,
+  } from "../icons";
   import { Card } from "../components";
-  import { DiscordAltIcon } from "../icons";
   import type { JavaStatusResponse } from "minecraft-server-util";
 
   type Status = JavaStatusResponse | false | null;
@@ -24,11 +24,11 @@
 
 <Card
   title={getStatusTitle(status)}
-  icon={status === false ? ServerOff : Server}
+  icon={status === false ? ServerOffIcon : ServerIcon}
 >
   <ul class="server-status">
     <li>
-      <Users />
+      <UsersIcon />
       {#if !!status}
         {status.players.online}/{status.players.max} online
       {:else}
@@ -36,14 +36,14 @@
       {/if}
     </li>
     <li>
-      <Joystick />
+      <JoystickIcon />
       <span>
         Java Edition 1.19.4
         <small>Compatível com 1.9.x ou superior</small>
       </span>
     </li>
-    <li><Skull /> Pirata e original</li>
-    <li><Sprout /> Seed: 372733000726032955</li>
+    <li><SkullIcon /> Pirata e original</li>
+    <li><SproutIcon /> Seed: 372733000726032955</li>
   </ul>
 </Card>
 
@@ -58,7 +58,7 @@
   />
 </Card>
 
-<Card title="Twitter" icon={Twitter}>
+<Card title="Twitter" icon={TwitterAltIcon}>
   <div class="widget">
     <a
       class="twitter-timeline"
@@ -70,7 +70,8 @@
     <script
       async
       src="https://platform.twitter.com/widgets.js"
-      charset="utf-8"></script>
+      charset="utf-8"
+    ></script>
   </div>
 </Card>
 

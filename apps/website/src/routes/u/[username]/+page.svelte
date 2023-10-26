@@ -4,7 +4,7 @@
 	import DOMPurify from 'dompurify';
 	import { Card, ContentWithAside, PageTitle } from 'ssnkit';
 	import watermelonIconImg from 'ssnkit/assets/img/watermelon-icon.png';
-	import { Heart } from 'ssnkit/icons';
+	import { Heart } from 'lucide-svelte';
 	import * as skinview3d from 'skinview3d';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';

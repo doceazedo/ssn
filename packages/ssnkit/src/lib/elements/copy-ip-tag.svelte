@@ -1,21 +1,21 @@
 <script lang="ts">
-  import { Check, Clipboard } from "lucide-svelte";
+  import { CheckIcon, ClipboardIcon } from "../icons";
 
-  const ip = 'ssn.gg';
+  const ip = "ssn.gg";
   let showCheckmark = false;
 
   const copy = () => {
     navigator.clipboard.writeText(ip);
     showCheckmark = true;
-    setTimeout(() => showCheckmark = false, 1000);
+    setTimeout(() => (showCheckmark = false), 1000);
   };
 </script>
 
 <button class="ip-tag" on:click={copy}>
   {#if showCheckmark}
-    <Check size={16} />
+    <CheckIcon size={16} />
   {:else}
-    <Clipboard size={16} />
+    <ClipboardIcon size={16} />
   {/if}
 
   {ip}

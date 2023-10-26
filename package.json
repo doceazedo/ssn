@@ -29,15 +29,16 @@
     "postinstall": "npm run warehouse:generate"
   },
   "devDependencies": {
+    "@prisma/client": "^5.5.2",
     "eslint-config-custom": "*",
     "prettier": "latest",
-    "turbo": "^1.10.12"
+    "turbo": "^1.10.16"
   },
   "engines": {
     "node": ">=14.0.0"
   },
   "packageManager": "npm@8.18.0",
   "dependencies": {
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.3.1"
   }
 }

@@ -32,6 +32,7 @@ yarn-error.log*
 
 # turbo
 .turbo
+/out
 
 # THIS IS TEMPORARY!
 kratos.yml
