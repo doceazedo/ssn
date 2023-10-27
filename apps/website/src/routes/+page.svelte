@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ContentWithSidebar, Card, CopyIpTag, Metadata } from 'ssnkit';
-	import { Hand, LifeBuoy, Rocket, Swords } from 'lucide-svelte';
+	import { Hand, LifeBuoy, Swords } from 'lucide-svelte';
 	import { GallerySlider } from '$lib/components/gallery';
 	import ClientsTable from '$lib/components/clients-table.svelte';
 	import { SERVER_STATUS } from '$lib/status';
@@ -86,47 +86,6 @@
 				você mesmo. Evite mods que são "pirateados" ou vazados, porque pode ser difícil saber qual é
 				seguro de verdade.
 			</p>
-		</div>
-	</Card>
-
-	<Card title="Próximos passos" icon={Rocket}>
-		<div class="content">
-			<p>
-				Então, você já baixou alguns mods e se conectou no SSN? Show! Aqui vão algumas dicas do que
-				fazer:
-			</p>
-			<ul>
-				<li>
-					<b>Faça uma viagem pelo Nether.</b> Se achar difícil conseguir recursos por perto do spawn
-					por causa do caos, pegue algumas obsidianas e viaje pelo Nether (que é 8x mais rápido) e volte
-					pro mundo normal quando estiver cansado.
-				</li>
-				<li>
-					<b>Construa sua base.</b> Comece a coletar recursos e estabeleça sua base numa área afastada.
-				</li>
-				<li>
-					<b>Participe de um clã.</b> Jogar no SSN pode ser mais divertido com outras pessoas. Embora
-					o servidor não tenha um sistema de clãs próprio, muitos jogadores se juntam com objetivos em
-					comum.
-				</li>
-				<li>
-					<b>Visite o spawn.</b> De vez em quando, volte pro spawn (coordenadas 0;0) e veja o que está
-					acontecendo, encontre novos jogadores, cause o caos ou participe de uma briga de rua.
-				</li>
-				<li>
-					<b>Junte-se a comunidades.</b> Acredite ou não, o SSN tem uma comunidade bem diversa,
-					então é fácil encontrar outras pessoas com os mesmos interesses que você. Você pode
-					começar participando do <a href="/discord" target="_blank">nosso Discord oficial</a>.
-				</li>
-				<li>
-					<b>Deixe sua marca.</b> Faça e destrua grandes construções, promova eventos, se torne notável...
-					não há limites do que você pode fazer no SSN.
-				</li>
-				<li>
-					<b>Divirta-se!</b> Sem regras, o ambiente pode ficar tóxico facilmente, então lembre-se de
-					levar o jogo com leveza e fazer o que te diverte! É isso que o servidor de anarquia é sobre.
-				</li>
-			</ul>
 		</div>
 	</Card>
 </ContentWithSidebar>
