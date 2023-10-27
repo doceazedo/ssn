@@ -82,6 +82,7 @@ services:
       PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
       PUBLIC_GATEKEEPER_URL: ${PUBLIC_GATEKEEPER_URL}
       GK_REDIS_URL: ${GK_REDIS_URL}
+      DATABASE_URL: ${DATABASE_URL}
     volumes:
       - type: bind
         source: ./apps/gatekeeper
@@ -113,6 +114,7 @@ services:
       PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
       PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
       LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
+      DATABASE_URL: ${DATABASE_URL}
     volumes:
       - type: bind
         source: ./apps/website

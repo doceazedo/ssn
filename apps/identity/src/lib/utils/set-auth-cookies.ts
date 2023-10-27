@@ -1,21 +1,20 @@
-import { dev } from "$app/environment";
+import { dev } from '$app/environment';
 import { baseDomain } from '$lib/env/public';
-import type { Cookies } from "@sveltejs/kit";
-import type { CookieSerializeOptions } from "cookie";
+import type { Cookies } from '@sveltejs/kit';
+import type { CookieSerializeOptions } from 'cookie';
 
 const options: CookieSerializeOptions = {
-    httpOnly: true,
-    sameSite: 'strict',
-    secure: false, //!dev
-    domain: !dev ? baseDomain : undefined,
-    path: '/',
+	httpOnly: true,
+	sameSite: 'strict',
+	secure: false, //!dev
+	domain: baseDomain,
+	path: '/'
 };
 
 export const setAuthCookies = (cookies: Cookies, token: string) =>
-  cookies.set('token', token, {
-    ...options,
-    maxAge: 60 * 60 * 24 * 30, // 30 days
-  });
+	cookies.set('token', token, {
+		...options,
+		maxAge: 60 * 60 * 24 * 30 // 30 days
+	});
 
-export const deleteAuthCookies = (cookies: Cookies) =>
-  cookies.delete('token', options);
+export const deleteAuthCookies = (cookies: Cookies) => cookies.delete('token', options);
