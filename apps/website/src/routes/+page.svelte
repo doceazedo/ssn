@@ -2,6 +2,7 @@
 	import { ContentWithSidebar, Card, CopyIpTag, Metadata } from 'ssnkit';
 	import { Hand, LifeBuoy, Rocket, Swords } from 'lucide-svelte';
 	import { GallerySlider } from '$lib/components/gallery';
+	import ClientsTable from '$lib/components/clients-table.svelte';
 	import { SERVER_STATUS } from '$lib/status';
 	import { CURRENT_URL } from '$lib/stores';
 
@@ -117,13 +118,9 @@
 				Existem clients com módulos focados em utilidade e PVP. Se você é novo no jogo, mods
 				utilitários provavelmente farão mais sentido para você. Algumas opções incluem:
 			</p>
-			<ul>
-				{#each clients as client}
-					<li>
-						<a href={client.href} target="_blank" rel="noreferrer">{client.name}</a>: {client.description}
-					</li>
-				{/each}
-			</ul>
+			<p>
+				<ClientsTable />
+			</p>
 			<p>
 				Eu recomendo experimentar alguns desses clients e ver qual você gosta mais. Alguns até
 				funcionam bem quando usados em conjunto se você quiser usar mais de um ao mesmo tempo.
