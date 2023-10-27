@@ -34,31 +34,28 @@
 
 	<Card title="Como conectar" icon={LifeBuoy} id="tutorial">
 		<div class="notification is-warning is-light">
-			Se você não tem certeza de como baixar e jogar Minecraft, talvez o SSN não seja a melhor opção
-			para começar a jogar.
+			O SSN só funciona no <b>Minecraft Java Edition</b>. Ou seja, se você quiser jogar no celular,
+			vai precisar usar o
+			<a href="https://pojavlauncherteam.github.io" target="_blank" rel="noopener noreferrer"
+				>PojavLauncher</a
+			>.
 		</div>
 		<div class="content">
 			<p>
-				O SSN está disponível para o Minecraft <b>Java Edition</b> à partir da versão 1.9, sendo
-				recomendado jogar na <b>versão 1.19.4</b>. Se você adquiriu o Minecraft, baixe o
-				<a href="https://minecraft.net/pt-br/download" target="_blank">launcher oficial</a>
-				no site do jogo. Caso você não possua uma cópia do jogo, recomendo o uso do
+				Você pode jogar com qualquer versão da 1.9 pra cima, mas é melhor jogar na <b
+					>versão 1.19.4</b
+				>. Se você comprou o Minecraft, é só baixar o
+				<a href="https://minecraft.net/pt-br/download" target="_blank">programa oficial</a>
+				no site deles. Se não, pode usar o
 				<a href="https://tlaun.ch" target="_blank">TL Legacy</a>.
 			</p>
 			<ol>
-				<li>Abra o Minecraft na versão 1.19.4</li>
-				<li>Acesse o servidor pelo IP: <CopyIpTag /></li>
-				<li>Registre-se com e-mail e senha ou via Discord no nosso site</li>
+				<li>Abra o Minecraft e escolha a versão 1.19.4</li>
+				<li>Adicione o servidor usando o IP <CopyIpTag /></li>
+				<li>Se cadastre no site com seu e-mail e uma senha, ou usando seu Discord</li>
 			</ol>
 			<p>
-				Se você está preocupado com sua segurança, recomendamos que <a href="/safety"
-					>leia essa página</a
-				>.
-			</p>
-			<p>
-				Se você está procurando um launcher para gerenciar mods e contas de forma mais fácil, eu
-				recomendo o <a href="https://prismlauncher.org" target="_blank">Prism Launcher</a>. E se
-				quiser dicas de mods e clients, dá uma olhada na seção abaixo.
+				Se estiver preocupado com segurança, é bom dar uma lida <a href="/safety">nessa página</a>.
 			</p>
 		</div>
 	</Card>
