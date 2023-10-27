@@ -5,43 +5,6 @@
 	import ClientsTable from '$lib/components/clients-table.svelte';
 	import { SERVER_STATUS } from '$lib/status';
 	import { CURRENT_URL } from '$lib/stores';
-
-	type Client = {
-		name: string;
-		description: string;
-		href: string;
-	};
-
-	const clients: Client[] = [
-		{
-			name: 'Lambda Client',
-			description:
-				'recomendação obrigatória, código aberto, promissor e é expansível com extensões.',
-			href: 'https://github.com/lambda-client/lambda'
-		},
-		{
-			name: 'Ares',
-			description: 'minha escolha pessoal, código aberto com seleção minimalista de módulos.',
-			href: 'https://aresclient.org'
-		},
-		{
-			name: 'Impact',
-			description: 'opção razoável e popular entre iniciantes, porém tem o código fechado.',
-			href: 'https://impactclient.net'
-		},
-		{
-			name: 'Inertia',
-			description:
-				'opção tão boa (ou melhor) quanto o Impact, porém não é tão atualizado e também tem o código fechado.',
-			href: 'https://inertiaclient.com'
-		},
-		{
-			name: '3arthh4ck',
-			description:
-				'menção honrosa por ser robusto e de código aberto, porém não é mais mantido e tem um histórico duvidoso.',
-			href: 'https://github.com/3arthqu4ke/3arthh4ck'
-		}
-	];
 </script>
 
 <Metadata currentUrl={$CURRENT_URL} />
