@@ -7,8 +7,10 @@ import com.doceazedo.catraca.gatekeeper.Flows.createFlow
 import com.doceazedo.catraca.gatekeeper.Grants.getGrantByKey
 import com.doceazedo.catraca.gatekeeper.Grants.isUserGranted
 import com.doceazedo.catraca.identity.Username.getUsernameIdentity
+import com.doceazedo.catraca.utils.getCasedUsername
 import com.doceazedo.catraca.utils.kickPlayer
 import com.doceazedo.catraca.utils.sendPlayer
+import com.doceazedo.catraca.utils.wrongNicknameCaseMessage
 import com.github.shynixn.mccoroutine.bukkit.launch
 import kotlinx.coroutines.delay
 import org.bukkit.Location
@@ -27,6 +29,12 @@ object PlayerJoin : Listener {
 
             // kick user if not registered
             val identity = getUsernameIdentity(e.player.displayName) ?: return@launch kickPlayer(e.player, Reason.NOT_REGISTERED)
+
+            // kick user if username case does not match
+            val username = getCasedUsername(identity, e.player.displayName)
+            if (!username.isCorrectlyCased) {
+                return@launch kickPlayer(e.player, wrongNicknameCaseMessage(username.casedUsername, username.username))
+            }
 
             // check if user is granted already
             val previousGrant = isUserGranted(identity.uuid, e.player)

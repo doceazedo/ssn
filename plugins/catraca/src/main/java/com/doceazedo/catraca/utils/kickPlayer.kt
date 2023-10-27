@@ -12,6 +12,22 @@ val notRegisteredMessage = arrayOf(
     "§6Acesse: §c§l§n${Env.BASE_DOMAIN.value}/alt"
 ).joinToString("\n§r")
 
+fun wrongNicknameCaseMessage (correctName: String, badName: String): String {
+    return arrayOf(
+        "§4§lSeu nome de usuário está errado!",
+        "",
+        "§fVocê se cadastrou como: §a$correctName",
+        "§fMas está tentando jogar como: §c$badName",
+        "",
+        "§eEntre com seu nome de usuário correto,",
+        "§eou confira seus usuários em §a§l§n${Env.BASE_DOMAIN.value}/alt"
+    ).joinToString("\n§r")
+}
+
 fun kickPlayer (player: Player, reason: Reason) {
-    player.kickPlayer(reason.message)
+    kickPlayer(player, reason.message)
+}
+
+fun kickPlayer (player: Player, reason: String) {
+    player.kickPlayer(reason)
 }
