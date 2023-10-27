@@ -1,13 +1,16 @@
 <script lang="ts">
-  import { CopyIpButton } from '../elements';
-  import witherHeroImg from '../../../assets/img/wither-hero.webp';
-  import ssnIconImg from '../../../assets/img/ssn-icon.png';
+  import { CopyIpButton } from "../elements";
+  import witherHeroImg from "../../../assets/img/wither-hero.webp";
+  import ssnIconImg from "../../../assets/img/ssn-icon.png";
 
   export let websiteBaseUrl: string;
   export let playerCount = 0;
 </script>
 
-<section class="hero section is-medium is-primary" style="background-image:url({witherHeroImg})">
+<section
+  class="hero section is-medium is-primary"
+  style="background-image:url({witherHeroImg})"
+>
   <div class="hero-body container">
     <div class="left">
       <a href={websiteBaseUrl}>
@@ -32,7 +35,7 @@
       display: flex
       justify-content: space-between
       width: 100%
-      padding: 4rem 0
+      padding: 4rem 0 !important
 
     .left,
     .right

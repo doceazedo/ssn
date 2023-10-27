@@ -174,5 +174,5 @@
 
   @media screen and (min-width: 769px)
     .field-body
-      flex-grow: 4
+      flex-grow: 3
 </style>

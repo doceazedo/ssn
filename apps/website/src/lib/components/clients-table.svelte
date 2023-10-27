@@ -72,27 +72,32 @@
 	}
 
 	.client .logo {
-		width: 6rem;
-		height: 6rem;
+		width: 5rem;
+		height: 5rem;
 		margin-bottom: 1rem;
 	}
 
 	.client .title,
 	.client .feature {
 		margin-bottom: 0;
-		line-height: 1.25;
 	}
 
 	.client .title {
-		font-size: 1.25rem;
+		font-size: 1.2rem;
 		margin-bottom: 0.375rem;
 	}
 
-	@media screen and (max-width: 768px) {
+	.client .feature {
+		line-height: 1.5;
+	}
+
+	@media screen and (max-width: 1215px) {
 		.clients {
 			grid-template-columns: repeat(2, 1fr);
 		}
+	}
 
+	@media screen and (max-width: 768px) {
 		.client .logo {
 			width: 4rem;
 			height: 4rem;

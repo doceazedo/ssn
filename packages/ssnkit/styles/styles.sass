@@ -69,3 +69,11 @@
 
     &:not(.is-active):hover
       background-color: rgba(#000, .05)
+
+@media screen and (min-width: 1216px)
+  .container:not(.is-max-desktop)
+    max-width: 1112px
+
+@media screen and (min-width: 1408px)
+  .container:not(.is-max-desktop):not(.is-max-widescreen)
+    max-width: 1112px

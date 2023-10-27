@@ -12,7 +12,10 @@
     </select>
   </div>
   <span class="icon is-left">
-    <img src="https://mc-heads.net/avatar/{currentUsername}/28" alt="Avatar de {currentUsername}" />
+    <img
+      src="https://mc-heads.net/avatar/{currentUsername}/28"
+      alt="Avatar de {currentUsername}"
+    />
   </span>
 </div>
 
@@ -26,8 +29,8 @@
       border-radius: .75rem
 
   .icon
-    height: 3rem
-    width: 3rem
+    height: 3rem !important
+    width: 3rem !important
 
     img
       border-radius: .25rem

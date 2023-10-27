@@ -34,7 +34,7 @@
 
 <style lang="sass">
   .glide
-    aspect-ratio: 21 / 9
+    aspect-ratio: 16 / 9
     background-color: #e5e7ea
     border-radius: 1rem
     overflow: hidden
@@ -72,8 +72,4 @@
       background-color: #2c9902
       color: #fff
       cursor: pointer
-
-  @media screen and (max-width: 768px)
-    .glide
-      aspect-ratio: 16 / 9
 </style>

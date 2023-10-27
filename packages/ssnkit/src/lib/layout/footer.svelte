@@ -1,40 +1,42 @@
 <script lang="ts">
-  import { DiscordIcon, GitHubIcon, TwitterIcon } from '../icons';
-  import { CopyIpTag } from '../elements';
+  import { DiscordIcon, GitHubIcon, TwitterIcon } from "../icons";
+  import { CopyIpTag } from "../elements";
 
   const socials = [
     {
       icon: DiscordIcon,
-      href: 'https://discord.gg/DChTnVTuKp',
+      href: "https://discord.gg/DChTnVTuKp",
     },
     {
       icon: TwitterIcon,
-      href: 'https://twitter.com/servidorsemnome',
+      href: "https://twitter.com/servidorsemnome",
     },
     {
       icon: GitHubIcon,
-      href: 'https://github.com/doceazedo/ssn',
+      href: "https://github.com/doceazedo/ssn",
     },
   ];
 </script>
 
 <footer class="footer">
-  <div class="footer-left">
-    <h1>ssn.gg</h1>
-    <p>DoceAzedo &copy; {new Date().getFullYear()}</p>
-  </div>
+  <div class="footer-inner container">
+    <div class="footer-left">
+      <h1>ssn.gg</h1>
+      <p>DoceAzedo &copy; {new Date().getFullYear()}</p>
+    </div>
 
-  <div class="footer-center">
-    <h1>Pronto para jogar?</h1>
-    <CopyIpTag />
-  </div>
+    <div class="footer-center">
+      <h1>Pronto para jogar?</h1>
+      <CopyIpTag />
+    </div>
 
-  <div class="footer-right">
-    {#each socials as social}
-      <a href={social.href} target="_blank" class="button is-light is-small">
-        <svelte:component this={social.icon} />
-      </a>
-    {/each}
+    <div class="footer-right">
+      {#each socials as social}
+        <a href={social.href} target="_blank" class="button is-light is-small">
+          <svelte:component this={social.icon} />
+        </a>
+      {/each}
+    </div>
   </div>
 </footer>
 
@@ -43,13 +45,17 @@
 
   .footer
     display: flex
-    justify-content: space-between
-    padding: 5rem 2.5rem
+    padding: 0
     background-color: #fff
     border-top: $divider
 
-    > *
-      width: 33.33333%
+    &-inner
+      display: flex
+      justify-content: space-between
+      padding: 5rem 2.5rem
+
+      > *
+        width: 33.33333%
 
     &-left
       display: flex
@@ -89,12 +95,13 @@
 
   @media screen and (max-width: 768px)
     .footer
-      flex-direction: column
-      padding: 2rem 1rem
-      gap: .5rem
+      &-inner
+        flex-direction: column
+        padding: 2rem 1rem
+        gap: .5rem
 
-      > *
-        width: 100%
+        > *
+          width: 100%
 
       &-left
         text-align: center
