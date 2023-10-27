@@ -15,20 +15,20 @@
 	<Card title="Conheça o SSN.gg!" icon={Hand}>
 		<div class="content">
 			<p>
-				O <b>SSN</b>, também conhecido como "servidor sem nome", é um dos poucos servidores de
-				anarquia no Minecraft que ainda estão ativos no Brasil. A ideia é criar um ambiente sem
-				regras e sem censura, onde a única preocupação da administração é manter o servidor no ar.
-				Ele foi fundado em <b>21/03/2020</b>, mas o mapa atual só foi criado em <b>13/01/2023</b>.
+				O <b>SSN</b> — antigamente chamado de "servidor sem nome" — é um servidor de Minecraft
+				brasileiro onde a única regra é não ter regras, e a administração só quer garantir que tudo
+				funcione direitinho. Ele começou em <b>Março de 2020</b>, mas o mapa que a gente joga agora
+				foi feito em Janeiro de 2023.
 			</p>
 			<p>
-				O servidor já foi fechado, reaberto e reiniciado várias vezes, e agora estamos na <b
-					>quinta edição</b
-				>, que a gente espera que seja a definitiva. Tudo o que tem aqui, desde as configurações até
-				os plugins e sistemas, é de
-				<a href="https://github.com/doceazedo/ssn" target="_blank">código-aberto</a>, o que
-				significa que qualquer um pode verificar o código e contribuir para o SSN, ou até criar sua
-				própria instância do servidor.
+				Esse servidor já fechou e abriu várias vezes, e agora estamos na <b>quinta versão</b>, que
+				eu espero que dure pra sempre. O legal é que tudo aqui, como as configurações, os plugins e
+				as coisinhas extras, tem o
+				<a href="https://github.com/doceazedo/ssn" target="_blank">código aberto</a>. Isso quer
+				dizer que qualquer pessoa pode olhar como é feito e até ajudar a melhorar o SSN.
+				<b>É como se o SSN fosse feito por todo mundo! ✨</b>
 			</p>
+			<a href="/history" class="button is-primary">Ler história</a>
 		</div>
 	</Card>
 
@@ -133,3 +133,9 @@
 		</div>
 	</Card>
 </ContentWithSidebar>
+
+<style>
+	.button {
+		width: fit-content;
+	}
+</style>
