@@ -6,7 +6,6 @@
     ServerOffIcon,
     SkullIcon,
     SproutIcon,
-    TwitterAltIcon,
     UsersIcon,
   } from "../icons";
   import { Card } from "../components";
@@ -56,23 +55,6 @@
     frameborder={0}
     sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
   />
-</Card>
-
-<Card title="Twitter" icon={TwitterAltIcon}>
-  <div class="widget">
-    <a
-      class="twitter-timeline"
-      href="https://twitter.com/servidorsemnome?ref_src=twsrc%5Etfw"
-      data-height={512}
-    >
-      Tweets by servidorsemnome
-    </a>
-    <script
-      async
-      src="https://platform.twitter.com/widgets.js"
-      charset="utf-8"
-    ></script>
-  </div>
 </Card>
 
 <style lang="sass">
