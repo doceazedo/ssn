@@ -19,7 +19,7 @@
 		{
 			icon: Mail,
 			label:
-				'Quando puder, confirme o seu endereço de e-mail para receber convites e poder recuperar sua senha no futuro. Lembre-se de conferir sua lixeira e caixa de spam.'
+				'Se você se cadastrou com seu e-mail, confirme seu e-mail para poder recuperar sua senha no futuro. Lembre-se de conferir sua lixeira e caixa de spam.'
 		},
 		{
 			icon: Heart,
