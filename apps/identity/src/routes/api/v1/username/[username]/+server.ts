@@ -126,6 +126,12 @@ export const PUT: RequestHandler = async ({ request, params, locals, cookies }) 
 						'Por favor, desconecte sua conta do servidor antes de alterar seu nome de usuário'
 					);
 
+				const isValidUsername = validateUsername(body.newUsername);
+				if (!isValidUsername) throw error(400, 'Insira um nome de usuário válido');
+
+				const existingUsername = await getUsername(body.newUsername);
+				if (existingUsername) throw error(409, 'Esse nome de usuário já está em uso');
+
 				const updatedUsername = await updateUsername(username.name, {
 					name: body.newUsername
 				});
