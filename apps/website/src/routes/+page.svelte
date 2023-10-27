@@ -65,35 +65,29 @@
 
 	<Card title="Clients e mods" icon={Swords} id="clients">
 		<div class="notification is-danger is-light">
-			<b
-				>Nunca baixe arquivos que você não conhece, mesmo que de pessoas que você confia! Baixe mods
-				apenas da fonte oficial e faça bom uso do bom senso.</b
-			>
+			<b>
+				É muito importante não baixar coisas de pessoas desconhecidas, mesmo que você confie nelas.
+				Só baixe mods do site oficial e use o bom senso.
+			</b>
 		</div>
 		<div class="content">
 			<p>
-				A maioria das pessoas no servidor usam clients modificados, e tem várias opções por aí. Eu
-				vou deixar uma lista com algumas <b>sugestões pessoais</b>, mas que fique claro que eu não
-				me responsabilizo por problemas que você possa ter com eles e não ofereço suporte. Você terá
-				que descobrir como configurar cada módulo para funcionar no SSN por conta própria.
-			</p>
-			<p>
-				Existem clients com módulos focados em utilidade e PVP. Se você é novo no jogo, mods
-				utilitários provavelmente farão mais sentido para você. Algumas opções incluem:
+				Muita gente no servidor usa hacks para deixar o jogo mais interessante, mas eu não vou poder
+				te ajudar se tiver algum problema com eles. Você vai ter que aprender a baixar e mexer neles
+				sozinho, ou pedir ajuda pra alguém.
 			</p>
 			<p>
 				<ClientsTable />
 			</p>
 			<p>
-				Eu recomendo experimentar alguns desses clients e ver qual você gosta mais. Alguns até
-				funcionam bem quando usados em conjunto se você quiser usar mais de um ao mesmo tempo.
+				Minha dica é experimentar alguns desses e ver qual você curte mais. Alguns até funcionam bem
+				juntos se você quiser usar mais de um ao mesmo tempo.
 			</p>
 			<p>
-				Agora, uma coisa importante: <b>qualquer client pode ser perigoso</b>. Por isso, é melhor
-				minimizar o risco de infectar seu computador baixando os arquivos apenas da fonte oficial,
-				usando mods populares e, se possível, auditar o código e fazer sua própria build. Eu também
-				recomendo evitar usar clients crackeados ou vazados, porque pode ser difícil para um jogador
-				inexperiente distinguir um mod seguro de um infectado.
+				Mas olha, todos esses mods podem ser perigosos. Por isso, é melhor baixar só dos sites
+				oficiais, usar os mods que bastante gente já usa e, se você souber como, conferir o código
+				você mesmo. Evite mods que são "pirateados" ou vazados, porque pode ser difícil saber qual é
+				seguro de verdade.
 			</p>
 		</div>
 	</Card>
