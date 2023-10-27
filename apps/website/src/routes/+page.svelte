@@ -28,7 +28,7 @@
 				dizer que qualquer pessoa pode olhar como é feito e até ajudar a melhorar o SSN.
 				<b>É como se o SSN fosse feito por todo mundo! ✨</b>
 			</p>
-			<a href="/history" class="button is-primary">Ler história</a>
+			<a href="/about" class="button is-primary">Ler história</a>
 		</div>
 	</Card>
 

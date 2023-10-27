@@ -1,3 +1,4 @@
+export { default as BookMarkedIcon } from "./book-marked-icon.svelte";
 export { default as CheckIcon } from "./check-icon.svelte";
 export { default as CheckmarkIcon } from "./checkmark-icon.svelte";
 export { default as ClipboardIcon } from "./clipboard-icon.svelte";

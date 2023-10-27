@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { PageTitle } from '../text';
-  import ReiChiquitaImg from '../../../assets/img/rei-chiquita.gif';
+  import { Error } from "../components";
 
   export let code: number;
 
@@ -50,26 +49,10 @@
     522: "Tempo de conexão esgotado",
     523: "Origem inalcançável",
     525: "Falha de SSL handshake",
-    599: "Erro interno de rede"
+    599: "Erro interno de rede",
   };
 
-  $: errorMessage = httpErrors[code] || 'Erro desconhecido';
+  $: errorMessage = httpErrors[code] || "Erro desconhecido";
 </script>
 
-<div class="error">
-  <img src={ReiChiquitaImg} alt="Rei Chiquita" />
-  <PageTitle title={errorMessage} pretitle="Erro {code}" class="mb-6" />
-</div>
-
-<style lang="sass">
-  .error
-    display: flex
-    flex-direction: column
-    align-items: center
-    gap: 3rem
-    width: 100%
-
-    :global(.page-title)
-      justify-content: center
-      text-align: center
-</style>
+<Error code="Erro {code}" message={errorMessage} />

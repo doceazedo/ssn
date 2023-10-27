@@ -2,6 +2,7 @@
   import { slide } from "svelte/transition";
   import { quintOut } from "svelte/easing";
   import {
+    BookMarkedIcon,
     DiscordAltIcon,
     HeartHandshakeIcon,
     HomeIcon,
@@ -24,6 +25,11 @@
       label: "Apoiar",
       href: `${websiteBaseUrl}/donate`,
       icon: HeartHandshakeIcon,
+    },
+    {
+      label: "Sobre o SSN",
+      href: `${websiteBaseUrl}/about`,
+      icon: BookMarkedIcon,
     },
     {
       label: "Segurança",
