@@ -35,7 +35,7 @@
 	<Card title="Como conectar" icon={LifeBuoy} id="tutorial">
 		<div class="notification is-warning is-light">
 			O SSN só funciona no <b>Minecraft Java Edition</b>. Ou seja, se você quiser jogar no celular,
-			vai precisar usar o
+			você vai precisar usar o
 			<a href="https://pojavlauncherteam.github.io" target="_blank" rel="noopener noreferrer"
 				>PojavLauncher</a
 			>.
