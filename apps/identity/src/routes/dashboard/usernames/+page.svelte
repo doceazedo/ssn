@@ -3,13 +3,14 @@
 	import { PageTitle } from 'ssnkit';
 	import { Plus } from 'lucide-svelte';
 	import { IDENTITY } from '$lib/auth';
-	import { NewUsernameModal, PrimaryUsernameModal } from '$lib/modals';
+	import { ChangeUsernameModal, NewUsernameModal, PrimaryUsernameModal } from '$lib/modals';
 	import type { Username } from '@prisma/client';
 	import type { PageServerData } from './$types';
 
 	export let data: PageServerData;
 
 	let isNewUserModalOpen = false;
+	let isChangeUsernameModalOpen = false;
 
 	let isPrimaryUserModalOpen = false;
 	let targetPrimaryUsername: string = '';
@@ -65,6 +66,15 @@
 							<button class="button is-danger is-small">Excluir</button>
 						{/if}
 					{/if}
+
+					{#if data.usernames?.length === 1 && !username.firstJoin}
+						<button
+							class="button is-warning is-small"
+							on:click={() => (isChangeUsernameModalOpen = true)}
+						>
+							Alterar nome de usuário
+						</button>
+					{/if}
 				</div>
 			</div>
 		</div>
@@ -73,6 +83,9 @@
 
 <NewUsernameModal bind:isOpen={isNewUserModalOpen} />
 <PrimaryUsernameModal bind:isOpen={isPrimaryUserModalOpen} username={targetPrimaryUsername} />
+{#if data.usernames?.length === 1}
+	<ChangeUsernameModal bind:isOpen={isChangeUsernameModalOpen} />
+{/if}
 
 <style lang="sass">
   .usernames

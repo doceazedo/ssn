@@ -90,8 +90,8 @@ export const DELETE: RequestHandler = async ({ request, params }) =>
 		});
 	});
 
-export const PUT: RequestHandler = async ({ request, params }) =>
-	tokenOnly(request, async () => {
+export const PUT: RequestHandler = async ({ request, params, locals, cookies }) =>
+	loggedInOnly(locals, cookies, async (identity) =>
 		validateRequest<UpdateUsernameParams>(
 			request,
 			yup.object().shape({
@@ -106,24 +106,42 @@ export const PUT: RequestHandler = async ({ request, params }) =>
 				const owner = await getUserByName(username.name);
 				if (!owner) throw error(404);
 
+				if (owner.usernames.length !== 1)
+					throw error(
+						400,
+						'Você não pode atualizar esse nome de usuário, ao invés disso, crie uma nova conta no seu painel'
+					);
+
+				if (username.ownerId !== identity.uuid) throw error(401);
+
+				if (username.firstJoin)
+					throw error(
+						400,
+						'Você não pode atualizar o nome de usuário de uma conta que já se conectou no servidor, ao invés disso, crie uma nova conta no seu painel'
+					);
+
+				if (username.isOnline)
+					throw error(
+						400,
+						'Por favor, desconecte sua conta do servidor antes de alterar seu nome de usuário'
+					);
+
 				const updatedUsername = await updateUsername(username.name, {
 					name: body.newUsername
 				});
-				if (!updatedUsername) throw error(500, 'Could not update username');
+				if (!updatedUsername) throw error(500, 'Não foi possível atualizar o seu nome de usuário');
 
-				let updatedPrimaryUsername = false;
 				if (owner.primaryUsername == params.username) {
 					const updatedUser = await updateUser(owner.uuid, {
 						primaryUsername: updatedUsername.name
 					});
-					if (!updatedUser) throw error(500, 'Could not update primary username');
-					updatedPrimaryUsername = true;
+					if (!updatedUser)
+						throw error(500, 'Não foi possível atualizar seu nome de usuário principal');
 				}
 
 				return json({
-					username: updatedUsername,
-					updatedPrimaryUsername
+					username: updatedUsername
 				});
 			}
-		);
-	});
+		)
+	);
