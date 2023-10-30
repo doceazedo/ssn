@@ -1,0 +1,188 @@
+version: "3.7"
+
+services:
+  gateway:
+    image: traefik:v2.7
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.yml:/etc/traefik/traefik.yml
+
+  identity-web:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.identity.entrypoints=web"
+      - "traefik.http.routers.identity.rule=Host(`id.${PUBLIC_BASE_DOMAIN}`)"
+    ports:
+      - "3000:3000"
+    build:
+      context: .
+      dockerfile: ./apps/identity/Dockerfile
+      target: ${NODE_ENV}
+    environment:
+      PUBLIC_BASE_DOMAIN: ${PUBLIC_BASE_DOMAIN}
+      PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
+      PUBLIC_DASHBOARD_URL: ${PUBLIC_DASHBOARD_URL}
+      PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
+      PUBLIC_REGISTER_ENABLED: ${PUBLIC_REGISTER_ENABLED}
+      PUBLIC_REGISTER_INVITE_ONLY: ${PUBLIC_REGISTER_INVITE_ONLY}
+      PUBLIC_REGISTER_INVITES_PER_USER: ${PUBLIC_REGISTER_INVITES_PER_USER}
+      PUBLIC_DISCORD_CLIENT_ID: ${PUBLIC_DISCORD_CLIENT_ID}
+      PUBLIC_CF_TURNSTILE_SITE_KEY: ${PUBLIC_CF_TURNSTILE_SITE_KEY}
+      PUBLIC_RCON_URL: ${PUBLIC_RCON_URL}
+      DISCORD_CLIENT_SECRET: ${DISCORD_CLIENT_SECRET}
+      CATRACA_IDENTITY_TOKEN: ${CATRACA_IDENTITY_TOKEN}
+      DATABASE_URL: ${DATABASE_URL}
+      WH_DEFAULT_ADMIN_USERNAME: ${WH_DEFAULT_ADMIN_USERNAME}
+      CF_TURNSTILE_SECRET_KEY: ${CF_TURNSTILE_SECRET_KEY}
+      SENDGRID_API_KEY: ${SENDGRID_API_KEY}
+      SENDGRID_FROM: ${SENDGRID_FROM}
+
+  warehouse:
+    image: postgres:13.1-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - ${MNT_WAREHOUSE}:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  warehouse-migrate:
+    build:
+      context: ./packages/warehouse
+    depends_on:
+      - warehouse
+    restart: on-failure
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+
+  gatekeeper-web:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.gatekeeper.entrypoints=web"
+      - "traefik.http.routers.gatekeeper.rule=Host(`gk.${PUBLIC_BASE_DOMAIN}`)"
+    ports:
+      - "3001:3000"
+    build:
+      context: .
+      dockerfile: ./apps/gatekeeper/Dockerfile
+      target: ${NODE_ENV}
+    environment:
+      PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
+      PUBLIC_GATEKEEPER_URL: ${PUBLIC_GATEKEEPER_URL}
+      GK_REDIS_URL: ${GK_REDIS_URL}
+      DATABASE_URL: ${DATABASE_URL}
+
+  gatekeeper-redis:
+    image: redis:7.0.5-alpine
+    command: redis-server --requirepass ${GK_REDIS_PASSWORD} --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - ${MNT_GATEKEEPER}:/data
+
+  website:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.website.entrypoints=web"
+      - "traefik.http.routers.website.rule=Host(`${PUBLIC_BASE_DOMAIN}`)"
+    ports:
+      - "3002:3000"
+    build:
+      context: .
+      dockerfile: ./apps/website/Dockerfile
+      target: ${NODE_ENV}
+    environment:
+      PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
+      PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
+      LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
+      DATABASE_URL: ${DATABASE_URL}
+
+  rcon:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.rcon.entrypoints=web"
+      - "traefik.http.routers.rcon.rule=Host(`rcon.${PUBLIC_BASE_DOMAIN}`)"
+    ports:
+      - "443:443"
+    build:
+      context: .
+      dockerfile: ./apps/rcon/Dockerfile
+    restart: on-failure
+    environment:
+      PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
+      LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
+
+  melonbot:
+    build:
+      context: ./apps/melonbot
+    environment:
+      PUBLIC_DISCORD_CLIENT_ID: ${PUBLIC_DISCORD_CLIENT_ID}
+      DISCORD_CLIENT_SECRET: ${DISCORD_CLIENT_SECRET}
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
+      LOCAL_COMMANDER_URL: ${LOCAL_COMMANDER_URL}
+    restart: always
+
+  minecraft-proxy:
+    image: amazoncorretto:17
+    command: java -Xms512M -Xmx1024M -jar BungeeCord.jar
+    stdin_open: true
+    tty: true
+    ports:
+      - "25565:25565"
+    working_dir: /data
+    volumes:
+      - ./servers/0-proxy:/data
+    restart: on-failure
+
+  minecraft-queue:
+    image: amazoncorretto:17
+    command: java --add-opens java.base/java.net=ALL-UNNAMED -Xms512M -Xmx1024M -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar paper-1.19.4-550.jar
+    stdin_open: true
+    tty: true
+    ports:
+      - "25561:25561"
+      - "25572:25572"
+    working_dir: /data
+    volumes:
+      - ./servers/1-queue:/data
+    environment:
+      PUBLIC_BASE_DOMAIN: ${PUBLIC_BASE_DOMAIN}
+      PUBLIC_GATEKEEPER_URL: ${PUBLIC_GATEKEEPER_URL}
+      LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
+      CATRACA_IDENTITY_TOKEN: ${CATRACA_IDENTITY_TOKEN}
+      GK_REDIS_HOST: ${GK_REDIS_HOST}
+      GK_REDIS_PORT: ${GK_REDIS_PORT}
+      GK_REDIS_PASSWORD: ${GK_REDIS_PASSWORD}
+    restart: on-failure
+
+  minecraft-main:
+    image: amazoncorretto:17
+    command: java --add-opens java.base/java.net=ALL-UNNAMED -Xms${RAM_MIN} -Xmx${RAM_MAX} -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar paper-1.19.4-550.jar
+    stdin_open: true
+    tty: true
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.minecraft-main.entrypoints=web"
+      - "traefik.http.routers.minecraft-main.rule=Host(`cmd.${PUBLIC_BASE_DOMAIN}`)"
+      - "traefik.http.services.minecraft-main.loadbalancer.server.port=25574"
+    ports:
+      - "25562:25562" # minecraft
+      - "25573:25573" # rcon
+      - "25574:25574" # commander
+    working_dir: /data
+    volumes:
+      - ./servers/2-main:/data
+    environment:
+      LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
+      CATRACA_IDENTITY_TOKEN: ${CATRACA_IDENTITY_TOKEN}
+      COMMANDER_TOKEN: ${COMMANDER_TOKEN}
+    restart: on-failure
+
+volumes:
+  warehouse:
+  gatekeeper:
