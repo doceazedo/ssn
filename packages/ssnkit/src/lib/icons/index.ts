@@ -5,6 +5,7 @@ export { default as ClipboardIcon } from "./clipboard-icon.svelte";
 export { default as CopyIcon } from "./copy-icon.svelte";
 export { default as DiscordAltIcon } from "./discord-alt-icon.svelte";
 export { default as DiscordIcon } from "./discord-icon.svelte";
+export { default as GemIcon } from "./gem-icon.svelte";
 export { default as GitHubIcon } from "./github-icon.svelte";
 export { default as HeartHandshakeIcon } from "./heart-handshake-icon.svelte";
 export { default as HomeIcon } from "./home-icon.svelte";

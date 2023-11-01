@@ -41,6 +41,7 @@
 		"@prisma/client": "^5.5.2",
 		"dayjs": "^1.11.10",
 		"dompurify": "^3.0.6",
+		"mercadopago": "^2.0.3",
 		"skinview3d": "^3.0.1",
 		"svelte-markdown": "^0.4.0"
 	}
