@@ -49,6 +49,7 @@ class Commander : JavaPlugin() {
                         route("/api/private") {
                             skinRoute()
                             execRoute()
+                            rankRoute()
                         }
                     }
                 }.start(wait = true)
