@@ -4,27 +4,22 @@ import com.doceazedo.commander.runnable.TPS
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import org.bukkit.Bukkit
 import java.net.InetAddress
-import kotlin.time.Duration
-import kotlin.time.measureTime
+import kotlin.system.measureTimeMillis
 
-data class Status(
-    val ping: Int,
+data class StatusResponse(
+    val ping: Long,
     val tps: Double,
 )
 
 fun Route.statusRoute() {
     get("/status") {
-        Bukkit.getLogger().info("GET /status was called")
-        val elapsed: Duration = measureTime {
-            // Ping the nearest Cloudflare server from us
-            InetAddress.getByName("1.1.1.1").isReachable(1000)
+        val ping: Long = measureTimeMillis {
+            // Ping UOL DNS server
+            InetAddress.getByName("200.221.11.100").isReachable(1000)
         }
-        val ping = elapsed.inWholeMilliseconds.toInt()
         val tps = TPS.getTPS()
-        val status = Status(ping, tps)
-        Bukkit.getLogger().info("$ping ms / $tps tps")
+        val status = StatusResponse(ping, tps)
         call.respond(status)
     }
 }

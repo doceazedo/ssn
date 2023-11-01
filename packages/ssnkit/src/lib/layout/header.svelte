@@ -1,13 +1,12 @@
 <script lang="ts">
-  import { Hero, Navbar } from '.';
+  import { Hero, Navbar } from ".";
   import type { SafeIdentity } from "warehouse";
 
   export let identity: SafeIdentity;
   export let websiteBaseUrl: string;
   export let identityBaseUrl: string;
-  export let currentUrl = '';
-  export let playerCount = 0;
+  export let currentUrl = "";
 </script>
 
-<Hero {websiteBaseUrl} {playerCount} />
+<Hero {websiteBaseUrl} />
 <Navbar {websiteBaseUrl} {identityBaseUrl} {currentUrl} {identity} />

@@ -1,10 +1,12 @@
 package com.doceazedo.commander
 
+import com.doceazedo.commander.enums.Env
 import com.doceazedo.commander.router.*
 import com.doceazedo.commander.runnable.TPS
 import com.github.shynixn.mccoroutine.bukkit.launch
 import io.ktor.serialization.gson.*
 import io.ktor.server.application.*
+import io.ktor.server.auth.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.contentnegotiation.*
@@ -31,6 +33,17 @@ class Commander : JavaPlugin() {
         launch {
             withContext(Dispatchers.IO) {
                 embeddedServer(Netty, port = 25574) {
+                    install(Authentication) {
+                        bearer {
+                            authenticate { tokenCredential ->
+                                if (tokenCredential.token == Env.COMMANDER_TOKEN.value) {
+                                    UserIdPrincipal("private")
+                                } else {
+                                    null
+                                }
+                            }
+                        }
+                    }
                     install(ContentNegotiation) {
                         gson {
                             setDateFormat(DateFormat.LONG)
@@ -46,9 +59,12 @@ class Commander : JavaPlugin() {
                             statusRoute()
                         }
 
-                        route("/api/private") {
-                            skinRoute()
-                            execRoute()
+                        authenticate {
+                            route("/api/private") {
+                                skinRoute()
+                                execRoute()
+                                rankRoute()
+                            }
                         }
                     }
                 }.start(wait = true)

@@ -1,15 +1,14 @@
 <script lang="ts">
-  import { Footer, Header } from '.';
+  import { Footer, Header } from ".";
   import type { SafeIdentity } from "warehouse";
 
   export let identity: SafeIdentity | null;
   export let websiteBaseUrl: string;
   export let identityBaseUrl: string;
-  export let currentUrl = '';
-  export let playerCount = 0;
+  export let currentUrl = "";
 </script>
 
-<Header {websiteBaseUrl} {identityBaseUrl} {currentUrl} {identity} {playerCount} />
+<Header {websiteBaseUrl} {identityBaseUrl} {currentUrl} {identity} />
 <main class="section">
   <div class="container">
     <slot />

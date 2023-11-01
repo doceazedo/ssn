@@ -4,7 +4,6 @@
 	import { page } from '$app/stores';
 	import { env } from '$env/dynamic/public';
 	import { IDENTITY } from '$lib/auth';
-	import { SERVER_STATUS } from '$lib/status';
 	import { CURRENT_URL } from '$lib/stores';
 	import type { LayoutServerData } from './$types';
 
@@ -21,7 +20,6 @@
 	websiteBaseUrl={env.PUBLIC_WEBSITE_URL || ''}
 	identityBaseUrl={env.PUBLIC_IDENTITY_URL || ''}
 	identity={$IDENTITY}
-	playerCount={$SERVER_STATUS?.players?.online}
 >
 	<slot />
 </Layout>

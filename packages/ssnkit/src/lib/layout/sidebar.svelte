@@ -9,27 +9,23 @@
     UsersIcon,
   } from "../icons";
   import { Card } from "../components";
-  import type { JavaStatusResponse } from "minecraft-server-util";
+  import { SERVER_STATUS, type Status } from "../stores";
 
-  type Status = JavaStatusResponse | false | null;
-
-  export let status: Status = null;
-
-  const getStatusTitle = (status: Status) => {
+  const getStatusTitle = (status: Status | null) => {
     if (status === null) return "Carregando...";
-    return status ? "Server online" : "Server fechado";
+    return status.online ? "Server online" : "Server fechado";
   };
 </script>
 
 <Card
-  title={getStatusTitle(status)}
-  icon={status === false ? ServerOffIcon : ServerIcon}
+  title={getStatusTitle($SERVER_STATUS)}
+  icon={$SERVER_STATUS?.online === false ? ServerOffIcon : ServerIcon}
 >
   <ul class="server-status">
     <li>
       <UsersIcon />
-      {#if !!status}
-        {status.players.online}/{status.players.max} online
+      {#if $SERVER_STATUS && $SERVER_STATUS.online}
+        {$SERVER_STATUS.players.online}/{$SERVER_STATUS.players.max} online
       {:else}
         0/0 online
       {/if}

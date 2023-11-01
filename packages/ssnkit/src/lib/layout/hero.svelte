@@ -2,9 +2,9 @@
   import { CopyIpButton } from "../elements";
   import witherHeroImg from "../../../assets/img/wither-hero.webp";
   import ssnIconImg from "../../../assets/img/ssn-icon.png";
+  import { SERVER_STATUS } from "../stores";
 
   export let websiteBaseUrl: string;
-  export let playerCount = 0;
 </script>
 
 <section
@@ -18,7 +18,7 @@
       </a>
     </div>
     <div class="right">
-      <CopyIpButton {playerCount} />
+      <CopyIpButton playerCount={$SERVER_STATUS?.players.online || 0} />
     </div>
   </div>
 </section>
