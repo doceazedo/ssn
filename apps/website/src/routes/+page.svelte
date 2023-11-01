@@ -3,13 +3,12 @@
 	import { Hand, LifeBuoy, Swords } from 'lucide-svelte';
 	import { GallerySlider } from '$lib/components/gallery';
 	import ClientsTable from '$lib/components/clients-table.svelte';
-	import { SERVER_STATUS } from '$lib/status';
 	import { CURRENT_URL } from '$lib/stores';
 </script>
 
 <Metadata currentUrl={$CURRENT_URL} />
 
-<ContentWithSidebar status={$SERVER_STATUS}>
+<ContentWithSidebar>
 	<GallerySlider />
 
 	<Card title="Conheça o SSN.gg!" icon={Hand}>

@@ -1,14 +1,11 @@
 <script lang="ts">
   import { ContentWithAside, Sidebar } from ".";
-  import type { JavaStatusResponse } from "minecraft-server-util";
-
-  export let status: JavaStatusResponse | false | null = null;
 </script>
 
 <ContentWithAside>
   <slot slot="main" />
   <svelte:fragment slot="aside">
-    <Sidebar {status} />
+    <Sidebar />
   </svelte:fragment>
 </ContentWithAside>
 

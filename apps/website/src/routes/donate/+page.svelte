@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { ContentWithSidebar, Metadata, PageTitle } from 'ssnkit';
-	import { SERVER_STATUS } from '$lib/status';
 	import { CURRENT_URL } from '$lib/stores';
 	import { Error } from 'ssnkit';
 </script>
@@ -9,6 +8,6 @@
 
 <PageTitle title="Apoiar" class="mb-6" />
 
-<ContentWithSidebar status={$SERVER_STATUS}>
+<ContentWithSidebar>
 	<Error code="Erro 503" message="Essa página está indisponível" />
 </ContentWithSidebar>

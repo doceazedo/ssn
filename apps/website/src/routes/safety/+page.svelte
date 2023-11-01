@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Card, ContentWithSidebar, Metadata, PageTitle } from 'ssnkit';
 	import { FileCog, FormInput, Key, Lock, ShieldCheck } from 'lucide-svelte';
-	import { SERVER_STATUS } from '$lib/status';
 	import { CURRENT_URL } from '$lib/stores';
 </script>
 
@@ -9,7 +8,7 @@
 
 <PageTitle title="Segurança" class="mb-6" />
 
-<ContentWithSidebar status={$SERVER_STATUS}>
+<ContentWithSidebar>
 	<Card title="Autenticação" icon={Lock}>
 		<div class="content">
 			<p>
