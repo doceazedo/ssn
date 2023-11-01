@@ -149,6 +149,11 @@
             <version>${ktor.version}</version>
         </dependency>
         <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-server-auth-jvm</artifactId>
+            <version>${ktor.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.github.shynixn.mccoroutine</groupId>
             <artifactId>mccoroutine-bukkit-api</artifactId>
             <version>${mccoroutine.version}</version>
