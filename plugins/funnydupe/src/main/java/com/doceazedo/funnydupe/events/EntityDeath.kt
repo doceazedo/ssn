@@ -15,6 +15,7 @@ object EntityDeath : Listener {
         EntityType.LLAMA,
         EntityType.MULE
     )
+    private const val distance = 128.0
 
     @EventHandler
     fun onEntityDeath(e: EntityDeathEvent) {
@@ -27,8 +28,10 @@ object EntityDeath : Listener {
         if (donkeyInventory.isEmpty()) return
         if (world.time < 18000) return
 
-        val nearbyPlayers = donkey.getNearbyEntities(96.0, 96.0, 96.0).filterIsInstance<Player>()
-        if (nearbyPlayers.size > 1) return
+        val nearbyEntities = donkey.getNearbyEntities(distance, distance, distance)
+        val nearbyPlayers = nearbyEntities.filterIsInstance<Player>()
+        val nearbyDonkeys = nearbyEntities.filter { it.type in rideableMobs }
+        if (nearbyPlayers.size > 1 || nearbyDonkeys.isNotEmpty()) return
 
         donkeyInventory
             .filterNotNull()
