@@ -13,7 +13,7 @@
 
   const getStatusTitle = (status: Status | null) => {
     if (status === null) return "Carregando...";
-    return status.online ? "Server online" : "Server fechado";
+    return status?.online ? "Server online" : "Server fechado";
   };
 </script>
 
@@ -24,7 +24,7 @@
   <ul class="server-status">
     <li>
       <UsersIcon />
-      {#if $SERVER_STATUS && $SERVER_STATUS.online}
+      {#if $SERVER_STATUS && $SERVER_STATUS?.online}
         {$SERVER_STATUS.players.online}/{$SERVER_STATUS.players.max} online
       {:else}
         0/0 online
