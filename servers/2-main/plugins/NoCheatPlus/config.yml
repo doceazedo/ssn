@@ -97,8 +97,7 @@ checks:
       shortterm:
         ticks: 5
         limit: 7
-      actions:
-        cancel vl>5 log:bbfrequency:3:5:i cancel vl>40 log:bbfrequency:0:5:if
+      actions: cancel vl>5 log:bbfrequency:3:5:i cancel vl>40 log:bbfrequency:0:5:if
         cancel cmdc:kickfrequency:0:5
     noswing:
       active: false
@@ -117,16 +116,15 @@ checks:
     active: true
     direction:
       active: true
-      actions:
-        cancel vl>15 cancel log:bdirection:4:8:i vl>200 cancel log:bdirection:1:5:if
+      actions: cancel vl>15 cancel log:bdirection:4:8:i vl>200 cancel log:bdirection:1:5:if
         cmdc:kickillegalblockinteract:1:5
     reach:
       active: true
       actions: cancel log:breach:5:6:i
     speed:
       active: true
-      interval: 750
-      limit: 6
+      interval: 250
+      limit: 3
       actions: cancel
     visible:
       active: false
@@ -145,24 +143,23 @@ checks:
       actions: cancel
     fastplace:
       active: true
-      limit: 15
+      limit: 30
       shortterm:
-        ticks: 10
-        limit: 6
+        ticks: 25
+        limit: 13
       improbable:
         feedonly: false
         weight: 0.3
-      actions:
-        cancel vl>5 cancel log:fastplace:8:3:i vl>20 cancel log:fastplace:2:4:i
-        vl>80 cancel log:fastplace:0:10:if cmdc:kickfastplace:1:10
+      actions: cancel vl>5 cancel log:fastplace:8:3:i vl>20 cancel log:fastplace:2:4:i
+        vl>80 cancel log:fastplace:0:10:if
     reach:
       active: default
       actions: cancel
     noswing:
       active: default
       exceptions:
-        - WATER_LILY
-        - FLINT_AND_STEEL
+      - WATER_LILY
+      - FLINT_AND_STEEL
       actions: cancel vl>10 log:noswing:2:5:i cancel
     scaffold:
       active: false
@@ -178,8 +175,7 @@ checks:
       improbable:
         feedonly: false
         weight: 0.4
-      actions:
-        cancel vl>10 cancel log:scaffold:3:7:if vl>70 cancel log:scaffold:0:5:if
+      actions: cancel vl>10 cancel log:scaffold:3:7:if vl>70 cancel log:scaffold:0:5:if
         cmd:clearscaffold:0:1 cmdc:kickscaffold:0:1
     speed:
       active: default
@@ -351,7 +347,7 @@ checks:
     active: default
     canceldead: true
     maxloopletencyticks: 8
-    toolchangepenalty: 10
+    toolchangepenalty: 150
     pvp:
       knockbackvelocity: default
     yawrate:
@@ -368,23 +364,20 @@ checks:
       active: false
       falldistance: 0.075
       falldistleniency: 9.0E-4
-      actions:
-        cancel vl>5 cancel log:critical:6:10:i vl>60 cancel log:critical:0:5:icf
+      actions: cancel vl>5 cancel log:critical:6:10:i vl>60 cancel log:critical:0:5:icf
         cmd:clearcritical:0:5 cmdc:kickcritical:0:2
     direction:
       active: true
       strict: true
       failall: true
       penalty: 75
-      actions:
-        vl>2 log:fdirectionlowvl:5:6:i vl>10 cancel log:fdirection:2:4:if vl>50
+      actions: vl>2 log:fdirectionlowvl:5:6:i vl>10 cancel log:fdirection:2:4:if vl>50
         cancel log:fdirection:0:7:icf cmdc:kicksuspiciouscombat:1:5
     fastheal:
       active: false
       interval: 4000
       buffer: 1000
-      actions:
-        cancel vl>10 cancel log:fastheal:2:6:i vl>30 cancel log:fastheal:1:1:i
+      actions: cancel vl>10 cancel log:fastheal:2:6:i vl>30 cancel log:fastheal:1:1:i
         vl>90 cancel log:fastheal:0:10:if cmdc:kickfastheal:0:10
     godmode:
       active: default
@@ -410,8 +403,7 @@ checks:
       improbable:
         feedonly: false
         weight: 2.0
-      actions:
-        cancel vl>1 cancel log:freach:8:9:i vl>5 cancel log:freach:2:6:i vl>12
+      actions: cancel vl>1 cancel log:freach:8:9:i vl>5 cancel log:freach:2:6:i vl>12
         cancel log:freachhighvl:1:5:if vl>35 cancel log:freachhighvl:0:5:if cmdc:kicksuspiciouscombat:2:1
     selfhit:
       active: default
@@ -549,16 +541,15 @@ checks:
       actions: cancel
     morepackets:
       active: default
-      seconds: 6
-      epsideal: 20
+      seconds: 2
+      epsideal: 21
       epsmax: 22
       burst:
-        packets: 15
-        directviolation: 10
-        epmviolation: 95
+        packets: 4
+        directviolation: 2
+        epmviolation: 20
       setbackage: 110
-      actions:
-        cancel vl>2 cancel log:morepackets:10:9:i vl>100 cancel log:morepackets:0:2:ifc
+      actions: cancel vl>2 cancel log:morepackets:10:9:i vl>100 cancel log:morepackets:0:2:ifc
         cmdc:kickpackets:0:10
     nofall:
       active: false
@@ -603,7 +594,7 @@ checks:
         noslow: false
         reset-activeitem: true
       leniency:
-        hbufmax: 5.0
+        hbufmax: 1.5
         violationfrequency:
           active: false
           debug: false
@@ -616,8 +607,7 @@ checks:
       setbackpolicy:
         falldamage: true
         voidtovoid: true
-      actions:
-        cancel log:flyfile:6:15:f vl>100 cancel log:survivalfly:10:11:i log:flyfile:6:15:f
+      actions: cancel log:flyfile:6:15:f vl>100 cancel log:survivalfly:10:11:i log:flyfile:6:15:f
         vl>700 cancel log:survivalfly:8:5:i log:flyfile:1:3:f vl>2100 cancel log:survivalflyhighvl:0:4:icf
         cmdc:kickfly:0:15
       hover:
