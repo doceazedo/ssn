@@ -15,14 +15,13 @@ type CommanderStatus = {
 };
 
 const commanderBaseUrl = process.env.LOCAL_COMMANDER_URL;
-const ip = "ssn.gg";
 
 const statusCommand: Command = {
   data: new SlashCommandBuilder()
     .setName("status")
     .setDescription("Retorna o status atual do servidor"),
   execute: async (interaction: any) => {
-    const proxyStatus = await status(ip);
+    const proxyStatus = await status("ssn.gg");
     const mainStatus = await getCommanderStatus();
 
     let file: AttachmentBuilder | undefined;
