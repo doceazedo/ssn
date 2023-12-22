@@ -1,5 +1,5 @@
 import { status } from "minecraft-server-util";
-import type { Client, GuildBasedChannel } from "discord.js";
+import { ActivityType, type Client, type GuildBasedChannel } from "discord.js";
 
 const GUILD_ID = "980494006863687680";
 const PLAYERCOUNT_CHANNEL_ID = "980510315441704980";
@@ -16,8 +16,12 @@ const updateServerStatus = async (client: Client) => {
     const guild = await client.guilds.fetch(GUILD_ID);
     channel = await guild.channels.fetch(PLAYERCOUNT_CHANNEL_ID);
   }
-  const proxyStatus = await status("ssn.gg");
-  channel?.setName(
-    `Players online: ${proxyStatus.players.online}/${proxyStatus.players.max}`
+  const { players } = await status("ssn.gg");
+  channel?.setName(`Players online: ${players.online}/${players.max}`);
+  client.user?.setActivity(
+    `ssn.gg ✦ ${players.online}/${players.max} players online`,
+    {
+      type: ActivityType.Playing,
+    }
   );
 };
