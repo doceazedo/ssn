@@ -3,7 +3,12 @@
 	import { PageTitle } from 'ssnkit';
 	import { Plus } from 'lucide-svelte';
 	import { IDENTITY } from '$lib/auth';
-	import { ChangeUsernameModal, NewUsernameModal, PrimaryUsernameModal } from '$lib/modals';
+	import {
+		ChangeUsernameModal,
+		DeleteUsernameModal,
+		NewUsernameModal,
+		PrimaryUsernameModal
+	} from '$lib/modals';
 	import type { Username } from '@prisma/client';
 	import type { PageServerData } from './$types';
 
@@ -11,15 +16,22 @@
 
 	let isNewUserModalOpen = false;
 	let isChangeUsernameModalOpen = false;
+	let isDeleteUserModalOpen = false;
 
 	let isPrimaryUserModalOpen = false;
-	let targetPrimaryUsername: string = '';
+	let targetPrimaryUsername = '';
+	let targetDeleteUsername = '';
 
 	const getFullDate = (date: Date) => dayjs(date).format('DD/MM/YYYY [às] HH:mm:ss');
 
 	const intentUpdateMainUser = (username: Username) => {
 		targetPrimaryUsername = username.name;
 		isPrimaryUserModalOpen = true;
+	};
+
+	const intentDeleteUser = (username: Username) => {
+		targetDeleteUsername = username.name;
+		isDeleteUserModalOpen = true;
 	};
 </script>
 
@@ -63,7 +75,9 @@
 							Tornar principal
 						</button>
 						{#if data.usernames && data.usernames.length > 1}
-							<button class="button is-danger is-small">Excluir</button>
+							<button on:click={() => intentDeleteUser(username)} class="button is-danger is-small">
+								Excluir
+							</button>
 						{/if}
 					{/if}
 
@@ -82,6 +96,7 @@
 </div>
 
 <NewUsernameModal bind:isOpen={isNewUserModalOpen} />
+<DeleteUsernameModal bind:isOpen={isDeleteUserModalOpen} username={targetDeleteUsername} />
 <PrimaryUsernameModal bind:isOpen={isPrimaryUserModalOpen} username={targetPrimaryUsername} />
 {#if data.usernames?.length === 1}
 	<ChangeUsernameModal bind:isOpen={isChangeUsernameModalOpen} />

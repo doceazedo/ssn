@@ -22,6 +22,10 @@ export type UpdateUsernameParams = {
 	newUsername: string;
 };
 
+export type DeleteUsernameParams = {
+	deleteIngameData?: boolean;
+};
+
 export const GET: RequestHandler = async ({ request, params }) =>
 	tokenOnly(request, async () => {
 		if (!params.username) throw error(400);
@@ -71,24 +75,46 @@ export const POST: RequestHandler = async ({ request, locals, params, cookies })
 			})
 	);
 
-export const DELETE: RequestHandler = async ({ request, params }) =>
-	tokenOnly(request, async () => {
-		if (!params.username) throw error(400);
+export const DELETE: RequestHandler = async ({ request, locals, cookies, params }) =>
+	validateRequest<DeleteUsernameParams>(
+		request,
+		yup.object().shape({
+			deleteIngameData: yup.boolean().nullable()
+		}),
+		async (body) =>
+			loggedInOnly(locals, cookies, async (identity) => {
+				if (!params.username) throw error(400);
 
-		const username = await getUsername(params.username);
-		if (!username) throw error(404);
+				// TODO: remove me later
+				throw error(501, 'Não foi possível desconectar o usuário do servidor');
 
-		const owner = await getUserByName(username.name);
-		if (!owner) throw error(404);
-		if (owner.primaryUsername === username.name) throw error(400, 'Cannot delete primary username');
+				// TODO: to be implemented
+				if (body.deleteIngameData)
+					throw error(
+						501,
+						'No momento não é possível apagar o inventário em jogo. Desative essa opção, ou tente novamente no futuro™'
+					);
 
-		const deletedUsername = await deleteUsername(username.name);
-		if (!deletedUsername) throw error(500);
+				const username = identity.usernames.find((user) => user.name === params.username);
+				if (!username) throw error(403, 'Esse nome de usuário não pertence à sua conta');
 
-		return json({
-			username: deletedUsername
-		});
-	});
+				if (identity.primaryUsername === username.name)
+					throw error(400, 'Não é possível apagar sua conta principal');
+
+				const deletedUsername = await deleteUsername(username.name);
+				if (!deletedUsername) throw error(500);
+
+				if (body.deleteIngameData) {
+					// call commander to kick user
+				} else {
+					// call commander to delete ingame data
+				}
+
+				return json({
+					username
+				});
+			})
+	);
 
 export const PUT: RequestHandler = async ({ request, params, locals, cookies }) =>
 	loggedInOnly(locals, cookies, async (identity) =>

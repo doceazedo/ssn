@@ -8,50 +8,80 @@ export const getUsername = async (name: string): Promise<Username | null> =>
     where: {
       name: {
         equals: name,
-        mode: 'insensitive'
-      }
+        mode: "insensitive",
+      },
     },
   });
 
 export const getUsernames = async (ownerId: string): Promise<Username[]> =>
   await prisma.username.findMany({
     where: {
-      ownerId
+      ownerId,
     },
     orderBy: {
-      createdAt: 'asc'
-    }
+      createdAt: "asc",
+    },
   });
 
-export const updateUsername = async (name: string, data: Partial<Username>): Promise<Username> =>
+export const updateUsername = async (
+  name: string,
+  data: Partial<Username>
+): Promise<Username> =>
   await prisma.username.update({
     where: {
-      name
+      name,
     },
-    data
+    data,
   });
 
-export const createUsername = async (name: string, ownerId: string): Promise<Username | null> =>
+export const createUsername = async (
+  name: string,
+  ownerId: string
+): Promise<Username | null> =>
   await prisma.username.create({
     data: {
       name,
-      ownerId
-    }
+      ownerId,
+    },
   });
 
-export const deleteUsername = async (name: string): Promise<Username | null> =>
-  await prisma.username.delete({
+export const deleteUsername = async (name: string) => {
+  const deleteBadges = prisma.usernameBadges.deleteMany({
     where: {
-      name
-    }
+      ownerName: name,
+    },
   });
 
-export const getUserBadges = async (username: string): Promise<BadgeWithDetails[]> =>
+  // deleteMany() is needed here, because if we try to
+  // delete() a record that does not exist, prism throws
+  // an error
+  const deleteProfile = prisma.profile.deleteMany({
+    where: {
+      ownerName: name,
+    },
+  });
+
+  const deleteUsername = prisma.username.delete({
+    where: {
+      name,
+    },
+  });
+
+  return await prisma.$transaction([
+    deleteBadges,
+    deleteProfile,
+    deleteUsername,
+  ]);
+};
+
+export const getUserBadges = async (
+  username: string
+): Promise<BadgeWithDetails[]> =>
   await prisma.usernameBadges.findMany({
     where: {
-      ownerName: username
+      ownerName: username,
     },
     include: {
-      badge: true
-    }
+      badge: true,
+    },
   });
