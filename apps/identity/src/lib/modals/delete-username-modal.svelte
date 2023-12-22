@@ -57,7 +57,8 @@
 							O inventário dessa conta será mantido dentro do jogo
 						</li>
 					</ul>
-					<Switch bind:checked={deleteIngameData}>Excluir o inventário em jogo dessa conta</Switch>
+					<Switch bind:checked={deleteIngameData}>Excluir todos os dados em jogo dessa conta</Switch
+					>
 					<hr />
 					<div class="notification is-danger is-light">
 						Ao abandonar essa conta, ela não poderá ser recuperada. Para confirmar que você entende,
