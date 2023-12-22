@@ -11,6 +11,6 @@ object CreatureSpawn : Listener {
         if (e.entityType != EntityType.WITHER) return
         val nearbyEntities = e.location.world.getNearbyEntities(e.location, 32.0, 255.0, 32.0)
         val nearbyWithers = nearbyEntities.filter { it.type == EntityType.WITHER }
-        if (nearbyWithers.size > 1) e.isCancelled = true
+        if (nearbyWithers.size > 3) e.isCancelled = true
     }
 }
