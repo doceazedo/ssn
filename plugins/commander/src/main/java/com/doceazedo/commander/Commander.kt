@@ -64,6 +64,7 @@ class Commander : JavaPlugin() {
                                 skinRoute()
                                 execRoute()
                                 rankRoute()
+                                playerRoute()
                             }
                         }
                     }

@@ -39,6 +39,8 @@ services:
       CF_TURNSTILE_SECRET_KEY: ${CF_TURNSTILE_SECRET_KEY}
       SENDGRID_API_KEY: ${SENDGRID_API_KEY}
       SENDGRID_FROM: ${SENDGRID_FROM}
+      LOCAL_COMMANDER_URL: ${LOCAL_COMMANDER_URL}
+      COMMANDER_TOKEN: ${COMMANDER_TOKEN}
     volumes:
       - type: bind
         source: ./apps/identity

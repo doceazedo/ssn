@@ -12,6 +12,7 @@ import {
 import { loggedInOnly, tokenOnly, validateRequest } from '$lib/middlewares';
 import { validateUsername } from '$lib/utils';
 import { validateCaptcha } from '$lib/captcha/validate-captcha';
+import { deletePlayer, kickPlayer } from '$lib/commander';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export type CreateUsernameParams = {
@@ -85,16 +86,6 @@ export const DELETE: RequestHandler = async ({ request, locals, cookies, params 
 			loggedInOnly(locals, cookies, async (identity) => {
 				if (!params.username) throw error(400);
 
-				// TODO: remove me later
-				throw error(501, 'Não foi possível desconectar o usuário do servidor');
-
-				// TODO: to be implemented
-				if (body.deleteIngameData)
-					throw error(
-						501,
-						'No momento não é possível apagar o inventário em jogo. Desative essa opção, ou tente novamente no futuro™'
-					);
-
 				const username = identity.usernames.find((user) => user.name === params.username);
 				if (!username) throw error(403, 'Esse nome de usuário não pertence à sua conta');
 
@@ -105,9 +96,9 @@ export const DELETE: RequestHandler = async ({ request, locals, cookies, params 
 				if (!deletedUsername) throw error(500);
 
 				if (body.deleteIngameData) {
-					// call commander to kick user
+					await deletePlayer(username.name);
 				} else {
-					// call commander to delete ingame data
+					await kickPlayer(username.name);
 				}
 
 				return json({
