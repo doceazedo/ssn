@@ -1,13 +1,13 @@
 # This is the world defaults configuration file for Paper.
 # As you can see, there's a lot to configure. Some options may impact gameplay, so use
 # with caution, and make sure you know what each option does before configuring.
-#
+# 
 # If you need help with the configuration or have any questions related to Paper,
 # join us in our Discord or check the docs page.
-#
+# 
 # Configuration options here apply to all worlds, unless you specify overrides inside
 # the world-specific config file inside each world folder.
-#
+# 
 # Docs: https://docs.papermc.io/
 # Discord: https://discord.gg/papermc
 # Website: https://papermc.io/
@@ -20,25 +20,25 @@ anticheat:
     enabled: false
     engine-mode: 1
     hidden-blocks:
-      - gold_ore
-      - iron_ore
-      - coal_ore
-      - lapis_ore
-      - mossy_cobblestone
-      - obsidian
-      - chest
-      - diamond_ore
-      - redstone_ore
-      - lit_redstone_ore
-      - clay
-      - emerald_ore
-      - ender_chest
+    - gold_ore
+    - iron_ore
+    - coal_ore
+    - lapis_ore
+    - mossy_cobblestone
+    - obsidian
+    - chest
+    - diamond_ore
+    - redstone_ore
+    - lit_redstone_ore
+    - clay
+    - emerald_ore
+    - ender_chest
     lava-obscures: false
     max-block-height: 64
     max-chunk-section-index: 3
     replacement-blocks:
-      - stone
-      - oak_planks
+    - stone
+    - oak_planks
     update-radius: 2
     use-permission: false
   obfuscation:
@@ -78,16 +78,16 @@ entities:
     disable-player-crits: false
     door-breaking-difficulty:
       husk:
-        - HARD
+      - HARD
       vindicator:
-        - NORMAL
-        - HARD
+      - NORMAL
+      - HARD
       zombie:
-        - HARD
+      - HARD
       zombie_villager:
-        - HARD
+      - HARD
       zombified_piglin:
-        - HARD
+      - HARD
     ender-dragons-death-always-places-dragon-egg: false
     experience-merge-max-value: -1
     mobs-can-always-pick-up-loot:
@@ -162,14 +162,14 @@ entities:
       safe-regen-delete-range: 32
     filter-bad-tile-entity-nbt-from-falling-blocks: true
     filtered-entity-tag-nbt-paths:
-      - Pos
-      - Motion
-      - SleepingX
-      - SleepingY
-      - SleepingZ
+    - Pos
+    - Motion
+    - SleepingX
+    - SleepingY
+    - SleepingZ
     iron-golems-can-spawn-in-air: false
     monster-spawn-max-light-level: -1
-    non-player-arrow-despawn-rate: "60"
+    non-player-arrow-despawn-rate: '60'
     per-player-mob-spawns: true
     scan-for-legacy-ender-dragon: true
     skeleton-horse-thunder-spawn-chance: 0.01
@@ -216,7 +216,7 @@ environment:
   treasure-maps:
     enabled: true
     find-already-discovered:
-      loot-tables: "false"
+      loot-tables: 'false'
       villager-trade: false
   water-over-lava-flow-speed: 5
 fast-drain:

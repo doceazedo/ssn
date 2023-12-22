@@ -1,29 +1,26 @@
 SkinsRestorer is running in "Proxy Mode"
-If you are NOT using a proxy (Bungeecord, waterfall or velocity) in your network, set spigot.yml -> bungeecord: false
 
-Using a proxy? --> you MUST use proxy installation! (or use override files)
+If you are NOT using a proxy (BungeeCord, Waterfall or Velocity) in your network, set spigot.yml -> bungeecord: false
 
-What is "Proxy mode"
-The proxy will handle SkinsRestorer's command's, API, permission, database and config in a "Centralised" manner.
-This way, each backend does not need to apply the skin when switching servers.
+Using a proxy? --> You MUST use proxy installation! (or use override files)
+
+What is "Proxy Mode"?
+The proxy will handle SkinsRestorer's commands, API, permission, database and config in a "centralized" manner.
 
 How to install on proxy?
-Download the latest version from https://www.spigotmc.org/resources/skinsrestorer.2124/
-Place the SkinsRestorer.jar in ./plugins/ folders of every Spigot server.
-Place the plugin in ./plugins/ folder of every proxy server.
-Check & set on every backend server spigot.yml -> bungeecord: true
-Restart (/restart or /stop) all servers [Plugman or /reload are NOT supported, use /stop or /end]
+Please read: https://skinsrestorer.net/docs/installation#platform-installation
 
 Your proxy will now tell all your backend servers what to do!
 You may now configure SkinsRestorer on your proxy (<proxy>/plugins/SkinsRestorer)
 
-!== override files ==!
-BackendStorage (api & commands):
-You can enable the backend storage by create a file called enableSkinStorageAPI.txt in SkinsRestorer folder (backend server -> ./plugins/SkinsRestorer/enableSkinStorageAPI.txt)
-This is useful when using plugins like bedwards, dynmap, etc. that need to get the skin through api from the backend server.
-keep in mind that connecting mysql to the same database as the proxy is required for this to work!
+--- Override Files ---
+
+Backend API:
+You can enable the backend storage by creating a file called enableSkinStorageAPI.txt in SkinsRestorer folder (backend server -> ./plugins/SkinsRestorer/enableSkinStorageAPI.txt)
+This is useful when using plugins like BedWars, Dynmap, etc. that need to get the skin through API from the backend server.
+Keep in mind that connecting MySQL to the same database as the proxy is required for this to work!
 
 ProxyMode:
-Warning: Disable ProxyMode will force the backend to handle everything including applying skin on join. This is not recommended as the proxy would only need to apply the skin once.
-How to urn off proxy mode: create a file called disableProxyMode.txt in SkinsRestorer folder (backend server -> ./plugins/SkinsRestorer/disableProxyMode.txt)
+Warning: Disabling ProxyMode will force the backend to handle everything including applying skin on join. This is not recommended as the proxy has way better control over the player connection.
+How to turn off proxy mode: create a file called disableProxyMode.txt in SkinsRestorer folder (backend server -> ./plugins/SkinsRestorer/disableProxyMode.txt)
 This will force disable proxy mode on next restart.

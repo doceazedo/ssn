@@ -25,8 +25,6 @@ header-footer:
   disable-condition: '%world%=disabledworld'
 tablist-name-formatting:
   enabled: true
-  align-tabsuffix-on-the-right: false
-  character-width-overrides: {}
   anti-override: true
   disable-condition: '%world%=disabledworld'
 scoreboard-teams:
@@ -51,15 +49,13 @@ scoreboard-teams:
       myCustomLine: 0.66
     disable-condition: '%world%=disabledworld'
   disable-condition: '%world%=disabledworld'
-yellow-number-in-tablist:
-  enabled: false
-  value: '%ping%'
-  disable-condition: '%world%=disabledworld'
 belowname-objective:
   enabled: false
   number: '%health%'
   text: '&cHealth'
   disable-condition: '%world%=disabledworld'
+  fancy-display-default: NPC
+  fancy-display-players: '&c%health%'
 prevent-spectator-effect:
   enabled: true
 bossbar:
@@ -129,7 +125,6 @@ placeholders:
   date-format: dd.MM.yyyy
   time-format: '[HH:mm:ss / h:mm a]'
   time-offset: 0
-  register-tab-expansion: false
 placeholder-output-replacements:
   '%essentials_vanished%':
     'yes': '&7| Vanished'
@@ -223,3 +218,10 @@ layout:
         players:
           slots:
           - 44-80
+playerlist-objective:
+  enabled: false
+  value: '%ping%'
+  disable-condition: '%world%=disabledworld'
+  fancy-value: '&7Ping: %ping%'
+ping-spoof:
+  enabled: false

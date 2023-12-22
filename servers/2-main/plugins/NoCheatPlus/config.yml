@@ -337,6 +337,9 @@ checks:
         feedonly: false
         weight: 90.0
   fight:
+    visible:
+      active: default
+      actions: cancel vl>30 log:fvisible:8:5:if cancel
     active: default
     canceldead: true
     maxloopletencyticks: 8
@@ -694,6 +697,8 @@ checks:
       active: default
       actions: cancel log:wrongturn:0:15:icf cmdc:kickillegalrotations:0:10
 strings:
+  fvisible: '&c[player]&7 failed &c[check]&7: tried to attack target through a solid
+    obstacle &7(&cVL[violations]&7)'
   against: '&c[player]&7 failed &c[check]&7: tried to place a block against liquid
     blocks or air as if they were solid &7(&cVL[violations]&7)'
   angle: '&c[player]&7 failed &c[check]&7: potentially tried to hit multiple entities
