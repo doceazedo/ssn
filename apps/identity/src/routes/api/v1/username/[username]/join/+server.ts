@@ -30,7 +30,7 @@ const giveSeasonBadges = async (username: string) => {
 	let label = 'Feliz Natal de 2023!';
 
 	const isPastChristmas = new Date() > new Date('Dec 27 2023 00:00:00 GMT-0300');
-	const isBeforeNewYear = new Date() < new Date('Dec 30 2023 00:00:00 GMT-0300');
+	const isBeforeNewYear = new Date() < new Date('Dec 31 2023 00:00:00 GMT-0300');
 	const isPastHolidays = new Date() > new Date('Jan 03 2024 00:00:00 GMT-0300');
 
 	if (isPastChristmas) {
