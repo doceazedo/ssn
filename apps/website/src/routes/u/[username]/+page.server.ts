@@ -5,14 +5,16 @@ import {
 	getUserByName,
 	getUsername
 } from 'warehouse';
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params, locals }) => {
 	const { username } = params;
 	const { identity } = locals;
 
-	if (!username) throw error(404);
+	if (!username) throw redirect(302, '/u/DoceAzedo');
+
+	if (username === '@me') throw redirect(302, `/u/${identity?.primaryUsername || 'DoceAzedo'}`);
 
 	const user = await getUsername(username);
 	if (!user) throw error(404);
