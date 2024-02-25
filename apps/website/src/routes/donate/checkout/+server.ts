@@ -24,7 +24,7 @@ export const GET = async ({ url }) => {
 			body: {
 				items: [
 					{
-						id: `donate-${username}-${days}d`,
+						id: `donate:${username}:${days}d`,
 						title: `Doação de ${username} (${days} dias)`,
 						quantity: 1,
 						currency_id: 'BRL',

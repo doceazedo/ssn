@@ -11,6 +11,7 @@
 	let username = $IDENTITY?.primaryUsername || '';
 
 	$: finalAmount = Math.floor(customAmount || amount);
+	$: isValidAmount = finalAmount >= 10 && finalAmount <= 500;
 
 	const pickAmount = (value: number) => {
 		amount = value;
@@ -60,7 +61,7 @@
 					</p>
 				</div>
 			</div>
-			{#if finalAmount >= 10 && finalAmount <= 500}
+			{#if isValidAmount}
 				<p class="notification is-info is-light">
 					Doando <b>R$ {finalAmount}</b> você terá todos os benefícios acima disponíveis por
 					<b>{amountToDuration(finalAmount)}</b>.
@@ -87,11 +88,13 @@
 				</small>
 			</p>
 			<hr />
-			<p class="is-flex is-justify-content-center">
+			<p class="is-flex is-justify-content-center" class:is-disabled={!isValidAmount}>
 				<a
 					href="/donate/checkout?amount={finalAmount}&username={username}"
-					class="button is-primary">Doar R$ {finalAmount} via MercadoPago</a
+					class="button checkout-btn is-primary"
 				>
+					Doar R$ {finalAmount} via MercadoPago
+				</a>
 			</p>
 		{:else}
 			<p class="notification is-warning is-light">
@@ -114,7 +117,8 @@
 		flex-grow: 1;
 	}
 
-	.donation-options .button {
+	.donation-options .button,
+	.checkout-btn {
 		transition: all 0.2s ease;
 	}
 
@@ -134,5 +138,14 @@
 		padding: 0.5rem 1rem;
 		border-top-right-radius: 0.75rem;
 		border-bottom-right-radius: 0.75rem;
+	}
+
+	.is-disabled {
+		cursor: not-allowed;
+	}
+
+	.is-disabled .checkout-btn {
+		opacity: 0.2;
+		pointer-events: none;
 	}
 </style>

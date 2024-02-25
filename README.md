@@ -59,13 +59,13 @@ For LuckPerms to function correctly, you'll need to start the database and creat
 docker-compose up warehouse
 ```
 
-Wait for the database to fully start up. Once it's running, execute the following command while the database is still up:
+Wait for the database to fully start up. Once it's running, execute the following command while the database is still up. Don't forget to stop the warehouse container afterwards.
 
 ```bash
 npm run warehouse:luckperms
 ```
 
-from now and then, you can start all the containers by running this command:
+From now and then, you can start all the containers by running this command:
 
 ```bash
 npm run start
@@ -89,7 +89,7 @@ All services are rebuilt on start by default.
 For deploying in production you can generally follow the development environment steps and:
 
 - Only expose the `25565` and `80` ports from your server
-- Setup the environment variables properly
+- Setup the environment variables inside ".env" properly
   - Generate random and strong passwords for the keys
   - Configure the memory allocation according to your server
   - Fill in external sevice keys (like Discord, Turnstile and SendGrid)
@@ -107,11 +107,12 @@ chmod +x ./scripts/deploy.sh
 These are known issues with the current setup of this project:
 
 - As you restart your instance multiple times, a gigantic build cache will form until your containers are out of space. When that happens, run `docker system prune -af --volumes` to delete all your docker containers and volumes.
+- Docker image building and publishing are not currently configured. Therefore, deployment requires manual steps and can take up to 10 minutes to complete.
 
 ## 🤝 Contributing
 
-First of all, thank you for your interest in making SSN.gg better! Contributions are always welcomed. Feel free to [open an issue](https://github.com/doceazedo/ssn/issues) with your suggestion or bug report, preferably in Brazilian Portuguese. Please, read our [contribution guidelines](CONTRIBUTING.md) before working on an issue.
+First of all, thank you for your interest in making SSN better! Contributions are always welcomed. Feel free to [open an issue](https://github.com/doceazedo/ssn/issues) with your suggestion or bug report, preferably in Brazilian Portuguese. Please, read our [contribution guidelines](CONTRIBUTING.md) before working on an issue.
 
 ## 📝 License
 
-The SSN.gg project is licensed under the [GPLv3 License](LICENSE).
+The SSN project is licensed under the [GPLv3 License](LICENSE).
