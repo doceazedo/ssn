@@ -19,20 +19,25 @@
     "build:funnydupe": "(cd ./plugins/funnydupe && mvn clean && mvn package && cp ./target/FunnyDupe-0.0.1.jar ../../servers/2-main/plugins)",
     "build:commander": "(cd ./plugins/commander && mvn clean && mvn package && cp ./target/Commander-0.0.1.jar ../../servers/2-main/plugins)",
     "build:commander-proxy": "(cd ./plugins/commander-proxy && mvn clean && mvn package && cp ./target/CommanderProxy-0.0.1.jar ../../servers/0-proxy/plugins)",
+    "build:waiting-room": "(cd ./plugins/waiting-room && mvn clean && mvn package && cp ./target/WaitingRoom-0.0.1.jar ../../servers/1-queue/plugins)",
     "start": "docker-compose up --build",
     "start:iam": "docker-compose up --build gateway warehouse warehouse-migrate identity-web",
     "start:website": "docker-compose up --build gateway warehouse warehouse-migrate identity-web website",
     "start:rcon": "docker-compose up --build gateway warehouse warehouse-migrate identity-web rcon minecraft-main",
     "start:minecraft": "docker-compose up gateway warehouse warehouse-migrate identity-web gatekeeper-redis gatekeeper-web minecraft-proxy minecraft-queue minecraft-main",
     "warehouse:generate": "(cd ./packages/warehouse && npx prisma generate)",
+    "warehouse:luckperms": "vite-node ./scripts/init-luckperms-db.ts",
     "docker:prune": "docker system prune --volumes",
     "postinstall": "npm run warehouse:generate"
   },
   "devDependencies": {
     "@prisma/client": "^5.5.2",
+    "@types/pg": "^8.11.1",
     "eslint-config-custom": "*",
+    "pg": "^8.11.3",
     "prettier": "latest",
-    "turbo": "^1.10.16"
+    "turbo": "^1.10.16",
+    "vite-node": "^1.3.1"
   },
   "engines": {
     "node": ">=14.0.0"

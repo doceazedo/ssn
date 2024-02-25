@@ -17,11 +17,11 @@ This monorepo uses [npm](https://www.npmjs.com/) as a package manager. It includ
 
 ## 📦 Dependencies
 
-Make sure you have **Node.js v18** installed with **npm v8** or up. You can easily change your Node version using [nvm](https://github.com/nvm-sh/nvm):
+Make sure you have **Node.js v20** installed with **npm v8** or up. You can easily change your Node version using [nvm](https://github.com/nvm-sh/nvm):
 
 ```bash
-nvm install 18
-node --version
+nvm install 20
+nvm use 20
 ```
 
 For plugin development, you will need **JDK 17** and **Maven**. To install them on macOS using [Homebrew](https://brew.sh), run:
@@ -53,6 +53,15 @@ Now, open your `/etc/hosts` file and add these lines to the end:
 ::1       ssn.local id.ssn.local gk.ssn.local rcon.ssn.local cmd.ssn.local
 ```
 
+For LuckPerms to work correctly you will need to start the database and create its tables beforehand like so:
+
+```bash
+docker-compose up warehouse
+# wait for it to startup...
+# then run while it is still up:
+npm run warehouse:luckperms
+```
+
 Start the containers by running this command:
 
 ```bash
@@ -74,7 +83,7 @@ All services are rebuilt on start by default.
 
 ## 🚀 Deploy
 
-Currently, there is no specific deployment process but you can generally follow the development environment steps and:
+For deploying in production you can generally follow the development environment steps and:
 
 - Only expose the `25565` and `80` ports from your server
 - Setup the environment variables properly
@@ -83,7 +92,12 @@ Currently, there is no specific deployment process but you can generally follow 
   - Fill in external sevice keys (like Discord, Turnstile and SendGrid)
   - Update the volume mount points to local paths
 
-Please keep in mind that these are general guidelines and your specific deployment process may differ.
+For now™, you will need to build the containers and run on your server like so:
+
+```bash
+chmod +x ./scripts/deploy.sh
+./scripts/deploy.sh
+```
 
 ## 🤒 Known issues
 

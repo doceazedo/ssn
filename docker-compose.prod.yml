@@ -141,6 +141,13 @@ services:
     volumes:
       - ./servers/0-proxy:/data
     restart: on-failure
+    environment:
+      LUCKPERMS_SERVER: "global"
+      LUCKPERMS_STORAGE_METHOD: "postgresql"
+      LUCKPERMS_DATA_ADDRESS: "warehouse"
+      LUCKPERMS_DATA_DATABASE: ${POSTGRES_DB}
+      LUCKPERMS_DATA_USERNAME: ${POSTGRES_USER}
+      LUCKPERMS_DATA_PASSWORD: ${POSTGRES_PASSWORD}
 
   minecraft-queue:
     image: amazoncorretto:17
@@ -161,6 +168,12 @@ services:
       GK_REDIS_HOST: ${GK_REDIS_HOST}
       GK_REDIS_PORT: ${GK_REDIS_PORT}
       GK_REDIS_PASSWORD: ${GK_REDIS_PASSWORD}
+      LUCKPERMS_SERVER: "global"
+      LUCKPERMS_STORAGE_METHOD: "postgresql"
+      LUCKPERMS_DATA_ADDRESS: "warehouse"
+      LUCKPERMS_DATA_DATABASE: ${POSTGRES_DB}
+      LUCKPERMS_DATA_USERNAME: ${POSTGRES_USER}
+      LUCKPERMS_DATA_PASSWORD: ${POSTGRES_PASSWORD}
     restart: on-failure
 
   minecraft-main:
@@ -184,6 +197,12 @@ services:
       LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
       CATRACA_IDENTITY_TOKEN: ${CATRACA_IDENTITY_TOKEN}
       COMMANDER_TOKEN: ${COMMANDER_TOKEN}
+      LUCKPERMS_SERVER: "global"
+      LUCKPERMS_STORAGE_METHOD: "postgresql"
+      LUCKPERMS_DATA_ADDRESS: "warehouse"
+      LUCKPERMS_DATA_DATABASE: ${POSTGRES_DB}
+      LUCKPERMS_DATA_USERNAME: ${POSTGRES_USER}
+      LUCKPERMS_DATA_PASSWORD: ${POSTGRES_PASSWORD}
     restart: on-failure
 
 volumes:
