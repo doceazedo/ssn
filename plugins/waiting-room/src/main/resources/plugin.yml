@@ -1,0 +1,6 @@
+name: WaitingRoom
+version: '${project.version}'
+main: com.doceazedo.waitingroom.WaitingRoom
+api-version: '1.19'
+libraries:
+  - org.jetbrains.kotlin:kotlin-stdlib:${kotlin.version}
