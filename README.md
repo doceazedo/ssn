@@ -53,22 +53,25 @@ Now, open your `/etc/hosts` file and add these lines to the end:
 ::1       ssn.local id.ssn.local gk.ssn.local rcon.ssn.local cmd.ssn.local
 ```
 
-For LuckPerms to work correctly you will need to start the database and create its tables beforehand like so:
+For LuckPerms to function correctly, you'll need to start the database and create its tables beforehand:
 
 ```bash
 docker-compose up warehouse
-# wait for it to startup...
-# then run while it is still up:
+```
+
+Wait for the database to fully start up. Once it's running, execute the following command while the database is still up:
+
+```bash
 npm run warehouse:luckperms
 ```
 
-Start the containers by running this command:
+from now and then, you can start all the containers by running this command:
 
 ```bash
 npm run start
 ```
 
-You should now be able to join the Minecraft server on **localhost:25565** and open [ssn.local](http://ssn.local) in your browser.
+🎉 You should now be able to join the Minecraft server using the IP **ssn.local** and open [http://ssn.local](http://ssn.local) in your browser.
 
 ## 🧰 Build
 
@@ -92,7 +95,7 @@ For deploying in production you can generally follow the development environment
   - Fill in external sevice keys (like Discord, Turnstile and SendGrid)
   - Update the volume mount points to local paths
 
-For now™, you will need to build the containers and run on your server like so:
+For now™, you'll need to build the containers and run them on your server like so:
 
 ```bash
 chmod +x ./scripts/deploy.sh
