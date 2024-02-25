@@ -23,6 +23,7 @@ object PlayerJoin : Listener {
         Catraca.instance.launch {
             e.joinMessage = ""
             e.player.teleport(spawn)
+            hidePlayers(e.player)
 
             // kick user if not registered
             val identity = getUsernameIdentity(e.player.displayName) ?: return@launch kickPlayer(e.player, Reason.NOT_REGISTERED)
@@ -53,7 +54,7 @@ object PlayerJoin : Listener {
             val isGranted = getGrantByKey(updatedFlow.grantKey) ?: return@launch kickPlayer(e.player, Reason.UNAUTHORIZED)
             if (!isGranted) return@launch kickPlayer(e.player, Reason.PROHIBITED)
 
-            // if the user wasn't kicked until this point, take them to the main server
+            // if the user wasn't kicked until this point, enqueue them
             enqueuePlayer(e.player)
         }
     }

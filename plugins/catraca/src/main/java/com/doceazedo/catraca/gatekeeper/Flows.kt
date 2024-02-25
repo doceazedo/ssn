@@ -86,6 +86,7 @@ object Flows {
         val flow = getFlow(code) ?: return null // TODO: delete flow
         if (flow.grantKey != null) {
             // TODO: delete flow
+            bar.removeAll()
             return Flow(code, flow.username, flow.ip, flow.grantKey)
         }
         val progress = bar.progress - flowProgressDecrement
