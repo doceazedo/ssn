@@ -19,7 +19,7 @@
     "build:funnydupe": "(cd ./plugins/funnydupe && mvn clean && mvn package && cp ./target/FunnyDupe-0.0.1.jar ../../servers/2-main/plugins)",
     "build:commander": "(cd ./plugins/commander && mvn clean && mvn package && cp ./target/Commander-0.0.1.jar ../../servers/2-main/plugins)",
     "build:commander-proxy": "(cd ./plugins/commander-proxy && mvn clean && mvn package && cp ./target/CommanderProxy-0.0.1.jar ../../servers/0-proxy/plugins)",
-    "build:waiting-room": "(cd ./plugins/waiting-room && mvn clean && mvn package && cp ./target/WaitingRoom-0.0.1.jar ../../servers/1-queue/plugins)",
+    "build:waiting-room": "(cd ./plugins/waiting-room && mvn clean && mvn package && cp ./target/WaitingRoom-0.0.1.jar ../../servers/1-queue/plugins && cp ./target/WaitingRoom-0.0.1.jar ../catraca/libraries/WaitingRoom-0.0.1.jar)",
     "start": "docker-compose up --build",
     "start:iam": "docker-compose up --build gateway warehouse warehouse-migrate identity-web",
     "start:website": "docker-compose up --build gateway warehouse warehouse-migrate identity-web website",

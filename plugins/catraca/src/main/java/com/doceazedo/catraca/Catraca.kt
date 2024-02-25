@@ -2,6 +2,7 @@ package com.doceazedo.catraca
 
 import com.doceazedo.catraca.enums.Env
 import com.doceazedo.catraca.events.*
+import com.doceazedo.waitingroom.api.WaitingRoomAPI
 import com.github.shynixn.mccoroutine.bukkit.registerSuspendingEvents
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
@@ -11,6 +12,7 @@ class Catraca : JavaPlugin() {
     companion object {
         lateinit var instance: Catraca
         lateinit var jedis: Jedis
+        lateinit var waitingRoomApi: WaitingRoomAPI
     }
 
     override fun onEnable() {
@@ -20,6 +22,8 @@ class Catraca : JavaPlugin() {
 
         jedis = Jedis(Env.REDIS_HOST.value, Env.REDIS_PORT.value.toInt())
         jedis.auth(Env.REDIS_PASSWORD.value)
+
+        waitingRoomApi = Bukkit.getServicesManager().load(WaitingRoomAPI::class.java)
 
         Bukkit.getPluginManager().registerSuspendingEvents(PlayerJoin, this)
         Bukkit.getPluginManager().registerEvents(EntityDamage, this)

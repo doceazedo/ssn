@@ -44,4 +44,16 @@ object Username {
             cause.printStackTrace()
         }
     }
+
+    fun logUsernameJoin(username: String) {
+        try {
+            khttp.post(
+                "${Env.IDENTITY_URL.value}/api/v1/username/$username/join",
+                mapOf("Authorization" to "Bearer ${Env.IDENTITY_TOKEN.value}")
+            )
+        } catch (cause: Throwable) {
+            Bukkit.getLogger().warning("An error ocurred when trying to fetch /api/v1/username/$username/join")
+            cause.printStackTrace()
+        }
+    }
 }

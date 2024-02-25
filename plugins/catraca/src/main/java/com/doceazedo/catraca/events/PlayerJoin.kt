@@ -7,10 +7,7 @@ import com.doceazedo.catraca.gatekeeper.Flows.createFlow
 import com.doceazedo.catraca.gatekeeper.Grants.getGrantByKey
 import com.doceazedo.catraca.gatekeeper.Grants.isUserGranted
 import com.doceazedo.catraca.identity.Username.getUsernameIdentity
-import com.doceazedo.catraca.utils.getCasedUsername
-import com.doceazedo.catraca.utils.kickPlayer
-import com.doceazedo.catraca.utils.sendPlayer
-import com.doceazedo.catraca.utils.wrongNicknameCaseMessage
+import com.doceazedo.catraca.utils.*
 import com.github.shynixn.mccoroutine.bukkit.launch
 import kotlinx.coroutines.delay
 import org.bukkit.Location
@@ -39,9 +36,7 @@ object PlayerJoin : Listener {
             // check if user is granted already
             val previousGrant = isUserGranted(identity.uuid, e.player)
             if (previousGrant == true) {
-                e.player.sendMessage("§5Logado, por favor aguarde...")
-                delay(1000) // not working without a delay for some reason
-                sendPlayer(e.player)
+                enqueuePlayer(e.player)
                 return@launch
             }
             if (previousGrant == false) return@launch kickPlayer(e.player, Reason.PROHIBITED)
@@ -59,7 +54,7 @@ object PlayerJoin : Listener {
             if (!isGranted) return@launch kickPlayer(e.player, Reason.PROHIBITED)
 
             // if the user wasn't kicked until this point, take them to the main server
-            sendPlayer(e.player)
+            enqueuePlayer(e.player)
         }
     }
 }

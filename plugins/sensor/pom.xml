@@ -17,6 +17,7 @@
         <kotlin.version>1.8.0-RC</kotlin.version>
         <mccoroutine.version>2.6.0</mccoroutine.version>
         <kotlinx-coroutines.version>1.6.4</kotlinx-coroutines.version>
+        <jedis.version>5.1.0</jedis.version>
     </properties>
 
     <build>
@@ -156,6 +157,12 @@
             <groupId>org.jetbrains.kotlinx</groupId>
             <artifactId>kotlinx-coroutines-core</artifactId>
             <version>${kotlinx-coroutines.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

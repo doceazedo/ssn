@@ -4,3 +4,8 @@ main: com.doceazedo.waitingroom.WaitingRoom
 api-version: '1.19'
 libraries:
   - org.jetbrains.kotlin:kotlin-stdlib:${kotlin.version}
+  - org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinx-coroutines.version}
+  - org.jetbrains.kotlinx:kotlinx-coroutines-reactive:${kotlinx-coroutines.version}
+  - com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:${mccoroutine.version}
+  - com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:${mccoroutine.version}
+  - redis.clients:jedis:${jedis.version}

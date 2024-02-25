@@ -1,3 +1,4 @@
 name: Catraca
 version: '${project.version}'
 main: com.doceazedo.catraca.Catraca
+depend: [WaitingRoom]

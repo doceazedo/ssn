@@ -14,7 +14,7 @@
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <kotlin.version>1.7.20</kotlin.version>
+        <kotlin.version>1.9.0</kotlin.version>
         <mccoroutine.version>2.5.0</mccoroutine.version>
         <kotlinx-coroutines.version>1.6.4</kotlinx-coroutines.version>
         <jedis.version>4.2.3</jedis.version>
@@ -171,6 +171,13 @@
             <artifactId>khttp</artifactId>
             <version>-SNAPSHOT</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.doceazedo.waitingroom</groupId>
+            <artifactId>WaitingRoom</artifactId>
+            <version>0.0.1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/libraries/WaitingRoom-0.0.1.jar</systemPath>
         </dependency>
     </dependencies>
 </project>
