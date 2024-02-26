@@ -30,7 +30,7 @@ class WaitingRoom : JavaPlugin() {
             launch {
                 QueueManager.runQueue()
             }
-        }, 0L, 20L * 2)
+        }, 0L, 20L * 5) // every 5sec
     }
 
     override fun onLoad() {
