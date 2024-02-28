@@ -53,19 +53,7 @@ Now, open your `/etc/hosts` file and add these lines to the end:
 ::1       ssn.local id.ssn.local gk.ssn.local rcon.ssn.local cmd.ssn.local
 ```
 
-For LuckPerms to function correctly, you'll need to start the database and create its tables beforehand:
-
-```bash
-docker-compose up warehouse
-```
-
-Wait for the database to fully start up. Once it's running, execute the following command while the database is still up. Don't forget to stop the warehouse container afterwards.
-
-```bash
-npm run warehouse:luckperms
-```
-
-From now and then, you can start all the containers by running this command:
+You can now start all the containers by running this command:
 
 ```bash
 npm run start
