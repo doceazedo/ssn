@@ -5,6 +5,12 @@ import { error } from '@sveltejs/kit';
 import { mercadoPago } from '$lib/api/mercado-pago';
 import { giveRank } from '$lib/api/cmd';
 import type { PaymentResponse } from 'mercadopago/dist/clients/payment/commonTypes';
+import {
+	sendDonationError,
+	sendDonationLog,
+	sendDonationMessage,
+	sendMercadoPagoLog
+} from '$lib/api/discord.js';
 
 export const POST = async ({ request }) => {
 	let body;
@@ -40,7 +46,7 @@ export const POST = async ({ request }) => {
 		throw error(500, 'Could not get payment');
 	}
 
-	// TODO: send Discord webhook
+	await sendMercadoPagoLog(body);
 
 	if (paymentData.status !== 'approved') throw error(422);
 
@@ -56,7 +62,7 @@ export const POST = async ({ request }) => {
 			if (product !== 'donate') return;
 
 			const rank = await giveRank(player, 'donator', days);
-			if (!rank) return false;
+			// if (!rank) return false;
 
 			const donation = await addDonation(
 				{
@@ -67,11 +73,18 @@ export const POST = async ({ request }) => {
 				},
 				parseInt(days)
 			);
+			if (donation) {
+				await sendDonationLog(donation, days);
+				await sendDonationMessage(donation);
+			}
 			return !!donation;
 		})
 	);
 	const ok = ranks.every((x) => !!x);
-	if (!ok) throw error(500, 'Could not process items');
+	if (!ok) {
+		await sendDonationError(body, paymentId);
+		throw error(500, 'Could not process items');
+	}
 
 	return new Response(null, {
 		status: 204

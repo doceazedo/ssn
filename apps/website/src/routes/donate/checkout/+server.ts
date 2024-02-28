@@ -12,7 +12,7 @@ export const GET = async ({ url }) => {
 	if (!username) throw error(400, 'Usuário não informado');
 	if (!validateUsername(username)) throw error(400, 'Usuário inválido');
 
-	const days = amount >= 10 ? (amount * 30) / 20 : 0;
+	const days = amount >= 10 ? Math.floor((Math.floor(amount) * 30) / 20) : 0;
 
 	const preference = new Preference(mercadoPago);
 	let checkout: PreferenceResponse;

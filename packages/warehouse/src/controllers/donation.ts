@@ -28,7 +28,6 @@ export const addDonation = async (
   );
   const expiresAt = unexpiredDonation?.expiresAt || new Date();
   expiresAt.setDate(expiresAt.getDate() + days);
-  console.log("Creating donation...");
   return await createDonation({
     ...data,
     expiresAt,
