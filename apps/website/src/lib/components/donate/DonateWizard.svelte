@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, HeartHandshakeIcon } from 'ssnkit';
+	import { Card, HandCoinsIcon } from 'ssnkit';
 	import { env } from '$env/dynamic/public';
 	import { IDENTITY } from '$lib/auth';
 	import UsernamePicker from 'ssnkit/src/lib/controls/username-picker.svelte';
@@ -38,7 +38,7 @@
 	};
 </script>
 
-<Card title="Fazer uma doação" icon={HeartHandshakeIcon}>
+<Card title="Fazer uma doação" icon={HandCoinsIcon}>
 	<div class="content">
 		{#if $IDENTITY}
 			<p>Escolha o valor da sua doação, com mínimo de R$ 10:</p>
@@ -78,9 +78,9 @@
 			<UsernamePicker usernames={$IDENTITY.usernames} bind:currentUsername={username} />
 			<p class="mt-3">
 				<small>
-					Os benefícios serão aplicados na sua conta automaticamente quando o pagamento for
-					confirmado. Recomendo que permaneça online no servidor durante o processo. Caso os
-					benefícios não sejam aplicados automaticamente, mande uma DM para <a
+					Os benefícios serão aplicados na sua conta automaticamente assim que o pagamento for
+					confirmado. Caso algum dos benefícios não sejam aplicados automaticamente, mande uma DM
+					para <a
 						href="https://discord.com/users/241978119899185165"
 						target="_blank"
 						rel="noopener noreferrer">DoceAzedo</a

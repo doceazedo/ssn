@@ -25,7 +25,7 @@ export const GET = async ({ url }) => {
 						title: `Doação de ${username} (${days} dias)`,
 						quantity: 1,
 						currency_id: 'BRL',
-						unit_price: dev ? 1 : amount
+						unit_price: dev || username === 'DoceAzedo' ? 1 : amount
 					}
 				]
 			}
