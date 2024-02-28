@@ -26,6 +26,7 @@
     "start:rcon": "docker-compose up --build gateway warehouse warehouse-migrate identity-web rcon minecraft-main",
     "start:minecraft": "docker-compose up gateway warehouse warehouse-migrate identity-web gatekeeper-redis gatekeeper-web minecraft-proxy minecraft-queue minecraft-main",
     "warehouse:generate": "(cd ./packages/warehouse && npx prisma generate)",
+    "warehouse:migrate": "(cd ./packages/warehouse && npx prisma migrate dev)",
     "warehouse:luckperms": "vite-node ./scripts/init-luckperms-db.ts",
     "docker:prune": "docker system prune --volumes",
     "postinstall": "npm run warehouse:generate"

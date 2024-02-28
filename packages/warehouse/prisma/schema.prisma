@@ -42,6 +42,7 @@ model Username {
   isOnline      Boolean   @default(false)
   badges        UsernameBadges[]
   profile       Profile?
+  donations     Donation[]
 }
 
 model Invite {
@@ -100,6 +101,71 @@ model Connection {
   ownerId      String
 }
 
+model Donation {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  amount    Int
+  paymentId String
+  gateway   PaymentGateway
+  owner     Username @relation(fields: [ownerName], references: [name])
+  ownerName String
+}
+
+model luckperms_user_permissions {
+  id          Int       @id @default(autoincrement())
+  uuid        String    @db.VarChar(36)
+  permission  String    @db.VarChar(200)
+  value       Boolean
+  server      String    @db.VarChar(36)
+  world       String    @db.VarChar(64)
+  expiry      BigInt
+  contexts    String    @db.VarChar(200)
+
+  @@index([uuid], name: "luckperms_user_permissions_uuid")
+}
+
+model luckperms_group_permissions {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.VarChar(36)
+  permission  String    @db.VarChar(200)
+  value       Boolean
+  server      String    @db.VarChar(36)
+  world       String    @db.VarChar(64)
+  expiry      BigInt
+  contexts    String    @db.VarChar(200)
+
+  @@index([name], name: "luckperms_group_permissions_name")
+}
+
+model luckperms_players {
+  uuid          String    @id @db.VarChar(36)
+  username      String    @db.VarChar(16)
+  primary_group String    @db.VarChar(36)
+
+  @@index([username], name: "luckperms_players_username")
+}
+
+model luckperms_groups {
+  name String @id @db.VarChar(36)
+}
+
+model luckperms_actions {
+  id          Int       @id @default(autoincrement())
+  time        BigInt
+  actor_uuid  String    @db.VarChar(36)
+  actor_name  String    @db.VarChar(100)
+  type        String    @db.Char(1)
+  acted_uuid  String    @db.VarChar(36)
+  acted_name  String    @db.VarChar(36)
+  action      String    @db.VarChar(300)
+}
+
+model luckperms_tracks {
+  name   String  @id @db.VarChar(36)
+  groups String  @db.Text
+}
+
 enum Role {
   USER
   ADMIN
@@ -107,4 +173,8 @@ enum Role {
 
 enum Service {
   DISCORD
+}
+
+enum PaymentGateway {
+  MERCADO_PAGO
 }

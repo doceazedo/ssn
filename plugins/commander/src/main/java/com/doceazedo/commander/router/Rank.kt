@@ -16,8 +16,7 @@ data class GiveRankRequest(
 fun Route.rankRoute() {
     post("/give-rank") {
         val request = call.receive<GiveRankRequest>()
-        Console.exec("lp user ${request.player} parent addtemp ${request.rank} ${request.duration}")
-        Console.exec("lpb user ${request.player} parent addtemp ${request.rank} ${request.duration}", true)
+        Console.exec("lp user ${request.player} parent addtemp ${request.rank} ${request.duration} accumulate")
         call.respond(HttpStatusCode.NoContent)
     }
 }

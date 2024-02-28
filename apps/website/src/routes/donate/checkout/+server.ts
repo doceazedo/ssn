@@ -1,8 +1,8 @@
-import { MercadoPagoConfig, Preference } from 'mercadopago';
+import { Preference } from 'mercadopago';
 import { error, redirect } from '@sveltejs/kit';
-import type { PreferenceResponse } from 'mercadopago/dist/clients/preference/commonTypes.js';
-import { env } from '$env/dynamic/private';
 import { dev } from '$app/environment';
+import { mercadoPago } from '$lib/api/mercado-pago';
+import type { PreferenceResponse } from 'mercadopago/dist/clients/preference/commonTypes.js';
 
 export const GET = async ({ url }) => {
 	const amount = parseInt(url.searchParams.get('amount') || '0');
@@ -14,10 +14,7 @@ export const GET = async ({ url }) => {
 
 	const days = amount >= 10 ? (amount * 30) / 20 : 0;
 
-	const client = new MercadoPagoConfig({
-		accessToken: env.MERCADOPAGO_ACCESS_TOKEN || ''
-	});
-	const preference = new Preference(client);
+	const preference = new Preference(mercadoPago);
 	let checkout: PreferenceResponse;
 	try {
 		checkout = await preference.create({
