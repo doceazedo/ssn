@@ -2,5 +2,5 @@
 cd "$(dirname "$0")"
 source ../.env
 
-(cd .. && $DOCKER compose up -d) &&
+(cd .. && $DOCKER compose -f docker-compose.prod.yml up -d) &&
 ./discord-webhook.sh --maintenance-done
