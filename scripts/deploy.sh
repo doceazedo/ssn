@@ -9,4 +9,5 @@ docker compose -f docker-compose.prod.yml up --build -d gatekeeper-redis gatekee
 docker builder prune -f &&
 docker compose -f docker-compose.prod.yml up --build -d melonbot rcon &&
 docker builder prune -f &&
-docker compose -f docker-compose.prod.yml up --build -d minecraft-proxy minecraft-queue minecraft-main
+docker compose -f docker-compose.prod.yml up --build -d minecraft-proxy minecraft-queue minecraft-main &&
+npm run discord-webhook -- --maintenance-done

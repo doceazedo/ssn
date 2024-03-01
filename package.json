@@ -29,6 +29,9 @@
     "warehouse:migrate": "(cd ./packages/warehouse && npx prisma migrate dev)",
     "warehouse:luckperms": "vite-node ./scripts/init-luckperms-db.ts",
     "docker:prune": "docker system prune --volumes",
+    "broadcast": "npx vite-node ./scripts/broadcast.ts",
+    "discord-webhook": "npx vite-node ./scripts/discord-webhook.ts",
+    "kick-all": "npx vite-node ./scripts/kick-all.ts",
     "postinstall": "npm run warehouse:generate"
   },
   "devDependencies": {
