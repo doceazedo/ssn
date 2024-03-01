@@ -1,3 +1,6 @@
 #!/bin/bash
-docker compose up -f docker-compose.prod.yml -d &&
-npm run discord-webhook -- --maintenance-done
+cd "$(dirname "$0")"
+source ../.env
+
+(cd .. && $DOCKER compose up -d) &&
+./discord-webhook.sh --maintenance-done

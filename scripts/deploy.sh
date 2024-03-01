@@ -1,13 +1,16 @@
 #!/bin/bash
-docker compose -f docker-compose.prod.yml up --build -d gateway warehouse warehouse-migrate &&
-docker builder prune -f &&
-docker compose -f docker-compose.prod.yml up --build -d website &&
-docker builder prune -f  &&
-docker compose -f docker-compose.prod.yml up --build -d identity-web &&
-docker builder prune -f &&
-docker compose -f docker-compose.prod.yml up --build -d gatekeeper-redis gatekeeper-web &&
-docker builder prune -f &&
-docker compose -f docker-compose.prod.yml up --build -d melonbot rcon &&
-docker builder prune -f &&
-docker compose -f docker-compose.prod.yml up --build -d minecraft-proxy minecraft-queue minecraft-main &&
-npm run discord-webhook -- --maintenance-done
+cd "$(dirname "$0")"
+source ../.env
+
+$DOCKER compose -f docker-compose.prod.yml up --build -d gateway warehouse warehouse-migrate &&
+$DOCKER builder prune -f &&
+$DOCKER compose -f docker-compose.prod.yml up --build -d website &&
+$DOCKER builder prune -f  &&
+$DOCKER compose -f docker-compose.prod.yml up --build -d identity-web &&
+$DOCKER builder prune -f &&
+$DOCKER compose -f docker-compose.prod.yml up --build -d gatekeeper-redis gatekeeper-web &&
+$DOCKER builder prune -f &&
+$DOCKER compose -f docker-compose.prod.yml up --build -d melonbot rcon &&
+$DOCKER builder prune -f &&
+$DOCKER compose -f docker-compose.prod.yml up --build -d minecraft-proxy minecraft-queue minecraft-main &&
+./discord-webhook.sh --maintenance-done
