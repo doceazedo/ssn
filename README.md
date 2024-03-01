@@ -19,15 +19,15 @@ This monorepo uses [npm](https://www.npmjs.com/) as a package manager. It includ
 
 Make sure you have **Node.js v20** installed with **npm v8** or up. You can easily change your Node version using [nvm](https://github.com/nvm-sh/nvm):
 
-```bash
-nvm install 20
-nvm use 20
+```sh
+$ nvm install 20
+$ nvm use 20
 ```
 
 For plugin development, you will need **JDK 17** and **Maven**. To install them on macOS using [Homebrew](https://brew.sh), run:
 
-```bash
-brew install openjdk@17 maven
+```sh
+$ brew install openjdk@17 maven
 ```
 
 Finally, you will also need to have **Docker** and **Docker Compose** installed. You can easily get both by installing the much recommended [Docker Desktop](https://www.docker.com/products/docker-desktop).
@@ -36,14 +36,14 @@ Finally, you will also need to have **Docker** and **Docker Compose** installed.
 
 First off, install the dependencies by running the following command:
 
-```bash
-npm install
+```sh
+$ npm install
 ```
 
 Then, you will need to setup your environment variables. You can do this by copying the example file:
 
-```bash
-cp .env.example .env
+```sh
+$ cp .env.example .env
 ```
 
 Now, open your `/etc/hosts` file and add these lines to the end:
@@ -55,8 +55,8 @@ Now, open your `/etc/hosts` file and add these lines to the end:
 
 You can now start all the containers by running this command:
 
-```bash
-npm run start
+```sh
+$ npm run start
 ```
 
 🎉 You should now be able to join the Minecraft server using the IP **ssn.local** and open [http://ssn.local](http://ssn.local) in your browser.
@@ -65,9 +65,9 @@ npm run start
 
 To build a plugin and copy the artifact to the server, you can run this command:
 
-```bash
+```sh
 # npm run build:plugin-name
-npm run build:catraca
+$ npm run build:catraca
 ```
 
 All services are rebuilt on start by default.
@@ -85,10 +85,39 @@ For deploying in production you can generally follow the development environment
 
 For now™, you'll need to build the containers and run them on your server like so:
 
-```bash
-chmod +x ./scripts/deploy.sh
-./scripts/deploy.sh
+```sh
+$ chmod +x ./scripts/deploy.sh
+$ ./scripts/deploy.sh
 ```
+
+### 🔄 Auto restart
+
+To enable automatic restarts, you'll need to setup a cron job to run the [`scripts/restart.sh`](./scripts/restart.sh) script. Begin by making all scripts in the scripts directory executable:
+
+```sh
+$ find scripts -type f -iname "*.sh" -exec chmod +x {} \;
+```
+
+Then, get the full path to the restart script:
+
+```sh
+$ realpath ./scripts/restart.sh
+# /path/to/restart.sh
+```
+
+Finally, you can use `crontab` to add your cron job as you wish. I like to run it every day, a minute before 6am (to account for the restart warning) — remember to check your system time beforehand!
+
+```sh
+$ crontab -e
+# if vim opens by default you can also use:
+# EDITOR="nano" crontab -e
+```
+
+```
+59 5 * * * /path/to/restart.sh
+```
+
+If you need help with cron, you can refer to [crontab.guru](https://crontab.guru).
 
 ## 🤒 Known issues
 
