@@ -65,6 +65,8 @@ class Commander : JavaPlugin() {
                                 execRoute()
                                 rankRoute()
                                 playerRoute()
+                                kickAll()
+                                broadcast()
                             }
                         }
                     }
