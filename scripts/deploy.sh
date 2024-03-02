@@ -14,4 +14,4 @@ $DOCKER builder prune -f &&
 $DOCKER compose -f docker-compose.prod.yml up --build -d melonbot rcon &&
 $DOCKER builder prune -f &&
 $DOCKER compose -f docker-compose.prod.yml up --build -d minecraft-proxy minecraft-queue minecraft-main &&
-./discord-webhook.sh --maintenance-done
+./scripts/discord-webhook.sh --maintenance-done
