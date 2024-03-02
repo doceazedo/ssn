@@ -2,6 +2,7 @@
 cd "$(dirname "$0")"
 source ../.env
 
+cd .. &&
 $DOCKER compose -f docker-compose.prod.yml up --build -d gateway warehouse warehouse-migrate &&
 $DOCKER builder prune -f &&
 $DOCKER compose -f docker-compose.prod.yml up --build -d website &&
