@@ -1,5 +1,5 @@
 import {
-	getDonationStatus,
+	getDonatorStatus,
 	getProfileByUsername,
 	getProfileLike,
 	getUserBadges,
@@ -29,7 +29,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 	const profile = await getProfileByUsername(user.name);
 	if (!profile) throw error(404);
 
-	const isDonator = await getDonationStatus(user.name);
+	const isDonator = await getDonatorStatus(user.name);
 
 	let hasLiked = false;
 	let isOwner = false;

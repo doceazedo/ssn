@@ -185,7 +185,11 @@
 		<Card title="Sobre mim">
 			<div class="content">
 				{#if data.aboutMe}
-					<SvelteMarkdown source={cleanAboutMe} />
+					{#if data.isDonator}
+						<SvelteMarkdown source={cleanAboutMe} />
+					{:else}
+						<p>{cleanAboutMe}</p>
+					{/if}
 				{:else}
 					Ainda não conhecemos {data.user.name} muito bem...
 				{/if}

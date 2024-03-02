@@ -23,7 +23,7 @@ export const filterDonators = async (users: string[]) => {
   return Array.from(new Set(donations.map((x) => x.ownerName)));
 };
 
-export const getDonationStatus = async (user: string) => {
+export const getDonatorStatus = async (user: string) => {
   const donations = await prisma.donation.findMany({
     where: {
       ownerName: user,

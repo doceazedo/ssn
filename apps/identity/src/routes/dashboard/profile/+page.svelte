@@ -98,9 +98,8 @@
 							/>
 						</div>
 						<p class="help">
-							Você pode usar
-							<a href="https://www.markdownguide.org/cheat-sheet" target="_blank">Markdown</a>
-							ou HTML para estilizar o texto.
+							Doadores podem usar Markdown para estilizar o texto.
+							<a href="{env.PUBLIC_WEBSITE_URL}/donate" target="_blank"> Saiba mais. </a>
 						</p>
 					</div>
 				</div>
