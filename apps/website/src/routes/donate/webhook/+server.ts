@@ -3,7 +3,7 @@ import { addDonation } from 'warehouse';
 import { env } from '$env/dynamic/private';
 import { error } from '@sveltejs/kit';
 import { mercadoPago } from '$lib/api/mercado-pago';
-import { giveRank } from '$lib/api/cmd';
+import { broadcast, giveRank } from '$lib/api/cmd';
 import type { PaymentResponse } from 'mercadopago/dist/clients/payment/commonTypes';
 import {
 	sendDonationError,
@@ -53,16 +53,13 @@ export const POST = async ({ request }) => {
 	const items = paymentData.additional_info?.items || [];
 	const ranks = await Promise.all(
 		items.map(async (item) => {
-			// FIXME: debug, remove this later
-			if (item.id === 'donate-30d') item.id = 'donate:DoceAzedo:30d';
-
 			const data = item.id.split(':');
 			if (data.length !== 3) return;
 			const [product, player, days] = data;
 			if (product !== 'donate') return;
 
 			const rank = await giveRank(player, 'donator', days);
-			// if (!rank) return false;
+			if (!rank) return false;
 
 			const donation = await addDonation(
 				{
@@ -76,6 +73,15 @@ export const POST = async ({ request }) => {
 			if (donation) {
 				await sendDonationLog(donation, days);
 				await sendDonationMessage(donation);
+				await broadcast(
+					[
+						' ',
+						`§6§l${donation.ownerName} §b§ldoou §6§lR$ ${donation.amount} §b§lpara o SSN!`,
+						`§b§lDoe em §6§l§nhttps://${env.PUBLIC_IDENTITY_URL}/doar§b§l e ganhe recompensas!`,
+						' '
+					],
+					true
+				);
 			}
 			return !!donation;
 		})

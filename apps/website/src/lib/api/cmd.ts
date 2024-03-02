@@ -21,3 +21,23 @@ export const giveRank = async (player: string, rank: string, duration: string) =
 		return false;
 	}
 };
+
+export const broadcast = async (message: string | string[], sound = false) => {
+	try {
+		const messages = Array.isArray(message) || [message];
+		const resp = await fetch(`${baseUrl}/private/broadcast`, {
+			method: 'POST',
+			body: JSON.stringify({
+				messages,
+				sound
+			}),
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${env.COMMANDER_TOKEN}`
+			}
+		});
+		return resp.ok;
+	} catch (error) {
+		return false;
+	}
+};
