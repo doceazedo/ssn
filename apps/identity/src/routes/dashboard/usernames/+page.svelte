@@ -10,9 +10,8 @@
 		PrimaryUsernameModal
 	} from '$lib/modals';
 	import type { Username } from '@prisma/client';
-	import type { PageServerData } from './$types';
 
-	export let data: PageServerData;
+	export let data;
 
 	let isNewUserModalOpen = false;
 	let isChangeUsernameModalOpen = false;
@@ -53,12 +52,13 @@
 					<h1 class="title is-5 mb-1">
 						{username.name}
 						{#if $IDENTITY?.primaryUsername === username.name}
-							<span class="tag is-primary">Principal</span>
+							<span class="tag">Principal</span>
+						{/if}
+						{#if data.donators.includes(username.name)}
+							<span class="tag is-gold">Doador</span>
 						{/if}
 						{#if username.isOnline}
 							<span class="tag is-primary">Online</span>
-						{:else}
-							<span class="tag">Offline</span>
 						{/if}
 					</h1>
 					<p>

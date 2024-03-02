@@ -11,6 +11,30 @@ export const getUserDonations = async (user: string) =>
     },
   });
 
+export const filterDonators = async (users: string[]) => {
+  const donations = await prisma.donation.findMany({
+    where: {
+      OR: users.map((user) => ({ ownerName: user })),
+      expiresAt: {
+        gt: new Date(),
+      },
+    },
+  });
+  return Array.from(new Set(donations.map((x) => x.ownerName)));
+};
+
+export const getDonationStatus = async (user: string) => {
+  const donations = await prisma.donation.findMany({
+    where: {
+      ownerName: user,
+      expiresAt: {
+        gt: new Date(),
+      },
+    },
+  });
+  return donations.length > 0;
+};
+
 const createDonation = async (
   data: Omit<Donation, "id" | "createdAt">
 ): Promise<Donation | null> =>
@@ -22,6 +46,7 @@ export const addDonation = async (
   data: Omit<Donation, "id" | "createdAt" | "expiresAt">,
   days: number
 ) => {
+  // TODO: this could use `where: { expiresAt: { gt: new Date() } }`
   const donations = await getUserDonations(data.ownerName);
   const unexpiredDonation = donations.find(
     (donation) => donation.expiresAt.getTime() > Date.now()

@@ -1,4 +1,5 @@
 import {
+	getDonationStatus,
 	getProfileByUsername,
 	getProfileLike,
 	getUserBadges,
@@ -28,6 +29,8 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 	const profile = await getProfileByUsername(user.name);
 	if (!profile) throw error(404);
 
+	const isDonator = await getDonationStatus(user.name);
+
 	let hasLiked = false;
 	let isOwner = false;
 	if (identity) {
@@ -49,6 +52,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		likes: profile._count.likes,
 		hasLiked,
 		isOwner,
-		isOnline: profile.showOnline && user.isOnline
+		isOnline: profile.showOnline && user.isOnline,
+		isDonator
 	};
 };

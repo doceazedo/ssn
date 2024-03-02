@@ -1,5 +1,6 @@
+import crypto from 'crypto';
 import { Payment } from 'mercadopago';
-import { addDonation } from 'warehouse';
+import { addDonation, giveDonationBadge } from 'warehouse';
 import { env } from '$env/dynamic/private';
 import { error } from '@sveltejs/kit';
 import { mercadoPago } from '$lib/api/mercado-pago';
@@ -12,7 +13,7 @@ import {
 	sendMercadoPagoLog
 } from '$lib/api/discord.js';
 
-export const POST = async ({ request }) => {
+export const POST = async ({ request, url }) => {
 	let body;
 	try {
 		body = await request.json();
@@ -22,13 +23,24 @@ export const POST = async ({ request }) => {
 
 	const signature = request.headers.get('x-signature');
 	if (!signature) throw error(400, 'Signature header not found');
-	const signatureV1 =
-		signature
-			.split(',')
-			.map((x) => x.split('='))
-			.find(([key]) => key == 'v1')?.[1] || null;
-	if (!signatureV1) throw error(400, 'Signature V1 not found');
-	if (signatureV1 !== env.MERCADOPAGO_WEBHOOK_SIGNATURE) throw error(401, 'Invalid signature');
+
+	const requestId = request.headers.get('x-request-id');
+	if (!requestId) throw error(400, 'Request ID not found');
+
+	const signatureMap = new Map(signature.split(',').map((x) => x.split('=')) as [string, string][]);
+	const signatureV1 = signatureMap.get('v1');
+	const timestamp = signatureMap.get('ts');
+	if (!signatureV1 || !timestamp) throw error(400, 'Invalid signature V1 not found');
+
+	const dataId = url.searchParams.get('data.id');
+	if (!dataId) throw error(400, 'Data ID not found');
+
+	const signatureTemplateParsed = `id:${dataId};request-id:${requestId};ts:${timestamp};`;
+	const cyphedSignature = crypto
+		.createHmac('sha256', env.MERCADOPAGO_WEBHOOK_SIGNATURE)
+		.update(signatureTemplateParsed)
+		.digest('hex');
+	if (cyphedSignature !== signatureV1) throw error(401, 'Invalid signature');
 
 	const type = body.type;
 	if (!type || type !== 'payment') throw error(400, 'Webhook must be of type payment');
@@ -70,6 +82,7 @@ export const POST = async ({ request }) => {
 				},
 				parseInt(days)
 			);
+			await giveDonationBadge(player);
 			if (donation) {
 				await sendDonationLog(donation, days);
 				await sendDonationMessage(donation);

@@ -34,10 +34,12 @@
 					<b>Falar colorido no chat:</b> você vai poder usar códigos para deixar suas mensagens coloridas;
 				</li>
 				<li>
-					<b>Cor do nome personalizada:</b> escolha a cor que seu nome aparece no chat e no TAB*;
+					<b>Cor do nome personalizada:</b> escolha a cor que seu nome aparece no chat com
+					<code>/cor</code>;
 				</li>
 				<li>
-					<b>Personalizar skin:</b> altere sua skin pelo seu painel*, mesmo sem Minecraft original;
+					<b>Personalizar skin:</b> altere sua skin com o comando <code>/skin</code>, mesmo sem
+					Minecraft original;
 				</li>
 				<li>
 					<b>Personalizar perfil:</b> você poderá usar Markdown para personalizar
@@ -48,12 +50,11 @@
 					>
 					do SSN;
 				</li>
+				<li>
+					<b>Emblema:</b> adicione um emblema exclusivo de doador ao seu perfil permanentemente;
+				</li>
 				<li><b>Cargo no Discord:</b> ganhe um cargo exclusivo no nosso Discord.</li>
 			</ul>
-
-			<p>
-				<small>* Disponível em breve</small>
-			</p>
 		</div>
 	</Card>
 

@@ -10,9 +10,8 @@
 	import { browser } from '$app/environment';
 	import { getProfileSocials, toggleProfileLike, type ProfileSocials } from '$lib/profile';
 	import { SocialButton } from 'ssnkit';
-	import type { PageServerData } from './$types';
 
-	export let data: PageServerData;
+	export let data;
 
 	const siteName = 'SSN.gg';
 	const pageTitle = `${data.user.name} | Perfil no ${siteName}`;
@@ -103,7 +102,7 @@
 	let cleanAboutMe: string;
 	onMount(async () => {
 		if (!browser) return;
-		cleanAboutMe = DOMPurify.sanitize(data.aboutMe);
+		cleanAboutMe = DOMPurify.sanitize(`${data.aboutMe}`);
 
 		socials = await getProfileSocials(data.user.name);
 	});
@@ -129,7 +128,10 @@
 
 <PageTitle title={data.user.name} class="mb-6">
 	<svelte:fragment slot="title">
-		{#if data.isOnline}
+		{#if data.isDonator}
+			<span class="tag is-gold">Doador</span>
+		{/if}
+		{#if data.isOnline || true}
 			<span class="beacon" />
 		{/if}
 	</svelte:fragment>
@@ -229,6 +231,7 @@
       color: #fff
       border-radius: .25rem
       transition: all .2s ease
+      z-index: 1
   
     &:not(:hover)::before
       transform: translateY(-.25rem)

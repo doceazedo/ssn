@@ -48,7 +48,6 @@ export const sendDonationLog = async (donation: Donation, duration: string) => {
 				].join('\n')
 			})
 		});
-		console.log({ ok: resp.ok });
 		return resp.ok;
 	} catch (error) {
 		return false;
