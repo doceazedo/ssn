@@ -26,9 +26,9 @@ settings:
 spawn-limits:
   water-ambient: 3
   water-underground-creature: 5
-  axolotls: 5
-  monsters: 30
-  animals: 10
+  axolotls: 3
+  monsters: 15
+  animals: 8
   water-animals: 3
   ambient: 1
 chunk-gc:

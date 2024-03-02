@@ -89,7 +89,7 @@ world-settings:
     seed-mineshaft: default
     seed-stronghold: default
     verbose: true
-    mob-spawn-range: 4
+    mob-spawn-range: 6
     growth:
       beetroot-modifier: 100
       carrot-modifier: 100
