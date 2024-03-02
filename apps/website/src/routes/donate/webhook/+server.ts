@@ -90,7 +90,7 @@ export const POST = async ({ request, url }) => {
 					[
 						' ',
 						`§6§l${donation.ownerName} §b§ldoou §6§lR$ ${donation.amount} §b§lpara o SSN!`,
-						`§b§lDoe em §6§l§nhttps://${env.PUBLIC_IDENTITY_URL}/doar§b§l e ganhe recompensas!`,
+						`§b§lDoe em §6§l§nhttps://ssn.gg/doar§b§l e ganhe recompensas!`,
 						' '
 					],
 					true
