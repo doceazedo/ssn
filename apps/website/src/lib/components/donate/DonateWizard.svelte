@@ -47,6 +47,7 @@
 					<button
 						class="button"
 						class:is-active={amount == option && !customAmount}
+						class:is-hidden-mobile={option >= 60}
 						on:click={() => pickAmount(option)}
 					>
 						R$ {option}
@@ -56,7 +57,7 @@
 					<p class="control">
 						<span class="button is-static">R$</span>
 					</p>
-					<p class="control">
+					<p class="control is-fullwidth">
 						<input class="input" type="number" placeholder="100" bind:value={customAmount} />
 					</p>
 				</div>
@@ -147,5 +148,15 @@
 	.is-disabled .checkout-btn {
 		opacity: 0.2;
 		pointer-events: none;
+	}
+
+	@media screen and (max-width: 768px) {
+		.donation-options {
+			flex-wrap: wrap;
+		}
+
+		.is-fullwidth {
+			width: 100%;
+		}
 	}
 </style>
