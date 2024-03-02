@@ -1,0 +1,9 @@
+name: InFlightConn
+version: '${project.version}'
+main: com.doceazedo.inflightconn.InFlightConn
+libraries:
+  - org.jetbrains.kotlin:kotlin-stdlib:${kotlin.version}
+  - org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinx-coroutines.version}
+  - org.jetbrains.kotlinx:kotlinx-coroutines-reactive:${kotlinx-coroutines.version}
+  - com.github.shynixn.mccoroutine:mccoroutine-bungeecord-api:${mccoroutine.version}
+  - com.github.shynixn.mccoroutine:mccoroutine-bungeecord-core:${mccoroutine.version}
