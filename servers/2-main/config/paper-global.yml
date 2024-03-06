@@ -124,7 +124,7 @@ unsupported-settings:
   allow-grindstone-overstacking: false
   allow-headless-pistons: false
   allow-permanent-block-break-exploits: false
-  allow-piston-duplication: false
+  allow-piston-duplication: true
   perform-username-validation: true
 watchdog:
   early-warning-delay: 10000
