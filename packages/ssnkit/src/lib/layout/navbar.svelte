@@ -27,8 +27,8 @@
       icon: HeartHandshakeIcon,
     },
     {
-      label: "Sobre o SSN",
-      href: `${websiteBaseUrl}/about`,
+      label: "Wiki",
+      href: `https://wiki.ssn.gg`,
       icon: BookMarkedIcon,
     },
     {
