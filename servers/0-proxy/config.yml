@@ -12,7 +12,7 @@ listeners:
   - queue
   bind_local_address: true
   host: 0.0.0.0:25565
-  max_players: 200
+  max_players: 75
   tab_size: 60
   force_default_server: true
 remote_ping_cache: -1
