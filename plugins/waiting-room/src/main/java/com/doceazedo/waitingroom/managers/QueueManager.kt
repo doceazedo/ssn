@@ -18,7 +18,8 @@ object QueueManager {
         if (!PlayerCount.isFull()) {
             WaitingRoom.intance.launch {
                 player.sendMessage("§5Por favor, aguarde...")
-                delay(500)
+                // https://github.com/PaperMC/Paper/issues/8222#issuecomment-1203535484
+                delay(2500)
                 sendPlayer(player)
             }
             return
