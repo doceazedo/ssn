@@ -18,28 +18,18 @@ export const POST: RequestHandler = async ({ params, request }) =>
 			isOnline: true
 		});
 
-		await giveSeasonBadges(username.name);
+		await giveBirthdayBadge(username.name);
 
 		return json({
 			username: updatedUsername
 		});
 	});
 
-const giveSeasonBadges = async (username: string) => {
-	let slug = 'christmas-2023';
-	let label = 'Feliz Natal de 2023!';
+const giveBirthdayBadge = async (username: string) => {
+	if (new Date() > new Date('Mar 25 2024 00:00:00 GMT-0300')) return;
 
-	const isPastChristmas = new Date() > new Date('Dec 27 2023 00:00:00 GMT-0300');
-	const isBeforeNewYear = new Date() < new Date('Dec 31 2023 00:00:00 GMT-0300');
-	const isPastHolidays = new Date() > new Date('Jan 03 2024 00:00:00 GMT-0300');
-
-	if (isPastChristmas) {
-		slug = 'new-year-2024';
-		label = 'Feliz 2024!';
-	}
-	if (isPastChristmas && isBeforeNewYear) return;
-	if (isPastHolidays) return;
-
+	const slug = '4th-anniversary';
+	const label = 'Feliz 4 anos, SSN!';
 	const badge = await prisma.badge.upsert({
 		where: {
 			slug
