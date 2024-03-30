@@ -84,8 +84,8 @@ checks:
       actions: cancel
     fastbreak:
       active: default
-      strict: true
-      delay: 95
+      strict: false
+      delay: 90
       intervalsurvival: 100
       grace: 2000
       actions: cancel
@@ -95,7 +95,7 @@ checks:
       intervalsurvival: 45
       shortterm:
         ticks: 5
-        limit: 7
+        limit: 8
       actions: cancel vl>5 log:bbfrequency:3:5:i cancel vl>40 log:bbfrequency:0:5:if
         cancel cmdc:kickfrequency:0:5
     noswing:
