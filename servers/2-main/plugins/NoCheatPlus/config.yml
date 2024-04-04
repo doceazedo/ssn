@@ -121,7 +121,7 @@ checks:
       active: true
       actions: cancel log:breach:5:6:i
     speed:
-      active: true
+      active: false
       interval: 250
       limit: 3
       actions: cancel
