@@ -80,7 +80,7 @@ checks:
   blockbreak:
     active: default
     direction:
-      active: true
+      active: false
       actions: cancel
     fastbreak:
       active: default
