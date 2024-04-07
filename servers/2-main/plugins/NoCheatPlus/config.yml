@@ -306,8 +306,8 @@ checks:
   combined:
     active: default
     enderpearl:
-      active: true
-      preventclickblock: true
+      active: false
+      preventclickblock: false
     improbable:
       active: false
       level: 250
