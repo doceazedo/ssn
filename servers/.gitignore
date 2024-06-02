@@ -25,6 +25,7 @@ crash-reports
 tmp
 versions
 libraries
+.paper-remapped
 
 # Bungeecord generated files
 locations.yml

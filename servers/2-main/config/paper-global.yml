@@ -12,9 +12,12 @@
 # Discord: https://discord.gg/papermc
 # Website: https://papermc.io/
 
-_version: 28
-async-chunks:
-  threads: -1
+_version: 29
+block-updates:
+  disable-chorus-plant-updates: false
+  disable-mushroom-block-updates: false
+  disable-noteblock-updates: false
+  disable-tripwire-updates: false
 chunk-loading:
   autoconfig-send-distance: true
   enable-frustum-priority: false
@@ -26,6 +29,14 @@ chunk-loading:
   player-max-chunk-load-rate: -1.0
   player-max-concurrent-loads: 20.0
   target-player-chunk-send-rate: 100.0
+chunk-loading-advanced:
+  auto-config-send-distance: true
+  player-max-concurrent-chunk-generates: 0
+  player-max-concurrent-chunk-loads: 0
+chunk-loading-basic:
+  player-max-chunk-generate-rate: -1.0
+  player-max-chunk-load-rate: 100.0
+  player-max-chunk-send-rate: 75.0
 chunk-system:
   gen-parallelism: default
   io-threads: -1
@@ -54,8 +65,6 @@ item-validation:
   resolve-selectors-in-books: false
 logging:
   deobfuscate-stacktraces: true
-  log-player-ip-addresses: true
-  use-rgb-for-named-text-colors: true
 messages:
   kick:
     authentication-servers-down: <lang:multiplayer.disconnect.authservers_down>
@@ -69,6 +78,7 @@ misc:
   chat-threads:
     chat-executor-core-size: -1
     chat-executor-max-size: -1
+  compression-level: default
   fix-entity-position-desync: true
   lag-compensate-block-breaking: true
   load-permissions-yml-before-plugins: true
@@ -121,10 +131,12 @@ timings:
   url: https://timings.aikar.co/
   verbose: true
 unsupported-settings:
-  allow-grindstone-overstacking: false
   allow-headless-pistons: false
   allow-permanent-block-break-exploits: false
   allow-piston-duplication: true
+  allow-tripwire-disarming-exploits: false
+  allow-unsafe-end-portal-teleportation: false
+  compression-format: ZLIB
   perform-username-validation: true
 watchdog:
   early-warning-delay: 10000

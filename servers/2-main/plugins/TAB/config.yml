@@ -125,6 +125,7 @@ placeholders:
   date-format: dd.MM.yyyy
   time-format: '[HH:mm:ss / h:mm a]'
   time-offset: 0
+  register-tab-expansion: true
 placeholder-output-replacements:
   '%essentials_vanished%':
     'yes': '&7| Vanished'
@@ -225,3 +226,4 @@ playerlist-objective:
   fancy-value: '&7Ping: %ping%'
 ping-spoof:
   enabled: false
+permission-refresh-interval: 1000

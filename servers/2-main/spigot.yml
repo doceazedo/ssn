@@ -65,6 +65,8 @@ stats:
   forced-stats: {}
 world-settings:
   default:
+    seed-trailruins: 83469867
+    seed-trialchambers: 94251327
     below-zero-generation-in-existing-chunks: true
     view-distance: default
     simulation-distance: default
@@ -91,6 +93,7 @@ world-settings:
     verbose: true
     mob-spawn-range: 6
     growth:
+      pitcherplant-modifier: 100
       beetroot-modifier: 100
       carrot-modifier: 100
       potato-modifier: 100
