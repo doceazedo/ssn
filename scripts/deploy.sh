@@ -12,7 +12,9 @@ $DOCKER compose -f docker-compose.prod.yml up --build -d identity-web &&
 $DOCKER system prune -af --volumes &&
 $DOCKER compose -f docker-compose.prod.yml up --build -d gatekeeper-redis gatekeeper-web &&
 $DOCKER system prune -af --volumes &&
-$DOCKER compose -f docker-compose.prod.yml up --build -d melonbot rcon &&
+$DOCKER compose -f docker-compose.prod.yml up --build -d melonbot &&
+$DOCKER system prune -af --volumes &&
+$DOCKER compose -f docker-compose.prod.yml up --build -d rcon &&
 $DOCKER system prune -af --volumes &&
 $DOCKER compose -f docker-compose.prod.yml up --build -d minecraft-proxy minecraft-queue minecraft-main &&
 ./scripts/discord-webhook.sh --maintenance-done
