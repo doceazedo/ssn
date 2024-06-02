@@ -38,14 +38,14 @@ object PlayerJoin : Listener {
         // https://wiki.vg/Protocol_version_numbers
         val api = Via.getAPI()
         val version = api.getPlayerVersion(e.player)
-        if (version > 762) { // > 1.9.4
-            e.player.sendMessage("§6§l[§e§l!§6§l] §e§lVocê está usando uma versão acima da §6§l1.19.4§e§l. Em caso de problemas, recomendamos usar a §6§l1.19.4§e§l.")
+        if (version > 766) { // > 1.20.6
+            e.player.sendMessage("§6§l[§e§l!§6§l] §e§lVocê está usando uma versão acima da §6§l1.20.6§e§l. Em caso de problemas, recomendamos usar a §6§l1.20.6§e§l.")
             e.player.sendMessage(" ")
         } else if (version < 755) { // < 1.17
-            e.player.sendMessage("§4§l[§c§l!§4§l] §c§lVocê está usando uma versão abaixo da §4§l1.17§c§l. Você não poderá ver abaixo do nível 0. Se possível, use a versão §4§l1.19.4§c§l.")
+            e.player.sendMessage("§4§l[§c§l!§4§l] §c§lVocê está usando uma versão abaixo da §4§l1.17§c§l. Você não poderá ver abaixo do nível 0. Se possível, use a versão §4§l1.20.6§c§l.")
             e.player.sendMessage(" ")
-        } else if (version < 759) { // < 1.19
-            e.player.sendMessage("§6§l[§e§l!§6§l] §e§lVocê está usando uma versão abaixo da §6§l1.19.4§e§l. Em caso de problemas, recomendamos usar a §6§l1.19.4§e§l.")
+        } else if (version < 763) { // < 1.20
+            e.player.sendMessage("§6§l[§e§l!§6§l] §e§lVocê está usando uma versão abaixo da §6§l1.20§e§l. Em caso de problemas, recomendamos usar a §6§l1.20.6§e§l.")
             e.player.sendMessage(" ")
         }
 

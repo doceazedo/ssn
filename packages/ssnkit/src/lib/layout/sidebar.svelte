@@ -33,7 +33,7 @@
     <li>
       <JoystickIcon />
       <span>
-        Java Edition 1.19.4
+        Java Edition 1.20.6
         <small>Compatível com 1.9.x ou superior</small>
       </span>
     </li>
