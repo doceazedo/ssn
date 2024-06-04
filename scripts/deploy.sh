@@ -17,4 +17,5 @@ $DOCKER system prune -af --volumes &&
 $DOCKER compose -f docker-compose.prod.yml up --build -d rcon &&
 $DOCKER system prune -af --volumes &&
 $DOCKER compose -f docker-compose.prod.yml up --build -d minecraft-proxy minecraft-queue minecraft-main &&
+$DOCKER system prune -af --volumes &&
 ./scripts/discord-webhook.sh --maintenance-done
