@@ -15,7 +15,4 @@ sleep 5 &&
 ./discord-webhook.sh --daily-restart &&
 ./kick-all.sh "§cO servidor está sendo reiniciado" &&
 (cd .. && $DOCKER compose down) &&
-(cd .. && $DOCKER system prune -af --volumes) &&
-(cd .. && $DOCKER compose -f docker-compose.prod.yml up -d) &&
-sleep 10 && # spigot server starting might take a while
-./discord-webhook.sh --maintenance-done
+(sh ./deploy.sh)
