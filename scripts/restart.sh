@@ -15,4 +15,4 @@ sleep 5 &&
 ./discord-webhook.sh --daily-restart &&
 ./kick-all.sh "§cO servidor está sendo reiniciado" &&
 (cd .. && $DOCKER compose down) &&
-(sh ./deploy.sh)
+(sh ./start.sh)

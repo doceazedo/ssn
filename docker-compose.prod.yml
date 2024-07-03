@@ -11,16 +11,13 @@ services:
       - ./traefik.yml:/etc/traefik/traefik.yml
 
   identity-web:
+    image: doceazedo/ssn-identity-web:latest
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.identity.entrypoints=web"
       - "traefik.http.routers.identity.rule=Host(`id.${PUBLIC_BASE_DOMAIN}`)"
     ports:
       - "3000:3000"
-    build:
-      context: .
-      dockerfile: ./apps/identity/Dockerfile
-      target: ${NODE_ENV}
     environment:
       PUBLIC_BASE_DOMAIN: ${PUBLIC_BASE_DOMAIN}
       PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
@@ -54,8 +51,7 @@ services:
       - "5432:5432"
 
   warehouse-migrate:
-    build:
-      context: ./packages/warehouse
+    image: doceazedo/ssn-warehouse-migrate:latest
     depends_on:
       - warehouse
     restart: on-failure
@@ -63,16 +59,13 @@ services:
       DATABASE_URL: ${DATABASE_URL}
 
   gatekeeper-web:
+    image: doceazedo/ssn-gatekeeper-web:latest
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.gatekeeper.entrypoints=web"
       - "traefik.http.routers.gatekeeper.rule=Host(`gk.${PUBLIC_BASE_DOMAIN}`)"
     ports:
       - "3001:3000"
-    build:
-      context: .
-      dockerfile: ./apps/gatekeeper/Dockerfile
-      target: ${NODE_ENV}
     environment:
       PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
       PUBLIC_GATEKEEPER_URL: ${PUBLIC_GATEKEEPER_URL}
@@ -88,16 +81,13 @@ services:
       - ${MNT_GATEKEEPER}:/data
 
   website:
+    image: doceazedo/ssn-website:latest
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.website.entrypoints=web"
       - "traefik.http.routers.website.rule=Host(`${PUBLIC_BASE_DOMAIN}`)"
     ports:
       - "3002:3000"
-    build:
-      context: .
-      dockerfile: ./apps/website/Dockerfile
-      target: ${NODE_ENV}
     environment:
       PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
       PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
@@ -111,23 +101,20 @@ services:
       DISCORD_WEBHOOK_PAYMENTS: ${DISCORD_WEBHOOK_PAYMENTS}
 
   rcon:
+    image: doceazedo/ssn-rcon:latest
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.rcon.entrypoints=web"
       - "traefik.http.routers.rcon.rule=Host(`rcon.${PUBLIC_BASE_DOMAIN}`)"
     ports:
       - "443:443"
-    build:
-      context: .
-      dockerfile: ./apps/rcon/Dockerfile
     restart: on-failure
     environment:
       PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
       LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
 
   melonbot:
-    build:
-      context: ./apps/melonbot
+    image: doceazedo/ssn-melonbot:latest
     environment:
       PUBLIC_DISCORD_CLIENT_ID: ${PUBLIC_DISCORD_CLIENT_ID}
       DISCORD_CLIENT_SECRET: ${DISCORD_CLIENT_SECRET}

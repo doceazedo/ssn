@@ -70,24 +70,35 @@ To build a plugin and copy the artifact to the server, you can run this command:
 $ npm run build:catraca
 ```
 
-All services are rebuilt on start by default.
+To build (and publish) the server Docker images, run:
+
+```sh
+$ chmod +x ./scripts/build-and-publish.sh # once
+$ ./scripts/build-and-publish.sh
+```
 
 ## 🚀 Deploy
 
-For deploying in production you can generally follow the development environment steps and:
+For deploying in production, clone this repository to your server. Alternatively, copy only the following files to your server:
 
-- Only expose the `25565` and `80` ports from your server
-- Setup the environment variables inside ".env" properly
-  - Generate random and strong passwords for the keys
-  - Configure the memory allocation according to your server
-  - Fill in external sevice keys (like Discord, Turnstile and SendGrid)
-  - Update the volume mount points to local paths
+- [docker-compose.prod.yml](./docker-compose.prod.yml)
+- [.env.example](./.env.example) (rename this to .env)
+- [/servers](./servers)
 
-For now™, you'll need to build the containers and run them on your server like so:
+Setup the environment variables inside ".env" properly:
+
+- Generate random and strong passwords for the keys
+- Configure the memory allocation according to your server
+- Fill in external sevice keys (like Discord, Turnstile and SendGrid)
+- Update the volume mount points to local paths
+
+You will need to expose the `25565` and `80` ports from your server according to your hosting provider instructions.
+
+Then simply run:
 
 ```sh
-$ chmod +x ./scripts/deploy.sh
-$ ./scripts/deploy.sh
+$ chmod +x ./scripts/start.sh # once
+$ ./scripts/start.sh
 ```
 
 ### 🔄 Auto restart
@@ -118,13 +129,6 @@ $ crontab -e
 ```
 
 If you need help with cron, you can refer to [crontab.guru](https://crontab.guru).
-
-## 🤒 Known issues
-
-These are known issues with the current setup of this project:
-
-- As you restart your instance multiple times, a gigantic build cache will form until your containers are out of space. When that happens, run `docker system prune -af --volumes` to delete all your docker containers and volumes.
-- Docker image building and publishing are not currently configured. Therefore, deployment requires manual steps and can take up to 10 minutes to complete.
 
 ## 🤝 Contributing
 
