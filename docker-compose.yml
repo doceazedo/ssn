@@ -131,21 +131,6 @@ services:
         source: ./packages
         target: /app/packages
 
-  rcon:
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.rcon.entrypoints=web"
-      - "traefik.http.routers.rcon.rule=Host(`rcon.${PUBLIC_BASE_DOMAIN}`)"
-    ports:
-      - "443:443"
-    build:
-      context: .
-      dockerfile: ./apps/rcon/Dockerfile
-    restart: on-failure
-    environment:
-      PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
-      LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
-
   melonbot:
     build:
       context: ./apps/melonbot

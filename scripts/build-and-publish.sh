@@ -5,7 +5,6 @@ services=(
   "warehouse-migrate"
   "gatekeeper-web"
   "website"
-  "rcon"
   "identity-web"
   "melonbot"
 )

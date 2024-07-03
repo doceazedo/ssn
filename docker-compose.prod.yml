@@ -100,19 +100,6 @@ services:
       DISCORD_WEBHOOK_DONATIONS: ${DISCORD_WEBHOOK_DONATIONS}
       DISCORD_WEBHOOK_PAYMENTS: ${DISCORD_WEBHOOK_PAYMENTS}
 
-  rcon:
-    image: doceazedo/ssn-rcon:latest
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.rcon.entrypoints=web"
-      - "traefik.http.routers.rcon.rule=Host(`rcon.${PUBLIC_BASE_DOMAIN}`)"
-    ports:
-      - "443:443"
-    restart: on-failure
-    environment:
-      PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
-      LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
-
   melonbot:
     image: doceazedo/ssn-melonbot:latest
     environment:
