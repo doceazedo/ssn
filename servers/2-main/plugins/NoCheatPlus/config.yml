@@ -91,7 +91,7 @@ checks:
       actions: cancel
     frequency:
       active: true
-      intervalcreative: 95
+      intervalcreative: 45
       intervalsurvival: 45
       shortterm:
         ticks: 5
@@ -114,7 +114,7 @@ checks:
   blockinteract:
     active: true
     direction:
-      active: true
+      active: false
       actions: cancel vl>15 cancel log:bdirection:4:8:i vl>200 cancel log:bdirection:1:5:if
         cmdc:kickillegalblockinteract:1:5
     reach:
