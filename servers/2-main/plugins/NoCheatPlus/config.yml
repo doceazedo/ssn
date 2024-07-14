@@ -142,7 +142,7 @@ checks:
       actions: cancel
     fastplace:
       active: true
-      limit: 30
+      limit: 35
       shortterm:
         ticks: 25
         limit: 13
@@ -152,10 +152,10 @@ checks:
       actions: cancel vl>5 cancel log:fastplace:8:3:i vl>20 cancel log:fastplace:2:4:i
         vl>80 cancel log:fastplace:0:10:if
     reach:
-      active: default
+      active: true
       actions: cancel
     noswing:
-      active: default
+      active: true
       exceptions:
       - WATER_LILY
       - FLINT_AND_STEEL
