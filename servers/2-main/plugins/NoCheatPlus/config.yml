@@ -138,7 +138,7 @@ checks:
       skipempty: false
       actions: cancel vl>10 log:bautosign:0:3:if cancel
     direction:
-      active: true
+      active: false
       actions: cancel
     fastplace:
       active: true
