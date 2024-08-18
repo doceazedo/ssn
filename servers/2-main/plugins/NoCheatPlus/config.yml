@@ -530,7 +530,7 @@ checks:
             maxheight: 128
           modifiers: false
           resetFwOnground: false
-          strict: true
+          strict: false
       actions: cancel
     morepackets:
       active: default
