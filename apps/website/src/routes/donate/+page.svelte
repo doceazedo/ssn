@@ -63,15 +63,15 @@
 	<Card title="Pra onde vai o dinheiro?" icon={PiggyBankIcon}>
 		<div class="content">
 			<p>
-				O SSN não tem fins lucrativos e precisa de doações para funcionar. Felizmente, grande parte
-				dos custos é nula. A máquina, com 8 vCPU, 24GB de RAM e 200GB de armazenamento é hospedada
-				gratuitamente pela Oracle Cloud Infrastructure (OCI) em São Paulo.
+				O SSN não tem fins lucrativos e precisa de doações para funcionar. A máquina com 8 vCPU e
+				24GB de RAM é hospedada gratuitamente pela Oracle Cloud Infrastructure (OCI) em São Paulo.
 			</p>
 			<p>Hoje, os custos do SSN se resumem em:</p>
 			<ul>
+				<li><b>300 GB</b> de armazenamento que custa cerca de <b>R$ 60/mês</b>;</li>
 				<li>
-					<b>Backups</b> diários, semanais, mensais e anuais que custam, atualmente, cerca de
-					<b>R$ 20/mês</b>;
+					<b>Backups</b> diários, semanais, mensais e anuais que custam cerca de
+					<b>R$ 85/mês</b>;
 				</li>
 				<li>A renovação do domínio <b>"ssn.gg"</b> que custa cerca de <b>R$ 350/ano</b>;</li>
 				<li>Ocasionais <b>parcerias pagas</b> com criadores de conteúdo de diferentes portes;</li>
