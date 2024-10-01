@@ -23,6 +23,7 @@ version_history.json
 whitelist.json
 crash-reports
 tmp
+tmp-client
 versions
 libraries
 .paper-remapped
