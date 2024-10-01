@@ -1,4 +1,4 @@
-version: "3.7"
+version: "4"
 
 services:
   gateway:
@@ -12,6 +12,7 @@ services:
 
   identity-web:
     image: doceazedo/ssn-identity-web:latest
+    pull_policy: always
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.identity.entrypoints=web"
@@ -52,6 +53,7 @@ services:
 
   warehouse-migrate:
     image: doceazedo/ssn-warehouse-migrate:latest
+    pull_policy: always
     depends_on:
       - warehouse
     restart: on-failure
@@ -60,6 +62,7 @@ services:
 
   gatekeeper-web:
     image: doceazedo/ssn-gatekeeper-web:latest
+    pull_policy: always
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.gatekeeper.entrypoints=web"
@@ -82,6 +85,7 @@ services:
 
   website:
     image: doceazedo/ssn-website:latest
+    pull_policy: always
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.website.entrypoints=web"
@@ -102,6 +106,7 @@ services:
 
   melonbot:
     image: doceazedo/ssn-melonbot:latest
+    pull_policy: always
     environment:
       PUBLIC_DISCORD_CLIENT_ID: ${PUBLIC_DISCORD_CLIENT_ID}
       DISCORD_CLIENT_SECRET: ${DISCORD_CLIENT_SECRET}
