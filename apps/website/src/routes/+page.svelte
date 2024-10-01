@@ -73,17 +73,48 @@
 				sozinho, ou pedir ajuda pra alguém.
 			</p>
 			<p>
-				<ClientsTable />
+				Se você não sabe qual escolher, recomendo o <a
+					href="https://meteorclient.com/"
+					target="_blank"
+					rel="noopener noreferrer">Meteor</a
+				>, que é uma das opções gratuitas e de código aberto mais populares disponíveis. Além do
+				mais, ele te permite instalar
+				<i
+					><a href="https://anticope.pages.dev/addons" target="_blank" rel="noopener noreferrer"
+						>addons</a
+					></i
+				>
+				que adicionam ainda mais funcionalidades, a exemplo do
+				<a href="https://github.com/KassuK1/BlackOut" target="_blank" rel="noopener noreferrer"
+					>Blackout</a
+				> que conta com recursos melhorados para combate.
+			</p>
+			<div class="buttons">
+				<a
+					href="https://meteorclient.com"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="button is-primary"
+				>
+					Baixar Meteor
+				</a>
+				<a
+					href="https://github.com/KassuK1/BlackOut"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="button"
+				>
+					Baixar addon Blackout
+				</a>
+			</div>
+			<p>
+				Sempre baixe mods dos sites oficiais, use opções que bastante gente já usa e, se você souber
+				como, confira o código você mesmo. Evite mods que são "pirateados" ou vazados, porque pode
+				ser difícil saber qual é seguro de verdade.
 			</p>
 			<p>
-				Minha dica é experimentar alguns desses e ver qual você curte mais. Alguns até funcionam bem
-				juntos se você quiser usar mais de um ao mesmo tempo.
-			</p>
-			<p>
-				Mas olha, todos esses mods podem ser perigosos. Por isso, é melhor baixar só dos sites
-				oficiais, usar os mods que bastante gente já usa e, se você souber como, conferir o código
-				você mesmo. Evite mods que são "pirateados" ou vazados, porque pode ser difícil saber qual é
-				seguro de verdade.
+				<b>Importante:</b> eu não tenho nenhum tipo de relação com os mods mencionados. Não conheço os
+				criadores deles e também não me responsabilizo se algo der errado. Use por sua conta e risco!
 			</p>
 		</div>
 	</Card>
