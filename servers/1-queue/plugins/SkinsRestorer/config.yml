@@ -20,6 +20,7 @@
 
 # (!) IF YOU ARE USING A PROXY (BungeeCord, Waterfall or Velocity), YOU NEED TO INSTALL SKINSRESTORER ON THE PROXY AND ALL SERVERS! (!)
 # (!) YOU ALSO NEED TO CONFIGURE YOUR SERVERS TO DETECT THE PROXY! (!)
+# (!) AND YOU ALSO NEED TO PUT THE SAME CONFIG FILE IN ALL PROXIES AND SERVERS! (!)
 # (!) You can find detailed proxy instructions here: https://skinsrestorer.net/docs/installation
 
 ##########
@@ -42,14 +43,15 @@ messages:
     # Every message sent by the plugin will use the players client locale if a translation is available.
     # If disabled, the config locale will be used instead.
     perIssuerLocale: true
+    # How dates are formatted by the plugin in messages. Format is explained here:
+    # https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/format/DateTimeFormatter.html
+    dateFormat: dd MMMM yyyy
 
 ############
 # Database #
 ############
 
 # Settings for databases skin storage (recommended for large networks with a lot of skins)
-# [!] IF YOU USE A PROXY, DO NOT ENABLE MYSQL in the Spigot / Backend config.yml [!]
-# [!] Non-root users: MySQL 8's new default authentication is not supported, use mysql_native_password [!]
 # [!] Make sure you have the correct permissions set for your MySQL user. [!]
 # [!] Make sure to fill in database.connectionOptions if you're using certificate / ssl authentication. [!]
 # [!] If you're not using ssl, change sslMode=trust to sslMode=disable [!]
@@ -72,8 +74,10 @@ database:
 # To learn more about commands and permissions, visit: https://skinsrestorer.net/docs/configuration/commands-permissions
 commands:
     # For all player commands to work by default, you need to give players the permission 'skinsrestorer.player'.
-    # This option allows you to force the default permission (skinsrestorer.player) to be given to all players if the value is not set explicitly.
+    # This option allows you to force the default permission (skinsrestorer.player) to be given to all players.
     # A value of 'false' will disable this behaviour, and players will need to be given the permission explicitly.
+    # This is because some platforms (like BungeeCord) do not have a default permission system.
+    # If your platform supports default permissions, this option is ignored.
     forceDefaultPermissions: true
     # Players cooldown in seconds when changing skins (set to 0 to disable).
     # SkinErrorCooldown is used when an error or invalid url occurs.
@@ -100,16 +104,26 @@ commands:
         list: 
         - steve
         - owner
+    # To enable per skin permissions you must agree to these rules:
+    # - Do not monetize players being able to use their own skin
+    # - Do not force players to steve skins and make them pay to use their own skin
+    # - You can charge them for custom skins, but not their own skin
+    # If you agree, set this to: 'I will follow the rules'
+    perSkinPermissionsConsent: ''
     # Allows the usage of per-skin permission.
     # Example: skinsrestorer.skin.xknat OR skinsrestorer.skin.Pistonmaster
-    # with "skinsrestorer.ownskin" players can run /skin set %playerusername%.
+    # with "skinsrestorer.ownskin" players can run /skin set <their own name>.
     # [!] Only enable if you have set up permissions properly and know what you are doing.
+    # [!] This option only works if 'commands.perSkinPermissionsConsent' is consented to.
     perSkinPermissions: false
-    # Removes < > and [ ] encasing from command arguments.
-    # Example: /skin set <skin> will become /skin set skin if this is enabled.
-    # This is useful to prevent players from incorrectly using the command, as those brackets are not supposed to be there.
-    # This will also send a message to the player that they incorrectly use the command, but the command will still run fixed arguments.
-    removeBrackets: true
+    # How many commands to store in the player's command history.
+    # This is used for the /skin undo command.
+    # Use 0 to disable storing command history.
+    maxHistoryLength: 36
+    # How many favourites a player may have.
+    # This is used for the /skin favourite command.
+    # Use 0 to disable storing favourites.
+    maxFavouriteLength: 180
     customHelp:
         # Override the automatically generated translated help message with a custom one.
         # This is useful if you want to have a custom help message for your server.
@@ -130,15 +144,49 @@ commands:
     # Do not disable this unless you are overriding the /skins command with a different plugin or you don't want the GUI command.
     # Requires a server restart to take effect.
     disableGUICommand: false
-# Custom skins for the /skins GUI.
-# This setting will allow custom skins to be shown in the GUI.
-# customGUI.showOnlyCustomGUI will allow only custom skins from customGUI.list to show up in the GUI.
-customGUI:
-    enabled: false
-    showOnlyCustomGUI: false
-    list: 
-    - xknat
-    - pistonmaster
+
+# Control what skins appear in the /skins GUI
+gui:
+    # Control what skin is displayed when a player does not have permission for a skin.
+    # This is the end part of the skin texture URL.
+    # You can obtain the texture URL from /sr info skin <skinName>
+    notUnlockedSkin: c10591e6909e6a281b371836e462d67a2c78fa0952e910f32b41a26c48c1757c
+    # Control custom skins in the /skins GUI
+    custom:
+        # Whether custom skins are enabled in the /skins GUI
+        enabled: false
+        # Order of custom skins relative to the other skin types
+        index: 0
+        # Whether only specific custom skins are allowed in the /skins GUI
+        onlyShowList: false
+        # Specific custom skins to show in the /skins GUI
+        list: 
+        - xknat
+        - pistonmaster
+    # Control player skins in the /skins GUI
+    players:
+        # Whether player skins are enabled in the /skins GUI
+        enabled: false
+        # Order of player skins relative to the other skin types
+        index: 1
+        # Whether only specific player skins are allowed in the /skins GUI
+        onlyShowList: false
+        # Specific player skins to show in the /skins GUI
+        list: 
+        - 7dcfc130-344a-4719-9fbe-3176bc2075c6
+        - b1ae0778-4817-436c-96a3-a72c67cda060
+    # Control recommended skins in the /skins GUI
+    recommendations:
+        # Whether recommended skins are enabled in the /skins GUI
+        enabled: true
+        # Order of recommended skins relative to the other skin types
+        index: 2
+        # Whether only specific recommended skins are allowed in the /skins GUI
+        onlyShowList: false
+        # Specific recommended skins to show in the /skins GUI
+        list: 
+        - vampire
+        - space-suit
 
 ###########
 # Storage #
@@ -174,13 +222,15 @@ storage:
 # Change proxy specific settings here.
 proxy:
     # Disable all SkinsRestorer commands on specific backend servers.
-    # [!] This only works & is relevant if you're using proxies like bungee / waterfall
+    # [!] This only works & is relevant if you're using proxies like BungeeCord / Velocity
     notAllowedCommandServers:
+        # Whether to enable the backend server command blocking feature.
         enabled: true
-        # Whether ONLY servers from the list below are allowed to use SkinsRestorer commands.
-        allowList: false
-        # Block players from executing SkinsRestorer commands before having joined a server. (RECOMMENDED)
+        # Block players from executing SkinsRestorer commands before having joined a server.
         ifNoServerBlockCommand: false
+        # When false means servers in the list are NOT allowed to execute SkinsRestorer commands, true means ONLY servers in the list are allowed to execute SkinsRestorer commands.
+        allowList: false
+        # List of servers where SkinsRestorer commands are allowed/disallowed depending on the 'allowList' setting.
         list: 
         - auth
 
@@ -203,6 +253,13 @@ server:
     # Dismounts all passengers mounting a player (such as plugins that let you ride another player), preventing those players from becoming desynced.
     # File override = ./plugins/SkinsRestorer/enableDismountEntities.txt
     dismountPassengersOnSkinUpdate: false
+    sound:
+        # Play a sound when a player runs /skin to change their skin.
+        enabled: true
+        # Sound to play when a player runs /skin to change their skin.
+        # You can find the allowed format and values at
+        # https://javadoc.io/static/com.github.cryptomorin/XSeries/11.0.0/com/cryptomorin/xseries/XSound.html#parse(java.lang.String)
+        value: ENTITY_PLAYER_TELEPORT, 0.7
 login:
     # Stops the process of setting a skin if the LoginEvent was canceled by an AntiBot plugin.
     # [?] Unsure? leave this true for better performance.
@@ -214,6 +271,16 @@ api:
     # Key can be requested from https://mineskin.org/apikey
     # [?] A key is not required, but recommended.
     mineskinAPIKey: key
+    # SkinsRestorer uses MineSkin to generate usable skins from links.
+    # All skins generated by MineSkin are by default shown in their public gallery on their website.
+    # Enabling this option will hide all skins generated by MineSkin from their public gallery.
+    mineskinSecretSkins: false
+    # SkinsRestorer provides curated recommended skins for players to use
+    # These skin can be used via /skin random and the /skins GUI
+    # If you would like to opt out of this feature, set this to false.
+    # It will prevent loading of recommended skins from storage and downloading new ones.
+    # Be aware that commands like /skin random will not work without this feature.
+    fetchRecommendedSkins: true
 
 ###############
 # Danger Zone #
@@ -231,17 +298,6 @@ advanced:
     # It also fixes all resource pack skin apply issues.
     # If your players are experiencing extremely long loading screens, try disabling this.
     enablePaperJoinListener: true
-    # <!! Warning !!>
-    # This enables the PaperMC async tab event integration that allows async command tab completions.
-    # It is recommended over the bukkit command system as tab completions will not lag the server using it.
-    # Only disable this if you're overriding a SkinsRestorer command like /skin with a different plugin.
-    enablePaperAsyncTabListener: true
-    # <!! Warning !!>
-    # When enabled if a skin gets applied on the proxy, the new texture will be forwarded to the backend as well.
-    # This is optional sometimes as the backend may pick up the new one of the proxy.
-    # It is recommended though to **KEEP THIS ON** because it keeps the backend data in sync.
-    # This feature is required for solutions like RedisBungee and also fixes bugs in some cases.
-    forwardTextures: true
     # <!! Warning !!>
     # When enabled SkinsRestorer will not try to connect to any web server, which means the follow things won't work:
     # Getting new skins from Mojang, looking up uuids of players, skin url, update checking and more.
@@ -268,20 +324,18 @@ dev:
 # End #
 
 # Useful tools:
-# Vectier Thailand has made some super cool "Custom Skin" tools that you can use!
 # 
 # SkinFile Generator:
 # With SkinFile Generator, you can upload your own custom skin to get a unique .skin file that you can put in your skins folder, to use with SkinsRestorer.
-# Check it out here: https://skinsrestorer.github.io/SkinFile-Generator/
+# Check it out here: https://generator.skinsrestorer.net
 # 
-# SkinSystem :
-# With SkinSystem, you, as a server owner, can connect AuthMe (and forum) with the SkinSystem website that you can host, to give your players the ability to upload custom skins.
+# SkinSystem:
+# With SkinSystem, you, as a server owner, can connect AuthMe with the SkinSystem website that you can host, to give your players the ability to upload custom skins.
 # Check it out here: https://github.com/SkinsRestorer/SkinSystem
 # 
 # Useful Links #
-# Website: https://skinsrestorer.net/
-# Download: https://github.com/SkinsRestorer/SkinsRestorerX/releases
-# Wiki https://github.com/SkinsRestorer/SkinsRestorerX/wiki/
-# Spigot: https://www.spigotmc.org/resources/skinsrestorer.2124/
-# Github: https://github.com/SkinsRestorer/SkinsRestorerX/
-# Discord: https://discord.me/SkinsRestorer/
+# Website: https://skinsrestorer.net
+# Docs: https://skinsrestorer.net/docs
+# Spigot: https://skinsrestorer.net/spigot
+# Github: https://github.com/SkinsRestorer/SkinsRestorer
+# Discord: https://skinsrestorer.net/discord

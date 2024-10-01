@@ -31,6 +31,8 @@ settings:
   restart-script: ./start.sh
   netty-threads: 4
   attribute:
+    maxAbsorption:
+      max: 2048.0
     maxHealth:
       max: 2048.0
     movementSpeed:
@@ -65,6 +67,7 @@ stats:
   forced-stats: {}
 world-settings:
   default:
+    unload-frozen-chunks: false
     seed-trailruins: 83469867
     seed-trialchambers: 94251327
     below-zero-generation-in-existing-chunks: true
