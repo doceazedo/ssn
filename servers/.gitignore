@@ -23,7 +23,6 @@ version_history.json
 whitelist.json
 crash-reports
 tmp
-tmp-client
 versions
 libraries
 .paper-remapped
@@ -45,3 +44,5 @@ ignored.yml
 colored-names.yml
 Citizens
 WorldEdit
+tmp-client
+recommendations.json
