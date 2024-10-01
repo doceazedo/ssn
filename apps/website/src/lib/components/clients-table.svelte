@@ -2,14 +2,14 @@
 	const clients = [
 		{
 			name: 'Meteor',
-			version: '1.20.2',
+			version: '1.21.1',
 			openSource: true,
 			link: 'https://meteorclient.com',
 			logo: 'meteor.png'
 		},
 		{
 			name: 'Aristois',
-			version: '1.20.2',
+			version: '1.21.1',
 			openSource: false,
 			link: 'https://aristois.net',
 			logo: 'aristois.png'

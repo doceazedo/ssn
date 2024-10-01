@@ -42,14 +42,14 @@
 		<div class="content">
 			<p>
 				Você pode jogar com qualquer versão da 1.9 pra cima, mas é melhor jogar na <b
-					>versão 1.20.6</b
+					>versão 1.21.1</b
 				>. Se você comprou o Minecraft, é só baixar o
 				<a href="https://minecraft.net/pt-br/download" target="_blank">programa oficial</a>
 				no site deles. Se não, pode usar o
 				<a href="https://tlaun.ch" target="_blank">TL Legacy</a>.
 			</p>
 			<ol>
-				<li>Abra o Minecraft e escolha a versão 1.20.6</li>
+				<li>Abra o Minecraft e escolha a versão 1.21.1</li>
 				<li>Adicione o servidor usando o IP <CopyIpTag /></li>
 				<li>Se cadastre no site com seu e-mail e uma senha, ou usando seu Discord</li>
 			</ol>
