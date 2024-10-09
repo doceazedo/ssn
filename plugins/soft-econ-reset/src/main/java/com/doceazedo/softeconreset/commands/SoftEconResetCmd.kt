@@ -75,12 +75,11 @@ object SoftEconResetCmd : SuspendingCommandExecutor {
             }
 
             // shulker box
-            if (item.type == Material.SHULKER_BOX) {
+            if (item.itemMeta is BlockStateMeta) {
+                Bukkit.getLogger().info("Checking Shulker Box inside inventory")
                 val itemMeta = item.itemMeta as BlockStateMeta
                 val shulker = itemMeta.blockState as ShulkerBox
-                Bukkit.getLogger().info("Checking Shulker Box inside inventory")
-                val shulkerInv = checkInventory(shulker.inventory)
-                shulker.inventory.contents = shulkerInv.contents
+                shulker.inventory.contents = checkInventory(shulker.inventory).contents
                 itemMeta.blockState = shulker
                 item.itemMeta = itemMeta
             }
