@@ -24,7 +24,7 @@ object Teleport {
         val chunk: Chunk = loc.chunk
         if (!chunk.isLoaded) chunk.load(true)
 
-        loc.y = w.getHighestBlockYAt(loc).toDouble()
+        loc.y = w.getHighestBlockYAt(loc).toDouble() + 1
         val floor: Block = loc.block.getRelative(BlockFace.DOWN)
 
         if (!floor.type.isSolid) return getRandomLocation()
