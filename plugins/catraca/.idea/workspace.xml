@@ -5,11 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c1cd4cd0-04a0-4ce5-995f-d89442cb1798" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/commands/LoginCmd.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/commands/RegisterCmd.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/managers/CaptchaManager.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/managers/GatekeeperManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apps/identity/src/lib/captcha/validate-captcha.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../apps/identity/src/lib/captcha/validate-captcha.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../servers/1-queue/plugins/Catraca-0.0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/Catraca.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/Catraca.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/events/PlayerChat.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/events/PlayerChat.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/events/PlayerCommand.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/events/PlayerCommand.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/events/PlayerJoin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/events/PlayerJoin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/events/PlayerQuit.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/events/PlayerQuit.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/managers/IdentityManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/managers/IdentityManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../servers/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../servers/0-proxy/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/0-proxy/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../servers/0-proxy/plugins/SkinsRestorer/recommendations.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/0-proxy/plugins/SkinsRestorer/recommendations.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../servers/1-queue/plugins/Catraca-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/1-queue/plugins/Catraca-1.0.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../servers/1-queue/plugins/Catraca/config.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../servers/1-queue/plugins/SkinsRestorer/recommendations.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/1-queue/plugins/SkinsRestorer/recommendations.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../servers/1-queue/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/1-queue/server.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../servers/2-main/plugins/NoCheatPlus/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/2-main/plugins/NoCheatPlus/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../servers/2-main/plugins/SkinsRestorer/recommendations.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/2-main/plugins/SkinsRestorer/recommendations.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../servers/2-main/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/2-main/server.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +83,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1728955964639</updated>
-      <workItem from="1728955965630" duration="9600000" />
+      <workItem from="1728955965630" duration="25674000" />
     </task>
     <servers />
   </component>

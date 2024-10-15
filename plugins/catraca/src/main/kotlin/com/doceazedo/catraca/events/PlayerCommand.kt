@@ -9,6 +9,6 @@ object PlayerCommand : Listener {
     @EventHandler
     fun onPlayerCommand(event: PlayerCommandPreprocessEvent) {
         Bukkit.getLogger().info("Comando: ${event.message}")
-        event.isCancelled = true
+        // event.isCancelled = true
     }
 }

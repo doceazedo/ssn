@@ -7,3 +7,6 @@ spawn:
   z: -522.5
   pitch: -5.0
   yaw: 165.0
+captchas:
+  - image: "eJxLSwOC5OTkNBhINgFCOCc5FSGFIoOiJy3NCIlpZATECB6qHKYeAIsKMGQ="
+    answers: [flor, flower]
