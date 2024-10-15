@@ -10,6 +10,7 @@ import org.bukkit.block.ShulkerBox
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.inventory.Inventory
+import org.bukkit.inventory.InventoryHolder
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.BlockStateMeta
 import org.bukkit.loot.Lootable
@@ -42,7 +43,7 @@ object SoftEconResetCmd : SuspendingCommandExecutor {
 
         val chunk = world.getChunkAt(x.toInt(), z.toInt())
         chunk.tileEntities.forEach { chest ->
-            if (chest is Container && chest is Lootable) {
+            if (chest is InventoryHolder) {
                 Bukkit.getLogger().info("Checking inventory: ${chest.type} (${chest.location})")
                 checkInventory(chest.inventory)
             }
