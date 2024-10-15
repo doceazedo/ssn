@@ -4,50 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="670d0d60-66a7-4ed2-9259-7d6f8d23559f" name="Changes" comment="Register join time on catraca">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libraries/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/Catraca.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/enums/Env.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/enums/Reason.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/events/EntityDamage.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/events/FoodLevelChange.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/events/PlayerChat.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/events/PlayerCommand.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/events/PlayerInteract.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/events/PlayerJoin.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/events/PlayerMove.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/events/PlayerQuit.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/gatekeeper/Flows.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/gatekeeper/Grants.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/identity/Username.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/utils/createBossBar.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/utils/enqueuePlayer.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/utils/generateCode.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/utils/getCasedUsername.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/utils/hidePlayers.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/doceazedo/catraca/utils/kickPlayer.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" />
+    <list default="true" id="c1cd4cd0-04a0-4ce5-995f-d89442cb1798" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../servers/1-queue/plugins/Catraca-0.0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../servers/1-queue/plugins/SkinsRestorer/recommendations.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/1-queue/plugins/SkinsRestorer/recommendations.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../servers/1-queue/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/1-queue/server.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager">
-    <option name="groupingKeys">
-      <option value="directory" />
-    </option>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Class" />
-        <option value="Kotlin Enum" />
-        <option value="Kotlin File" />
         <option value="Kotlin Object" />
       </list>
     </option>
@@ -55,32 +27,16 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="downloadDocsAutomatically" value="true" />
-        <option name="downloadSourcesAutomatically" value="true" />
-      </MavenImportingSettings>
-    </option>
-  </component>
   <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 2
+  "associatedIndex": 6
 }]]></component>
-  <component name="ProjectId" id="2FdLgIACswdRntt6vWdiEID11kK" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="2nSAB9LI6LQgV8T7CR2Lnr8rIat" />
   <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "ssn-2025",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -88,81 +44,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.22493461",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
-    "ts.external.directory.path": "/Users/doce/Library/Application Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/222.4167.29/IntelliJ IDEA.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration name="catraca build" type="MavenRunConfiguration" factoryName="Maven">
-      <MavenSettings>
-        <option name="myGeneralSettings">
-          <MavenGeneralSettings>
-            <option name="alwaysUpdateSnapshots" value="false" />
-            <option name="checksumPolicy" value="NOT_SET" />
-            <option name="customMavenHome" />
-            <option name="emulateTerminal" value="false" />
-            <option name="failureBehavior" value="NOT_SET" />
-            <option name="localRepository" value="" />
-            <option name="mavenHome" value="Bundled (Maven 3)" />
-            <option name="mavenHomeTypeForPersistence" value="BUNDLED3" />
-            <option name="nonRecursive" value="false" />
-            <option name="outputLevel" value="INFO" />
-            <option name="printErrorStackTraces" value="false" />
-            <option name="showDialogWithAdvancedSettings" value="false" />
-            <option name="threads" />
-            <option name="useMavenConfig" value="false" />
-            <option name="userSettingsFile" value="" />
-            <option name="workOffline" value="false" />
-          </MavenGeneralSettings>
-        </option>
-        <option name="myRunnerSettings">
-          <MavenRunnerSettings>
-            <option name="delegateBuildToMaven" value="false" />
-            <option name="environmentProperties">
-              <map />
-            </option>
-            <option name="jreName" value="#USE_PROJECT_JDK" />
-            <option name="mavenProperties">
-              <map />
-            </option>
-            <option name="passParentEnv" value="true" />
-            <option name="runMavenInBackground" value="true" />
-            <option name="skipTests" value="false" />
-            <option name="vmOptions" value="" />
-          </MavenRunnerSettings>
-        </option>
-        <option name="myRunnerParameters">
-          <MavenRunnerParameters>
-            <option name="cmdOptions" />
-            <option name="profiles">
-              <set />
-            </option>
-            <option name="goals">
-              <list>
-                <option value="clean" />
-                <option value="package" />
-              </list>
-            </option>
-            <option name="multimoduleDir" />
-            <option name="pomFileName" />
-            <option name="profilesMap">
-              <map />
-            </option>
-            <option name="projectsCmdOptionValues">
-              <list />
-            </option>
-            <option name="resolveToWorkspace" value="false" />
-            <option name="workingDirPath" value="$PROJECT_DIR$" />
-          </MavenRunnerParameters>
-        </option>
-      </MavenSettings>
-      <method v="2" />
-    </configuration>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -174,164 +58,16 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="670d0d60-66a7-4ed2-9259-7d6f8d23559f" name="Changes" comment="" />
-      <created>1664817125848</created>
+      <changelist id="c1cd4cd0-04a0-4ce5-995f-d89442cb1798" name="Changes" comment="" />
+      <created>1728955964639</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1664817125848</updated>
-      <workItem from="1664817128957" duration="19813000" />
-      <workItem from="1666385170158" duration="16730000" />
-      <workItem from="1666404853623" duration="1176000" />
-      <workItem from="1666450008531" duration="8410000" />
-      <workItem from="1666487947910" duration="4920000" />
-      <workItem from="1666651618240" duration="709000" />
-      <workItem from="1666826123250" duration="1374000" />
-      <workItem from="1671397075880" duration="58000" />
-      <workItem from="1672193759028" duration="1544000" />
-      <workItem from="1672369775658" duration="23000" />
-      <workItem from="1698368673461" duration="4801000" />
-      <workItem from="1708879558634" duration="331000" />
-      <workItem from="1708881732102" duration="36000" />
-      <workItem from="1708887748349" duration="1531000" />
-      <workItem from="1708889288590" duration="381000" />
-      <workItem from="1708890504062" duration="304000" />
-      <workItem from="1708893269248" duration="2086000" />
-      <workItem from="1709340143377" duration="1361000" />
-      <workItem from="1728954216141" duration="1636000" />
+      <updated>1728955964639</updated>
+      <workItem from="1728955965630" duration="9600000" />
     </task>
-    <task id="LOCAL-00001" summary="Setup catraca plugin">
-      <created>1664817534352</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1664817534352</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Refactor catraca and add sendPlayer">
-      <created>1666390223746</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1666390223746</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Register some events and set spawn point">
-      <created>1666393416817</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1666393416817</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Add build catraca plugin script">
-      <created>1666393445441</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1666393445441</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Update server files">
-      <created>1666393451815</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1666393451815</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Implemente catraca grant flow">
-      <created>1666398887089</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1666398887089</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Fix catraca autologin">
-      <created>1666459176312</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1666459176312</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Refactor catraca objects">
-      <created>1666460148368</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1666460148368</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Refactor catraca objects">
-      <created>1666460171962</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1666460171962</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Use data from .env instead of config.yml">
-      <created>1666461885154</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1666461885154</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Show remaining login time on bossbar">
-      <created>1666464557362</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1666464557362</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Change catraca whois to username identity">
-      <created>1666499957365</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1666499957365</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Add /username/:username endpoint">
-      <created>1666501062675</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1666501062675</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Register join time on catraca">
-      <created>1666501106486</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1666501106486</updated>
-    </task>
-    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Setup catraca plugin" />
-    <MESSAGE value="Refactor catraca and add sendPlayer" />
-    <MESSAGE value="Register some events and set spawn point" />
-    <MESSAGE value="Add build catraca plugin script" />
-    <MESSAGE value="Update server files" />
-    <MESSAGE value="Implemente catraca grant flow" />
-    <MESSAGE value="Fix catraca autologin" />
-    <MESSAGE value="Refactor catraca objects" />
-    <MESSAGE value="Use data from .env instead of config.yml" />
-    <MESSAGE value="Show remaining login time on bossbar" />
-    <MESSAGE value="Change catraca whois to username identity" />
-    <MESSAGE value="Add /username/:username endpoint" />
-    <MESSAGE value="Register join time on catraca" />
-    <option name="LAST_COMMIT_MESSAGE" value="Register join time on catraca" />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>
