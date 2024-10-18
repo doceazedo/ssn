@@ -75,7 +75,6 @@ object PlayerJoin : Listener {
             if (!player.isOnline) return
 
             if (CaptchaManager.captchas.contains(player.uniqueId)) {
-                repeat(30) { player.sendMessage("") }
                 CaptchaManager.sendCaptcha(player)
                 return@repeat
             }

@@ -2,6 +2,7 @@ import { goto } from '$app/navigation';
 import { browser } from '$app/environment';
 import { dashboardUrl } from '$lib/env/public';
 import { IDENTITY } from './auth.store';
+import { env } from '$env/dynamic/public';
 
 export type RegisterParams = {
 	email: string;
@@ -58,7 +59,11 @@ export const register = async (params: RegisterParams, invite?: string) => {
 	}
 };
 
-export const registerWithDiscord = async (params: RegisterWithDiscordParams, invite?: string) => {
+export const registerWithDiscord = async (
+	params: RegisterWithDiscordParams,
+	invite?: string,
+	gkCode?: string | null
+) => {
 	try {
 		const resp = await fetch(`${baseUrl}/register/discord`, {
 			method: 'POST',
@@ -67,6 +72,10 @@ export const registerWithDiscord = async (params: RegisterWithDiscordParams, inv
 		const data = await resp.json();
 		if (!resp.ok) throw Error(data.message || 'Erro desconhecido');
 		IDENTITY.set(data.identity);
+		if (gkCode) {
+			window.location = `${env.PUBLIC_GATEKEEPER_URL}/${gkCode}`;
+			return;
+		}
 		await goto('/auth/register');
 	} catch (e: any) {
 		console.error(e);

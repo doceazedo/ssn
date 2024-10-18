@@ -1,6 +1,6 @@
-import { discordClientId, identityUrl } from "$lib/env/public";
+import { discordClientId, identityUrl } from '$lib/env/public';
 
-const discordRedirectUrl = encodeURI(`${identityUrl}/auth/discord`);
-
-export const discordOauthUrl =
-  `https://discord.com/oauth2/authorize?client_id=${discordClientId}&redirect_uri=${discordRedirectUrl}&response_type=code&scope=identify`;
+export const discordOauthUrl = (gkCode?: string | null) =>
+	`https://discord.com/oauth2/authorize?client_id=${discordClientId}&redirect_uri=${encodeURI(
+		`${identityUrl}/auth/discord${gkCode ? `&gk=${gkCode}` : ''}`
+	)}&response_type=code&scope=identify`;

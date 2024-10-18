@@ -38,6 +38,7 @@ object CaptchaManager {
         messages[6] += " §bimagem aparece no desenho ao lado§e."
         messages[7] += " §8§oExemplo: \"cachorro\""
 
+        repeat(30) { player.sendMessage("") }
         messages.forEach { player.sendMessage(it) }
     }
 

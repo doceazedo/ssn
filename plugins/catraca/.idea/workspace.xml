@@ -5,29 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c1cd4cd0-04a0-4ce5-995f-d89442cb1798" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/commands/LoginCmd.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/commands/RegisterCmd.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/managers/CaptchaManager.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/managers/GatekeeperManager.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../apps/identity/src/lib/captcha/validate-captcha.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../apps/identity/src/lib/captcha/validate-captcha.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/Catraca.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/Catraca.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/commands/RegisterCmd.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/commands/RegisterCmd.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/events/PlayerChat.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/events/PlayerChat.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/events/PlayerCommand.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/events/PlayerCommand.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/events/PlayerJoin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/events/PlayerJoin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/events/PlayerQuit.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/events/PlayerQuit.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/managers/CaptchaManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/managers/CaptchaManager.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/managers/IdentityManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/managers/IdentityManager.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../servers/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../servers/0-proxy/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/0-proxy/config.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../servers/0-proxy/plugins/SkinsRestorer/recommendations.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/0-proxy/plugins/SkinsRestorer/recommendations.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../servers/1-queue/plugins/Catraca-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/1-queue/plugins/Catraca-1.0.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../servers/1-queue/plugins/Catraca/config.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../servers/1-queue/plugins/SkinsRestorer/recommendations.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/1-queue/plugins/SkinsRestorer/recommendations.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../servers/1-queue/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/1-queue/server.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../servers/2-main/plugins/NoCheatPlus/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/2-main/plugins/NoCheatPlus/config.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../servers/2-main/plugins/SkinsRestorer/recommendations.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/2-main/plugins/SkinsRestorer/recommendations.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../servers/2-main/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/2-main/server.properties" afterDir="false" />
     </list>
@@ -47,26 +35,26 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2nSAB9LI6LQgV8T7CR2Lnr8rIat" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "ssn-2025",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ssn-2025&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -83,7 +71,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1728955964639</updated>
-      <workItem from="1728955965630" duration="25674000" />
+      <workItem from="1728955965630" duration="31165000" />
+      <workItem from="1729264435069" duration="3623000" />
     </task>
     <servers />
   </component>

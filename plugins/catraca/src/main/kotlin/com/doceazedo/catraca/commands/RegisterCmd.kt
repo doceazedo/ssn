@@ -19,12 +19,22 @@ object RegisterCmd : CommandExecutor {
         if (sender !is Player) return false
         if (args.size != 3) return false
 
+        val (email, password, confirmPassword) = args
+
+        if (password != confirmPassword) {
+            sender.sendMessage("§cAs senhas não conferem. Por favor, tente novamente.")
+            return false
+        }
+
+        if (CaptchaManager.captchas.contains(sender.uniqueId)) return true
+
         instance.launch {
             val identity = IdentityManager.getIdentityFromUsername(sender.name)
             if (identity != null) {
                 sender.sendMessage("§cEsse nome de usuário já está em uso!")
                 return@launch
             }
+            IdentityManager.registeringUsers[sender.uniqueId] = Pair(email, password)
             CaptchaManager.sendCaptcha(sender)
         }
 
