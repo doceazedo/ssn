@@ -9,6 +9,7 @@ import org.bukkit.block.Container
 import org.bukkit.block.ShulkerBox
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
+import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.InventoryHolder
 import org.bukkit.inventory.ItemStack
@@ -16,11 +17,17 @@ import org.bukkit.inventory.meta.BlockStateMeta
 import org.bukkit.loot.Lootable
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.util.*
 import kotlin.io.path.listDirectoryEntries
 
 
 object SoftEconResetCmd : SuspendingCommandExecutor {
-    override suspend fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
+    override suspend fun onCommand(
+        sender: CommandSender,
+        command: Command,
+        label: String,
+        args: Array<out String>
+    ): Boolean {
         val world = Bukkit.getWorld("world") ?: return false
 
         val worldPath = Paths.get(instance.server.worldContainer.path, "world", "region")
@@ -28,10 +35,35 @@ object SoftEconResetCmd : SuspendingCommandExecutor {
 
         val lastChunkIdx = -1
         checkChunk(world, chunkFiles, lastChunkIdx + 1)
+
+        val playerDataPath = Paths.get(instance.server.worldContainer.path, "world", "playerdata")
+        val playerDataFiles = playerDataPath.listDirectoryEntries()
+
+        checkPlayerData(world, playerDataFiles)
+
         return true
     }
 
-    private fun checkChunk (world: World, chunkFiles: List<Path>, idx: Int) {
+    private fun checkPlayerData(world: World, playerDataFiles: List<Path>) {
+        playerDataFiles.forEach { playerDataFile ->
+            if (playerDataFile.endsWith(".dat_old")) {
+                return
+            }
+
+            val playerUuid = UUID.fromString(playerDataFile.toString().split("\\").last().substringBefore(".dat"))
+            Bukkit.getLogger().info("Checking UUID '${playerUuid}'!")
+            val player = Bukkit.getPlayer(playerUuid)
+
+            if (player != null) {
+                Bukkit.getLogger().info("Checking player '${player.name}'!")
+
+                checkInventory(player.inventory)
+                checkInventory(player.enderChest)
+            }
+        }
+    }
+
+    private fun checkChunk(world: World, chunkFiles: List<Path>, idx: Int) {
         if (idx > chunkFiles.size - 1) {
             Bukkit.getLogger().info("No more chunks to check on world '${world.name}'!")
             return
@@ -42,7 +74,9 @@ object SoftEconResetCmd : SuspendingCommandExecutor {
         Bukkit.getLogger().info("[${idx + 1}/${chunkFiles.size}] Checking chunk $chunkFile on world '${world.name}'...")
 
         val chunk = world.getChunkAt(x.toInt(), z.toInt())
+
         chunk.tileEntities.forEach { chest ->
+            Bukkit.getLogger().info("${chest.type}")
             if (chest is InventoryHolder) {
                 Bukkit.getLogger().info("Checking inventory: ${chest.type} (${chest.location})")
                 checkInventory(chest.inventory)
@@ -53,7 +87,7 @@ object SoftEconResetCmd : SuspendingCommandExecutor {
         checkChunk(world, chunkFiles, idx + 1)
     }
 
-    private fun checkInventory (inventory: Inventory): Inventory {
+    private fun checkInventory(inventory: Inventory): Inventory {
         inventory.forEach { item ->
             if (item == null) return@forEach
 
@@ -66,12 +100,37 @@ object SoftEconResetCmd : SuspendingCommandExecutor {
 
             // reduce
             if (item.type in arrayOf(
-                Material.END_CRYSTAL,
-                Material.EXPERIENCE_BOTTLE,
-                Material.ENCHANTED_GOLDEN_APPLE
-            )) {
+                    Material.END_CRYSTAL,
+                    Material.EXPERIENCE_BOTTLE,
+                    Material.ENCHANTED_GOLDEN_APPLE,
+                    Material.ENDER_CHEST,
+                    Material.TIPPED_ARROW
+                )
+            ) {
                 Bukkit.getLogger().info("Reducing: ${item.type}")
                 item.amount = 1
+                return@forEach
+            }
+
+            //remove enchantments
+            if (item.type in arrayOf(
+                    Material.NETHERITE_AXE,
+                    Material.NETHERITE_BLOCK,
+                    Material.NETHERITE_BOOTS,
+                    Material.NETHERITE_CHESTPLATE,
+                    Material.NETHERITE_HELMET,
+                    Material.NETHERITE_HOE,
+                    Material.NETHERITE_INGOT,
+                    Material.NETHERITE_LEGGINGS,
+                    Material.NETHERITE_PICKAXE,
+                    Material.NETHERITE_SCRAP,
+                    Material.NETHERITE_SHOVEL,
+                    Material.NETHERITE_SWORD,
+                    Material.ELYTRA
+                )
+            ) {
+                Bukkit.getLogger().info("Removing enchantments: ${item.type}")
+                item.removeEnchantments()
                 return@forEach
             }
 
