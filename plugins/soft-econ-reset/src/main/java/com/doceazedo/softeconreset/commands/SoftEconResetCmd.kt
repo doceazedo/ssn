@@ -6,15 +6,14 @@ import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.World
 import org.bukkit.block.Container
-import org.bukkit.block.ShulkerBox
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
-import org.bukkit.entity.Player
+import org.bukkit.entity.Item
+import org.bukkit.entity.ItemFrame
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.InventoryHolder
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.BlockStateMeta
-import org.bukkit.loot.Lootable
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.*
@@ -76,15 +75,39 @@ object SoftEconResetCmd : SuspendingCommandExecutor {
         val chunk = world.getChunkAt(x.toInt(), z.toInt())
 
         chunk.tileEntities.forEach { chest ->
-            Bukkit.getLogger().info("${chest.type}")
             if (chest is InventoryHolder) {
                 Bukkit.getLogger().info("Checking inventory: ${chest.type} (${chest.location})")
                 checkInventory(chest.inventory)
             }
         }
+
+        chunk.entities.forEach { entity ->
+            if (entity is InventoryHolder) {
+                Bukkit.getLogger().info("Checking inventory of entity: ${entity.type} (${entity.location})")
+                checkInventory(entity.inventory)
+            } else if (entity is ItemFrame) {
+                Bukkit.getLogger().info("Checking item of item frame: ${entity.type} (${entity.location})")
+                checkItemFrame(entity)
+            }
+        }
+
         chunk.unload()
 
         checkChunk(world, chunkFiles, idx + 1)
+    }
+
+    private fun checkItemFrame(itemFrame: ItemFrame) {
+        //ja que item frame so segura um item, so precisamo checar as shulkers
+        if (itemFrame.item.itemMeta is BlockStateMeta) {
+            Bukkit.getLogger().info("Checking Shulker Box inside item frame")
+            val itemMeta = itemFrame.item.itemMeta as BlockStateMeta
+            if (itemMeta.blockState is Container) {
+                val container = itemMeta.blockState as Container
+                container.inventory.contents = checkInventory(container.inventory).contents
+                itemMeta.blockState = container
+            }
+            itemFrame.item.itemMeta = itemMeta
+        }
     }
 
     private fun checkInventory(inventory: Inventory): Inventory {
@@ -138,10 +161,10 @@ object SoftEconResetCmd : SuspendingCommandExecutor {
             if (item.itemMeta is BlockStateMeta) {
                 Bukkit.getLogger().info("Checking Shulker Box inside inventory")
                 val itemMeta = item.itemMeta as BlockStateMeta
-                if (itemMeta is ShulkerBox) {
-                    val shulker = itemMeta.blockState as ShulkerBox
-                    shulker.inventory.contents = checkInventory(shulker.inventory).contents
-                    itemMeta.blockState = shulker
+                if (itemMeta.blockState is Container) {
+                    val container = itemMeta.blockState as Container
+                    container.inventory.contents = checkInventory(container.inventory).contents
+                    itemMeta.blockState = container
                 }
                 item.itemMeta = itemMeta
             }
