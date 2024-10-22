@@ -6,21 +6,27 @@ import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.World
 import org.bukkit.block.Container
-import org.bukkit.block.ShulkerBox
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
+import org.bukkit.entity.Item
+import org.bukkit.entity.ItemFrame
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.InventoryHolder
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.BlockStateMeta
-import org.bukkit.loot.Lootable
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.util.*
 import kotlin.io.path.listDirectoryEntries
 
 
 object SoftEconResetCmd : SuspendingCommandExecutor {
-    override suspend fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
+    override suspend fun onCommand(
+        sender: CommandSender,
+        command: Command,
+        label: String,
+        args: Array<out String>
+    ): Boolean {
         val world = Bukkit.getWorld("world") ?: return false
 
         val worldPath = Paths.get(instance.server.worldContainer.path, "world", "region")
@@ -28,10 +34,35 @@ object SoftEconResetCmd : SuspendingCommandExecutor {
 
         val lastChunkIdx = -1
         checkChunk(world, chunkFiles, lastChunkIdx + 1)
+
+        val playerDataPath = Paths.get(instance.server.worldContainer.path, "world", "playerdata")
+        val playerDataFiles = playerDataPath.listDirectoryEntries()
+
+        checkPlayerData(world, playerDataFiles)
+
         return true
     }
 
-    private fun checkChunk (world: World, chunkFiles: List<Path>, idx: Int) {
+    private fun checkPlayerData(world: World, playerDataFiles: List<Path>) {
+        playerDataFiles.forEach { playerDataFile ->
+            if (playerDataFile.endsWith(".dat_old")) {
+                return
+            }
+
+            val playerUuid = UUID.fromString(playerDataFile.toString().split("\\").last().substringBefore(".dat"))
+            Bukkit.getLogger().info("Checking UUID '${playerUuid}'!")
+            val player = Bukkit.getPlayer(playerUuid)
+
+            if (player != null) {
+                Bukkit.getLogger().info("Checking player '${player.name}'!")
+
+                checkInventory(player.inventory)
+                checkInventory(player.enderChest)
+            }
+        }
+    }
+
+    private fun checkChunk(world: World, chunkFiles: List<Path>, idx: Int) {
         if (idx > chunkFiles.size - 1) {
             Bukkit.getLogger().info("No more chunks to check on world '${world.name}'!")
             return
@@ -42,18 +73,41 @@ object SoftEconResetCmd : SuspendingCommandExecutor {
         Bukkit.getLogger().info("[${idx + 1}/${chunkFiles.size}] Checking chunk $chunkFile on world '${world.name}'...")
 
         val chunk = world.getChunkAt(x.toInt(), z.toInt())
+
         chunk.tileEntities.forEach { chest ->
             if (chest is InventoryHolder) {
                 Bukkit.getLogger().info("Checking inventory: ${chest.type} (${chest.location})")
                 checkInventory(chest.inventory)
             }
         }
+
+        chunk.entities.forEach { entity ->
+            if (entity is InventoryHolder) {
+                Bukkit.getLogger().info("Checking inventory of entity: ${entity.type} (${entity.location})")
+                checkInventory(entity.inventory)
+            } else if (entity is ItemFrame) {
+                Bukkit.getLogger().info("Checking item of item frame: ${entity.type} (${entity.location})")
+                checkItemFrame(entity)
+            }
+        }
+
         chunk.unload()
 
         checkChunk(world, chunkFiles, idx + 1)
     }
 
-    private fun checkInventory (inventory: Inventory): Inventory {
+    private fun checkItemFrame(itemFrame: ItemFrame) {
+        //FODASE KKKKKKKKKK
+        if (itemFrame.item.itemMeta is BlockStateMeta) {
+            Bukkit.getLogger().info("Checking Shulker Box inside item frame")
+            val itemMeta = itemFrame.item.itemMeta as BlockStateMeta
+            if (itemMeta.blockState is Container) {
+                itemFrame.setItem(null)
+            }
+        }
+    }
+
+    private fun checkInventory(inventory: Inventory): Inventory {
         inventory.forEach { item ->
             if (item == null) return@forEach
 
@@ -66,12 +120,37 @@ object SoftEconResetCmd : SuspendingCommandExecutor {
 
             // reduce
             if (item.type in arrayOf(
-                Material.END_CRYSTAL,
-                Material.EXPERIENCE_BOTTLE,
-                Material.ENCHANTED_GOLDEN_APPLE
-            )) {
+                    Material.END_CRYSTAL,
+                    Material.EXPERIENCE_BOTTLE,
+                    Material.ENCHANTED_GOLDEN_APPLE,
+                    Material.ENDER_CHEST,
+                    Material.TIPPED_ARROW
+                )
+            ) {
                 Bukkit.getLogger().info("Reducing: ${item.type}")
                 item.amount = 1
+                return@forEach
+            }
+
+            //remove enchantments
+            if (item.type in arrayOf(
+                    Material.NETHERITE_AXE,
+                    Material.NETHERITE_BLOCK,
+                    Material.NETHERITE_BOOTS,
+                    Material.NETHERITE_CHESTPLATE,
+                    Material.NETHERITE_HELMET,
+                    Material.NETHERITE_HOE,
+                    Material.NETHERITE_INGOT,
+                    Material.NETHERITE_LEGGINGS,
+                    Material.NETHERITE_PICKAXE,
+                    Material.NETHERITE_SCRAP,
+                    Material.NETHERITE_SHOVEL,
+                    Material.NETHERITE_SWORD,
+                    Material.ELYTRA
+                )
+            ) {
+                Bukkit.getLogger().info("Removing enchantments: ${item.type}")
+                item.removeEnchantments()
                 return@forEach
             }
 
@@ -79,9 +158,11 @@ object SoftEconResetCmd : SuspendingCommandExecutor {
             if (item.itemMeta is BlockStateMeta) {
                 Bukkit.getLogger().info("Checking Shulker Box inside inventory")
                 val itemMeta = item.itemMeta as BlockStateMeta
-                val shulker = itemMeta.blockState as ShulkerBox
-                shulker.inventory.contents = checkInventory(shulker.inventory).contents
-                itemMeta.blockState = shulker
+                if (itemMeta.blockState is Container) {
+                    val container = itemMeta.blockState as Container
+                    container.inventory.contents = checkInventory(container.inventory).contents
+                    itemMeta.blockState = container
+                }
                 item.itemMeta = itemMeta
             }
         }
