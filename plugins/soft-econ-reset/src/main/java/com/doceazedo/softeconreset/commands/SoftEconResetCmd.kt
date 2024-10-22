@@ -97,16 +97,13 @@ object SoftEconResetCmd : SuspendingCommandExecutor {
     }
 
     private fun checkItemFrame(itemFrame: ItemFrame) {
-        //ja que item frame so segura um item, so precisamo checar as shulkers
+        //FODASE KKKKKKKKKK
         if (itemFrame.item.itemMeta is BlockStateMeta) {
             Bukkit.getLogger().info("Checking Shulker Box inside item frame")
             val itemMeta = itemFrame.item.itemMeta as BlockStateMeta
             if (itemMeta.blockState is Container) {
-                val container = itemMeta.blockState as Container
-                container.inventory.contents = checkInventory(container.inventory).contents
-                itemMeta.blockState = container
+                itemFrame.setItem(null)
             }
-            itemFrame.item.itemMeta = itemMeta
         }
     }
 
