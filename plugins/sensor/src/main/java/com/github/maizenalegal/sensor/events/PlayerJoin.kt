@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerJoinEvent
 object PlayerJoin: Listener {
     @EventHandler
     suspend fun onPlayerJoin(e: PlayerJoinEvent) {
+        e.player.noDamageTicks = 0
         Sensor.instance.launch {
             logUsernameJoin(e.player.displayName)
             PlayerCount.update()
