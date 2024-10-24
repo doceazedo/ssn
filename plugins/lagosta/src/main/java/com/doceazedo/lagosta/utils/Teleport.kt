@@ -14,12 +14,12 @@ object Teleport {
     private val maxZ: Int = Lagosta.instance.config.getInt("maxZ")
 
     suspend fun getRandomLocation(): Location {
-        val x: Int = (minX..maxX).random()
-        val z: Int = (minZ..maxZ).random()
-        val y = 0
+        val x = (minX..maxX).random() + 0.5
+        val z = (minZ..maxZ).random() + 0.5
+        val y = 0.0
 
         val w: World = Bukkit.getServer().getWorld(world)
-        val loc = Location(w, x.toDouble(), y.toDouble(), z.toDouble())
+        val loc = Location(w, x, y, z)
 
         val chunk: Chunk = loc.chunk
         if (!chunk.isLoaded) chunk.load(true)
