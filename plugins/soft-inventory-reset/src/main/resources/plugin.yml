@@ -1,0 +1,7 @@
+name: SoftInventoryReset
+version: '${project.version}'
+main: com.doceazedo.softinventoryreset.SoftInventoryReset
+api-version: '1.21'
+commands:
+  soft-inventory-reset:
+    permission: 'soft-inventory-reset.admin'
