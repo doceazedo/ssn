@@ -22,15 +22,11 @@ public class SoftEconResetCmd implements CommandExecutor {
         Logger logger = Bukkit.getLogger();
         logger.info("Command received: " + label);
 
-        World world = Bukkit.getWorld("world");
-        if (world == null) {
-            logger.warning("World 'world' not found!");
-            return false;
-        }
-
-        // Check loaded chunks
-        for (var chunk : world.getLoadedChunks()) {
-            checkChunk(chunk);
+        for (World world : Bukkit.getWorlds()) {
+            logger.info("Checking world: " + world.getName());
+            for (var chunk : world.getLoadedChunks()) {
+                checkChunk(chunk);
+            }
         }
 
         return true;
