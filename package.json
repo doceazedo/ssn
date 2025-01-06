@@ -22,7 +22,6 @@
     "build:waiting-room": "(cd ./plugins/waiting-room && mvn clean && mvn package && cp ./target/WaitingRoom-0.0.1.jar ../../servers/1-queue/plugins && cp ./target/WaitingRoom-0.0.1.jar ../catraca/libraries/WaitingRoom-0.0.1.jar)",
     "build:in-flight-conn": "(cd ./plugins/in-flight-conn && mvn clean && mvn package && cp ./target/InFlightConn-0.0.1.jar ../../servers/0-proxy/plugins)",
     "build:soft-econ-reset": "(cd ./plugins/soft-econ-reset && mvn install && cp ./target/SoftEconReset-0.0.1.jar ../../servers/2-main/plugins)",
-    "build:soft-inventory-reset": "(cd ./plugins/soft-inventory-reset && mvn install && cp ./target/SoftInventoryReset-0.0.1.jar ../../servers/2-main/plugins)",
     "start": "docker-compose up --build",
     "start:iam": "docker-compose up --build gateway warehouse warehouse-migrate identity-web",
     "start:website": "docker-compose up --build gateway warehouse warehouse-migrate identity-web website",
