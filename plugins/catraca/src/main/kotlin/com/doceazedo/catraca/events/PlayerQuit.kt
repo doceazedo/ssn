@@ -11,6 +11,8 @@ object PlayerQuit : Listener {
     fun onPlayerQuit(event: PlayerQuitEvent) {
         event.quitMessage = ""
         IdentityManager.loggedInUsers.remove(event.player.uniqueId)
+        IdentityManager.registeringUsers.remove(event.player.uniqueId)
+        IdentityManager.authenticatedUsers.remove(event.player.uniqueId)
         CaptchaManager.captchas.remove(event.player.uniqueId)
         // TODO: delete flow
     }

@@ -1,20 +1,22 @@
 package com.doceazedo.catraca.managers
 
 import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.core.FuelError
 import com.github.kittinunf.fuel.core.Headers
 import com.github.kittinunf.fuel.core.extensions.authentication
 import com.github.kittinunf.fuel.gson.jsonBody
 import com.github.kittinunf.fuel.gson.responseObject
 import com.google.gson.Gson
 import org.bukkit.Bukkit
-import java.util.UUID
+import java.net.HttpCookie
+import java.util.*
+
 
 object IdentityManager {
     private val API_BASE_URL: String = System.getenv("LOCAL_IDENTITY_URL")
     private val API_TOKEN: String = System.getenv("CATRACA_IDENTITY_TOKEN")
     val loggedInUsers = mutableSetOf<UUID>()
     val registeringUsers = mutableMapOf<UUID, Pair<String, String>>()
+    val authenticatedUsers = mutableMapOf<UUID, Pair<Identity, String>>()
 
     data class Identity(
         val uuid: String,
@@ -44,8 +46,23 @@ object IdentityManager {
         val captchaToken: String,
     )
 
+    data class AddUsernameRequest(
+        val captchaToken: String,
+    )
+
+    data class Username(
+        val name: String,
+        val ownerId: String,
+        val createdAt: String,
+        val firstJoin: String?,
+        val lastSeen: String?,
+        val playedSeconds: Int,
+        val joinCount: Int,
+        val isOnline: Boolean,
+    )
+
     data class UsernameResponse(
-        val username: String,
+        val username: Username,
     )
 
     data class ErrorResponse(
@@ -76,7 +93,14 @@ object IdentityManager {
             ))
             .responseObject<IdentityResponse>()
         val (data, error) = result
-        val token = response.headers["token"].firstOrNull()
+
+        var token: String? = null
+        val setCookiesHeader = response.headers["set-cookie"].firstOrNull()
+        if (setCookiesHeader != null) {
+            val cookies = HttpCookie.parse(setCookiesHeader)
+            token = cookies.find { it.name == "token" }?.value
+        }
+
         val errorMessage = Gson().fromJson(error?.response?.body()?.toByteArray()?.let { String(it, Charsets.UTF_8) }, ErrorResponse::class.java)
         return LoginResponse(
             data?.identity,
@@ -102,10 +126,10 @@ object IdentityManager {
     fun addUsername(username: String, token: String): Pair<Boolean, ErrorResponse?> {
         val (_, _, result) = Fuel.post("$API_BASE_URL/api/v1/username/$username")
             .header(Headers.COOKIE to "token=$token")
-            .jsonBody("{\"captchaToken\": \"$API_TOKEN\"}")
+            .jsonBody(AddUsernameRequest(API_TOKEN))
             .responseObject<UsernameResponse>()
-        val (response, error) = result
+        val (data, error) = result
         val errorMessage = Gson().fromJson(error?.response?.body()?.toByteArray()?.let { String(it, Charsets.UTF_8) }, ErrorResponse::class.java)
-        return Pair(response?.username != null, errorMessage)
+        return Pair(data?.username != null, errorMessage)
     }
 }

@@ -58,7 +58,7 @@ object PlayerJoin : Listener {
             instance.launch { sendMessages(event.player, identity != null, authFlowCode) }
 
             val authFlow = GatekeeperManager.awaitFlowChange(authFlowCode, event.player)
-                ?: return@launch event.player.kickPlayer("§cVocê demorou mais de §4${AUTH_FLOW_DURATION}s §cpara fazer login.\nPor favor, tente novamente.")
+                ?: return@launch event.player.kickPlayer("§cVocê demorou mais de §c§l${AUTH_FLOW_DURATION}s §cpara fazer login.\nPor favor, tente novamente.")
 
             if (authFlow.grantKey == null) return@launch event.player.kickPlayer("§cNão autorizado!")
 

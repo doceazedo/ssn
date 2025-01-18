@@ -21,10 +21,13 @@ object PlayerChat : Listener {
             return
         }
 
-        event.player.sendMessage("§aVerificado com sucesso! Por favor, aguarde...")
+        repeat(30) { event.player.sendMessage("") }
+        event.player.sendMessage("§eManeiro, você não é um robô! :)")
+        CaptchaManager.captchas.remove(event.player.uniqueId)
 
         if (IdentityManager.registeringUsers.contains(event.player.uniqueId)) {
             instance.launch {
+                event.player.sendMessage("§eRegistrando sua conta, só um momento...")
                 val (email, password) = IdentityManager.registeringUsers[event.player.uniqueId]!!
                 val (identity, error) = IdentityManager.register(email, password, event.player.name)
                 if (error?.message != null) {
@@ -32,22 +35,30 @@ object PlayerChat : Listener {
                     return@launch
                 }
                 if (identity == null) return@launch
-                event.player.sendMessage("§aRegistrado com sucesso! Por favor, aguarde...")
+                event.player.sendMessage("§aSua conta foi criada com sucesso!")
                 IdentityManager.registeringUsers.remove(event.player.uniqueId)
+                IdentityManager.loggedInUsers.add(event.player.uniqueId)
                 waitingRoom.enqueuePlayer(event.player)
             }
             return
         }
 
-        if (IdentityManager.loggedInUsers.contains(event.player.uniqueId)) {
+        val authenticatedUser = IdentityManager.authenticatedUsers[event.player.uniqueId]
+        if (authenticatedUser != null) {
+            val (_, token) = authenticatedUser
             instance.launch {
-                event.player.sendMessage("§cTODO: IdentityManager.addUsername()")
+                event.player.sendMessage("§eRegistrando seu novo usuário, só um momento...")
+                val (ok, usernameError) = IdentityManager.addUsername(event.player.name, token)
+                if (!ok) {
+                    event.player.kickPlayer("§c${usernameError?.message ?: "Algo deu errado!"}")
+                    return@launch
+                }
+                event.player.sendMessage("§aO nome de usuário §e${event.player.displayName} §afoi adicionado à sua conta!")
+                IdentityManager.authenticatedUsers.remove(event.player.uniqueId)
+                waitingRoom.enqueuePlayer(event.player)
             }
             return
         }
-
-        CaptchaManager.captchas.remove(event.player.uniqueId)
-        IdentityManager.registeringUsers.remove(event.player.uniqueId)
 
         event.player.kickPlayer("§4Algo deu errado do nosso lado!\n§cNão encontramos suas credenciais para cadastrar sua nova conta.")
     }
