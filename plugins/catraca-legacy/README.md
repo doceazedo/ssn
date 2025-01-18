@@ -1,2 +1,0 @@
-# Catraca 👮‍♂️
-The login plugin™️

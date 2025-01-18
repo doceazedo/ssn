@@ -1,9 +1,0 @@
-targetServer: "main"
-spawn:
-  ==: org.bukkit.Location
-  world: world
-  x: -469.5
-  y: 24.0
-  z: -522.5
-  pitch: -5.0
-  yaw: 165.0
