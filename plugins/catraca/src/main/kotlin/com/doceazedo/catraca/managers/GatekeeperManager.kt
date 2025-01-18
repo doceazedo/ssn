@@ -33,6 +33,15 @@ object GatekeeperManager {
         return getGrant(ownerUUID, ip, "*")
     }
 
+    fun grantUser(ownerUUID: String, player: Player, allowAlts: Boolean): Pair<String, Boolean> {
+        val ip = player.address?.address?.hostAddress ?: "0.0.0.0"
+        val usernameOrStar = if (allowAlts) "*" else player.displayName.lowercase()
+        val key = "grants:$ownerUUID:$ip:${usernameOrStar}"
+        jedis[key] = "true"
+        // jedis.expire(key, GRANT_DURATION)
+        return Pair(key, true)
+    }
+
     fun createAuthFlow(player: Player): String {
         val code = UUID.randomUUID().toString().slice(0..4).uppercase()
         val key = "flows:$code"
@@ -60,13 +69,20 @@ object GatekeeperManager {
         )
     }
 
+    fun deleteUserAuthFlow(player: Player): Boolean {
+        val code = flows[player.uniqueId] ?: return false
+        return deleteAuthFlowByCode(code)
+    }
+
+    private fun deleteAuthFlowByCode(code: String): Boolean {
+        return jedis.del("flows:$code") == 1L
+    }
+
     suspend fun awaitFlowChange(code: String, player: Player): AuthFlow? {
-        if (!player.isOnline) return null // TODO: delete flow
-        val flow = getAuthFlow(code) ?: return null // TODO: delete flow
-        if (flow.grantKey != null) {
-            // TODO: delete flow
-            return flow
-        }
+        if (!player.isOnline) return null
+        val flow = getAuthFlow(code) ?: return null
+        if (flow.grantKey != null) return flow
+
         delay(500)
         return awaitFlowChange(code, player)
     }

@@ -3,6 +3,7 @@ package com.doceazedo.catraca.commands
 import com.doceazedo.catraca.Catraca.Companion.instance
 import com.doceazedo.catraca.Catraca.Companion.waitingRoom
 import com.doceazedo.catraca.managers.CaptchaManager
+import com.doceazedo.catraca.managers.GatekeeperManager
 import com.doceazedo.catraca.managers.IdentityManager
 import com.github.shynixn.mccoroutine.bukkit.launch
 import org.bukkit.Bukkit
@@ -48,6 +49,7 @@ object LoginCmd : CommandExecutor {
             }
 
             IdentityManager.loggedInUsers.add(sender.uniqueId)
+            GatekeeperManager.grantUser(identity.uuid, sender, true)
             waitingRoom.enqueuePlayer(sender)
         }
 

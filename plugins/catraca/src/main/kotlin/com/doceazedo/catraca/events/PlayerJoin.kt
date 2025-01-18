@@ -44,6 +44,7 @@ object PlayerJoin : Listener {
                 val existingGrant = GatekeeperManager.isUserGranted(identity.uuid, event.player)
                 if (existingGrant == true) {
                     IdentityManager.loggedInUsers.add(event.player.uniqueId)
+                    GatekeeperManager.grantUser(identity.uuid, event.player, true)
                     waitingRoom.enqueuePlayer(event.player)
                     return@launch
                 } else if (existingGrant == false) {
