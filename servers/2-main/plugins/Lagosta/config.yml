@@ -1,5 +1,5 @@
-world: 'world'
-minX: -256
-minZ: -256
-maxX: 256
-maxZ: 256
+world: "world"
+minX: -2048
+minZ: -2048
+maxX: 2048
+maxZ: 2048
