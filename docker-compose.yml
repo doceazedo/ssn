@@ -102,37 +102,6 @@ services:
     volumes:
       - ${MNT_GATEKEEPER}:/data
 
-  website:
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.website.entrypoints=web"
-      - "traefik.http.routers.website.rule=Host(`${PUBLIC_BASE_DOMAIN}`)"
-    ports:
-      - "3002:3000"
-    build:
-      context: .
-      dockerfile: ./apps/website/Dockerfile
-      target: ${NODE_ENV}
-    environment:
-      PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
-      PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
-      PUBLIC_GATEKEEPER_URL: ${PUBLIC_GATEKEEPER_URL}
-      LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
-      DATABASE_URL: ${DATABASE_URL}
-      MERCADOPAGO_ACCESS_TOKEN: ${MERCADOPAGO_ACCESS_TOKEN}
-      MERCADOPAGO_WEBHOOK_SIGNATURE: ${MERCADOPAGO_WEBHOOK_SIGNATURE}
-      LOCAL_COMMANDER_URL: ${LOCAL_COMMANDER_URL}
-      COMMANDER_TOKEN: ${COMMANDER_TOKEN}
-      DISCORD_WEBHOOK_DONATIONS: ${DISCORD_WEBHOOK_DONATIONS}
-      DISCORD_WEBHOOK_PAYMENTS: ${DISCORD_WEBHOOK_PAYMENTS}
-    volumes:
-      - type: bind
-        source: ./apps/website
-        target: /app/apps/website
-      - type: bind
-        source: ./packages
-        target: /app/packages
-
   melonbot:
     build:
       context: ./apps/melonbot
@@ -220,6 +189,51 @@ services:
       LUCKPERMS_DATA_USERNAME: ${POSTGRES_USER}
       LUCKPERMS_DATA_PASSWORD: ${POSTGRES_PASSWORD}
     restart: on-failure
+
+  pocketbase:
+    image: ghcr.io/kdpuvvadi/pocketbase:latest
+    volumes:
+      - ./apps/pocketbase/pb_data:/usr/src/app/pb_data
+      - ./apps/pocketbase/pb_public:/usr/src/app/pb_public
+      - ./apps/pocketbase/pb_hooks:/usr/src/app/pb_hooks
+    environment:
+      PB_ENCRYPTION_KEY: ${PB_ENCRYPTION_KEY}
+    ports:
+      - 8090:8090
+    command: --encryptionEnv=PB_ENCRYPTION_KEY
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pocketbase.entrypoints=web"
+      - "traefik.http.routers.pocketbase.rule=Host(`pb.${PUBLIC_BASE_DOMAIN}`)"
+    restart: unless-stopped
+    healthcheck:
+      test: curl --fail http://localhost:8090/api/health || exit 1
+      interval: 30s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
+
+  web:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.web.entrypoints=web"
+      - "traefik.http.routers.web.rule=Host(`${PUBLIC_BASE_DOMAIN}`)"
+    ports:
+      - "3000:3000"
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile
+      target: ${NODE_ENV}
+    environment:
+      PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
+      PUBLIC_POCKETBASE_URL: ${PUBLIC_POCKETBASE_URL}
+    volumes:
+      - type: bind
+        source: ./apps/website
+        target: /app/apps/website
+      - type: bind
+        source: ./packages
+        target: /app/packages
 
 volumes:
   warehouse:
