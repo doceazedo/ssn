@@ -196,6 +196,7 @@ services:
       - ./apps/pocketbase/pb_data:/usr/src/app/pb_data
       - ./apps/pocketbase/pb_public:/usr/src/app/pb_public
       - ./apps/pocketbase/pb_hooks:/usr/src/app/pb_hooks
+      - ./apps/pocketbase/pb_migrations:/usr/src/app/pb_migrations
     environment:
       PB_ENCRYPTION_KEY: ${PB_ENCRYPTION_KEY}
     ports:
