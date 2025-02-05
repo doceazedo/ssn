@@ -228,13 +228,15 @@ services:
     environment:
       PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
       PUBLIC_POCKETBASE_URL: ${PUBLIC_POCKETBASE_URL}
+      LOCAL_POCKETBASE_URL: ${LOCAL_POCKETBASE_URL}
     volumes:
-      - type: bind
-        source: ./apps/website
-        target: /app/apps/website
-      - type: bind
-        source: ./packages
-        target: /app/packages
+      - ./apps/web/src:/app/apps/web/src
+      - ./apps/web/static:/app/apps/web/static
+      - ./apps/web/vite.config.ts:/app/apps/web/vite.config.ts
+      - ./apps/web/tsconfig.json:/app/apps/web/tsconfig.json
+      - ./apps/web/svelte.config.js:/app/apps/web/svelte.config.js
+      - ./apps/web/project.inlang:/app/apps/web/project.inlang
+      - ./apps/web/messages:/app/apps/web/messages
 
 volumes:
   warehouse:
