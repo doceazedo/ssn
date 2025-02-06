@@ -5,8 +5,6 @@ import { env } from '$env/dynamic/private';
 
 export const handle = sequence(i18n.handle(), async ({ event, resolve }) => {
 	const pb = new PocketBase(env.LOCAL_POCKETBASE_URL);
-	pb.autoCancellation(false);
-
 	pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');
 
 	try {
@@ -17,6 +15,7 @@ export const handle = sequence(i18n.handle(), async ({ event, resolve }) => {
 		pb.authStore.clear();
 	}
 
+	event.locals.pb = pb;
 	event.locals.user = pb.authStore.record;
 
 	const response = await resolve(event);

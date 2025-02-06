@@ -86,5 +86,21 @@
 	"links_section_wiki": "If someone ever makes a wiki, the link will be here.",
 	"access_wiki": "Check the wiki",
 	"links_section_github": "Server code, configs, website, and everything else.",
-	"access_repo": "Check the repo"
+	"access_repo": "Check the repo",
+	"authorize_login_title": "Authorize access",
+	"authorize_login_text": "Is this you trying to play on SSN as <span>{username}</span> from around <span>{region}</span>?",
+	"cancel": "Cancel",
+	"authorize": "Authorize",
+	"always_allow_ip": "Always allow access from this IP",
+	"allow_wildcard": "Allow access for all my usernames",
+	"all_set": "You're all set!",
+	"authorized_successfully": "You can close this page and get back to the game. Have fun!",
+	"error_page_title": "We hit a roadblock!",
+	"return_to_homepage": "Go back home",
+	"unknown_region": "Unknown region",
+	"authorize_login_no_code_error": "No authorization code found, try again.",
+	"authorize_login_invalid_code_error": "Invalid authorization code, double-check the link you used.",
+	"authorize_login_flow_not_found_error": "This authorization link no longer exists, try again.",
+	"authorize_login_prohibited": "You're trying to play as <span>DoceAzedo</span>, but that username isn't linked to your SSN account.",
+	"no_error_message": "No further information."
 }

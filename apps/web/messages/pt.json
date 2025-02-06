@@ -86,5 +86,21 @@
 	"links_section_wiki": "Se um dia alguém criar uma wiki, o link vai ficar aqui.",
 	"access_wiki": "Acessar wiki",
 	"links_section_github": "Código e configurações dos servidores, site e tudo mais.",
-	"access_repo": "Acessar repositório"
+	"access_repo": "Acessar repositório",
+	"authorize_login_title": "Autorizar acesso",
+	"authorize_login_text": "É você tentando jogar no SSN com o nome de usuário <span>{username}</span> na região de <span>{region}</span>?",
+	"cancel": "Cancelar",
+	"authorize": "Autorizar",
+	"always_allow_ip": "Sempre permitir acesso para esse IP",
+	"allow_wildcard": "Permitir acesso à todos os meus nomes de usuário",
+	"all_set": "Tudo certo!",
+	"authorized_successfully": "Você já pode fechar essa página e voltar para o jogo. Divirta-se!",
+	"error_page_title": "Eita, deu ruim!",
+	"return_to_homepage": "Voltar para página inicial",
+	"unknown_region": "Região desconhecida",
+	"authorize_login_no_code_error": "Nenhum código de autorização informado, tente novamente.",
+	"authorize_login_invalid_code_error": "Código de autorização inválido, confira o link que você acessou.",
+	"authorize_login_flow_not_found_error": "Esse link de autorização já não existe mais, tente novamente.",
+	"authorize_login_prohibited": "Você está tentando jogar como <span>DoceAzedo</span>, mas esse nome de usuário não está cadastrado na sua conta do SSN.",
+	"no_error_message": "Sem mais informações."
 }

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
+	import Header from '$lib/components/Header.svelte';
 	import { Button } from '$lib/components/ui/button';
 	import { pb } from '$lib/pocketbase';
 	import { PRIMARY_USERNAME } from '$lib/stores';
@@ -14,12 +15,7 @@
 	};
 </script>
 
-<header class="flex justify-center my-12">
-	<a class="w-fit" href="/">
-		<img src="/img/ssn-icon.png" alt="" class="h-12" style="user-select: none; user-drag: none"
-		draggable="false" />
-	</a>
-</header>
+<Header />
 
 <div class="mx-auto flex w-full max-w-6xl gap-6">
 	<aside class="flex h-fit w-full max-w-xs flex-col gap-1.5 rounded-lg border p-6">

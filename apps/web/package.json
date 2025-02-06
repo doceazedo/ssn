@@ -21,13 +21,14 @@
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
 		"@tailwindcss/typography": "^0.5.16",
 		"autoprefixer": "^10.4.20",
-		"bits-ui": "^1.0.0-next.84",
+		"bits-ui": "^1.0.0-next.86",
 		"clsx": "^2.1.1",
 		"eslint": "^9.18.0",
 		"eslint-config-prettier": "^10.0.1",
 		"eslint-plugin-svelte": "^2.46.1",
 		"formsnap": "^2.0.0",
 		"globals": "^15.14.0",
+		"lucide-svelte": "^0.474.0",
 		"mode-watcher": "^0.5.1",
 		"phosphor-svelte": "^3.0.1",
 		"prettier": "^3.4.2",
@@ -49,6 +50,8 @@
 	"dependencies": {
 		"@inlang/paraglide-sveltekit": "^0.15.5",
 		"pocketbase": "^0.25.1",
-		"svelte-french-toast": "^1.2.0"
+		"redis": "^4.7.0",
+		"svelte-french-toast": "^1.2.0",
+		"uuid": "^11.0.5"
 	}
 }

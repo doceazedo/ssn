@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import { page } from '$app/state';
 	import { i18n } from '$lib/i18n';
 	import * as m from '$lib/paraglide/messages.js';
@@ -8,6 +9,8 @@
 	import FlagMxIcon from './icons/FlagMxIcon.svelte';
 	import FlagUsIcon from './icons/FlagUsIcon.svelte';
 	import { Button } from './ui/button';
+
+	const href = $derived(i18n.route(page.url.pathname) + page.url.search);
 </script>
 
 <footer
@@ -40,7 +43,7 @@
 		<p class="text-foreground/80 text-sm">{m.select_language()}</p>
 		<div class="flex">
 			<Button
-				href={i18n.route(page.url.pathname)}
+				{href}
 				hreflang="pt"
 				variant="outline"
 				class={cn('rounded-r-none', languageTag() === 'pt' && 'bg-muted')}
@@ -49,7 +52,7 @@
 				Português
 			</Button>
 			<Button
-				href={i18n.route(page.url.pathname)}
+				{href}
 				hreflang="es"
 				variant="outline"
 				class={cn('rounded-none border-x-0', languageTag() === 'es' && 'bg-muted')}
@@ -58,7 +61,7 @@
 				Español
 			</Button>
 			<Button
-				href={i18n.route(page.url.pathname)}
+				{href}
 				hreflang="en"
 				variant="outline"
 				class={cn('rounded-l-none', languageTag() === 'en' && 'bg-muted')}
