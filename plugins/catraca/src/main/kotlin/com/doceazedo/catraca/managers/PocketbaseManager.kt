@@ -168,6 +168,11 @@ object PocketbaseManager {
             return Pair(null, "§cO e-mail informado é inválido.")
         }
 
+        // check password length
+        if (password.length < 6 || password.length > 71) {
+            return Pair(null, "§cEscolha uma senha de pelo menos 6 caracteres.")
+        }
+
         if (!isEmailAvailable(email)) {
             return Pair(null, Messages.takenEmailMessage(email, name))
         }

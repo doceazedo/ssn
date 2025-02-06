@@ -5,6 +5,7 @@ import com.doceazedo.catraca.commands.RegisterCmd
 import com.doceazedo.catraca.events.*
 import com.doceazedo.catraca.managers.PocketbaseManager
 import com.doceazedo.waitingroom.api.WaitingRoomAPI
+import com.github.kittinunf.fuel.core.FuelManager
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import redis.clients.jedis.Jedis
@@ -26,6 +27,8 @@ class Catraca : JavaPlugin() {
         jedis.auth(System.getenv("GK_REDIS_PASSWORD"))
 
         waitingRoom = Bukkit.getServicesManager().load(WaitingRoomAPI::class.java)!!
+
+        FuelManager.instance.forceMethods = true
 
         PocketbaseManager.loginAsSuperUser()
 

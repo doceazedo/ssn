@@ -27,7 +27,7 @@
       password: z
         .string()
         .min(6, m.invalid_password_too_short())
-        .max(72, m.invalid_password_too_long()),
+        .max(71, m.invalid_password_too_long()),
       confirmPassword: z.string(),
     })
     .superRefine(({ confirmPassword, password }, ctx) => {

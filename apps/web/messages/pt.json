@@ -40,7 +40,7 @@
 	"invalid_username_regex": "Seu nome só pode ter letras, números e _",
 	"invalid_password": "Informe uma senha",
 	"invalid_password_too_short": "Informe uma senha com pelo menos 6 caracteres",
-	"invalid_password_too_long": "Informe uma senha com até 72 caracteres",
+	"invalid_password_too_long": "Informe uma senha com até 71 caracteres",
 	"invalid_password_confirmation": "As senhas informadas não conferem",
 	"invalid_email_or_username": "Informe um e-mail ou nome de usuário válido",
 	"invalid_email": "Informe um endereço de e-mail válido",

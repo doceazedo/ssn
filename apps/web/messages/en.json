@@ -40,7 +40,7 @@
 	"invalid_username_regex": "Your name can only have letters, numbers, and _",
 	"invalid_password": "Enter a password",
 	"invalid_password_too_short": "Your password must be at least 6 characters long",
-	"invalid_password_too_long": "Your password can't be longer than 72 characters",
+	"invalid_password_too_long": "Your password can't be longer than 71 characters",
 	"invalid_password_confirmation": "Passwords don't match",
 	"invalid_email_or_username": "Enter a valid email or username",
 	"invalid_email": "Enter a valid email address",
