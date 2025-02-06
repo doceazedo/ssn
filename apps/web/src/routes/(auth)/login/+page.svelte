@@ -11,6 +11,8 @@
 	import { pb } from '$lib/pocketbase';
 	import { goto } from '$app/navigation';
 	import { toast } from '$lib/utils';
+	import { i18n } from '$lib/i18n';
+	import { page } from '$app/state';
 
   let loading = $state(false);
 
@@ -46,7 +48,8 @@
             form.data.usernameOrEmail,
             form.data.password,
           );
-          goto('/account', { invalidateAll: true });
+          const url = page.url.searchParams.get('redirect') || '/account';
+          goto(i18n.resolveRoute(url), { invalidateAll: true });
         } catch (error) {
           loading = false;
           toast.error(m.login_error());
@@ -66,7 +69,7 @@
         draggable="false" />
 			</a>
 			<h1 class="text-2xl font-bold">{m.login_page_title()}</h1>
-			<Button variant="discord" disabled={loading} onclick={loginWithDiscord}>
+			<Button variant="discord" disabled={loading} onclick={() => loginWithDiscord(page.url.search)}>
 				<DiscordIcon class="size-5" />
 				{m.login_with({ service: 'Discord' })}
 			</Button>
@@ -102,7 +105,7 @@
       <hr />
       <p class="text-muted-foreground text-sm">
         {m.not_registered_yet()}
-        <a href="/register" class="underline-offset-2 underline text-foreground font-medium">
+        <a href="/register{page.url.search}" class="underline-offset-2 underline text-foreground font-medium">
           {m.register()}
         </a>
       </p>

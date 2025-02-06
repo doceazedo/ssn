@@ -12,6 +12,7 @@
 	import { goto } from '$app/navigation';
 	import { toast } from '$lib/utils';
 	import type { RecordModel } from 'pocketbase';
+	import { page } from '$app/state';
 
   let loading = $state(false);
 
@@ -98,7 +99,8 @@
           toast.error(m.register_primary_username_error());
         }
 
-        goto('/account', { invalidateAll: true });
+        const url = page.url.searchParams.get('redirect') || '/account';
+        goto(url, { invalidateAll: true });
       }
     }
   });
@@ -114,7 +116,7 @@
         draggable="false" />
 			</a>
 			<h1 class="text-2xl font-bold">{m.register_page_title()}</h1>
-			<Button variant="discord" disabled={loading} onclick={loginWithDiscord}>
+			<Button variant="discord" disabled={loading} onclick={() => loginWithDiscord(page.url.search)}>
 				<DiscordIcon class="size-5" />
 				{m.register_with({ service: 'Discord' })}
 			</Button>
@@ -168,7 +170,7 @@
       <hr />
       <p class="text-muted-foreground text-sm">
         {m.already_registered()}
-        <a href="/login" class="underline-offset-2 underline text-foreground font-medium">
+        <a href="/login{page.url.search}" class="underline-offset-2 underline text-foreground font-medium">
           {m.login()}
         </a>.
       </p>
