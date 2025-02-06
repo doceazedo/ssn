@@ -4,10 +4,7 @@ import com.doceazedo.catraca.Catraca.Companion.AUTH_FLOW_DURATION
 import com.doceazedo.catraca.Catraca.Companion.instance
 import com.doceazedo.catraca.Catraca.Companion.waitingRoom
 import com.doceazedo.catraca.helpers.Messages
-import com.doceazedo.catraca.managers.BossBarManager
-import com.doceazedo.catraca.managers.CaptchaManager
-import com.doceazedo.catraca.managers.GatekeeperManager
-import com.doceazedo.catraca.managers.IdentityManager
+import com.doceazedo.catraca.managers.*
 import com.github.shynixn.mccoroutine.bukkit.launch
 import kotlinx.coroutines.delay
 import org.bukkit.Bukkit
@@ -17,7 +14,6 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
-import java.util.*
 
 object PlayerJoin : Listener {
     private const val MESSAGES_COOLDOWN = 9
@@ -37,14 +33,20 @@ object PlayerJoin : Listener {
         }
 
         instance.launch {
-            val identity = IdentityManager.getIdentityFromUsername(event.player.name)
+            val existingUsername = PocketbaseManager.findUsername(event.player.name)
 
-            // handle existing grant
-            if (identity != null) {
-                val existingGrant = GatekeeperManager.isUserGranted(identity.uuid, event.player)
+            if (existingUsername != null) {
+                // handle mismatching casing
+                if (existingUsername.name != event.player.name) {
+                    event.player.kickPlayer("§cVocê tentou entrar como \"§4${event.player.name}§c\", mas esse usuário já está registrado como \"§a${existingUsername.name}§c\".")
+                    return@launch
+                }
+
+                // handle existing grant
+                val existingGrant = GatekeeperManager.isUserGranted(existingUsername.owner, event.player)
                 if (existingGrant == true) {
                     IdentityManager.loggedInUsers.add(event.player.uniqueId)
-                    GatekeeperManager.grantUser(identity.uuid, event.player, true)
+                    GatekeeperManager.grantUser(existingUsername.owner, event.player, true)
                     waitingRoom.enqueuePlayer(event.player)
                     return@launch
                 } else if (existingGrant == false) {
@@ -56,7 +58,7 @@ object PlayerJoin : Listener {
             // new auth flow
             val authFlowCode = GatekeeperManager.createAuthFlow(event.player)
             instance.launch { showTimer(event.player, authFlowCode) }
-            instance.launch { sendMessages(event.player, identity != null, authFlowCode) }
+            instance.launch { sendMessages(event.player, existingUsername != null, authFlowCode) }
 
             val authFlow = GatekeeperManager.awaitFlowChange(authFlowCode, event.player)
                 ?: return@launch event.player.kickPlayer("§cVocê demorou mais de §c§l${AUTH_FLOW_DURATION}s §cpara fazer login.\nPor favor, tente novamente.")

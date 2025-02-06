@@ -15,8 +15,6 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.identity.entrypoints=web"
       - "traefik.http.routers.identity.rule=Host(`id.${PUBLIC_BASE_DOMAIN}`)"
-    ports:
-      - "3000:3000"
     build:
       context: .
       dockerfile: ./apps/identity/Dockerfile
@@ -156,6 +154,9 @@ services:
       LUCKPERMS_DATA_DATABASE: ${POSTGRES_DB}
       LUCKPERMS_DATA_USERNAME: ${POSTGRES_USER}
       LUCKPERMS_DATA_PASSWORD: ${POSTGRES_PASSWORD}
+      LOCAL_POCKETBASE_URL: ${LOCAL_POCKETBASE_URL}
+      PB_SUPERUSER_IDENTITY: ${PB_SUPERUSER_IDENTITY}
+      PB_SUPERUSER_PASSWORD: ${PB_SUPERUSER_PASSWORD}
     restart: on-failure
 
   minecraft-main:

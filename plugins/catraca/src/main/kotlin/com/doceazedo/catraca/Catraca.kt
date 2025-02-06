@@ -3,6 +3,7 @@ package com.doceazedo.catraca
 import com.doceazedo.catraca.commands.LoginCmd
 import com.doceazedo.catraca.commands.RegisterCmd
 import com.doceazedo.catraca.events.*
+import com.doceazedo.catraca.managers.PocketbaseManager
 import com.doceazedo.waitingroom.api.WaitingRoomAPI
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
@@ -25,6 +26,8 @@ class Catraca : JavaPlugin() {
         jedis.auth(System.getenv("GK_REDIS_PASSWORD"))
 
         waitingRoom = Bukkit.getServicesManager().load(WaitingRoomAPI::class.java)!!
+
+        PocketbaseManager.loginAsSuperUser()
 
         Bukkit.getPluginManager().registerEvents(PlayerJoin, this)
         Bukkit.getPluginManager().registerEvents(EntityDamage, this)

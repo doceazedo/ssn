@@ -5,6 +5,7 @@ import com.doceazedo.catraca.Catraca.Companion.waitingRoom
 import com.doceazedo.catraca.managers.CaptchaManager
 import com.doceazedo.catraca.managers.GatekeeperManager
 import com.doceazedo.catraca.managers.IdentityManager
+import com.doceazedo.catraca.managers.PocketbaseManager
 import com.github.shynixn.mccoroutine.bukkit.launch
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -26,30 +27,28 @@ object LoginCmd : CommandExecutor {
         val password = if (args.size == 1) args[0] else args[1]
 
         instance.launch {
-            val (identity, token, loginError) = IdentityManager.login(
-                emailOrUsername,
-                password
-            )
-            if (loginError != null || identity == null || token == null) {
-                sender.kickPlayer("§c${loginError?.message ?: "Login ou senha inválidos!"}")
+            val user = PocketbaseManager.login(emailOrUsername, password)
+            if (user == null) {
+                sender.kickPlayer("§cLogin ou senha inválidos!")
                 return@launch
             }
 
-            if (!identity.usernames.contains(sender.name)) {
-                val usernameOwner = IdentityManager.getIdentityFromUsername(sender.name)
-                if (usernameOwner != null) {
-                    sender.kickPlayer("§cO nome de usuário §4${sender.displayName} §cnão está vinculado a essa conta!")
-                    return@launch
-                }
+            val username = PocketbaseManager.findUsername(sender.name)
 
-                IdentityManager.authenticatedUsers[sender.uniqueId] = Pair(identity, token)
+            // new alt username if available
+            if (username == null) {
+                IdentityManager.authenticatedUsers.add(sender.uniqueId)
                 CaptchaManager.sendCaptcha(sender)
+                return@launch
+            }
 
+            if (username.owner != user.id) {
+                sender.kickPlayer("§cO nome de usuário §4${sender.displayName} §cnão está vinculado a essa conta!")
                 return@launch
             }
 
             IdentityManager.loggedInUsers.add(sender.uniqueId)
-            GatekeeperManager.grantUser(identity.uuid, sender, true)
+            GatekeeperManager.grantUser(user.id, sender, true)
             waitingRoom.enqueuePlayer(sender)
         }
 

@@ -3,6 +3,7 @@ package com.doceazedo.catraca.commands
 import com.doceazedo.catraca.Catraca.Companion.instance
 import com.doceazedo.catraca.managers.CaptchaManager
 import com.doceazedo.catraca.managers.IdentityManager
+import com.doceazedo.catraca.managers.PocketbaseManager
 import com.github.shynixn.mccoroutine.bukkit.launch
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -29,8 +30,8 @@ object RegisterCmd : CommandExecutor {
         if (CaptchaManager.captchas.contains(sender.uniqueId)) return true
 
         instance.launch {
-            val identity = IdentityManager.getIdentityFromUsername(sender.name)
-            if (identity != null) {
+            val username = PocketbaseManager.findUsername(sender.name)
+            if (username != null) {
                 sender.sendMessage("§cEsse nome de usuário já está em uso!")
                 return@launch
             }
