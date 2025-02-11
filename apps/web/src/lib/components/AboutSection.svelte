@@ -70,7 +70,7 @@
 		{m.about_section_subtitle()}
 	</p>
 	<ul
-		class="text-foreground/80 [&_span]:text-foreground mb-8 grid grid-cols-1 gap-8 md:mb-14 md:grid-cols-2 lg:grid-cols-2"
+		class="text-foreground/80 [&_span]:text-foreground mb-8 grid grid-cols-1 gap-8 md:mb-14 md:grid-cols-2 lg:grid-cols-3"
 	>
 		<li class="flex gap-2">
 			<Prohibit size={20} class="text-primary shrink-0 translate-y-px" />
