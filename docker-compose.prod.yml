@@ -10,72 +10,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.yml:/etc/traefik/traefik.yml
 
-  identity-web:
-    image: doceazedo/ssn-identity-web:latest
-    pull_policy: always
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.identity.entrypoints=web"
-      - "traefik.http.routers.identity.rule=Host(`id.${PUBLIC_BASE_DOMAIN}`)"
-    ports:
-      - "3000:3000"
-    environment:
-      PUBLIC_BASE_DOMAIN: ${PUBLIC_BASE_DOMAIN}
-      PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
-      PUBLIC_GATEKEEPER_URL: ${PUBLIC_GATEKEEPER_URL}
-      PUBLIC_DASHBOARD_URL: ${PUBLIC_DASHBOARD_URL}
-      PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
-      PUBLIC_REGISTER_ENABLED: ${PUBLIC_REGISTER_ENABLED}
-      PUBLIC_REGISTER_INVITE_ONLY: ${PUBLIC_REGISTER_INVITE_ONLY}
-      PUBLIC_REGISTER_INVITES_PER_USER: ${PUBLIC_REGISTER_INVITES_PER_USER}
-      PUBLIC_DISCORD_CLIENT_ID: ${PUBLIC_DISCORD_CLIENT_ID}
-      PUBLIC_CF_TURNSTILE_SITE_KEY: ${PUBLIC_CF_TURNSTILE_SITE_KEY}
-      PUBLIC_RCON_URL: ${PUBLIC_RCON_URL}
-      DISCORD_CLIENT_SECRET: ${DISCORD_CLIENT_SECRET}
-      CATRACA_IDENTITY_TOKEN: ${CATRACA_IDENTITY_TOKEN}
-      DATABASE_URL: ${DATABASE_URL}
-      WH_DEFAULT_ADMIN_USERNAME: ${WH_DEFAULT_ADMIN_USERNAME}
-      CF_TURNSTILE_SECRET_KEY: ${CF_TURNSTILE_SECRET_KEY}
-      SENDGRID_API_KEY: ${SENDGRID_API_KEY}
-      SENDGRID_FROM: ${SENDGRID_FROM}
-      LOCAL_COMMANDER_URL: ${LOCAL_COMMANDER_URL}
-      COMMANDER_TOKEN: ${COMMANDER_TOKEN}
-
-  warehouse:
-    image: postgres:13.1-alpine
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-    volumes:
-      - ${MNT_WAREHOUSE}:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-
-  warehouse-migrate:
-    image: doceazedo/ssn-warehouse-migrate:latest
-    pull_policy: always
-    depends_on:
-      - warehouse
-    restart: on-failure
-    environment:
-      DATABASE_URL: ${DATABASE_URL}
-
-  gatekeeper-web:
-    image: doceazedo/ssn-gatekeeper-web:latest
-    pull_policy: always
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.gatekeeper.entrypoints=web"
-      - "traefik.http.routers.gatekeeper.rule=Host(`gk.${PUBLIC_BASE_DOMAIN}`)"
-    ports:
-      - "3001:3000"
-    environment:
-      PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
-      PUBLIC_GATEKEEPER_URL: ${PUBLIC_GATEKEEPER_URL}
-      GK_REDIS_URL: ${GK_REDIS_URL}
-      DATABASE_URL: ${DATABASE_URL}
-
   gatekeeper-redis:
     image: redis:7.0.5-alpine
     command: redis-server --requirepass ${GK_REDIS_PASSWORD} --appendonly yes
@@ -83,28 +17,6 @@ services:
       - "6379:6379"
     volumes:
       - ${MNT_GATEKEEPER}:/data
-
-  website:
-    image: doceazedo/ssn-website:latest
-    pull_policy: always
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.website.entrypoints=web"
-      - "traefik.http.routers.website.rule=Host(`${PUBLIC_BASE_DOMAIN}`)"
-    ports:
-      - "3002:3000"
-    environment:
-      PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
-      PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
-      PUBLIC_GATEKEEPER_URL: ${PUBLIC_GATEKEEPER_URL}
-      LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
-      DATABASE_URL: ${DATABASE_URL}
-      MERCADOPAGO_ACCESS_TOKEN: ${MERCADOPAGO_ACCESS_TOKEN}
-      MERCADOPAGO_WEBHOOK_SIGNATURE: ${MERCADOPAGO_WEBHOOK_SIGNATURE}
-      LOCAL_COMMANDER_URL: ${LOCAL_COMMANDER_URL}
-      COMMANDER_TOKEN: ${COMMANDER_TOKEN}
-      DISCORD_WEBHOOK_DONATIONS: ${DISCORD_WEBHOOK_DONATIONS}
-      DISCORD_WEBHOOK_PAYMENTS: ${DISCORD_WEBHOOK_PAYMENTS}
 
   melonbot:
     image: doceazedo/ssn-melonbot:latest
@@ -194,6 +106,54 @@ services:
       LUCKPERMS_DATA_PASSWORD: ${POSTGRES_PASSWORD}
     restart: on-failure
 
+  pocketbase:
+    image: ghcr.io/kdpuvvadi/pocketbase:latest
+    volumes:
+      - ./apps/pocketbase/pb_data:/usr/src/app/pb_data
+      - ./apps/pocketbase/pb_public:/usr/src/app/pb_public
+      - ./apps/pocketbase/pb_hooks:/usr/src/app/pb_hooks
+      - ./apps/pocketbase/pb_migrations:/usr/src/app/pb_migrations
+    environment:
+      PB_ENCRYPTION_KEY: ${PB_ENCRYPTION_KEY}
+    ports:
+      - 8090:8090
+    command: --encryptionEnv=PB_ENCRYPTION_KEY
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pocketbase.entrypoints=web"
+      - "traefik.http.routers.pocketbase.rule=Host(`pb.${PUBLIC_BASE_DOMAIN}`)"
+    restart: unless-stopped
+    healthcheck:
+      test: curl --fail http://localhost:8090/api/health || exit 1
+      interval: 30s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
+
+  web:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.web.entrypoints=web"
+      - "traefik.http.routers.web.rule=Host(`${PUBLIC_BASE_DOMAIN}`)"
+    ports:
+      - "3000:3000"
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile
+      target: ${NODE_ENV}
+    environment:
+      PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
+      PUBLIC_POCKETBASE_URL: ${PUBLIC_POCKETBASE_URL}
+      LOCAL_POCKETBASE_URL: ${LOCAL_POCKETBASE_URL}
+      GK_REDIS_URL: ${GK_REDIS_URL}
+    volumes:
+      - ./apps/web/src:/app/apps/web/src
+      - ./apps/web/static:/app/apps/web/static
+      - ./apps/web/vite.config.ts:/app/apps/web/vite.config.ts
+      - ./apps/web/tsconfig.json:/app/apps/web/tsconfig.json
+      - ./apps/web/svelte.config.js:/app/apps/web/svelte.config.js
+      - ./apps/web/project.inlang:/app/apps/web/project.inlang
+      - ./apps/web/messages:/app/apps/web/messages
+
 volumes:
-  warehouse:
   gatekeeper:
