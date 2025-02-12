@@ -2,10 +2,7 @@
 export NODE_ENV="production"
 
 services=(
-  "warehouse-migrate"
-  "gatekeeper-web"
-  "website"
-  "identity-web"
+  "web"
   "melonbot"
 )
 
