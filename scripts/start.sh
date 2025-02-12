@@ -5,7 +5,7 @@ source ../.env
 cd .. &&
 $DOCKER system prune -a -f &&
 sleep .5 &&
-$DOCKER compose -f docker-compose.prod.yml up -d gateway identity-web warehouse warehouse-migrate gatekeeper-web gatekeeper-redis website melonbot &&
+$DOCKER compose -f docker-compose.prod.yml up -d gateway warehouse gatekeeper-redis web melonbot &&
 sleep .5 &&
 $DOCKER system prune -a -f &&
 sleep .5 &&
