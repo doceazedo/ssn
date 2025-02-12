@@ -107,7 +107,21 @@ services:
       LUCKPERMS_DATA_DATABASE: ${POSTGRES_DB}
       LUCKPERMS_DATA_USERNAME: ${POSTGRES_USER}
       LUCKPERMS_DATA_PASSWORD: ${POSTGRES_PASSWORD}
+      LOCAL_POCKETBASE_URL: ${LOCAL_POCKETBASE_URL}
+      PB_SUPERUSER_IDENTITY: ${PB_SUPERUSER_IDENTITY}
+      PB_SUPERUSER_PASSWORD: ${PB_SUPERUSER_PASSWORD}
     restart: on-failure
+
+  warehouse:
+    image: postgres:13.1-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - ${MNT_WAREHOUSE}:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
   pocketbase:
     image: ghcr.io/kdpuvvadi/pocketbase:latest
@@ -159,4 +173,5 @@ services:
       - ./apps/web/messages:/app/apps/web/messages
 
 volumes:
+  warehouse:
   gatekeeper:

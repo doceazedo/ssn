@@ -23,22 +23,22 @@ object LoginCmd : CommandExecutor {
         if (sender !is Player) return false
         if (args.isEmpty()) return false
 
-        val emailOrUsername = if (args.size == 1) sender.name else args[0]
-        val password = if (args.size == 1) args[0] else args[1]
-
         instance.launch {
-            val user = PocketbaseManager.login(emailOrUsername, password)
-            if (user == null) {
-                sender.kickPlayer("§cLogin ou senha inválidos!")
-                return@launch
-            }
-
             val username = PocketbaseManager.findUsername(sender.name)
 
             // new alt username if available
             if (username == null) {
                 IdentityManager.authenticatedUsers.add(sender.uniqueId)
                 CaptchaManager.sendCaptcha(sender)
+                return@launch
+            }
+
+            // login with username id and password
+            val emailOrUsername = if (args.size == 1) username.id else args[0]
+            val password = if (args.size == 1) args[0] else args[1]
+            val user = PocketbaseManager.login(emailOrUsername, password)
+            if (user == null) {
+                sender.kickPlayer("§cLogin ou senha inválidos!")
                 return@launch
             }
 

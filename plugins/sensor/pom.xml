@@ -18,6 +18,7 @@
         <mccoroutine.version>2.6.0</mccoroutine.version>
         <kotlinx-coroutines.version>1.6.4</kotlinx-coroutines.version>
         <jedis.version>5.1.0</jedis.version>
+        <fuel.version>2.3.1</fuel.version>
     </properties>
 
     <build>
@@ -130,12 +131,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>khttp</groupId>
-            <artifactId>khttp</artifactId>
-            <version>1.0.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.10</version>
@@ -164,6 +159,16 @@
             <artifactId>jedis</artifactId>
             <version>${jedis.version}</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.kittinunf.fuel</groupId>
+            <artifactId>fuel</artifactId>
+            <version>${fuel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.kittinunf.fuel</groupId>
+            <artifactId>fuel-gson</artifactId>
+            <version>${fuel.version}</version>
         </dependency>
     </dependencies>
 </project>

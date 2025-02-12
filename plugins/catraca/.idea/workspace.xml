@@ -5,7 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c1cd4cd0-04a0-4ce5-995f-d89442cb1798" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/managers/PocketbaseManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/doceazedo/catraca/managers/PocketbaseManager.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sensor/src/main/java/com/github/maizenalegal/sensor/managers/PocketbaseManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../docker-compose.prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../docker-compose.prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sensor/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../sensor/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sensor/src/main/java/com/github/maizenalegal/sensor/Sensor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../sensor/src/main/java/com/github/maizenalegal/sensor/Sensor.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sensor/src/main/java/com/github/maizenalegal/sensor/commands/PlaytimeCmd.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../sensor/src/main/java/com/github/maizenalegal/sensor/commands/PlaytimeCmd.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sensor/src/main/java/com/github/maizenalegal/sensor/enums/Env.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sensor/src/main/java/com/github/maizenalegal/sensor/events/PlayerJoin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../sensor/src/main/java/com/github/maizenalegal/sensor/events/PlayerJoin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sensor/src/main/java/com/github/maizenalegal/sensor/events/PlayerQuit.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../sensor/src/main/java/com/github/maizenalegal/sensor/events/PlayerQuit.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sensor/src/main/java/com/github/maizenalegal/sensor/identity/Username.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sensor/src/main/java/com/github/maizenalegal/sensor/utils/TimeFormatter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../sensor/src/main/java/com/github/maizenalegal/sensor/utils/TimeFormatter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../servers/0-proxy/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/0-proxy/config.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../servers/0-proxy/plugins/SkinsRestorer/recommendations.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/0-proxy/plugins/SkinsRestorer/recommendations.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../servers/1-queue/plugins/SkinsRestorer.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/1-queue/plugins/SkinsRestorer.jar" afterDir="false" />
@@ -13,6 +24,7 @@
       <change beforePath="$PROJECT_DIR$/../../servers/1-queue/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/1-queue/server.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../servers/2-main/config/paper-world-defaults.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/2-main/config/paper-world-defaults.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../servers/2-main/plugins/NoCheatPlus/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/2-main/plugins/NoCheatPlus/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../servers/2-main/plugins/Sensor-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/2-main/plugins/Sensor-0.0.1.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../servers/2-main/plugins/SkinsRestorer.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/2-main/plugins/SkinsRestorer.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../servers/2-main/plugins/SkinsRestorer/recommendations.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/2-main/plugins/SkinsRestorer/recommendations.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../servers/2-main/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../servers/2-main/server.properties" afterDir="false" />
