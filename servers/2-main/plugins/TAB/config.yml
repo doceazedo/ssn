@@ -1,4 +1,3 @@
-# https://github.com/NEZNAMY/TAB/wiki/Feature-guide:-Header-&-Footer
 header-footer:
   enabled: true
   header:
@@ -37,25 +36,14 @@ scoreboard-teams:
   - PLACEHOLDER_A_TO_Z:%player%
   case-sensitive-sorting: true
   can-see-friendly-invisibles: false
-  unlimited-nametag-mode:
-    enabled: false
-    disable-on-boats: true
-    dynamic-lines:
-    - abovename
-    - nametag
-    - belowname
-    - another
-    static-lines:
-      myCustomLine: 0.66
-    disable-condition: '%world%=disabledworld'
   disable-condition: '%world%=disabledworld'
 belowname-objective:
   enabled: false
-  number: '%health%'
-  text: '&cHealth'
   disable-condition: '%world%=disabledworld'
-  fancy-display-default: NPC
-  fancy-display-players: '&c%health%'
+  fancy-value-default: NPC
+  fancy-value: '&c%health%'
+  value: '%health%'
+  title: '&cHealth'
 prevent-spectator-effect:
   enabled: true
 bossbar:
@@ -90,7 +78,6 @@ scoreboard:
   use-numbers: false
   static-number: 0
   delay-on-join-milliseconds: 0
-  respect-other-plugins: true
   scoreboards:
     admin:
       display-condition: permission:tab.scoreboard.admin
@@ -168,6 +155,7 @@ mysql:
 use-online-uuid-in-tablist: true
 global-playerlist:
   enabled: false
+  update-latency: false
 layout:
   enabled: false
   direction: COLUMNS
@@ -227,3 +215,5 @@ playerlist-objective:
 ping-spoof:
   enabled: false
 permission-refresh-interval: 1000
+enable-redisbungee-support: true
+compensate-for-packetevents-bug: false

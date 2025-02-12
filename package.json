@@ -26,7 +26,7 @@
     "start:iam": "docker-compose up --build gateway warehouse warehouse-migrate identity-web",
     "start:website": "docker-compose up --build gateway warehouse warehouse-migrate identity-web website",
     "start:rcon": "docker-compose up --build gateway warehouse warehouse-migrate identity-web rcon minecraft-main",
-    "start:minecraft": "docker-compose up --build gateway warehouse warehouse-migrate identity-web gatekeeper-redis gatekeeper-web minecraft-proxy minecraft-queue minecraft-main",
+    "start:minecraft": "docker-compose up --build gateway pocketbase warehouse gatekeeper-redis minecraft-proxy minecraft-queue minecraft-main",
     "warehouse:generate": "(cd ./packages/warehouse && npx prisma generate)",
     "warehouse:migrate": "(cd ./packages/warehouse && npx prisma migrate dev)",
     "docker:prune": "docker system prune --volumes",
