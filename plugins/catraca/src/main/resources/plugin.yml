@@ -1,4 +1,11 @@
 name: Catraca
-version: '${project.version}'
+version: '1.0.0'
 main: com.doceazedo.catraca.Catraca
+api-version: '1.21'
 depend: [WaitingRoom]
+commands:
+  login:
+    usage: "Uso: /<command> [email] <senha>"
+  registrar:
+    aliases: [register]
+    usage: "Uso: /<command> [email] <senha> <confirmar-senha>"

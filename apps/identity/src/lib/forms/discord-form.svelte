@@ -5,6 +5,7 @@
 	import { registerWithDiscord } from '$lib/auth';
 	import { Form } from '.';
 	import { usernameWarning } from '$lib/helpers';
+	import { page } from '$app/stores';
 
 	export let refreshToken: string;
 
@@ -50,7 +51,11 @@
 			if (!acceptedTerms) return (isTermsModalOpen = true);
 			isLoading = true;
 
-			await registerWithDiscord({ username, refreshToken }, invite);
+			await registerWithDiscord(
+				{ username, refreshToken },
+				invite,
+				$page.url.searchParams.get('code')
+			);
 		} catch (e) {
 			isLoading = false;
 			error = e.message;

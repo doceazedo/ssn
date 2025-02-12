@@ -5,6 +5,7 @@
 	import { DiscordForm } from '$lib/forms';
 	import { discordOauthUrl } from '$lib/helpers';
 	import { dashboardUrl } from '$lib/env/public';
+	import { page } from '$app/stores';
 
 	export let data;
 
@@ -42,7 +43,9 @@
 		<img class="avatar" src={discordAvatar} alt="Avatar de {discordUsername}" />
 		<p class="user">
 			<span class="name">{discordUsername}</span>
-			<a class="has-text-grey" href={discordOauthUrl}>Não é você?</a>
+			<a class="has-text-grey" href={discordOauthUrl($page.url.searchParams.get('code'))}
+				>Não é você?</a
+			>
 		</p>
 	</div>
 

@@ -1,6 +1,6 @@
 package com.github.maizenalegal.sensor.commands
 
-import com.github.maizenalegal.sensor.identity.Username.getUsername
+import com.github.maizenalegal.sensor.managers.PocketbaseManager
 import com.github.maizenalegal.sensor.utils.TimeFormatter
 import com.github.shynixn.mccoroutine.bukkit.SuspendingCommandExecutor
 import org.bukkit.command.Command
@@ -16,7 +16,7 @@ object PlaytimeCmd : SuspendingCommandExecutor {
     ): Boolean {
         if (sender !is Player) return false
         val target = if (args.isEmpty()) sender.displayName else args[0]
-        val user = getUsername(target)
+        val user = PocketbaseManager.findUsername(target)
 
         if (user?.firstJoin == null) {
             sender.sendMessage("§cEsse jogador nunca entrou nesse servidor ou não existe.")

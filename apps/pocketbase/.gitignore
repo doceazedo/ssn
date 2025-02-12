@@ -1,0 +1,8 @@
+*
+!.gitignore
+!/pb_hooks
+!/pb_hooks/**
+!/pb_public
+!/pb_public/**
+!/pb_migrations
+!/pb_migrations/**

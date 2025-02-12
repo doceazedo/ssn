@@ -35,7 +35,10 @@
 
 <form class="form" class:is-loading={isLoading} on:submit|preventDefault>
 	{#if discordLabel}
-		<a href={discordOauthUrl} class="button is-link is-light is-fullwidth">
+		<a
+			href={discordOauthUrl($page.url.searchParams.get('gk'))}
+			class="button is-link is-light is-fullwidth"
+		>
 			<DiscordIcon />
 			{discordLabel}
 		</a>

@@ -52,13 +52,13 @@ const statusCommand: Command = {
           value: `${mainStatus?.ping || proxyStatus.roundTripLatency}ms`,
           inline: true,
         },
-        { name: "🧭 Versão", value: "Java Edition 1.21.1", inline: true },
+        { name: "🧭 Versão", value: "Java Edition 1.21.4", inline: true },
         {
           name: "⚡️ TPS",
           value: mainStatus?.tps?.toFixed(1) || "20.0",
           inline: true,
         },
-        { name: "💭 MOTD", value: proxyStatus.motd.clean, inline: true }
+        { name: "💭 MOTD", value: proxyStatus.motd.clean, inline: true },
       );
 
     const actions = new ActionRowBuilder().addComponents(
@@ -69,7 +69,7 @@ const statusCommand: Command = {
       new ButtonBuilder()
         .setCustomId("refresh")
         .setLabel("Atualizar")
-        .setStyle(ButtonStyle.Secondary)
+        .setStyle(ButtonStyle.Secondary),
     );
 
     await interaction.reply({

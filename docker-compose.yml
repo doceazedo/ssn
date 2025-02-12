@@ -1,5 +1,3 @@
-version: "4"
-
 services:
   gateway:
     image: traefik:v2.7
@@ -10,89 +8,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.yml:/etc/traefik/traefik.yml
 
-  identity-web:
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.identity.entrypoints=web"
-      - "traefik.http.routers.identity.rule=Host(`id.${PUBLIC_BASE_DOMAIN}`)"
-    ports:
-      - "3000:3000"
-    build:
-      context: .
-      dockerfile: ./apps/identity/Dockerfile
-      target: ${NODE_ENV}
-    environment:
-      PUBLIC_BASE_DOMAIN: ${PUBLIC_BASE_DOMAIN}
-      PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
-      PUBLIC_DASHBOARD_URL: ${PUBLIC_DASHBOARD_URL}
-      PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
-      PUBLIC_REGISTER_ENABLED: ${PUBLIC_REGISTER_ENABLED}
-      PUBLIC_REGISTER_INVITE_ONLY: ${PUBLIC_REGISTER_INVITE_ONLY}
-      PUBLIC_REGISTER_INVITES_PER_USER: ${PUBLIC_REGISTER_INVITES_PER_USER}
-      PUBLIC_DISCORD_CLIENT_ID: ${PUBLIC_DISCORD_CLIENT_ID}
-      PUBLIC_CF_TURNSTILE_SITE_KEY: ${PUBLIC_CF_TURNSTILE_SITE_KEY}
-      PUBLIC_RCON_URL: ${PUBLIC_RCON_URL}
-      DISCORD_CLIENT_SECRET: ${DISCORD_CLIENT_SECRET}
-      CATRACA_IDENTITY_TOKEN: ${CATRACA_IDENTITY_TOKEN}
-      DATABASE_URL: ${DATABASE_URL}
-      WH_DEFAULT_ADMIN_USERNAME: ${WH_DEFAULT_ADMIN_USERNAME}
-      CF_TURNSTILE_SECRET_KEY: ${CF_TURNSTILE_SECRET_KEY}
-      SENDGRID_API_KEY: ${SENDGRID_API_KEY}
-      SENDGRID_FROM: ${SENDGRID_FROM}
-      LOCAL_COMMANDER_URL: ${LOCAL_COMMANDER_URL}
-      COMMANDER_TOKEN: ${COMMANDER_TOKEN}
-    volumes:
-      - type: bind
-        source: ./apps/identity
-        target: /app/apps/identity
-      - type: bind
-        source: ./packages
-        target: /app/packages
-
-  warehouse:
-    image: postgres:13.1-alpine
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-    volumes:
-      - ${MNT_WAREHOUSE}:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-
-  warehouse-migrate:
-    build:
-      context: ./packages/warehouse
-    depends_on:
-      - warehouse
-    restart: on-failure
-    environment:
-      DATABASE_URL: ${DATABASE_URL}
-
-  gatekeeper-web:
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.gatekeeper.entrypoints=web"
-      - "traefik.http.routers.gatekeeper.rule=Host(`gk.${PUBLIC_BASE_DOMAIN}`)"
-    ports:
-      - "3001:3000"
-    build:
-      context: .
-      dockerfile: ./apps/gatekeeper/Dockerfile
-      target: ${NODE_ENV}
-    environment:
-      PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
-      PUBLIC_GATEKEEPER_URL: ${PUBLIC_GATEKEEPER_URL}
-      GK_REDIS_URL: ${GK_REDIS_URL}
-      DATABASE_URL: ${DATABASE_URL}
-    volumes:
-      - type: bind
-        source: ./apps/gatekeeper
-        target: /app/apps/gatekeeper
-      - type: bind
-        source: ./packages
-        target: /app/packages
-
   gatekeeper-redis:
     image: redis:7.0.5-alpine
     command: redis-server --requirepass ${GK_REDIS_PASSWORD} --appendonly yes
@@ -100,36 +15,6 @@ services:
       - "6379:6379"
     volumes:
       - ${MNT_GATEKEEPER}:/data
-
-  website:
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.website.entrypoints=web"
-      - "traefik.http.routers.website.rule=Host(`${PUBLIC_BASE_DOMAIN}`)"
-    ports:
-      - "3002:3000"
-    build:
-      context: .
-      dockerfile: ./apps/website/Dockerfile
-      target: ${NODE_ENV}
-    environment:
-      PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
-      PUBLIC_IDENTITY_URL: ${PUBLIC_IDENTITY_URL}
-      LOCAL_IDENTITY_URL: ${LOCAL_IDENTITY_URL}
-      DATABASE_URL: ${DATABASE_URL}
-      MERCADOPAGO_ACCESS_TOKEN: ${MERCADOPAGO_ACCESS_TOKEN}
-      MERCADOPAGO_WEBHOOK_SIGNATURE: ${MERCADOPAGO_WEBHOOK_SIGNATURE}
-      LOCAL_COMMANDER_URL: ${LOCAL_COMMANDER_URL}
-      COMMANDER_TOKEN: ${COMMANDER_TOKEN}
-      DISCORD_WEBHOOK_DONATIONS: ${DISCORD_WEBHOOK_DONATIONS}
-      DISCORD_WEBHOOK_PAYMENTS: ${DISCORD_WEBHOOK_PAYMENTS}
-    volumes:
-      - type: bind
-        source: ./apps/website
-        target: /app/apps/website
-      - type: bind
-        source: ./packages
-        target: /app/packages
 
   melonbot:
     build:
@@ -162,7 +47,7 @@ services:
 
   minecraft-queue:
     image: amazoncorretto:21
-    command: java --add-opens java.base/java.net=ALL-UNNAMED -Xms512M -Xmx1024M -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar paper-1.21.1-116.jar
+    command: java --add-opens java.base/java.net=ALL-UNNAMED -Xms512M -Xmx1024M -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar paper-1.21.4-147.jar
     stdin_open: true
     tty: true
     ports:
@@ -185,11 +70,14 @@ services:
       LUCKPERMS_DATA_DATABASE: ${POSTGRES_DB}
       LUCKPERMS_DATA_USERNAME: ${POSTGRES_USER}
       LUCKPERMS_DATA_PASSWORD: ${POSTGRES_PASSWORD}
+      LOCAL_POCKETBASE_URL: ${LOCAL_POCKETBASE_URL}
+      PB_SUPERUSER_IDENTITY: ${PB_SUPERUSER_IDENTITY}
+      PB_SUPERUSER_PASSWORD: ${PB_SUPERUSER_PASSWORD}
     restart: on-failure
 
   minecraft-main:
     image: amazoncorretto:21
-    command: java --add-opens java.base/java.net=ALL-UNNAMED -Xms${RAM_MIN} -Xmx${RAM_MAX} -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar paper-1.21.1-116.jar
+    command: java --add-opens java.base/java.net=ALL-UNNAMED -Xms${RAM_MIN} -Xmx${RAM_MAX} -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar paper-1.21.4-147.jar
     stdin_open: true
     tty: true
     labels:
@@ -217,7 +105,70 @@ services:
       LUCKPERMS_DATA_DATABASE: ${POSTGRES_DB}
       LUCKPERMS_DATA_USERNAME: ${POSTGRES_USER}
       LUCKPERMS_DATA_PASSWORD: ${POSTGRES_PASSWORD}
+      LOCAL_POCKETBASE_URL: ${LOCAL_POCKETBASE_URL}
+      PB_SUPERUSER_IDENTITY: ${PB_SUPERUSER_IDENTITY}
+      PB_SUPERUSER_PASSWORD: ${PB_SUPERUSER_PASSWORD}
     restart: on-failure
+
+  warehouse:
+    image: postgres:13.1-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - ${MNT_WAREHOUSE}:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  pocketbase:
+    image: ghcr.io/kdpuvvadi/pocketbase:latest
+    volumes:
+      - ./apps/pocketbase/pb_data:/usr/src/app/pb_data
+      - ./apps/pocketbase/pb_public:/usr/src/app/pb_public
+      - ./apps/pocketbase/pb_hooks:/usr/src/app/pb_hooks
+      - ./apps/pocketbase/pb_migrations:/usr/src/app/pb_migrations
+    environment:
+      PB_ENCRYPTION_KEY: ${PB_ENCRYPTION_KEY}
+    ports:
+      - 8090:8090
+    command: --encryptionEnv=PB_ENCRYPTION_KEY
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pocketbase.entrypoints=web"
+      - "traefik.http.routers.pocketbase.rule=Host(`pb.${PUBLIC_BASE_DOMAIN}`)"
+    restart: unless-stopped
+    healthcheck:
+      test: curl --fail http://localhost:8090/api/health || exit 1
+      interval: 30s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
+
+  web:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.web.entrypoints=web"
+      - "traefik.http.routers.web.rule=Host(`${PUBLIC_BASE_DOMAIN}`)"
+    ports:
+      - "3000:3000"
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile
+      target: ${NODE_ENV}
+    environment:
+      PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
+      PUBLIC_POCKETBASE_URL: ${PUBLIC_POCKETBASE_URL}
+      LOCAL_POCKETBASE_URL: ${LOCAL_POCKETBASE_URL}
+      GK_REDIS_URL: ${GK_REDIS_URL}
+    volumes:
+      - ./apps/web/src:/app/apps/web/src
+      - ./apps/web/static:/app/apps/web/static
+      - ./apps/web/vite.config.ts:/app/apps/web/vite.config.ts
+      - ./apps/web/tsconfig.json:/app/apps/web/tsconfig.json
+      - ./apps/web/svelte.config.js:/app/apps/web/svelte.config.js
+      - ./apps/web/project.inlang:/app/apps/web/project.inlang
+      - ./apps/web/messages:/app/apps/web/messages
 
 volumes:
   warehouse:

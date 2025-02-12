@@ -1,7 +1,7 @@
 package com.github.maizenalegal.sensor.events
 
 import com.github.maizenalegal.sensor.Sensor
-import com.github.maizenalegal.sensor.identity.Username.logUsernameJoin
+import com.github.maizenalegal.sensor.managers.PocketbaseManager
 import com.github.maizenalegal.sensor.utils.PlayerCount
 import com.github.shynixn.mccoroutine.bukkit.launch
 import org.bukkit.event.EventHandler
@@ -13,7 +13,7 @@ object PlayerJoin: Listener {
     suspend fun onPlayerJoin(e: PlayerJoinEvent) {
         e.player.noDamageTicks = 0
         Sensor.instance.launch {
-            logUsernameJoin(e.player.displayName)
+            PocketbaseManager.logUsernameJoin(e.player.displayName)
             PlayerCount.update()
         }
     }

@@ -6,7 +6,7 @@ import java.util.*
 object TimeFormatter {
     val dateFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
 
-    fun formatDuration(durationInSeconds: Long): String {
+    fun formatDuration(durationInSeconds: Int): String {
         val builder = StringBuilder()
         val days = durationInSeconds / 86400
         val hours = (durationInSeconds % 86400) / 3600
