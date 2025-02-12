@@ -137,7 +137,7 @@
 			</p>
 		</li>
 		<li class="flex flex-col justify-center border-l px-4 py-2">
-			<p class="text-xl lg:text-2xl">280 GB</p>
+			<p class="text-xl lg:text-2xl">317 GB</p>
 			<p class="text-foreground/80 text-xs lg:text-sm">
 				{m.about_section_map_size()}
 			</p>
