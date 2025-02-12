@@ -109,6 +109,7 @@
 			target="_blank"
 			rel="noopener noreferrer"
 			data-umami-event="Discord invite"
+			data-umami-event-url={DISCORD_INVITE}
 		>
 			<DiscordIcon class="size-6" />
 			{m.join_discord()}
