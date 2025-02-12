@@ -49,6 +49,7 @@
 	},
 	"dependencies": {
 		"@inlang/paraglide-sveltekit": "^0.15.5",
+		"@sveltejs/adapter-node": "^5.2.12",
 		"pocketbase": "^0.25.1",
 		"redis": "^4.7.0",
 		"svelte-french-toast": "^1.2.0",
