@@ -102,5 +102,7 @@
 	"authorize_login_invalid_code_error": "Invalid authorization code, double-check the link you used.",
 	"authorize_login_flow_not_found_error": "This authorization link no longer exists, try again.",
 	"authorize_login_prohibited": "You're trying to play as <span>DoceAzedo</span>, but that username isn't linked to your SSN account.",
-	"no_error_message": "No further information."
+	"no_error_message": "No further information.",
+	"seo_title": "Brazilian Minecraft Server With No Rules",
+	"seo_description": "The classic brazilian Minecraft server with no rules! Est. March 2020. No land protection, no bans, and no admins holding your hand. If you're smart, you'll figure it out."
 }

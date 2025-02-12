@@ -102,5 +102,7 @@
 	"authorize_login_invalid_code_error": "Código de autorización inválido, revisa bien el link que usaste.",
 	"authorize_login_flow_not_found_error": "Este link de autorización ya no existe, inténtalo de nuevo.",
 	"authorize_login_prohibited": "Estás intentando jugar como <span>DoceAzedo</span>, pero ese usuario no está vinculado a tu cuenta de SSN.",
-	"no_error_message": "Sin más información."
+	"no_error_message": "Sin más información.",
+	"seo_title": "Server Brasileño de Minecraft Sin Reglas",
+	"seo_description": "El clásico server brasileño de Minecraft sin reglas! Desde marzo de 2020. Sin protección de terrenos, sin bans y sin admins que te cuiden. Si eres listo, te las arreglas."
 }

@@ -102,5 +102,7 @@
 	"authorize_login_invalid_code_error": "Código de autorização inválido, confira o link que você acessou.",
 	"authorize_login_flow_not_found_error": "Esse link de autorização já não existe mais, tente novamente.",
 	"authorize_login_prohibited": "Você está tentando jogar como <span>DoceAzedo</span>, mas esse nome de usuário não está cadastrado na sua conta do SSN.",
-	"no_error_message": "Sem mais informações."
+	"no_error_message": "Sem mais informações.",
+	"seo_title": "Servidor Brasileiro de Minecraft Sem Regras",
+	"seo_description": "O clássico servidor brasileiro de Minecraft sem regras! Desde Março de 2020. Sem proteção de terrenos, sem bans e sem admins segurando sua mão. Se você for esperto, você dá seu jeito."
 }

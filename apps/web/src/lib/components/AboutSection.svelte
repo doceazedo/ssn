@@ -143,7 +143,7 @@
 			</p>
 		</li>
 		<li class="flex flex-col justify-center border-l px-4 py-2">
-			<p class="text-xl lg:text-2xl">{languageTag() === 'en' ? '28,000' : '28.000'}+</p>
+			<p class="text-xl lg:text-2xl">{languageTag() === 'en' ? '4,400' : '4.400'}+</p>
 			<p class="text-foreground/80 text-xs lg:text-sm">
 				{m.about_section_unique_players()}
 			</p>
