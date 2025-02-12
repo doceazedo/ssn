@@ -143,29 +143,19 @@ services:
       timeout: 5s
 
   web:
+    image: doceazedo/ssn-web:latest
+    pull_policy: always
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.web.entrypoints=web"
       - "traefik.http.routers.web.rule=Host(`${PUBLIC_BASE_DOMAIN}`)"
     ports:
       - "3000:3000"
-    build:
-      context: .
-      dockerfile: ./apps/web/Dockerfile
-      target: ${NODE_ENV}
     environment:
       PUBLIC_WEBSITE_URL: ${PUBLIC_WEBSITE_URL}
       PUBLIC_POCKETBASE_URL: ${PUBLIC_POCKETBASE_URL}
       LOCAL_POCKETBASE_URL: ${LOCAL_POCKETBASE_URL}
       GK_REDIS_URL: ${GK_REDIS_URL}
-    volumes:
-      - ./apps/web/src:/app/apps/web/src
-      - ./apps/web/static:/app/apps/web/static
-      - ./apps/web/vite.config.ts:/app/apps/web/vite.config.ts
-      - ./apps/web/tsconfig.json:/app/apps/web/tsconfig.json
-      - ./apps/web/svelte.config.js:/app/apps/web/svelte.config.js
-      - ./apps/web/project.inlang:/app/apps/web/project.inlang
-      - ./apps/web/messages:/app/apps/web/messages
 
 volumes:
   warehouse:
