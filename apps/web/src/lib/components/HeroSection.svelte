@@ -63,7 +63,11 @@
 	</p>
 
 	<div class="flex flex-col items-center gap-4 md:flex-row">
-		<button class="group relative flex h-14 transition-all hover:-translate-y-0.5" onclick={copyIp}>
+		<button
+			class="group relative flex h-14 transition-all hover:-translate-y-0.5"
+			onclick={copyIp}
+			data-umami-event="Copy IP"
+		>
 			<span
 				class="group-hover:bg-primary/90 bg-primary flex size-14 items-center justify-center rounded-l-lg border border-white/30 transition-all"
 			>
@@ -104,6 +108,7 @@
 			href={DISCORD_INVITE}
 			target="_blank"
 			rel="noopener noreferrer"
+			data-umami-event="Discord invite"
 		>
 			<DiscordIcon class="size-6" />
 			{m.join_discord()}
