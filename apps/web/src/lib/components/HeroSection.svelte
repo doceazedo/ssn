@@ -17,6 +17,8 @@
 	const copyIp = () => {
 		copyToClipboard(SERVER_IP);
 		toast.success(m.copied_ip());
+		// @ts-ignore
+		dataLayer?.push({ event: 'copyIp' });
 
 		const now = new Date();
 		copiedAt = now;
