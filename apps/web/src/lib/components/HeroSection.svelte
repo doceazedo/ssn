@@ -64,6 +64,7 @@
 
 	<div class="flex flex-col items-center gap-4 md:flex-row">
 		<button
+			id="copy-ip"
 			class="group relative flex h-14 transition-all hover:-translate-y-0.5"
 			onclick={copyIp}
 			data-umami-event="Copy IP"
@@ -103,7 +104,6 @@
 		</button>
 
 		<Button
-			id="copy-ip"
 			variant="discord"
 			size="lg"
 			href={DISCORD_INVITE}
