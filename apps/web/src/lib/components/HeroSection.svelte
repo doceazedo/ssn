@@ -103,6 +103,7 @@
 		</button>
 
 		<Button
+			id="copy-ip"
 			variant="discord"
 			size="lg"
 			href={DISCORD_INVITE}
