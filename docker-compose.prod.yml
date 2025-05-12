@@ -36,7 +36,7 @@ services:
     working_dir: /data
     volumes:
       - ./servers/0-proxy:/data
-    restart: on-failure
+    restart: always
     environment:
       LUCKPERMS_SERVER: "global"
       LUCKPERMS_STORAGE_METHOD: "postgresql"
@@ -73,7 +73,7 @@ services:
       LOCAL_POCKETBASE_URL: ${LOCAL_POCKETBASE_URL}
       PB_SUPERUSER_IDENTITY: ${PB_SUPERUSER_IDENTITY}
       PB_SUPERUSER_PASSWORD: ${PB_SUPERUSER_PASSWORD}
-    restart: on-failure
+    restart: always
 
   minecraft-main:
     image: amazoncorretto:21
@@ -108,7 +108,7 @@ services:
       LOCAL_POCKETBASE_URL: ${LOCAL_POCKETBASE_URL}
       PB_SUPERUSER_IDENTITY: ${PB_SUPERUSER_IDENTITY}
       PB_SUPERUSER_PASSWORD: ${PB_SUPERUSER_PASSWORD}
-    restart: on-failure
+    restart: always
 
   warehouse:
     image: postgres:13.1-alpine
