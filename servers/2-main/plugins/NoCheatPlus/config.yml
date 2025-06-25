@@ -96,7 +96,7 @@ checks:
       intervalsurvival: 45
       shortterm:
         ticks: 5
-        limit: 8
+        limit: 10
       actions:
         cancel vl>5 log:bbfrequency:3:5:i cancel vl>40 log:bbfrequency:0:5:if
         cancel cmdc:kickfrequency:0:5
@@ -137,7 +137,7 @@ checks:
       active: false
       actions: cancel log:against:1:5:i vl>10 cancel log:against:0:2:if cmdc:kickagainst:0:10
     autosign:
-      active: default
+      active: false
       skipempty: false
       actions: cancel vl>10 log:bautosign:0:3:if cancel
     direction:
