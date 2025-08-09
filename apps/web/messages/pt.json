@@ -31,7 +31,7 @@
 	"about_section_map_age": "Idade do mapa atual",
 	"about_section_map_size": "Armazenamento usado",
 	"about_section_unique_players": "Jogadores únicos",
-	"footer_license": "&copy; {date} SSN.gg. Licensiado sob a <a href=\"{licenseUrl}\" target=\"_blank\">{license}</a>.",
+	"footer_license": "&copy; {date} SSN.gg. Licenciado sob a <a href=\"{licenseUrl}\" target=\"_blank\">{license}</a>.",
 	"footer_credits": "Criado e mantido por <a href=\"{operatorLink}\" target=\"_blank\">{operator}</a> e pela <a href=\"{contributorsLink}\" target=\"_blank\">comunidade</a>.",
 	"footer_unofficial_server": "Servidor não oficial de Minecraft. Este servidor não é afiliado, patrocinado, apoiado ou aprovado de forma alguma pela Microsoft ou pela Mojang.",
 	"select_language": "Selecionar idioma:",
