@@ -35,17 +35,17 @@ object PlayerJoin : Listener {
         e.player.sendMessage(" ")
 
 
-        // https://wiki.vg/Protocol_version_numbers
+        // https://minecraft.wiki/w/Minecraft_Wiki:Projects/wiki.vg_merge/Protocol_version_numbers
         val api = Via.getAPI()
         val version = api.getPlayerVersion(e.player)
-        if (version > 769) { // > 1.21.4
-            e.player.sendMessage("§6§l[§e§l!§6§l] §e§lVocê está usando uma versão acima da §6§l1.21.4§e§l. Em caso de problemas, recomendamos usar a §6§l1.21.4§e§l.")
+        if (version > 772) { // > 1.21.8
+            e.player.sendMessage("§6§l[§e§l!§6§l] §e§lVocê está usando uma versão acima da §6§l1.21.8§e§l. Em caso de problemas, recomendamos usar a §6§l1.21.8§e§l.")
             e.player.sendMessage(" ")
         } else if (version < 755) { // < 1.17
-            e.player.sendMessage("§4§l[§c§l!§4§l] §c§lVocê está usando uma versão abaixo da §4§l1.17§c§l. Você não poderá ver abaixo do nível 0. Se possível, use a versão §4§l1.21.4§c§l.")
+            e.player.sendMessage("§4§l[§c§l!§4§l] §c§lVocê está usando uma versão abaixo da §4§l1.17§c§l. Você não poderá ver abaixo do nível 0. Se possível, use a versão §4§l1.21.8§c§l.")
             e.player.sendMessage(" ")
         } else if (version < 767) { // < 1.21
-            e.player.sendMessage("§6§l[§e§l!§6§l] §e§lVocê está usando uma versão abaixo da §6§l1.21§e§l. Em caso de problemas, recomendamos usar a §6§l1.21.4§e§l.")
+            e.player.sendMessage("§6§l[§e§l!§6§l] §e§lVocê está usando uma versão abaixo da §6§l1.21§e§l. Em caso de problemas, recomendamos usar a §6§l1.21.8§e§l.")
             e.player.sendMessage(" ")
         }
 
