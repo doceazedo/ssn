@@ -1,111 +1,71 @@
+# This configuration was updated for anarchy server use.
+
 saveback-config: true
-savebackconfig: true
-configversion:
-  notify: true
-  notifymaxpaths: 5
-  created: 1154
-  saved: 1154
 logging:
-  max-queue-size: 5000
   active: true
-  maxqueuesize: 5000
+  max-queue-size: 5000
   extended:
+    status: false
+    commands:
+      actions: false
     all-violations:
       debug: true
       debug-only: false
       backend:
         trace: false
         notify: false
-    status: false
-    commands:
-      actions: false
-    allviolations:
-      debug: true
-      debugonly: false
-      backend:
-        trace: false
-        notify: false
   backend:
-    ingame-chat:
-      active: true
-      prefix: '&7&l[&cNC+&7&l]&7 '
     console:
       active: true
       asynchronous: true
     file:
       active: true
-      prefix: ''
+      prefix: ""
       filename: nocheatplus.log
-    ingamechat:
+    ingame-chat:
       active: true
-      prefix: '&7&l[&cNC+&7&l]&7 '
+      prefix: "&7&l[&cNC+&7&l]&7 "
 data:
+  expiration:
+    active: false
+    duration: 60
+    history: false
   consistency-checks:
     active: true
     interval: 10
     max-time: 2
     suppress-warnings: false
-  expiration:
-    active: false
-    duration: 60
-    history: false
-  consistencychecks:
-    active: true
-    interval: 10
-    maxtime: 2
-    suppresswarnings: false
 permissions:
   policy:
     default: ALWAYS
     rules:
-    - 'nocheatplus.notify :: INTERVAL:60, -world, -offline'
-    - 'nocheatplus.admin.debug :: INTERVAL:10'
-    - 'nocheatplus.admin* :: ALWAYS'
-    - 'nocheatplus.command* :: ALWAYS'
-    - 'nocheatplus.bypass* :: ALWAYS'
-    - 'regex:^nocheatplus\.checks\..*\.silent$ :: FALSE'
-    - 'nocheatplus.checks* :: INTERVAL:6'
+      - "nocheatplus.notify :: INTERVAL:60, -world, -offline"
+      - "nocheatplus.admin.debug :: INTERVAL:10"
+      - "nocheatplus.admin* :: ALWAYS"
+      - "nocheatplus.command* :: ALWAYS"
+      - "nocheatplus.bypass* :: ALWAYS"
+      - 'regex:^nocheatplus\.checks\..*\.silent$ :: FALSE'
+      - "nocheatplus.checks* :: INTERVAL:6"
 protection:
   plugins:
     hide:
-      no-permission:
-        message: '&cI''m sorry, but you do not have permission to perform this command.
-          Please contact the server administrators if you believe that this is in
-          error.'
-        commands:
-        - plugins
-        - version
-        - icanhasbukkit
-      unknown-command:
-        message: Unknown command. Type "/help" for help.
-        commands: []
       active: true
-      nopermission:
-        message: '&cI''m sorry, but you do not have permission to perform this command.
-          Please contact the server administrators if you believe that this is in
-          error.'
+      no-permission:
+        message: "&cI'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error."
         commands:
-        - plugins
-        - version
-        - icanhasbukkit
-      unknowncommand:
+          - plugins
+          - version
+          - icanhasbukkit
+      unknown-command:
         message: Unknown command. Type "/help" for help.
         commands: []
   commands:
     console-only:
       active: false
-      message: '&cI''m sorry, but this command can''t be executed in chat. Use the
-        console instead!'
+      message: "&cI'm sorry, but this command can't be executed in chat. Use the console instead!"
       commands:
-      - op
-      - deop
-    consoleonly:
-      active: false
-      message: '&cI''m sorry, but this command can''t be executed in chat. Use the
-        console instead!'
-      commands:
-      - op
-      - deop
+        - op
+        - deop
 checks:
   active: true
   lag: true
@@ -116,27 +76,20 @@ checks:
       active: false
       actions: cancel
     fastbreak:
-      interval-survival: 100
       active: default
       strict: false
       delay: 90
-      intervalsurvival: 100
+      interval-survival: 100
       grace: 2000
       actions: cancel
     frequency:
-      interval-creative: 95
+      active: true
+      interval-creative: 45
       interval-survival: 45
       short-term:
         ticks: 5
-        limit: 7
-      active: true
-      intervalcreative: 45
-      intervalsurvival: 45
-      shortterm:
-        ticks: 5
         limit: 10
-      actions: cancel vl>5 log:bbfrequency:3:5:i cancel vl>40 log:bbfrequency:0:5:if
-        cancel cmdc:kickfrequency:0:5
+      actions: cancel vl>5 log:bbfrequency:3:5:i cancel vl>40 log:bbfrequency:0:5:if cancel cmdc:kickfrequency:0:5
     noswing:
       active: false
       actions: cancel vl>10 log:noswing:0:5:i cancel
@@ -148,15 +101,13 @@ checks:
       level: 20
       improbable:
         feed-only: false
-        feedonly: false
         weight: 2.0
       actions: cancel
   blockinteract:
     active: true
     direction:
       active: false
-      actions: cancel vl>15 cancel log:bdirection:4:8:i vl>200 cancel log:bdirection:1:5:if
-        cmdc:kickillegalblockinteract:1:5
+      actions: cancel vl>15 cancel log:bdirection:4:8:i vl>200 cancel log:bdirection:1:5:if cmdc:kickillegalblockinteract:1:5
     reach:
       active: true
       actions: cancel log:breach:5:6:i
@@ -169,45 +120,38 @@ checks:
       active: true
       actions: cancel vl>30 log:bvisible:8:5:if cancel
   blockplace:
-    boats-on-water-only: false
     active: true
+    boats-on-water-only: true
     against:
       active: false
       actions: cancel log:against:1:5:i vl>10 cancel log:against:0:2:if cmdc:kickagainst:0:10
     autosign:
-      skip-empty: false
       active: false
-      skipempty: false
+      skip-empty: false
       actions: cancel vl>10 log:bautosign:0:3:if cancel
     direction:
       active: false
       actions: cancel
     fastplace:
-      short-term:
-        ticks: 10
-        limit: 6
       active: true
       limit: 35
-      shortterm:
+      short-term:
         ticks: 25
         limit: 13
       improbable:
         feed-only: false
-        feedonly: false
         weight: 0.3
-      actions: cancel vl>5 cancel log:fastplace:8:3:i vl>20 cancel log:fastplace:2:4:i
-        vl>80 cancel log:fastplace:0:10:if
+      actions: cancel vl>5 cancel log:fastplace:8:3:i vl>20 cancel log:fastplace:2:4:i vl>80 cancel log:fastplace:0:10:if
     reach:
       active: true
       actions: cancel
     noswing:
       active: true
       exceptions:
-      - WATER_LILY
-      - FLINT_AND_STEEL
+        - LILY_PAD
+        - FLINT_AND_STEEL
       actions: cancel vl>10 log:noswing:2:5:i cancel
     scaffold:
-      tool-switch: true
       active: false
       angle: true
       sprint: true
@@ -217,144 +161,92 @@ checks:
       rotate:
         active: true
         difference: 90
-      toolswitch: true
+      tool-switch: true
       improbable:
         feed-only: false
-        feedonly: false
         weight: 0.4
-      actions: cancel vl>10 cancel log:scaffold:3:7:if vl>70 cancel log:scaffold:0:5:if
-        cmd:clearscaffold:0:1 cmdc:kickscaffold:0:1
+      actions: cancel vl>10 cancel log:scaffold:3:7:if vl>70 cancel log:scaffold:0:5:if cmd:clearscaffold:0:1 cmdc:kickscaffold:0:1
     speed:
       active: default
       interval: 35
       improbable:
         feed-only: true
-        feedonly: true
         weight: 0.3
       actions: cancel vl>100 log:bpspeed:6:7:i cancel vl>1000 log:bpspeed:3:5:if cancel
-    preventmisc:
-      boatsanywhere: true
   chat:
     active: true
     captcha:
-      active: 'false'
+      active: "false"
       skip:
         commands: false
       characters: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!?><
       length: 6
-      question: '&l&2[&assn.gg&2] &r&ePlease type ''&6[captcha]&7'' to continue using
-        chat.'
-      success: '&l&2[&assn.gg&2] &r&eAntispam check passed.'
+      question: "&c&l(!)&7 Please type '&6[captcha]&7' to continue using chat."
+      success: "&c&l(!)&7 Antispam check passed."
       tries: 3
       actions: cancel cmdc:kickcaptcha vl>4 log:captcha:2:5:cf cancel cmdc:kickcaptcha
     commands:
+      active: default
+      exclusions:
+        - undo
+        - redo
       handle-as-chat:
-      - me
-      - msg
-      - emsg
-      - essentials:msg
-      - tell
-      - etell
-      - essentials:tell
-      - say
-      - esay
-      - essentials:say
-      - whisper
-      - ewhisper
-      - essentials:whisper
-      - w
-      - essentials:w
-      - ew
-      - r
-      - er
-      - essentials:r
-      - reply
-      - essentials:reply
-      - ereply
+        - me
+        - msg
+        - emsg
+        - essentials:msg
+        - tell
+        - etell
+        - essentials:tell
+        - say
+        - esay
+        - essentials:say
+        - whisper
+        - ewhisper
+        - essentials:whisper
+        - w
+        - essentials:w
+        - ew
+        - r
+        - er
+        - essentials:r
+        - reply
+        - essentials:reply
+        - ereply
+      level: 10
       short-term:
         ticks: 18
         level: 3
-      active: default
-      exclusions:
-      - undo
-      - redo
-      handleaschat:
-      - me
-      - msg
-      - emsg
-      - essentials:msg
-      - tell
-      - etell
-      - essentials:tell
-      - say
-      - esay
-      - essentials:say
-      - whisper
-      - ewhisper
-      - essentials:whisper
-      - w
-      - essentials:w
-      - ew
-      - r
-      - er
-      - essentials:r
-      - reply
-      - essentials:reply
-      - ereply
-      level: 10
-      shortterm:
-        ticks: 18
-        level: 3
-      actions: log:commands:0:5:cf cancel cmdc:kickcommands vl>20 log:commands:0:5:cf
-        cancel cmdc:tempkick1
+      actions: log:commands:0:5:cf cancel cmdc:kickcommands vl>20 log:commands:0:5:cf cancel cmdc:tempkick1
     text:
-      allow-VL-reset: true
       active: default
-      allowvlreset: true
+      allow-VL-reset: true
       frequency:
-        short-term:
-          minimum: 2.0
-          factor: 0.7
-          weight: 3.0
-          level: 20.0
-          actions: log:chatfast:2:3:icf cancel cmdc:kickchatfast:0:5 vl>20 cancel
-            log:chatfast:0:5:cif cmdc:kickchatfast vl>40 cancel log:chatfast:0:5:cif
-            cmdc:kickchat1
         normal:
           minimum: 0.0
           factor: 0.9
           weight: 6
           level: 160
           actions: cancel
-        shortterm:
+        short-term:
           minimum: 2.0
           factor: 0.7
           weight: 3.0
           level: 20.0
-          actions: log:chatfast:2:3:icf cancel cmdc:kickchatfast:0:5 vl>20 cancel
-            log:chatfast:0:5:cif cmdc:kickchatfast vl>40 cancel log:chatfast:0:5:cif
-            cmdc:kickchat1
+          actions: log:chatfast:2:3:icf cancel cmdc:kickchatfast:0:5 vl>20 cancel log:chatfast:0:5:cif cmdc:kickchatfast vl>40 cancel log:chatfast:0:5:cif cmdc:kickchat1
       message:
         letter-count: 1.0
+        partition: 1.0
+        uppercase: 1.2
         after-join: 1.5
+        nomoving: 1.1
         repeat-violation: 2.0
         repeat-global: 1.0
         repeat-self: 1.5
-        lettercount: 1.0
-        partition: 1.0
-        uppercase: 1.2
-        afterjoin: 1.5
-        nomoving: 1.1
-        repeatviolation: 2.0
-        repeatglobal: 1.0
-        repeatself: 1.5
         words:
           length-av: 1.0
           length-msg: 1.0
           no-letter: 0.2
-          lengthav: 1.0
-          lengthmsg: 1.0
-          noletter: 0.2
       global:
         active: true
         weight: 1.0
@@ -375,54 +267,42 @@ checks:
     warning:
       active: true
       level: 67
-      message: "\n  &l&2[&assn.gg&2] &r&ePlease slow down chat, you might get kicked\
-        \ by the antispam.\n \n"
+      message: "\n  &c&l(!)&7 Please slow down chat, you might get kicked by the antispam.\n \n"
       timeout: 10
     relog:
-      kick-message: Too fast re-login, try with a little delay.
       active: default
       timeout: 2500
       warning:
-        message: '&l&2[&assn.gg&2] &r&eYou relogged really fast! If you keep doing
-          that, you''re going to be banned.'
+        message: "&c&l(!)&7 You relogged really fast! If you keep doing that, you're going to be banned."
         number: 1
         timeout: 60000
-      kickmessage: Too fast re-login, try with a little delay.
+      kick-message: Too fast re-login, try with a little delay.
       actions: log:relog:0:10:cf cancel vl>20 log:relog:0:10:cf cancel cmdc:tempkick5
     logins:
+      active: default
       startup-delay: 600
       per-world-count: false
-      kick-message: Too many players are logging in at the same time, please try again
-        later.
-      active: default
-      startupdelay: 600
-      perworldcount: false
       seconds: 10
       limit: 10
-      kickmessage: Too many players are logging in at the same time, please try again
-        later.
+      kick-message: Too many players are logging in at the same time, please try again later.
   combined:
     active: default
     enderpearl:
-      prevent-click-on-block: true
       active: true
-      preventclickblock: true
+      prevent-click-on-block: true
     improbable:
       active: false
       level: 250
-      actions: cancel vl>20 log:improbable:8:9:if cancel vl>1500 cancel log:improbable:0:10:if
-        cmdc:kickimprobable:0:5
+      actions: cancel vl>20 log:improbable:8:9:if cancel vl>1500 cancel log:improbable:0:10:if cmdc:kickimprobable:0:5
     invulnerable:
-      initial-ticks:
-        join: -1
       active: true
       triggers:
         always: false
         falldistance: true
-      initialticks:
+      initial-ticks:
         join: -1
       ignore:
-      - FALL
+        - FALL
       modifiers:
         all: 0
     yawrate:
@@ -433,24 +313,15 @@ checks:
         maximum: 2500
       improbable:
         feed-only: false
-        feedonly: false
         weight: 90.0
   fight:
+    active: default
     cancel-dead: true
     enforce-item-release: true
     enforce-closed-inventory: true
     max-loop-latency-ticks: 8
-    tool-change-penalty: 0
+    tool-change-penalty: 150
     knockback-velocity: default
-    visible:
-      active: false
-      actions: cancel vl>30 log:fvisible:8:5:if cancel
-    active: default
-    canceldead: true
-    maxloopletencyticks: 8
-    toolchangepenalty: 150
-    pvp:
-      knockbackvelocity: default
     yawrate:
       active: false
     angle:
@@ -460,215 +331,130 @@ checks:
         avg-time: 150
         avg-yaw: 60
         avg-switch: 50
-        average_move: 100
-        average_time: 150
-        average_yaw: 60
-        average_switch: 50
       actions: cancel vl>100 log:angle:6:5:i cancel vl>800 log:angle:0:20:if cancel
     critical:
       active: true
-      falldistance: 0.075
-      falldistleniency: 9.0E-4
-      actions: cancel vl>5 cancel log:critical:6:10:i vl>60 cancel log:critical:0:5:icf
-        cmd:clearcritical:0:5 cmdc:kickcritical:0:2
+      actions: cancel vl>5 cancel log:critical:6:10:i vl>60 cancel log:critical:0:5:icf cmd:clearcritical:0:5 cmdc:kickcritical:0:2
     direction:
       active: false
       strict: true
       failall: true
       penalty: 75
-      actions: vl>2 log:fdirectionlowvl:5:6:i vl>10 cancel log:fdirection:2:4:if vl>50
-        cancel log:fdirection:0:7:icf cmdc:kicksuspiciouscombat:1:5
+      actions: vl>2 log:fdirectionlowvl:5:6:i vl>10 cancel log:fdirection:2:4:if vl>50 cancel log:fdirection:0:7:icf cmdc:kicksuspiciouscombat:1:5
     fastheal:
       active: false
       interval: 4000
       buffer: 1000
-      actions: cancel vl>10 cancel log:fastheal:2:6:i vl>30 cancel log:fastheal:1:1:i
-        vl>90 cancel log:fastheal:0:10:if cmdc:kickfastheal:0:10
+      actions: cancel vl>10 cancel log:fastheal:2:6:i vl>30 cancel log:fastheal:1:1:i vl>90 cancel log:fastheal:0:10:if cmdc:kickfastheal:0:10
     godmode:
+      active: default
       min-age: 1100
       max-age: 5000
-      active: default
-      minage: 1100
-      maxage: 5000
       actions: cancel vl>10 cancel log:godmode:0:5:icf cmdc:kickgod:0:5
-    impossiblehit:
-      active: default
-      improbable:
-        weight: 0.05
-      actions: cancel vl>3 cancel log:impossiblehit:0:5:if
     noswing:
       active: false
       actions: vl>2 cancel vl>10 log:noswing:2:5:i cancel
     reach:
-      survival-distance: 4.02
-      reduce-distance: 0.8
-      reduce-step: 0.14
       active: default
-      survivaldistance: 4.4
+      survival-distance: 4.4
       penalty: 500
       reduce: true
       precision: true
-      reducedistance: 0.9
-      reducestep: 0.15
+      reduce-distance: 0.9
+      reduce-step: 0.15
       improbable:
         feed-only: false
-        feedonly: false
         weight: 2.0
-      actions: cancel vl>1 cancel log:freach:8:9:i vl>5 cancel log:freach:2:6:i vl>12
-        cancel log:freachhighvl:1:5:if vl>35 cancel log:freachhighvl:0:5:if cmdc:kicksuspiciouscombat:2:1
+      actions: cancel vl>1 cancel log:freach:8:9:i vl>5 cancel log:freach:2:6:i vl>12 cancel log:freachhighvl:1:5:if vl>35 cancel log:freachhighvl:0:5:if cmdc:kicksuspiciouscombat:2:1
     selfhit:
       active: default
       actions: cancel log:fselfhit:0:5:icf cmdc:kickselfhit:0:5
+    visible:
+      active: false
+      actions: cancel vl>30 log:fvisible:8:5:if cancel
   inventory:
     active: false
     fastclick:
-      spare-creative: true
-      min-interaction-duration: 155
       active: false
       exclude:
-      - Inventory Name Here
-      sparecreative: true
+        - Inventory Name Here
+      spare-creative: true
       limit:
         short-term: 4
-        shortterm: 4
         normal: 15
-        chest: 155
+      min-interaction-duration: 155
       improbable:
         weight: 0.7
-      actions: cancel vl>150 cancel log:fastclick:7:5:i vl>400 cancel log:fastclick:1:5:if
-        vl>3000 cancel log:fastclick:1:2:if cmdc:kickfastclick:2:5
+      actions: cancel vl>150 cancel log:fastclick:7:5:i vl>400 cancel log:fastclick:1:5:if vl>3000 cancel log:fastclick:1:2:if cmdc:kickfastclick:2:5
     instantbow:
       active: false
       strict: true
       delay: 75
       improbable:
         feed-only: false
-        feedonly: false
         weight: 0.6
-      actions: cancel vl>15 cancel log:instantbow:4:5:i vl>200 cancel log:instantbow:0:10:if
-        cmdc:kickbow:2:10
+      actions: cancel vl>15 cancel log:instantbow:4:5:i vl>200 cancel log:instantbow:0:10:if cmdc:kickbow:2:10
     fastconsume:
       active: false
       duration: 1.4
       whitelist: false
       items: []
-      actions: cancel vl>2 log:fastconsume:2:5:if cancel vl>35 cancel log:fastconsume:0:5:if
-        cmdc:kickfastconsume:0:5
+      actions: cancel vl>2 log:fastconsume:2:5:if cancel vl>35 cancel log:fastconsume:0:5:if cmdc:kickfastconsume:0:5
     gutenberg:
-      page-limit: 50
       active: default
-      pagelimit: 50
+      page-limit: 50
       actions: cancel log:gutenberg:0:10:if cmdc:kickinvaliddata:0:5
     open:
+      active: default
+      close: true
       close-on-move: true
       disable-creative: true
       improbable-weight: 1
-      active: default
-      close: true
-      cancelother: true
     hotfix:
       duplication:
         falling-block-endportal: true
-        fallingblockendportal: true
   moving:
-    ignore-stance: default
-    temp-kick-illegal: true
-    speed-grace: 4.0
-    enforce-location: default
     active: default
     creativefly:
+      active: default
       ignore-allow-flight: true
       ignore-creative: false
-      active: default
-      ignoreallowflight: true
-      ignorecreative: false
       model:
-        slowfalling:
-          horizontal:
-            speed: 65
-          vertical:
-            ascend:
-              speed: 0
-            maxheight: 200
-            gravity: false
-          modifiers: true
-          ground: true
-        riptiding:
-          horizontal:
-            speed: 700
-          vertical:
-            ascend:
-              speed: 600
-            maxheight: 200
-          modifiers: false
         creative:
           horizontal:
             speed: 100
           vertical:
-            max-height: 128
             ascend:
               speed: 100
-            maxheight: 128
+            max-height: 128
         spectator:
           horizontal:
             speed: 450
           vertical:
-            max-height: 200
             ascend:
               speed: 170
-            maxheight: 128
+            max-height: 200
           ground: false
-        levitation:
-          horizontal:
-            speed: 50
-          vertical:
-            ascend:
-              speed: 10
-            maxheight: 128
-            gravity: false
-          modifiers: false
-          ground: true
-        elytra:
-          horizontal:
-            speed: 99999
-            modsprint: 1.0
-          vertical:
-            ascend:
-              speed: 99999
-            maxheight: 128
-          modifiers: false
-          resetFwOnground: false
       actions: cancel
     morepackets:
-      eps-ideal: 20
-      eps-max: 22
       active: default
       seconds: 2
-      epsideal: 21
-      epsmax: 22
+      eps-ideal: 21
+      eps-max: 22
       burst:
-        direct-violation: 10
-        epm-violation: 95
         packets: 4
-        directviolation: 2
-        epmviolation: 20
+        direct-violation: 2
+        epm-violation: 20
       setbackage: 110
-      actions: cancel vl>2 cancel log:morepackets:10:9:i vl>100 cancel log:morepackets:0:2:ifc
-        cmdc:kickpackets:0:10
+      actions: cancel vl>2 cancel log:morepackets:10:9:i vl>100 cancel log:morepackets:0:2:ifc cmdc:kickpackets:0:10
     nofall:
+      active: false
       deal-damage: true
       skip-allow-flight: true
       reset-on-violation: false
       reset-on-teleport: false
       reset-on-vehicle: true
       anti-criticals: true
-      active: false
-      dealdamage: true
-      skipallowflight: true
-      resetonviolation: false
-      resetonteleport: false
-      resetonvehicle: true
-      anticriticals: true
       actions: cancel vl>2 cancel log:nofall:0:5:if
     passable:
       active: true
@@ -677,125 +463,84 @@ checks:
         teleport:
           active: true
         command:
-          try-teleport: true
           active: true
-          tryteleport: true
+          try-teleport: true
           prefixes:
-          - sethome
-          - home set
-          - setwarp
-          - warp set
-          - setback
-          - set back
-          - back set
-          - warp
-          - home
-          - tp
-          - tpa
-          - tpask
-          - tpyes
-          - tphere
+            - sethome
+            - home set
+            - setwarp
+            - warp set
+            - setback
+            - set back
+            - back set
+            - warp
+            - home
+            - tp
+            - tpa
+            - tpask
+            - tpyes
+            - tphere
     survivalfly:
-      setback-policy:
-        falldamage: true
       active: default
       stepheight: default
       extended:
-        strict-speed-prediction: true
-        vertical-accounting: true
-        horizontal-accounting: true
-        step-accounting: true
         reset-activeitem: true
+        strict-speed-prediction: true
       leniency:
-        freeze-count: 40
-        freeze-inair: true
         violationfrequency:
+          active: false
+          debug: false
           max-threshold-vl: 35
           no-addition-vl: 5
           amount-to-add: 5
           last-violated-move-count: 10
-          active: false
-          debug: false
-          maxleniencyvl: 35
-          mintoadd: 5
-          morevls: 5
-          movecount: 10
-        freezecount: 40
-        freezeinair: true
-      setbackpolicy:
+        freeze-count: 40
+        freeze-inair: true
+      setback-policy:
         falldamage: true
-        voidtovoid: false
-      actions: cancel log:flyfile:6:15:f vl>100 cancel log:survivalfly:10:11:i log:flyfile:6:15:f
-        vl>700 cancel log:survivalfly:8:5:i log:flyfile:1:3:f vl>2100 cancel log:survivalflyhighvl:0:4:icf
-        cmdc:kickfly:0:15
+      actions: cancel log:flyfile:6:15:f vl>100 cancel log:survivalfly:10:11:i log:flyfile:6:15:f vl>700 cancel log:survivalfly:8:5:i log:flyfile:1:3:f vl>2100 cancel log:survivalflyhighvl:0:4:icf cmdc:kickfly:0:15
       hover:
-        login-ticks: 60
-        fall-damage: true
-        sf-violation: 200
         active: false
         step: 5
         ticks: 85
-        loginticks: 60
-        falldamage: true
-        sfviolation: 200
+        login-ticks: 60
+        fall-damage: true
+        sf-violation: 200
     trace:
       max-age: 30
       max-size: 30
-      maxage: 30
-      maxsize: 30
     velocity:
-      activation-counter: 20
+      activation-counter: 80
       activation-ticks: 140
-      activationcounter: 80
-      activationticks: 140
-    splitmoves: default
-    ignorestance: default
-    tempkickillegal: true
+    ignore-stance: default
+    temp-kick-illegal: true
     loadchunks:
-      world-change: true
       join: true
       move: false
       teleport: true
-      worldchange: true
-    sprintinggrace: 4.0
-    speedgrace: 4.0
-    enforcelocation: default
+      world-change: true
+    speed-grace: 4.0
+    enforce-location: default
     setback:
       method: default
     vehicle:
-      prevent-destroy-own: true
+      prevent-destroy-own: false
       enforce-location: default
       schedule-setbacks: default
       schedule-set-passenger: default
-      preventdestroyown: false
-      enforcelocation: default
-      schedulesetbacks: default
-      schedulesetpassenger: default
       morepackets:
         active: false
-        actions: cancel vl>2 log:morepackets:2:5:if cancel vl>100 cancel log:morepackets:1:2:if
-          cmdc:kickpackets:2:10
+        actions: cancel vl>2 log:morepackets:2:5:if cancel vl>100 cancel log:morepackets:1:2:if cmdc:kickpackets:2:10
       envelope:
+        active: default
         hdist-cap:
           default: 0.9
           pig: 0.3
-        active: default
-        hdistcap:
-          default: 0.9
-          pig: 0.3
-        actions: cancel vl>50 cancel log:vehicleenvelope:10:6:if vl>300 cancel log:vehicleenvelope:0:10:if
-          cmdc:kickvehiclefly:0:10
+        actions: cancel vl>50 cancel log:vehicleenvelope:10:6:if vl>300 cancel log:vehicleenvelope:0:10:if cmdc:kickvehiclefly:0:10
     message:
       illegal-player-move: Illegal move.
       illegal-vehicle-move: Illegal vehicle move.
-      illegalplayermove: Illegal move.
-      illegalvehiclemove: Illegal vehicle move.
   net:
-    togglefrequency:
-      active: default
-      seconds: 1
-      limit: 25
-      actions: cancel vl>10 cancel log:togglefrequency:3:5:if
     active: default
     attackfrequency:
       active: default
@@ -807,181 +552,122 @@ checks:
         eight: 85
       improbable:
         weight: 3.0
-      actions: cancel vl>10 cancel log:attackfrequency:4:5:i vl>200 cancel log:attackfrequency:0:4:if
-        cmdc:kickattackfrequency
+      actions: cancel vl>10 cancel log:attackfrequency:4:5:i vl>200 cancel log:attackfrequency:0:4:if cmdc:kickattackfrequency
     flyingfrequency:
-      packets-per-second: 60
       active: default
       seconds: 5
-      packetspersecond: 60
-      actions: cancel vl>20 cancel log:flyingfrequency:3:2:i vl>500 cancel log:flyingfrequency:0:5:if
-        vl>1000 cancel log:flyingfrequency:0:2:icf cmdc:kickflyingfrequency:0:10
+      packets-per-second: 60
+      actions: cancel vl>20 cancel log:flyingfrequency:3:2:i vl>500 cancel log:flyingfrequency:0:5:if vl>1000 cancel log:flyingfrequency:0:2:icf cmdc:kickflyingfrequency:0:10
     keepalivefrequency:
       active: default
       seconds: 20
-      actions: cancel vl>10 cancel log:keepalive:2:6:i vl>60 cancel log:keepalive:0:10:icf
-        cmdc:kickalive:0:5
+      actions: cancel vl>10 cancel log:keepalive:2:6:i vl>60 cancel log:keepalive:0:10:icf cmdc:kickalive:0:5
     moving:
       active: default
       actions: cancel vl>17 cancel log:moving:10:15:i
     packetfrequency:
-      limit-per-second: 300
       active: true
-      limitpersecond: 300
+      limit-per-second: 300
       seconds: 4
       actions: cancel vl>2 cancel cmdc:kickpacketfrequency:0:5
     sounddistance:
-      max-distance: 320
       active: default
-      maxdistance: 320
+      max-distance: 320
+    togglefrequency:
+      active: default
+      seconds: 1
+      limit: 25
+      actions: cancel vl>10 cancel log:togglefrequency:3:5:if
     superseded:
       flying:
         cancel-waiting: true
-        cancelwaiting: true
     wrongturn:
       active: default
       actions: cancel log:wrongturn:0:15:icf cmdc:kickillegalrotations:0:10
 strings:
-  togglefrequency: '&c[player]&7 failed &c[check]&7: tried to toggle sneak/sprint
-    too quickly &7(&cVL[violations]&7)'
-  fvisible: '&c[player]&7 failed &c[check]&7: tried to attack target through a solid
-    obstacle &7(&cVL[violations]&7)'
-  against: '&c[player]&7 failed &c[check]&7: tried to place a block against liquid
-    blocks or air as if they were solid &7(&cVL[violations]&7)'
-  angle: '&c[player]&7 failed &c[check]&7: potentially tried to hit multiple entities
-    at the same time (Tags: &6[tags]&7) &7(&cVL[violations]&7)'
-  attackfrequency: '&c[player]&7 failed &c[check]&7: seems to be using an autoclicker
-    (Clicks: &6[packets]&7/LimitPerTime-frame: &6[limit]&7, &6[tags]&7) &7(&cVL[violations]&7)'
-  bautosign: '&c[player]&7 failed &c[check]&7: tried to use the autosign hack (Subcheck:
-    &6[tags]&7) &7(&cVL[violations]&7)'
-  bbfrequency: '&c[player]&7 failed &c[check]&7: tried to break too many blocks at
-    once &7(&cVL[violations]&7)'
-  bdirection: '&c[player]&7 failed &c[check]&7: tried to interact with a block outside
-    their line of sight &7(&cVL[violations]&7)'
-  bpspeed: '&c[player]&7 failed &c[check]&7: tried to throw projectiles too quickly
-    &7(&cVL[violations]&7)'
-  breach: '&c[player]&7 failed &c[check]&7: tried to interact with a block too far
-    away &7(&cVL[violations]&7)'
-  bspeed: '&c[player]&7 failed &c[check]&7: tried to interact with blocks beyond legit
-    speeds &7(&cVL[violations]&7)'
-  bvisible: '&c[player]&7 failed &c[check]&7: tried to interact with a block through
-    a solid obstacle &7(&cVL[violations]&7)'
-  bwrong: '&c[player]&7 failed &c[check]&7: tried to break another block than interacted
-    with last &7(&cVL[violations]&7)'
-  captcha: '[player] failed captcha repeatedly &7(&cVL[violations]&7)'
-  chatfast: '&c[player]&7 failed &c[check]&7: acted like spamming (message deleted)
-    (IP: &6[ip]&7) &7(&cVL[violations]&7)'
-  chatnormal: '&c[player]&7 failed &c[check]&7: seems to be spamming the server chat
-    &7(&cVL[violations]&7)'
-  commands: '&c[player]&7 failed &c[check]&7: issued too many commands too quickly
-    &7(&cVL[violations]&7)'
-  creativefly: '&c[player]&7 failed &c[check]&7: tried to perform a move that deviates
-    from the model (Model: &6[model]&7, Tags: &6[tags]&7) &7(&cVL[violations]&7)'
-  critical: '&c[player]&7 failed &c[check]&7: tried to perform an illegal critical
-    hit (Tags: &6[tags]&7) &7(&cVL[violations]&7)'
-  fastbreak: '&c[player]&7 failed &c[check]&7: tried to break a block faster than
-    possible (Block: &6[blocktype]&7) &7(&cVL[violations]&7)'
-  fastclick: '&c[player]&7 failed &c[check]&7: tried to move items in their inventory
-    too quickly (Tags: &6[tags]&7) &7(&cVL[violations]&7)'
-  fastconsume: '&c[player]&7 failed &c[check]&7: tried to consume an item too quickly
-    (Food: &6[food][tags]&7) &7(&cVL[violations]&7)'
-  fastheal: '&c[player]&7 failed &c[check]&7: tried to regenerate their health bar
-    faster than possible (Health: &6[health]&7) &7(&cVL[violations]&7)'
-  fastplace: '&c[player]&7 failed &c[check]&7: tried to place blocks too quickly &7(&cVL[violations]&7)'
-  fdirection: '&c[player]&7 failed &c[check]&7: tried to hit an entity outside their
-    line of sight &7(&cVL[violations]&7)'
-  fdirectionlowvl: '&c[player]&7 failed &c[check]&7: could be using an aimbot (hit
-    not canceled) &7(&cVL[violations]&7)'
-  flyfile: '&c[player]&7 failed &c[check]&7: tried to perform an illegal move from
-    ([locationfrom]) to ([locationto]) over a distance of ([distance]) blocks, subchecks
-    triggered> ([tags]) &7(&cVL[violations]&7)'
-  flyingfrequency: '&c[player]&7 failed &c[check]&7: is manipulating packets sent
-    to the server to gain an unfair advantage &7(&cVL[violations]&7)'
-  freach: '&c[player]&7 failed &c[check]&7: tried to hit an entity from a suspicious
-    distance (Reach: &6[reachdistance]&7) &7(&cVL[violations]&7)'
-  fselfhit: '&c[player]&7 failed &c[check]&7: tried to hit themselves &7(&cVL[violations]&7)'
-  fspeed: '&c[player]&7 failed &c[check]&7: tried to click [violations] times over
-    the established [limit] CPS limit &7(&cVL[violations]&7)'
-  godmode: '&c[player]&7 failed &c[check]&7: tried to ignore inflicted damage (Health:
-    &7[health]&7) &7(&cVL[violations]&7)'
-  gutenberg: '&c[player]&7 failed &c[check]&7: created a book with too many pages
-    &7(&cVL[violations]&7)'
-  impossiblehit: '&c[player]&7 failed &c[check]&7: tried to hit an entity while performing
-    another action (Tags: &6[tags]&7) &7(&cVL[violations]&7)'
-  improbable: '&c[player]&7 failed &c[check]&7: is exhibiting an erratic behaviour
-    (Check: &6[tags]&7) &7(&cVL[violations]&7)'
-  instantbow: '&c[player]&7 failed &c[check]&7: tried to shoot an arrow too fast &7(&cVL[violations]&7)'
-  instanteat: '&c[player]&7 failed &c[check]&7: tried to consume an item too quickly
-    (Food: &6[food]&7) &7(&cVL[violations]&7)'
-  inventorymove: '&c[player]&7 failed &c[check]&7: tried to click in their inventory
-    while performing another action (Tags: &6[tags]&7) &7(&cVL[violations]&7)'
-  keepalive: '&c[player]&7 failed &c[check]&7: is spamming keep-alive packets to the
-    server &7(&cVL[violations]&7)'
-  kickagainst: ncp kick &l&2[&assn.gg&2] &r&eInvalid block placements.
-  kickalive: ncp kick &l&2[&assn.gg&2] &r&eToo many keep-alive packets.
-  kickattackfrequency: ncp kick &l&2[&assn.gg&2] &r&eUnlikely fast clicking.
-  kickbow: ncp kick &l&2[&assn.gg&2] &r&eShooting arrows too quickly.
-  kickbspeed: ncp kick [player] &l&2[&assn.gg&2] &r&eToo fast block interactions.
-  kickcaptcha: ncp kick &l&2[&assn.gg&2] &r&eEnter the captcha!
-  kickchat1: ncp tempkick [player] 1 &l&2[&assn.gg&2] &r&eDo not spam the server chat
-    (1 minute tempkick)
-  kickchat5: ncp tempkick [player] 5 &l&2[&assn.gg&2] &r&eYou are not allowed to spam
-    the server chat (5 minutes tempkick)
-  kickchatfast: ncp kick &l&2[&assn.gg&2] &r&eStop spamming.
-  kickchatnormal: ncp kick &l&2[&assn.gg&2] &r&eToo many chat messages, take a break.
-  kickcommands: ncp tempkick [player] 1 &l&2[&assn.gg&2] &r&eDo not spam commands
-    (1 minute tempkick)
-  kickcritical: ncp kick &l&2[&assn.gg&2] &r&eIncorrect movements (Critical cheats?)
-  kickfastbreak: ncp kick &l&2[&assn.gg&2] &r&eBreaking blocks too fast.
-  kickfastclick: ncp kick &l&2[&assn.gg&2] &r&eUnlikely inventory interactions.
-  kickfastconsume: ncp kick &l&2[&assn.gg&2] &r&eUsing items too quickly.
-  kickfastheal: ncp kick &l&2[&assn.gg&2] &r&eToo fast health regeneration.
-  kickfastplace: ncp kick &l&2[&assn.gg&2] &r&ePlacing blocks too quickly.
-  kickfly: ncp kick &l&2[&assn.gg&2] &r&eMoved unexpectedly.
-  kickflyingfrequency: ncp kick &l&2[&assn.gg&2] &r&eKicked for packet spam.
-  kickfrequency: ncp kick &l&2[&assn.gg&2] &r&eIllegal block-breaking frequency.
-  kickgod: ncp kick &l&2[&assn.gg&2] &r&eGodMode?
-  kickillegalblockinteract: ncp kick &l&2[&assn.gg&2] &r&eIllegal block interactions.
-  kickillegalrotations: ncp kick &l&2[&assn.gg&2] &r&eInvalid rotations.
-  kickimprobable: ncp kick &l&2[&assn.gg&2] &r&eIllegal client modifications.
-  kickinvaliddata: ncp kick &l&2[&assn.gg&2] &r&eInvalid book data.
-  kickpacketfrequency: ncp kick &l&2[&assn.gg&2] &r&eToo many packets.
-  kickpackets: ncp kick &l&2[&assn.gg&2] &r&eYou sent too many moves (extreme lag?)
-  kickscaffold: ncp kick &l&2[&assn.gg&2] &r&eUnnatural block placements.
-  kickselfhit: ncp kick &l&2[&assn.gg&2] &r&eYou tried to hit yourself!
-  kicksuspiciouscombat: ncp kick &l&2[&assn.gg&2] &r&eIllegal combat modifications.
-  kickvehiclefly: ncp kick &l&2[&assn.gg&2] &r&eUnexpected vehicle movement.
-  kickwb: ncp kick &l&2[&assn.gg&2] &r&eBlock breaking out of sync.
-  freachhighvl: '&c[player]&7 failed &c[check]&7: is most likely using a killaura
-    cheat (Reach: &6[reachdistance]&7) &7(&cVL[violations]&7)'
-  morepackets: '&c[player]&7 failed &c[check]&7: sent too many moves (&cPackets&7/&cVL
-    [packets]&7)'
-  moving: '&c[player]&7 failed &c[check]&7: tried to send improbable position updates
-    &7(&cVL[violations]&7)'
+  against: "&c[player]&7 failed &c[check]&7: tried to place a block against liquid blocks or air as if they were solid &7(&cVL[violations]&7)"
+  angle: "&c[player]&7 failed &c[check]&7: potentially tried to hit multiple entities at the same time (Tags: &6[tags]&7) &7(&cVL[violations]&7)"
+  attackfrequency: "&c[player]&7 failed &c[check]&7: seems to be using an autoclicker (Clicks: &6[packets]&7/LimitPerTime-frame: &6[limit]&7, &6[tags]&7) &7(&cVL[violations]&7)"
+  bautosign: "&c[player]&7 failed &c[check]&7: tried to use the autosign hack (Subcheck: &6[tags]&7) &7(&cVL[violations]&7)"
+  bbfrequency: "&c[player]&7 failed &c[check]&7: tried to break too many blocks at once &7(&cVL[violations]&7)"
+  bdirection: "&c[player]&7 failed &c[check]&7: tried to interact with a block outside their line of sight &7(&cVL[violations]&7)"
+  bpspeed: "&c[player]&7 failed &c[check]&7: tried to throw projectiles too quickly &7(&cVL[violations]&7)"
+  breach: "&c[player]&7 failed &c[check]&7: tried to interact with a block too far away &7(&cVL[violations]&7)"
+  bspeed: "&c[player]&7 failed &c[check]&7: tried to interact with blocks beyond legit speeds &7(&cVL[violations]&7)"
+  bvisible: "&c[player]&7 failed &c[check]&7: tried to interact with a block through a solid obstacle &7(&cVL[violations]&7)"
+  bwrong: "&c[player]&7 failed &c[check]&7: tried to break another block than interacted with last &7(&cVL[violations]&7)"
+  captcha: "[player] failed captcha repeatedly &7(&cVL[violations]&7)"
+  chatfast: "&c[player]&7 failed &c[check]&7: acted like spamming (message deleted) (IP: &6[ip]&7) &7(&cVL[violations]&7)"
+  chatnormal: "&c[player]&7 failed &c[check]&7: seems to be spamming the server chat &7(&cVL[violations]&7)"
+  commands: "&c[player]&7 failed &c[check]&7: issued too many commands too quickly &7(&cVL[violations]&7)"
+  creativefly: "&c[player]&7 failed &c[check]&7: tried to perform a move that deviates from the model (Model: &6[model]&7, Tags: &6[tags]&7) &7(&cVL[violations]&7)"
+  critical: "&c[player]&7 failed &c[check]&7: tried to perform an illegal critical hit &7(&cVL[violations]&7)"
+  fastbreak: "&c[player]&7 failed &c[check]&7: tried to break a block faster than possible (Block: &6[blocktype]&7) &7(&cVL[violations]&7)"
+  fastclick: "&c[player]&7 failed &c[check]&7: tried to move items in their inventory too quickly (Tags: &6[tags]&7) &7(&cVL[violations]&7)"
+  fastconsume: "&c[player]&7 failed &c[check]&7: tried to consume an item too quickly (Food: &6[food][tags]&7) &7(&cVL[violations]&7)"
+  fastheal: "&c[player]&7 failed &c[check]&7: tried to regenerate their health bar faster than possible (Health: &6[health]&7) &7(&cVL[violations]&7)"
+  fastplace: "&c[player]&7 failed &c[check]&7: tried to place blocks too quickly &7(&cVL[violations]&7)"
+  fdirection: "&c[player]&7 failed &c[check]&7: tried to hit an entity outside their line of sight &7(&cVL[violations]&7)"
+  fdirectionlowvl: "&c[player]&7 failed &c[check]&7: could be using an aimbot (hit not canceled) &7(&cVL[violations]&7)"
+  flyfile: "&c[player]&7 failed &c[check]&7: tried to perform an illegal move from ([locationfrom]) to ([locationto]) over a distance of ([distance]) blocks, subchecks triggered> ([tags]) &7(&cVL[violations]&7)"
+  flyingfrequency: "&c[player]&7 failed &c[check]&7: is manipulating packets sent to the server to gain an unfair advantage &7(&cVL[violations]&7)"
+  freach: "&c[player]&7 failed &c[check]&7: tried to hit an entity from a suspicious distance (Reach: &6[reachdistance]&7) &7(&cVL[violations]&7)"
+  fselfhit: "&c[player]&7 failed &c[check]&7: tried to hit themselves &7(&cVL[violations]&7)"
+  fvisible: "&c[player]&7 failed &c[check]&7: tried to attack target through a solid obstacle &7(&cVL[violations]&7)"
+  godmode: "&c[player]&7 failed &c[check]&7: tried to ignore inflicted damage (Health: &7[health]&7) &7(&cVL[violations]&7)"
+  gutenberg: "&c[player]&7 failed &c[check]&7: created a book with too many pages &7(&cVL[violations]&7)"
+  improbable: "&c[player]&7 failed &c[check]&7: is exhibiting an erratic behaviour (Check: &6[tags]&7) &7(&cVL[violations]&7)"
+  instantbow: "&c[player]&7 failed &c[check]&7: tried to shoot an arrow too fast &7(&cVL[violations]&7)"
+  keepalive: "&c[player]&7 failed &c[check]&7: is spamming keep-alive packets to the server &7(&cVL[violations]&7)"
+  kickagainst: ncp kick [player] &c&l(!)&7 Invalid block placements.
+  kickalive: ncp kick [player] &c&l(!)&7 Too many keep-alive packets.
+  kickattackfrequency: ncp kick [player] &c&l(!)&7 Unlikely fast clicking.
+  kickbow: ncp kick [player] &c&l(!)&7 Shooting arrows too quickly.
+  kickbspeed: ncp kick [player] &c&l(!)&7 Too fast block interactions.
+  kickcaptcha: ncp kick [player] &c&l(!)&7 Enter the captcha!
+  kickchat1: ncp tempkick [player] 1 &c&l(!)&7 Do not spam the server chat (1 minute tempkick)
+  kickchat5: ncp tempkick [player] 5 &c&l(!)&7 You are not allowed to spam the server chat (5 minutes tempkick)
+  kickchatfast: ncp kick [player] &c&l(!)&7 Stop spamming.
+  kickchatnormal: ncp kick [player] &c&l(!)&7 Too many chat messages, take a break.
+  kickcommands: ncp tempkick [player] 1 &c&l(!)&7 Do not spam commands (1 minute tempkick)
+  kickcritical: ncp kick [player] &c&l(!)&7 Incorrect movements (Critical cheats?)
+  kickfastbreak: ncp kick [player] &c&l(!)&7 Breaking blocks too fast.
+  kickfastclick: ncp kick [player] &c&l(!)&7 Unlikely inventory interactions.
+  kickfastconsume: ncp kick [player] &c&l(!)&7 Using items too quickly.
+  kickfastheal: ncp kick [player] &c&l(!)&7 Too fast health regeneration.
+  kickfastplace: ncp kick [player] &c&l(!)&7 Placing blocks too quickly.
+  kickfly: ncp kick [player] &c&l(!)&7 Moved unexpectedly.
+  kickflyingfrequency: ncp kick [player] &c&l(!)&7 Kicked for packet spam.
+  kickfrequency: ncp kick [player] &c&l(!)&7 Illegal block-breaking frequency.
+  kickgod: ncp kick [player] &c&l(!)&7 GodMode?
+  kickillegalblockinteract: ncp kick [player] &c&l(!)&7 Illegal block interactions.
+  kickillegalrotations: ncp kick [player] &c&l(!)&7 Invalid rotations.
+  kickimprobable: ncp kick [player] &c&l(!)&7 Illegal client modifications.
+  kickinvaliddata: ncp kick [player] &c&l(!)&7 Invalid book data.
+  kickpacketfrequency: ncp kick [player] &c&l(!)&7 Too many packets.
+  kickpackets: ncp kick [player] &c&l(!)&7 You sent too many moves (extreme lag?)
+  kickscaffold: ncp kick [player] &c&l(!)&7 Unnatural block placements.
+  kickselfhit: ncp kick [player] &c&l(!)&7 You tried to hit yourself!
+  kicksuspiciouscombat: ncp kick [player] &c&l(!)&7 Illegal combat modifications.
+  kickvehiclefly: ncp kick [player] &c&l(!)&7 Unexpected vehicle movement.
+  kickwb: ncp kick [player] &c&l(!)&7 Block breaking out of sync.
+  freachhighvl: "&c[player]&7 failed &c[check]&7: is most likely using a killaura cheat (Reach: &6[reachdistance]&7) &7(&cVL[violations]&7)"
+  morepackets: "&c[player]&7 failed &c[check]&7: sent too many moves (&cPackets&7/&cVL [packets]&7)"
+  moving: "&c[player]&7 failed &c[check]&7: tried to send improbable position updates &7(&cVL[violations]&7)"
   msgtempdenylogin: You are temporarily denied to join this server.
-  munchhausen: '&c[player]&7 failed &c[check]&7: tried to hit themeselves with a fishing
-    rod too many times (the knockback can be potentially abused for bypasses) &7(&cVL[violations]&7)'
-  nofall: '&c[player]&7 failed &c[check]&7: tried to alter fall damage or fall distance
-    (Tags: &6[tags]&7) &7(&cVL[violations]&7)'
-  noswing: '&c[player]&7 failed &c[check]&7: didn''t swing arm before performing their
-    action &7(&cVL[violations]&7)'
-  passable: '&c[player]&7 failed &c[check]&7: tried to move into a block (bugged player
-    of phase cheat) &7(&cVL[violations]&7)'
-  relog: '&c[player]&7 failed &c[check]&7: tried to relog too fast &7(&cVL[violations]&7)'
-  scaffold: '&c[player]&7 failed &c[check]&7: tried to place a block in an unnatural
-    way (Tags: &6[tags]&7) &7(&cVL[violations]&7)'
-  survivalfly: '&c[player]&7 failed &c[check]&7: tried to move unexpectedly &7(&cVL[violations]&7)'
-  survivalflyhighvl: '&c[player]&7 failed &c[check]&7: tried to perform an illegal
-    move (Subchecks: &6[tags]&7) &7(&cVL[violations]&7)'
-  tellchatnormal: ncp tell &l&2[&assn.gg&2] &r&eToo many messages, slow down...
-  tempkick1: ncp tempkick [player] 1 &l&2[&assn.gg&2] &r&eYou have to wait 1 minute
-    before joining this server again.
-  tempkick5: ncp tempkick [player] 5 &l&2[&assn.gg&2] &r&eYou have to wait 5 minutes
-    before joining this server again.
-  vehicleenvelope: '&c[player]&7 failed &c[check]&7: tried to move a vehicle unexpectedly
-    (Tags/Vehicle: &6[tags]&7) &7(&cVL[violations]&7)'
-  wrongturn: '&c[player]&7 failed &c[check]&7: tried to send an impossible pitch rotation
-    (&6>90 &7or&6 <-90&7) &7(&cVL[violations]&7)'
+  nofall: "&c[player]&7 failed &c[check]&7: tried to alter fall damage or fall distance (Tags: &6[tags]&7) &7(&cVL[violations]&7)"
+  noswing: "&c[player]&7 failed &c[check]&7: didn't swing arm before performing their action &7(&cVL[violations]&7)"
+  passable: "&c[player]&7 failed &c[check]&7: tried to move into a block (bugged player or phase cheat) &7(&cVL[violations]&7)"
+  relog: "&c[player]&7 failed &c[check]&7: tried to relog too fast &7(&cVL[violations]&7)"
+  scaffold: "&c[player]&7 failed &c[check]&7: tried to place a block in an unnatural way (Tags: &6[tags]&7) &7(&cVL[violations]&7)"
+  survivalfly: "&c[player]&7 failed &c[check]&7: tried to move unexpectedly &7(&cVL[violations]&7)"
+  survivalflyhighvl: "&c[player]&7 failed &c[check]&7: tried to perform an illegal move (Tags: &6[tags]&7) &7(&cVL[violations]&7)"
+  tellchatnormal: ncp tell [player] &c&l(!)&7 Too many messages, slow down...
+  tempkick1: ncp tempkick [player] 1 &c&l(!)&7 You have to wait 1 minute before joining this server again.
+  tempkick5: ncp tempkick [player] 5 &c&l(!)&7 You have to wait 5 minutes before joining this server again.
+  togglefrequency: "&c[player]&7 failed &c[check]&7: tried to toggle sneak/sprint too quickly &7(&cVL[violations]&7)"
+  vehicleenvelope: "&c[player]&7 failed &c[check]&7: tried to move a vehicle unexpectedly (Tags/Vehicle: &6[tags]&7) &7(&cVL[violations]&7)"
+  wrongturn: "&c[player]&7 failed &c[check]&7: tried to send an impossible pitch rotation (&6>90 &7or&6 <-90&7) &7(&cVL[violations]&7)"
   clearcritical: ncp removeplayer [player] FIGHT_CRITICAL
   clearscaffold: ncp removeplayer [player] BLOCKPLACE_SCAFFOLD
 compatibility:
@@ -991,15 +677,14 @@ compatibility:
         metadata:
           active: true
           keys:
-          - nocheat.exempt
+            - nocheat.exempt
       npc:
-        bukkit-npc: true
         active: true
-        bukkitnpc: true
+        bukkit-npc: true
         metadata:
           active: true
           keys:
-          - NPC
+            - NPC
     remove:
       join: true
       leave: true
@@ -1007,10 +692,6 @@ compatibility:
     CB-dedicated:
       enable: true
     CB-eflect:
-      enable: true
-    cbdedicated:
-      enable: true
-    cbreflect:
       enable: true
   blocks:
     breaking-time: []
@@ -1025,22 +706,8 @@ compatibility:
       max-age-icks: 20
       perworld:
         max-entries: 1000
-    breakingtime:
-      IRON_BLOCK:PICKAXE:DIAMOND:12: 1139
-    allowinstantbreak: []
-    overrideflags:
-      snow: default
-      moving_piston: default+ign_passable+ground_height
-    blockcache:
-      minimalworldy: -64
-    changetracker:
-      active: true
-      pistons: true
-      maxageticks: 20
-      perworld:
-        maxentries: 1000
 config-version:
   notify: true
   notify-max-paths: 5
-  saved: 1154
   created: 1154
+  saved: 1154
