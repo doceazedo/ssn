@@ -619,38 +619,38 @@ strings:
   improbable: "&c[player]&7 failed &c[check]&7: is exhibiting an erratic behaviour (Check: &6[tags]&7) &7(&cVL[violations]&7)"
   instantbow: "&c[player]&7 failed &c[check]&7: tried to shoot an arrow too fast &7(&cVL[violations]&7)"
   keepalive: "&c[player]&7 failed &c[check]&7: is spamming keep-alive packets to the server &7(&cVL[violations]&7)"
-  kickagainst: ncp kick [player] &c&l(!)&7 Invalid block placements.
-  kickalive: ncp kick [player] &c&l(!)&7 Too many keep-alive packets.
-  kickattackfrequency: ncp kick [player] &c&l(!)&7 Unlikely fast clicking.
-  kickbow: ncp kick [player] &c&l(!)&7 Shooting arrows too quickly.
-  kickbspeed: ncp kick [player] &c&l(!)&7 Too fast block interactions.
-  kickcaptcha: ncp kick [player] &c&l(!)&7 Enter the captcha!
-  kickchat1: ncp tempkick [player] 1 &c&l(!)&7 Do not spam the server chat (1 minute tempkick)
-  kickchat5: ncp tempkick [player] 5 &c&l(!)&7 You are not allowed to spam the server chat (5 minutes tempkick)
-  kickchatfast: ncp kick [player] &c&l(!)&7 Stop spamming.
-  kickchatnormal: ncp kick [player] &c&l(!)&7 Too many chat messages, take a break.
-  kickcommands: ncp tempkick [player] 1 &c&l(!)&7 Do not spam commands (1 minute tempkick)
-  kickcritical: ncp kick [player] &c&l(!)&7 Incorrect movements (Critical cheats?)
-  kickfastbreak: ncp kick [player] &c&l(!)&7 Breaking blocks too fast.
-  kickfastclick: ncp kick [player] &c&l(!)&7 Unlikely inventory interactions.
-  kickfastconsume: ncp kick [player] &c&l(!)&7 Using items too quickly.
-  kickfastheal: ncp kick [player] &c&l(!)&7 Too fast health regeneration.
-  kickfastplace: ncp kick [player] &c&l(!)&7 Placing blocks too quickly.
-  kickfly: ncp kick [player] &c&l(!)&7 Moved unexpectedly.
-  kickflyingfrequency: ncp kick [player] &c&l(!)&7 Kicked for packet spam.
-  kickfrequency: ncp kick [player] &c&l(!)&7 Illegal block-breaking frequency.
-  kickgod: ncp kick [player] &c&l(!)&7 GodMode?
-  kickillegalblockinteract: ncp kick [player] &c&l(!)&7 Illegal block interactions.
-  kickillegalrotations: ncp kick [player] &c&l(!)&7 Invalid rotations.
-  kickimprobable: ncp kick [player] &c&l(!)&7 Illegal client modifications.
-  kickinvaliddata: ncp kick [player] &c&l(!)&7 Invalid book data.
-  kickpacketfrequency: ncp kick [player] &c&l(!)&7 Too many packets.
-  kickpackets: ncp kick [player] &c&l(!)&7 You sent too many moves (extreme lag?)
-  kickscaffold: ncp kick [player] &c&l(!)&7 Unnatural block placements.
-  kickselfhit: ncp kick [player] &c&l(!)&7 You tried to hit yourself!
-  kicksuspiciouscombat: ncp kick [player] &c&l(!)&7 Illegal combat modifications.
-  kickvehiclefly: ncp kick [player] &c&l(!)&7 Unexpected vehicle movement.
-  kickwb: ncp kick [player] &c&l(!)&7 Block breaking out of sync.
+  kickagainst: ncp kick [player] &c&l(!)&7 Blocos colocados de forma inválida. Ajuste ou desative seus hacks.
+  kickalive: ncp kick [player] &c&l(!)&7 Muitos pacotes de keep-alive enviados. Ajuste ou desative seus hacks.
+  kickattackfrequency: ncp kick [player] &c&l(!)&7 Cliques muito rápidos detectados. Ajuste ou desative seus hacks.
+  kickbow: ncp kick [player] &c&l(!)&7 Atirando flechas rápido demais. Ajuste ou desative seus hacks.
+  kickbspeed: ncp kick [player] &c&l(!)&7 Interações com blocos muito rápidas. Ajuste ou desative seus hacks.
+  kickcaptcha: ncp kick [player] &c&l(!)&7 Complete o captcha para continuar.
+  kickchat1: ncp tempkick [player] 1 &c&l(!)&7 Não envie spam no chat. Você pode voltar em 1 minuto.
+  kickchat5: ncp tempkick [player] 5 &c&l(!)&7 Não envie spam no chat. Você pode voltar em 5 minutos.
+  kickchatfast: ncp kick [player] &c&l(!)&7 Pare de enviar mensagens repetidas.
+  kickchatnormal: ncp kick [player] &c&l(!)&7 Mensagens em excesso. Dá um tempinho.
+  kickcommands: ncp tempkick [player] 1 &c&l(!)&7 Não envie comandos em excesso. Você pode voltar em 1 minuto.
+  kickcritical: ncp kick [player] &c&l(!)&7 Movimentos incorretos detectados. Ajuste ou desative seus hacks (Criticals?).
+  kickfastbreak: ncp kick [player] &c&l(!)&7 Quebrando blocos rápido demais. Ajuste ou desative o FastBreak.
+  kickfastclick: ncp kick [player] &c&l(!)&7 Cliques em inventário muito rápidos. Ajuste ou desative seus hacks.
+  kickfastconsume: ncp kick [player] &c&l(!)&7 Usando itens rápido demais. Ajuste ou desative seus hacks.
+  kickfastheal: ncp kick [player] &c&l(!)&7 Regeneração de vida muito rápida. Ajuste ou desative seus hacks.
+  kickfastplace: ncp kick [player] &c&l(!)&7 Colocando blocos rápido demais. Ajuste ou desative o FastPlace.
+  kickfly: ncp kick [player] &c&l(!)&7 Movimento inesperado detectado. Ajuste ou desative o Flight / ElytraFlight.
+  kickflyingfrequency: ncp kick [player] &c&l(!)&7 Envio excessivo de pacotes detectado. Ajuste ou desative o Flight / ElytraFlight.
+  kickfrequency: ncp kick [player] &c&l(!)&7 Frequência ilegal de quebra de blocos. Ajuste ou desative seus hacks.
+  kickgod: ncp kick [player] &c&l(!)&7 Potencial GodMode detectado. Ajuste ou desative seus hacks.
+  kickillegalblockinteract: ncp kick [player] &c&l(!)&7 Interações ilegais com blocos. Ajuste ou desative seus hacks.
+  kickillegalrotations: ncp kick [player] &c&l(!)&7 Rotação inválida detectada. Ajuste ou desative seus hacks.
+  kickimprobable: ncp kick [player] &c&l(!)&7 Ações impossíveis detectadas. Ajuste ou desative seus hacks antes de entrar no servidor novamente.
+  kickinvaliddata: ncp kick [player] &c&l(!)&7 Dados de livro inválidos detectados. Ajuste ou desative seus hacks.
+  kickpacketfrequency: ncp kick [player] &c&l(!)&7 Pacotes enviados em excesso. Ajuste ou desative seus hacks.
+  kickpackets: ncp kick [player] &c&l(!)&7 Muitos pacotes de movimento (lag extremo?). Ajuste ou desative seus hacks.
+  kickscaffold: ncp kick [player] &c&l(!)&7 Blocos colocados de forma inválida. Ajuste ou desative o Scaffold.
+  kickselfhit: ncp kick [player] &c&l(!)&7 Você tentou se acertar. Ajuste ou desative seus hacks.
+  kicksuspiciouscombat: ncp kick [player] &c&l(!)&7 Modificações ilegais de combate detectadas. Ajuste ou desative seus hacks.
+  kickvehiclefly: ncp kick [player] &c&l(!)&7 Movimento de veículo inesperado detectado. Ajuste ou desative o BoatFly.
+  kickwb: ncp kick [player] &c&l(!)&7 Quebra de blocos fora dessincronizado. Ajuste ou desative seus hacks.
   freachhighvl: "&c[player]&7 failed &c[check]&7: is most likely using a killaura cheat (Reach: &6[reachdistance]&7) &7(&cVL[violations]&7)"
   morepackets: "&c[player]&7 failed &c[check]&7: sent too many moves (&cPackets&7/&cVL [packets]&7)"
   moving: "&c[player]&7 failed &c[check]&7: tried to send improbable position updates &7(&cVL[violations]&7)"
