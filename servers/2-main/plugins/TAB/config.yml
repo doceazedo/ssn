@@ -1,36 +1,39 @@
 header-footer:
   enabled: true
-  header:
-  - ' '
-  - '&a&lSERVIDOR SEM NOME &2&l• &c&lSSN.gg'
-  - ' '
-  footer:
-  - ' '
-  - '&a%tps% &2TPS &c• &a%online% &2online &c• &2Ping: &a%ping%ms &c• &2Uptime: &a%server_uptime%'
-  - ' '
-  - '&2Junte-se ao Discord: &a&nssn.gg/discord'
-  - '&2Apoie o servidor: &a&nssn.gg/doar&r'
-  - ' '
-  per-world:
-    world1:
+  designs:
+    world-world1:
+      display-condition: '%world%=world1'
       header:
       - an example of world with custom
       footer:
       - header/footer and prefix/suffix
-    world2;world3:
+    world-world2;world3:
+      display-condition: '%world%=world2|%world%=world3'
       header:
       - This is a shared header for
       - world2 and world3
-  disable-condition: '%world%=disabledworld'
+      footer: []
+    default:
+      display-condition: '%world%!=disabledworld'
+      header:
+      - ' '
+      - '&a&lSERVIDOR SEM NOME &2&l• &c&lSSN.gg'
+      - ' '
+      footer:
+      - ' '
+      - '&a%tps% &2TPS &c• &a%online% &2online &c• &2Ping: &a%ping%ms &c• &2Uptime:
+        &a%server_uptime%'
+      - ' '
+      - '&2Junte-se ao Discord: &a&nssn.gg/discord'
+      - '&2Apoie o servidor: &a&nssn.gg/doar&r'
+      - ' '
 tablist-name-formatting:
   enabled: true
-  anti-override: true
   disable-condition: '%world%=disabledworld'
 scoreboard-teams:
   enabled: true
   enable-collision: true
   invisible-nametags: false
-  anti-override: true
   sorting-types:
   - GROUPS:owner,admin,mod,helper,builder,vip,default
   - PLACEHOLDER_A_TO_Z:%player%
@@ -128,15 +131,6 @@ conditions:
     - '%player%=%essentials_nickname%'
     true: '%player%'
     false: ~%essentials_nickname%
-placeholderapi-refresh-intervals:
-  default-refresh-interval: 500
-  '%server_uptime%': 1000
-  '%server_tps_1_colored%': 1000
-  '%server_unique_joins%': 5000
-  '%player_health%': 200
-  '%player_ping%': 1000
-  '%vault_prefix%': 1000
-  '%rel_factionsuuid_relation_color%': 1000
 assign-groups-by-permissions: false
 primary-group-finding-list:
 - Owner
@@ -212,8 +206,32 @@ playerlist-objective:
   value: '%ping%'
   disable-condition: '%world%=disabledworld'
   fancy-value: '&7Ping: %ping%'
+  title: TAB
+  render-type: INTEGER
 ping-spoof:
   enabled: false
 permission-refresh-interval: 1000
-enable-redisbungee-support: true
 compensate-for-packetevents-bug: false
+proxy-support:
+  enabled: true
+  type: PLUGIN
+  plugin:
+    name: RedisBungee
+  redis:
+    url: redis://:password@localhost:6379/0
+  rabbitmq:
+    exchange: plugin
+    url: amqp://guest:guest@localhost:5672/%2F
+placeholder-refresh-intervals:
+  default-refresh-interval: 500
+  '%server_uptime%': 1000
+  '%server_tps_1_colored%': 1000
+  '%server_unique_joins%': 5000
+  '%player_health%': 200
+  '%player_ping%': 1000
+  '%vault_prefix%': 1000
+  '%rel_factionsuuid_relation_color%': 1000
+config-version: 2
+components:
+  minimessage-support: true
+  disable-shadow-for-heads: true

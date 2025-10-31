@@ -83,7 +83,12 @@ commands:
     # SkinErrorCooldown is used when an error or invalid url occurs.
     # Can be bypassed with 'skinsrestorer.bypasscooldown'.
     skinChangeCooldown: 30
+    # Players cooldown in seconds when getting skulls (set to 0 to disable).
+    # SkullErrorCooldown is used when an error or invalid url occurs.
+    # Can be bypassed with 'skinsrestorer.bypasscooldown'.
+    skullGetCooldown: 30
     skinErrorCooldown: 5
+    skullErrorCooldown: 5
     # When enabled, only websites from the list below is allowed to be set using /skin url <url>
     # [?] this is useful if you host your own image server.
     restrictSkinUrls:
@@ -139,6 +144,11 @@ commands:
     # Do not disable this unless you are overriding the /skin command with a different plugin or you don't want the skin command.
     # Requires a server restart to take effect.
     disableSkinCommand: false
+    # <!! Warning !!>
+    # This option will disable the /skull command from being registered on the server.
+    # Do not disable this unless you are overriding the /skull command with a different plugin or you don't want the skull command.
+    # Requires a server restart to take effect.
+    disableSkullCommand: false
     # <!! Warning !!>
     # This option will disable the /skins command from being registered on the server.
     # Do not disable this unless you are overriding the /skins command with a different plugin or you don't want the GUI command.
@@ -197,7 +207,8 @@ gui:
 # Enable or disable default skins
 # applyForPremium: false will only put a skin on skinless/steve players.
 # If there is more than one, the plugin will choose a random one.
-# [?] Supports custom & url.png skins, read SkinFile Generator below. [?]
+# You can use "<random>" in the defaultSkins list to select a random SkinsRestorer recommended skin.
+# [!] url.png skins will be cached and therefore will not be updated
 storage:
     defaultSkins:
         enabled: false
@@ -209,10 +220,12 @@ storage:
     # Enable this will require players to run "/skin update" to update their skin.
     disallowAutoUpdateSkin: false
     # Time that skins are stored in the database before we request again (in minutes).
-    # [?] A value of 0 will disable auto updating of skins and players will need to manual run /skin update.
+    # [?] A value of 0 will always trigger a request to the Mojang API.
     # [!] Lowering this value will increase the amount of requests which could be a problem on large servers.
     skinExpiresAfter: 15
     # How long we should cache the UUIDs of players (in minutes).
+    # [?] A value of 0 will always trigger a request to the Mojang API.
+    # [!] Lowering this value will increase the amount of requests which could be a problem on large servers.
     uuidExpiresAfter: 60
 
 #########
@@ -244,14 +257,11 @@ server:
     # When a player loads a server resource pack, their skin is reset. By default, SkinsRestorer reapplies the skin when the player reports that the resource pack has been loaded or an error has occurred.
     resourcePackFix: true
     # Dismounts a mounted (on a horse, or sitting) player when their skin is updated, preventing players from becoming desynced.
-    # File override = ./plugins/SkinsRestorer/disableDismountPlayer.txt
     dismountPlayerOnSkinUpdate: true
     # Remounts a player that was dismounted after a skin update (above option must be true).
     # Disabling this is only recommended if you use plugins that allow you ride other players, or use sit. Otherwise you could get errors or players could be kicked for flying.
-    # File override = ./plugins/SkinsRestorer/disableRemountPlayer.txt
     remountPlayerOnSkinUpdate: true
     # Dismounts all passengers mounting a player (such as plugins that let you ride another player), preventing those players from becoming desynced.
-    # File override = ./plugins/SkinsRestorer/enableDismountEntities.txt
     dismountPassengersOnSkinUpdate: false
     sound:
         # Play a sound when a player runs /skin to change their skin.
@@ -260,6 +270,12 @@ server:
         # You can find the allowed format and values at
         # https://javadoc.io/static/com.github.cryptomorin/XSeries/11.0.0/com/cryptomorin/xseries/XSound.html#parse(java.lang.String)
         value: ENTITY_PLAYER_TELEPORT, 0.7
+    # Proxy mode settings. Allows SkinsRestorer to work with proxies.
+    proxyMode:
+        # Proxy mode detection. Valid values are ENABLED, DISABLED, AUTO. Auto will auto detect based on your server configuration.
+        detection: AUTO
+        # Proxy mode API will make server-side plugin calls to SkinsRestorer API possible. Only works if a database is set up instead of file storage.
+        api: true
 login:
     # Stops the process of setting a skin if the LoginEvent was canceled by an AntiBot plugin.
     # [?] Unsure? leave this true for better performance.
@@ -281,6 +297,10 @@ api:
     # It will prevent loading of recommended skins from storage and downloading new ones.
     # Be aware that commands like /skin random will not work without this feature.
     fetchRecommendedSkins: true
+    # Window size in seconds for batching Mojang API requests to avoid rate limits.
+    # Requests are batched in windows of this duration or up to 10 requests, whichever comes first.
+    # Default is 1 second.
+    mojangBatchWindowSeconds: 1
 
 ###############
 # Danger Zone #
@@ -298,6 +318,11 @@ advanced:
     # It also fixes all resource pack skin apply issues.
     # If your players are experiencing extremely long loading screens, try disabling this.
     enablePaperJoinListener: true
+    # <!! Warning !!>
+    # This is a very dangerous feature that should only be used if you know what you are doing.
+    # Instead of resending player skins to other players by hiding and shadowing them, we will teleport them to a far away location and back
+    # This is a workaround for some server software with broken vanishing support, like Arclight.
+    teleportRefresh: false
     # <!! Warning !!>
     # When enabled SkinsRestorer will not try to connect to any web server, which means the follow things won't work:
     # Getting new skins from Mojang, looking up uuids of players, skin url, update checking and more.
