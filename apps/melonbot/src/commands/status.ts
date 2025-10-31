@@ -52,7 +52,7 @@ const statusCommand: Command = {
           value: `${mainStatus?.ping || proxyStatus.roundTripLatency}ms`,
           inline: true,
         },
-        { name: "🧭 Versão", value: "Java Edition 1.21.4", inline: true },
+        { name: "🧭 Versão", value: "Java Edition 1.21.8", inline: true },
         {
           name: "⚡️ TPS",
           value: mainStatus?.tps?.toFixed(1) || "20.0",
