@@ -485,7 +485,7 @@ checks:
       stepheight: default
       extended:
         reset-activeitem: true
-        strict-speed-prediction: true
+        strict-speed-prediction: false
       leniency:
         violationfrequency:
           active: false
