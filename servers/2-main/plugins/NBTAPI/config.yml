@@ -1,0 +1,5 @@
+bStats:
+  enabled: true
+updateCheck:
+  enabled: true
+silentquickstart: false
