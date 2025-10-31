@@ -73,7 +73,9 @@
 					<p class="text-foreground/80">{m.links_section_wiki()}</p>
 				</div>
 			</div>
-			<Button variant="secondary" class="w-full" disabled>{m.access_wiki()}</Button>
+			<Button variant="secondary" class="w-full" href="https://wiki.ssn.gg" target="_blank">
+				{m.access_wiki()}
+			</Button>
 		</li>
 
 		<li class="flex flex-col items-center justify-center gap-4 rounded-lg border p-4">
